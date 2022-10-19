@@ -1,8 +1,12 @@
 //Euan: this can act like the main (overview?) class
 
+import java.util.ArrayList;
+
 public class RestaurantManager {
-    public static void main(String[] args) {
+
+    private ArrayList<Booking> bookings = new ArrayList<>();
 
 
-    }
+
+
 }
