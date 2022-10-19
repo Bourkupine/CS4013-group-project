@@ -2,6 +2,7 @@
 //I had the idea that there would be two options, one with email and phone number and one without for contacting.
 
 import java.time.LocalDateTime;
+import java.util.Formatter;
 
 public class Booking {
 
@@ -20,5 +21,14 @@ public class Booking {
         this(name, amountOfPeople);
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Formatter fm = new Formatter(sb);
+
+        fm.format("Name: %s\nPeople: %d", name, amountOfPeople);
+
+        return sb.toString();
     }
 }
