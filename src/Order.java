@@ -5,10 +5,14 @@
 
 public class Order{
     
-    setLoyalty() + 1 ;
+    Customer.setLoyalty(getLoyalty + 1) ;
+    
+
 
 
     String receipt(){
+        StringBuilder receipt = new StringBuilder();
+        receipt.append(Order);
 
     }
 
