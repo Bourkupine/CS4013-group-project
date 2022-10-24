@@ -6,29 +6,7 @@ import java.util.Formatter;
 
 public class Booking {
 
-    private String name;
-    private String email;
-    private String phoneNumber; //NEEDS to be stored as a String as otherwise 083 will become 83
-    private int amountOfPeople;
-    private LocalDateTime time; //good suggestion from Ronan with storing it as LocalDateTime
 
 
-    public Booking(String name, int amountOfPeople) {
-        this.name = name;
-        this.amountOfPeople = amountOfPeople;
-    }
-    public Booking(String name, int amountOfPeople, String email, String phoneNumber) {
-        this(name, amountOfPeople);
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
 
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        Formatter fm = new Formatter(sb);
-
-        fm.format("Name: %s\nPeople: %d", name, amountOfPeople);
-
-        return sb.toString();
-    }
 }
