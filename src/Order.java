@@ -12,6 +12,10 @@ public class Order{
 
     }
 
+    if (getLoyalty()%10 == 0){
+        getBill() - (getBill() / 10);
+    }
+
 
     
 }
