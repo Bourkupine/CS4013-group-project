@@ -5,19 +5,19 @@
 
 public class Order{
     
-    Customer.setLoyalty(getLoyalty + 1) ;
-    
+    Customer.setLoyalty(getLoyalty() + 1) ; // this will increment the loyalty of said customer
 
 
 
-    String receipt(){
+    public String receipt(){
         StringBuilder receipt = new StringBuilder();
         receipt.append(Order);
 
     }
-
+    public void incrementLoyalty(){
     if (getLoyalty()%10 == 0){
         getBill() - (getBill() / 10);
+        }
     }
 
 
