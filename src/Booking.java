@@ -7,15 +7,17 @@ import java.util.*;
 
 public class Booking {
 
-    Customer customer;
-    int numberOfPeople;
-    LocalDateTime time;
+    private Customer customer;
+    private int numberOfPeople;
+    private LocalDateTime time;
 
     /**
      * @author Euan
-     * @param customer
-     * @param numberOfPeople
-     * @param time
+     *
+     * Create Booking order
+     * @param customer pass a customer //might need to change this to id or something
+     * @param numberOfPeople number of people at a table
+     * @param time time of booking
      */
     public Booking(Customer customer, int numberOfPeople, LocalDateTime time) { //Booking
         this.customer = customer;
@@ -26,6 +28,21 @@ public class Booking {
         this.customer = customer;
         this.numberOfPeople = numberOfPeople;
         this.time = LocalDateTime.now();
+    }
+
+    //Setters & Getters
+
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public int getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
     }
 
 }
