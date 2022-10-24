@@ -2,7 +2,7 @@
 
 import java.util.ArrayList;
 
-public class RestaurantManager {
+public class Restaurant {
 
     private ArrayList<Booking> bookings = new ArrayList<>();
 
