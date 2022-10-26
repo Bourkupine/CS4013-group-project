@@ -7,9 +7,9 @@ import java.util.*;
 
 public class Booking {
 
-    private Customer customer;
-    private int numberOfPeople;
-    private LocalDateTime time;
+    private Customer customer; //Customer that makes the booking
+    private int numberOfPeople; //number of people at the table
+    private LocalDateTime time; //time of booking. We will need to run a checker for this
 
 
     /**
