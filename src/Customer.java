@@ -7,7 +7,7 @@ public class Customer {
     private String name;//Customers name
     private int id;//Unique id number for customer
     private String phoneNumber;//Phone number of customer
-    private int loyalty=1;//number of times customer has been to restaurant
+    private static int loyalty=1;//number of times customer has been to restaurant
 
     /**
      * Non phone number constructor (ideal for walk-ins)
@@ -64,7 +64,7 @@ public class Customer {
      * Returns number of times customer has been to restaurant
      * @return number of visits as int
      */
-    public int getLoyalty() {
+    public static int getLoyalty() {
         return loyalty;
     }
 
@@ -73,7 +73,7 @@ public class Customer {
      * @param loyalty number of visits
      */
     public void setLoyalty(int loyalty) {
-        this.loyalty = loyalty;
+        Customer.loyalty = loyalty; //this was needed to change to customer.loyalty as loyalty is now static because i need to access it in order to increment the loyalty and to use it in the if()
     }
 
     //Basic toString. Can modify if needed.
