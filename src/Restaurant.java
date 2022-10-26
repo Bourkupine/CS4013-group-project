@@ -10,6 +10,7 @@ public class Restaurant {
 
     public Restaurant(int tableNumber) { //Look back into this
 
+        //very temporary solution
         for (int i = 0; i < tableNumber; i++) {
             Table table = new Table();
             tables.add(table);
