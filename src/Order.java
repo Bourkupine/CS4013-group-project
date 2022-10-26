@@ -20,6 +20,8 @@ public class Order{
         }
     }
 
+    // make new receipt
+
 
     
 }
