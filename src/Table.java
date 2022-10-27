@@ -4,8 +4,8 @@
  * @author Bayan
  */
 public class Table {
-    private int tableNumber; //Unique ID number for the table
-    private int numberOfSeats; //Number of seats at the table
+    private final int tableNumber; //Unique ID number for the table
+    private final int numberOfSeats; //Number of seats at the table
     private boolean reserved; //Indicates if the table is reserved or not
 
     /**
