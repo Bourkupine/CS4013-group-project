@@ -16,7 +16,7 @@ public class Table {
     public Table(int tableNumber, int numberOfSeats) {
         this.tableNumber = tableNumber;
         this.numberOfSeats = numberOfSeats;
-        reserved = false;
+        reserved = false; //Tables are not reserved by default
     }
 
     /**
