@@ -3,14 +3,17 @@
 // i need to make a receipt with the customers details 
 // scanner we need to take an order 
 // need to make a menu to
+import java.util.Formatter;
 import java.util.Scanner;
 
 public class Order{
     
     private Customer c; // bayan:
     private int total = 0; //thomas adding up the total amount for the bill
+
+    private StringBuilder sb = new StringBuilder();
     /**
-     * @param takeOrder this is taking the order of the cutomer
+     *
      * @author thomas
      * @return order for the bill
      */
@@ -34,7 +37,7 @@ public class Order{
     
     
     /**
-    * @param giveLoyaltyDiscount this is discounting the customers bill
+    * will update the Customer c's loyalty
     @author thomas
     */
     public void giveLoyaltyDiscount(){
@@ -44,16 +47,14 @@ public class Order{
     }
    
  
-    public  void addItemToBill(int item){ //t adding item to the string bill 
-        StringBuilder Bill = new StringBuilder();//t creating string builder bill
+    public void addItemToBill(int item){ //t adding item to the string bill
+        sb.append(item).append("\n");//todo: .append price after item!!
     }
-    
-
     
     @Override
     public String toString() {
-        
-        return Bill() + 
+
+        return sb.toString();
     }
     
     
