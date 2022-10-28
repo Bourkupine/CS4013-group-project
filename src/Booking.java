@@ -41,6 +41,26 @@ public class Booking {
         //set booked table to unavailable
     }
 
+    /**
+     * Delete/cancel a booking
+     *
+     * @param booking: the booking you want to cancel
+     * @author Euan
+     */
+    public void cancelBooking(Object booking) {
+        booking = null;
+    }
+
+    /**
+     * Change time of booking
+     *
+     * @param time time you wish to change your booking to
+     * @author Euan
+     */
+    public void laterTime(LocalDateTime time){
+        this.time = time;
+    }
+
     //Setters & Getters
 
     public Customer getCustomer() {
