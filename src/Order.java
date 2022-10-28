@@ -12,6 +12,14 @@ public class Order{
     private int total = 0; //thomas adding up the total amount for the bill
 
     private StringBuilder sb = new StringBuilder();
+
+    public Order(Customer c){
+        this.c = c; 
+    }
+
+    public StringBuilder getSb() {
+        return sb;
+    }
     /**
      *
      * @author thomas
@@ -49,6 +57,10 @@ public class Order{
  
     public void addItemToBill(int item){ //t adding item to the string bill
         sb.append(item).append("\n");//todo: .append price after item!!
+    }
+
+    public Customer getC() {
+        return c;
     }
     
     @Override

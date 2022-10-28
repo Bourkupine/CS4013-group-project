@@ -1,14 +1,15 @@
 // this will print the receipt 
 
-public class Receipt extends Order {
+public class Receipt{
 
     private String receipt ;
-
-    
+    private Order order;
 
     public Receipt(Order order){
-        this.order = order ;
+       order.getC().incrementLoyalty();
+       this.order=order;
     }
+    
 
     public String getReceipt() {
         return receipt;
@@ -18,13 +19,9 @@ public class Receipt extends Order {
         this.receipt = receipt;
     }
 
-    public generateReceipt(Order order){
-        
-    }
-
     @Override
     public String toString() {
         
-        return super.toString() + "Total "+ getBill() + "Thank you for visiting BigBums" ;
+        return super.toString() + "Total "+ order.getSb() + "Thank you for visiting Yum" ;  
     }
 }
