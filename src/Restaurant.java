@@ -3,7 +3,7 @@
 
 import java.util.ArrayList;
 
-public class Restaurant extends RestaurantChain {
+public class Restaurant {
 
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
