@@ -5,13 +5,13 @@
 
 public class Order{
     
-    
-    private int total ;
+    private Customer c;
+    private int total = 0;
 
      // this will increment the loyalty of said customer
     public void giveLoyaltyDiscount(){
-    if (Customer.getLoyalty()%10 == 0){
-        total = total - (total / 10);
+    if (c.getLoyalty()%10 == 0){
+        total -= total / 10;
         }
     }
 
