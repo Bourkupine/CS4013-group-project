@@ -7,19 +7,25 @@ import java.util.Scanner;
 
 public class Order{
     
-    private Customer c;
-    private int total = 0;
-    
+    private Customer c; // bayan:
+    private int total = 0; //thomas adding up the total amount for the bill
+    /**
+     * @param takeOrder this is taking the order of the cutomer
+     * @author thomas
+     * @return order for the bill
+     */
     public void takeOrder(){
-        // creating the scanner
+        //t: creating the scanner
         Scanner order = new Scanner(System.in);
         
-        System.out.println(Restaurant.printMenu());
-        boolean ordering = true ;
+        System.out.println(Restaurant.printMenu()); //t:this is printing the menu so the customer can choose their items
+        boolean ordering = true ; //t: this is for the customers they will input 0 when they want to stop ordering 
         while(ordering ){
             // Menu item input
             int item = order.nextInt();
-            if (item == 0){
+            addItemToBill(item); //t adding item to the string for the bill
+
+            if (item == 0){ //t this is breaking out of the ordering when the customer decides
                 break;
             }
         }
@@ -28,26 +34,21 @@ public class Order{
     
     
     /**
-    * @param 
+    * @param giveLoyaltyDiscount this is discounting the customers bill
+    @author thomas
     */
     public void giveLoyaltyDiscount(){
-        if (c.getLoyalty()%10 == 0){
+        if (c.getLoyalty()%10 == 0){ //t when they get to 10 orders/visits the get a ten percent discount
             total -= total / 10;
         }
     }
-    /**
-    * @param adds up the total amount 
-    * @author thomas
-    * @return the bill
-    */
-    public double getBill(){
-        
-    }
-    public  String Bill(){
-        
+   
+ 
+    public  void addItemToBill(int item){ //t adding item to the string bill 
+        StringBuilder Bill = new StringBuilder();//t creating string builder bill
     }
     
-    // make new receipt
+
     
     @Override
     public String toString() {
