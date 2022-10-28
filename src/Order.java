@@ -14,7 +14,6 @@ public class Order{
         total -= total / 10;
         }
     }
-
     // make new receipt
 
 
