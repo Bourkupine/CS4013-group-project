@@ -11,6 +11,7 @@ public class RestaurantChain {
     private String name; //The name of the restaurant chain.
     private int amountOfRestaurants; //The amount of restaurants.
     private ArrayList<FoodItem> menu = new ArrayList<>();
+    private ArrayList<Restaurant> restaurants = new ArrayList<>();//Ronan: need to double check how we are implementing this
 
     /**
      * Full-arg constructor.
@@ -19,6 +20,10 @@ public class RestaurantChain {
      */
     public RestaurantChain(String name, int amountOfRestaurants) {
         this.name = name;
+        for (int i = 0; i < amountOfRestaurants; i++) {
+            Restaurant restaurant = new Restaurant{15};//Ronan: 15 tables is arbitrary and can be changed
+            restaurants.add(restaurant);
+        }
 
     }
 }

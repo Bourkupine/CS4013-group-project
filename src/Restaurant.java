@@ -11,17 +11,23 @@ public class Restaurant {
 
     public Restaurant(int amountOfTables) { //Look back into this
 
-        //very temporary solution
-        for (int i = 0; i < amountOfTables; i++) {
-            Table table = new Table(i, (int) Math.pow(2, (i%3)+1)); //see comment below method for this
-            tables.add(table);
+        int floor = Math.floor(amountOfTables/3.0);
+        for (int i = 0; i < floor; i++) {
+            Table t1 = new Table(1,2);//Ronan: all tables will have id num of 1
+            Table t2 = new Table(1,4);// perhaps use rng here?
+            Table t3 = new Table(1,5);
+            tables.add(t1);
+            tables.add(t2);
+            tables.add(t3);
+        }
+        //If numberOfTables is divisible by three, then above gives us exactly how many tables we need
+        //Below loop will add either one or two tables if needed.
+        while(amountOfTables!=tables.size()){
+            Table t = new Table(1,2);
+            tables.add(t);
         }
     }
-    //Math.pow(x, y) will return x^y, by using %3 we will return a number from 0-2 each time, we then +1.
-    //so what this is effectively giving us is, Math.pow(2, (1/2/3)) i.e 2^(1/2/3)
-    //where 2^(1/2/3) will cycle between the values in the bracket each time i is incremented
-    //thus giving us 2^1, 2^2, 2^3, or 2, 4, 8
-    //this allows us to generate tables of these sizes.
+
 
     //Getters and Setters
     public ArrayList<Customer> getCustomers() {
