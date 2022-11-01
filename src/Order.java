@@ -12,10 +12,24 @@ public class Order{
     private Customer c; // bayan:
     private int total = 0; //thomas adding up the total amount for the bill
     private Menu m ;
+    private boolean ordering ;
     
     public Order(Customer c){
         this.c = c; 
+        takeOrder(c);
+        Bill bill = new Bill(null); //todo: WHY DOES THIS TAKE NULL AND NOT AN ORDER AGHHH maybe i can give it a cutomer ?
     }
+
+    public boolean getordering(){
+        return ordering ;
+    }
+
+    public void setordering(){
+        ordering = false ;
+    
+    }
+
+    
     
     /**
     *
