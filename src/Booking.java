@@ -8,7 +8,8 @@ public class Booking {
     private Customer customer; //Customer that makes the booking
     private int numberOfPeople; //number of people at the table
     private LocalDateTime time; //time of booking. We will need to run a checker for this
-    private Table table; 
+    private Table table;
+    private Restaurant rest;
 
 
     /**
@@ -20,16 +21,18 @@ public class Booking {
      * @param numberOfPeople number of people at a table
      * @param time time of booking (second constructor sets time to now)
      */
-    public Booking(Customer customer, int numberOfPeople, LocalDateTime time) { //Booking
+    public Booking(Customer customer, int numberOfPeople, LocalDateTime time, Restaurant rest) { //Booking
         this.customer = customer;
         this.numberOfPeople = numberOfPeople;
         this.time = time;
+        this.rest = rest;
         assignTable();
     }
-    public Booking(Customer customer, int numberOfPeople) { //walk-in
+    public Booking(Customer customer, int numberOfPeople, Restaurant rest) { //walk-in
         this.customer = customer;
         this.numberOfPeople = numberOfPeople;
         this.time = LocalDateTime.now();
+        this.rest = rest;
         assignTable();
     }
 
@@ -43,13 +46,16 @@ public class Booking {
         //assign if available
         //print out next available time and give option to book next time
         //set booked table to unavailable
-        
-        if(tableAvailableAtTime(time.getHour()))  {
-            table = getTable(time.getHour()); //the getTable() method will also call the setReservedTime() method
-        } 
-        else {
-            System.out.println("No available table at this time\nNext available table is at %d", table.getNextAvailable());
-        }
+
+
+        for(Table table : rest.getTables())
+
+            if(table.getReservedAtTime(time.getHour())) {
+                table = getTable(); //TODO Make this method
+            } else {
+                System.out.printf("No available tables at %d", time.getHour());
+            }
+
     }
 
     /**
