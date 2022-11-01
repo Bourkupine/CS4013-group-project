@@ -13,7 +13,7 @@ public class Restaurant {
         int j = 1;
         int floor = amountOfTables/3;
         for (int i = 0; i < floor; i++) {
-            Table t1 = new Table(j,2);//Ronan: all tables will have id num of 1
+            Table t1 = new Table(j,2);//Ronan: all tables will have id num of 1. //Euan: fixed
             j++;
             Table t2 = new Table(j,4);// perhaps use rng here?
             j++;
@@ -38,4 +38,5 @@ public class Restaurant {
     public ArrayList<Booking> getBookings() {
         return bookings;
     }
+    public ArrayList<Table> getTables() {return tables;}
 }
