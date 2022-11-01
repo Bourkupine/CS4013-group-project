@@ -32,12 +32,7 @@ public class Order{
         while(ordering ){
             // Menu item input
             int item = order.nextInt();
-            if (item == 0){
-                break;
-            } else if (item == 14){
-                int removeItem = order.nextInt();
-                ordered.remove(removeItem);
-            } else if( item > 0 & item <= 13 ){
+            if( item > 0 & item <= 13 ){
                 
                 //need to relate item number to whatever that no. is on the menu and put that in the array list... not just the no.
                 ordered.add(m.getFoodItemAtIndex(item)); //t adding item to the string for the bill
@@ -45,9 +40,21 @@ public class Order{
                 System.out.println(ordered.toString()); // this is the array list of what they are currently ordering
                 System.out.println("To confirm your order enter the number 0");
                 System.out.println("To cancel an item enter the number 14 ");
+                System.out.println("To cancel your order enter the number 15");
+                
+            }else if (item == 0){
+                break;
+            }
+            else if (item == 14){
+                int removeItem = order.nextInt();
+                ordered.remove(removeItem);
+                
+            }
+            else if (item == 15){
+                ordered.clear();
+                break ;
             }
         }
-        
     } 
     
     /**
