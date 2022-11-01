@@ -44,11 +44,11 @@ public class Booking {
         //print out next available time and give option to book next time
         //set booked table to unavailable
         
-        if(tableAvailableAtTime(time.getHour())) 
+        if(tableAvailableAtTime(time.getHour()))  {
             table = getTable(time.getHour()); //the getTable() method will also call the setReservedTime() method
         } 
         else {
-         System.out.println("No available table at this time\nNext available table is at %d", table.getNextAvailable());
+            System.out.println("No available table at this time\nNext available table is at %d", table.getNextAvailable());
         }
     }
 
