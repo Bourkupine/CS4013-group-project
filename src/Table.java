@@ -6,7 +6,7 @@
 public class Table {
     private final int tableNumber; //Unique ID number for the table
     private final int numberOfSeats; //Number of seats at the table
-    private boolean reserved; //Indicates if the table is reserved or not
+    private boolean[] reserved = new boolean[13]; //Indicates if the table is reserved or not
 
     /**
      * Full-arg constructor.
@@ -16,23 +16,25 @@ public class Table {
     public Table(int tableNumber, int numberOfSeats) {
         this.tableNumber = tableNumber;
         this.numberOfSeats = numberOfSeats;
-        reserved = false; //Tables are not reserved by default
+        for (int i = 0; i < 13; i++) {
+            reserved[i] = false;
+        } //Tables are not reserved by default
     }
 
     /**
      * Sets the table to be reserved or not reserved.
      * @param reserved reserved value for the table
      */
-    public void setReserved(boolean reserved) {
-        this.reserved = reserved;
+    public void setReservedAtIndex(int index, boolean reserved) {
+        this.reserved[index] = reserved;
     }
 
     /**
      * Gets reservation status for the table.
      * @return reserved as boolean
      */
-    public boolean getReserved() {
-        return reserved;
+    public boolean getReservedAtIndex(int index) {
+        return reserved[index];
     }
 
     /**
