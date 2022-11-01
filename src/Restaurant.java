@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Restaurant {
 
     private ArrayList<Booking> bookings = new ArrayList<>();
-    private ArrayList<Customer> customers = new ArrayList<>();
     private ArrayList<Table> tables = new ArrayList<>();
 
     public Restaurant(int amountOfTables) { //Look back into this
@@ -35,9 +34,6 @@ public class Restaurant {
 
 
     //Getters and Setters
-    public ArrayList<Customer> getCustomers() {
-        return customers;
-    }
 
     public ArrayList<Booking> getBookings() {
         return bookings;
