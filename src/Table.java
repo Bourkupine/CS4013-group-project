@@ -1,9 +1,9 @@
 //Bayan: A class to represent a table at a restaurant
 
 public class Table {
-    private final int tableNumber; //Unique ID number for the table
-    private final int numberOfSeats; //Number of seats at the table
-    private boolean[] reserved = new boolean[13]; //Indicates if the table is reserved or not
+    private final int tableNumber; //Bayan: Unique ID number for the table
+    private final int numberOfSeats; //Bayan: Number of seats at the table
+    private boolean[] reserved = new boolean[13]; //Bayan: Indicates if the table is reserved at a specific time or not
 
     /**
      * Full-arg constructor.
@@ -15,26 +15,28 @@ public class Table {
         this.tableNumber = tableNumber;
         this.numberOfSeats = numberOfSeats;
         for (int i = 0; i < 13; i++) {
-            reserved[i] = false;
-        } //Tables are not reserved by default
+            reserved[i] = false; //Bayan: Tables are not reserved by default
+        }
     }
 
     /**
      * Sets the table to be reserved or not reserved.
+     * @param hour the time in hours in 24 hour clock
      * @param reserved reserved value for the table
      * @author Bayan
      */
-    public void setReservedAtIndex(int index, boolean reserved) {
-        this.reserved[index] = reserved;
+    public void setReservedAtTime(int hour, boolean reserved) {
+        this.reserved[hour - 9] = reserved;
     }
 
     /**
      * Gets reservation status for the table.
+     * @param hour the time in hours in 24 hour clock
      * @return reserved as boolean
      * @author Bayan
      */
-    public boolean getReservedAtIndex(int index) {
-        return reserved[index];
+    public boolean getReservedAtTime(int hour) {
+        return reserved[hour - 9];
     }
 
     /**
