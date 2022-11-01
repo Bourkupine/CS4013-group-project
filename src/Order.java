@@ -6,6 +6,8 @@
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
+import staff.*;
+import staff.Chef.FOODSTATUS;
 
 public class Order{
     private ArrayList<FoodItem> ordered = new ArrayList<>();
@@ -13,6 +15,7 @@ public class Order{
     private int total = 0; //thomas adding up the total amount for the bill
     private Menu m ;
     private boolean ordering ;
+    private Chef chef = new Chef("King");
     
     public Order(Customer c){
         this.c = c; 
@@ -42,7 +45,11 @@ public class Order{
         Scanner order = new Scanner(System.in);
         
         System.out.println(m.toString()); //t:this is printing the menu so the customer can choose their items
+
         boolean ordering = true ; //t: this is for the customers they will input 0 when they want to stop ordering 
+
+        chef.setStatus(FOODSTATUS.WAITING); // puts the enum value of the chef to waiting
+        
         while(ordering ){
             // Menu item input
             int item = order.nextInt();
@@ -57,6 +64,7 @@ public class Order{
                 System.out.println("To cancel your order enter the number 15");
                 
             }else if (item == 0){
+                chef.ordered();
                 break;
             }
             else if (item == 14){
