@@ -8,14 +8,14 @@ public class Restaurant {
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Table> tables = new ArrayList<>();
 
-    public Restaurant(int amountOfTables) { //Look back into this
+    public Restaurant(int amountOfTables) {
         
         int j = 1;
         int floor = amountOfTables/3;
         for (int i = 0; i < floor; i++) {
-            Table t1 = new Table(j,2);//Ronan: all tables will have id num of 1. //Euan: fixed
+            Table t1 = new Table(j,2);
             j++;
-            Table t2 = new Table(j,4);// perhaps use rng here?
+            Table t2 = new Table(j,4);
             j++;
             Table t3 = new Table(j,5);
             j++;

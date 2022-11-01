@@ -9,7 +9,7 @@ public class RestaurantChain {
     private String name; //The name of the restaurant chain.
     private int amountOfRestaurants; //The amount of restaurants.
     private ArrayList<FoodItem> menu = new ArrayList<>();
-    private ArrayList<Restaurant> restaurants = new ArrayList<>();//Ronan: need to double check how we are implementing this
+    private ArrayList<Restaurant> restaurants = new ArrayList<>();// ArrayList containing all restaurants in chain
 
     /**
      * Full-arg constructor.
