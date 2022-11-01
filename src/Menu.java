@@ -1,10 +1,7 @@
+//Bayan: A class to represent a menu for a restaurant chain
+
 import java.util.HashMap;
 
-/**
- * A class to represent a menu at a restaurant
- *
- * @author Bayan
- */
 public class Menu {
     private HashMap<Integer, FoodItem> menu = new HashMap<>();
 
@@ -22,6 +19,7 @@ public class Menu {
      * Returns the FoodItem with the specified id
      * @param id id of the food item
      * @return FoodItem
+     * @author Bayan
      */
     public FoodItem getFoodItemAtIndex(int id) {
         return menu.get(id);

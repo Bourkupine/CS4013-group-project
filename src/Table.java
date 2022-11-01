@@ -1,8 +1,5 @@
-/**
- * A class for a table in a restaurant.
- *
- * @author Bayan
- */
+//Bayan: A class to represent a table at a restaurant
+
 public class Table {
     private final int tableNumber; //Unique ID number for the table
     private final int numberOfSeats; //Number of seats at the table
@@ -12,6 +9,7 @@ public class Table {
      * Full-arg constructor.
      * @param tableNumber id number for the table
      * @param numberOfSeats number of seats at this table
+     * @author Bayan
      */
     public Table(int tableNumber, int numberOfSeats) {
         this.tableNumber = tableNumber;
@@ -24,6 +22,7 @@ public class Table {
     /**
      * Sets the table to be reserved or not reserved.
      * @param reserved reserved value for the table
+     * @author Bayan
      */
     public void setReservedAtIndex(int index, boolean reserved) {
         this.reserved[index] = reserved;
@@ -32,6 +31,7 @@ public class Table {
     /**
      * Gets reservation status for the table.
      * @return reserved as boolean
+     * @author Bayan
      */
     public boolean getReservedAtIndex(int index) {
         return reserved[index];
@@ -40,6 +40,7 @@ public class Table {
     /**
      * Gets table number for the table.
      * @return table number as int
+     * @author Bayan
      */
     public int getTableNumber() {
         return tableNumber;
@@ -48,6 +49,7 @@ public class Table {
     /**
      * Gets number of seats at the table.
      * @return number of seats as int
+     * @author Bayan
      */
     public int getNumberOfSeats() {
         return numberOfSeats;
