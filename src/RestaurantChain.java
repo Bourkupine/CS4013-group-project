@@ -2,8 +2,6 @@ import java.util.ArrayList;
 
 /**
  * A class to represent a chain of restaurants.
- *
- * @author Bayan
  */
 
 public class RestaurantChain {
