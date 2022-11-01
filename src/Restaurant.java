@@ -11,7 +11,7 @@ public class Restaurant {
 
     public Restaurant(int amountOfTables) { //Look back into this
 
-        int floor = Math.floor(amountOfTables/3.0);
+        int floor = amountOfTables/3;
         for (int i = 0; i < floor; i++) {
             Table t1 = new Table(1,2);//Ronan: all tables will have id num of 1
             Table t2 = new Table(1,4);// perhaps use rng here?
