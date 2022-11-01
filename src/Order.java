@@ -13,13 +13,10 @@ public class Order{
     private int total = 0; //thomas adding up the total amount for the bill
     private Menu m ;
     
-    // private StringBuilder sb = new StringBuilder();
-    
     public Order(Customer c){
         this.c = c; 
     }
     
-   
     /**
     *
     * @author Thomas
@@ -35,20 +32,23 @@ public class Order{
         while(ordering ){
             // Menu item input
             int item = order.nextInt();
-
-            //need to relate item number to whatever that no. is on the menu and put that in the array list... not just the no.
-            ordered.add(m.getFoodItemAtIndex(item)); //t adding item to the string for the bill
-            System.out.println("This is your current order " + "\n"); //printing what the customer has currently ordered so the can see what their order is currently
-            System.out.println(ordered.toString()); // this is the array list of what they are currently ordering
-            
-            if (item == 0){ //t this is breaking out of the ordering when the customer decides
+            if (item == 14){
                 break;
+            } else if (item == 15){
+                int removeItem = order.nextInt();
+                ordered.remove(removeItem);
+            } else if( item >= 0 & item <= 13 ){
+                
+                //need to relate item number to whatever that no. is on the menu and put that in the array list... not just the no.
+                ordered.add(m.getFoodItemAtIndex(item)); //t adding item to the string for the bill
+                System.out.println("This is your current order " + "\n"); //printing what the customer has currently ordered so the can see what their order is currently
+                System.out.println(ordered.toString()); // this is the array list of what they are currently ordering
+                System.out.println("To confirm your order enter the number 14");
+                System.out.println("To cancel an item enter the number 15 ");
             }
         }
         
-    }
-    
-    
+    } 
     
     /**
     * {@summary will give a discount if thw customer has visited 10 or more times }
@@ -60,23 +60,22 @@ public class Order{
         }
     }
     
-
     /**
     * {@summary Gets what customer c is }
     @author Thomas
     */
-        public Customer getCustomer() {
-            return c;
-        }
-        
-        @Override
-        //this definitely wont work but going to leave it here for now 
-        //also dont think i need to have a to string here maybe
-        public String toString() {
-            
-            return orderd.toString();
-        }
-        
-        
-        
+    public Customer getCustomer() {
+        return c;
     }
+    
+    @Override
+    //this definitely wont work but going to leave it here for now 
+    //also dont think i need to have a to string here maybe
+    public String toString() {
+        
+        return ordered.toString();
+    }
+    
+    
+    
+}
