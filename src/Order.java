@@ -44,6 +44,7 @@ public class Order{
     }
     
     
+    
     /**
     * will update the Customer c's loyalty
     @author thomas
