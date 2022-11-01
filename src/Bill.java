@@ -27,6 +27,6 @@ public class Bill{
     @Override
     public String toString() { //printing the bill
         
-        return  "Total "+ order.getSb() + "Thank you for visiting Yum" ;  
+        return  "Total "+ "Thank you for visiting Yum" ;  
     }
 }
