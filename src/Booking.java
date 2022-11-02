@@ -60,19 +60,10 @@ public class Booking {
      *@author Euan
      */
     private void assignTable() {
-        //Check for available tables        
-        //assign if available
-        //print out next available time and give option to book next time
-        //set booked table to unavailable
 
+        rest.getTable(time.getHour(), numberOfPeople);
+        table.setReservedAtTime(time.getHour(), true);
 
-        for(Table table : rest.getTables())
-
-            if(table.getReservedAtTime(time.getHour())) {
-                table = rest.getTable(); //TODO Make this method
-            } else {
-                System.out.printf("No available tables at %d", time.getHour());
-            }
 
     }
 
@@ -84,6 +75,7 @@ public class Booking {
      */
     public void cancelBooking(Object booking) {
         booking = null; //doesnt work; needs testing
+        table.setReservedAtTime(time.getHour(), false);
     }
 
     /**
