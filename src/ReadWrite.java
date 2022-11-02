@@ -21,7 +21,7 @@ public interface ReadWrite {
      *
      * @param f .csv file to read from
      * @return an ArrayList of comma-separated strings, with each element representing one row
-     * @throws java.io.FileNotFoundException
+     * @throws java.io.FileNotFoundException if cannot find file to read from
      */
     public default ArrayList<String> readFile(File f)throws java.io.FileNotFoundException{
 
@@ -40,8 +40,8 @@ public interface ReadWrite {
      *
      * @param f .csv file to write to
      * @param s an arraylist of comma-separated strings to write to file
-     * @throws java.io.FileNotFoundException
-     * @throws java.io.IOException
+     * @throws java.io.FileNotFoundException if cannot find file to write to
+     * @throws java.io.IOException if error occurs while writing
      */
     public default void writeFile(File f,ArrayList<String> s)throws java.io.FileNotFoundException, java.io.IOException{
         PrintWriter out = new PrintWriter(f);
