@@ -1,7 +1,7 @@
 //Euan: this can act like the main (overview?) class
 
 import java.util.ArrayList;
-import staff.*;
+
 
 public class Restaurant {
 
