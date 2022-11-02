@@ -1,6 +1,5 @@
 //Euan: this can act like the main (overview?) class
 
-
 import java.util.ArrayList;
 import staff.*;
 
@@ -34,11 +33,30 @@ public class Restaurant {
         }
     }
 
+    /**
+     * Gets table at time and has numOfPeople
+     *
+     * @param hour hour of booking
+     * @param numOfPeople number of people at the table
+     * @return table
+     *
+     * @author Euan
+     */
+    public Table getTable(int hour, int numOfPeople) {
+        for (Table table : getTableList()) {
+            if(!table.getReservedAtTime(hour) && table.getNumberOfSeats() == numOfPeople) {
+                return table;
+            }
+        }
+        //temporary response if no available tables:
+        System.out.println("No available tables at that time");
+        return null;
+    }
 
     //Getters and Setters
 
     public ArrayList<Booking> getBookings() {
         return bookings;
     }
-    public ArrayList<Table> getTables() {return tables;}
+    public ArrayList<Table> getTableList() {return tables;} //Euan: changed name to getTableList to not confuse with getTable
 }
