@@ -1,6 +1,3 @@
-package staff;
-
-
 
 public class Waiter extends Staff {
     private boolean canIDrop = false ;
