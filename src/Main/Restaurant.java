@@ -2,14 +2,16 @@
 
 
 import java.util.ArrayList;
+import staff.*;
 
 public class Restaurant {
 
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Table> tables = new ArrayList<>();
-
+    private Chef chef = new Chef("King");
+    private Waiter waiter = new Waiter("Bob") ;
+    
     public Restaurant(int amountOfTables) {
-        
         int j = 1;
         int floor = amountOfTables/3;
         for (int i = 0; i < floor; i++) {

@@ -7,33 +7,30 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 import staff.*;
-import staff.Chef.FOODSTATUS;
+
 
 public class Order{
     private ArrayList<FoodItem> ordered = new ArrayList<>();
     private Customer c; // bayan:
     private int total = 0; //thomas adding up the total amount for the bill
-    private Menu m ;
-    private boolean ordering ;
+    private Menu m ;  
     private Chef chef = new Chef("King");
+    private orderStatus status;
     
     public Order(Customer c){
         this.c = c; 
+        status = orderStatus.ORDERING ;
         takeOrder(c);
-        Bill bill = new Bill(null); //todo: WHY DOES THIS TAKE NULL AND NOT AN ORDER AGHHH maybe i can give it a cutomer ?
+        Bill bill = new Bill(this); //todo: WHY DOES THIS TAKE NULL AND NOT AN ORDER AGHHH maybe i can give it a customer ?
+    }
+    public enum orderStatus{
+        WAITING,
+        ORDERING,
+        ORDERED,
+        READY,
+        DELIVERED;
     }
 
-    public boolean getordering(){
-        return ordering ;
-    }
-
-    public void setordering(){
-        ordering = false ;
-    
-    }
-
-    
-    
     /**
     *
     * @author Thomas
@@ -42,15 +39,15 @@ public class Order{
     */
     public void takeOrder(Customer c){
         //t: creating the scanner
+        
         Scanner order = new Scanner(System.in);
         
         System.out.println(m.toString()); //t:this is printing the menu so the customer can choose their items
 
-        boolean ordering = true ; //t: this is for the customers they will input 0 when they want to stop ordering 
+     
 
-        chef.setStatus(FOODSTATUS.WAITING); // puts the enum value of the chef to waiting
         
-        while(ordering ){
+        while(status == orderStatus.ORDERING ){
             // Menu item input
             int item = order.nextInt();
             if( item > 0 & item <= 13 ){
@@ -64,8 +61,7 @@ public class Order{
                 System.out.println("To cancel your order enter the number 15");
                 
             }else if (item == 0){
-                chef.ordered();
-                break;
+                status = orderStatus.ORDERED;
             }
             else if (item == 14){
                 int removeItem = order.nextInt();
@@ -74,10 +70,14 @@ public class Order{
             }
             else if (item == 15){
                 ordered.clear();
-                break ;
+                status = orderStatus.WAITING ;
             }
         }
     } 
+
+    public orderStatus getStatus() {
+        return status;
+    }
     
     /**
     * {@summary will give a discount if thw customer has visited 10 or more times }
