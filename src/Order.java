@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 
 public class Order{
-    private ArrayList<FoodItem> ordered = new ArrayList<>();
+    private ArrayList<String> ordered = new ArrayList<>();
     private Customer c; // bayan:
     private int total = 0; //thomas adding up the total amount for the bill
     private Menu m = new Menu(); // todo: needs to get menu method in restaurant chain.
@@ -53,20 +53,26 @@ public class Order{
             if( item > 0 & item <= 13 ){
                 
                 //need to relate item number to whatever that no. is on the menu and put that in the array list... not just the no.
-                ordered.add(m.getFoodItemAtIndex(item-1)); //t adding item to the string for the bill
+                ordered.add(m.getFoodItemAtIndex(item-1).getName()); //t adding item to the string for the bill
                 System.out.println("This is your current order " + "\n"); //printing what the customer has currently ordered so the can see what their order is currently
-                System.out.println(ordered.toString()); // this is the array list of what they are currently ordering
+                System.out.println(ordered.toString());
+                total += m.getFoodItemAtIndex(item-1).getPrice();
+                System.out.println("Your current total is " + total); // this is the array list of what they are currently ordering
                 System.out.println("To order an item or another item enter the number of the item on the menu");
                 System.out.println("To confirm your order enter the number 0");
                 System.out.println("To cancel an item enter the number 14 ");
+        
                 System.out.println("To cancel your order enter the number 15");
                 
             }else if (item == 0){
                 status = foodStatus.ORDERED;
             }
             else if (item == 14){
+                System.out.println("Enter the number on your order that you would like to remove");
                 int removeItem = order.nextInt();
-                ordered.remove(removeItem);
+                total -= m.getFoodItemAtIndex(item-1).getPrice();
+                ordered.remove(removeItem + 1);
+                System.out.println(m.getFoodItemAtIndex(removeItem-1 )+" was removed from the order");
                 
             }
             else if (item == 15){
