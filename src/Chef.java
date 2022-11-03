@@ -8,6 +8,8 @@ public class Chef extends Staff {
     public Chef(String name){
         super(name);
     }
+
+    
     
     public void isDeliverable() { // this will tell the waiter wether the order is ready to be dropped yet or not
         if ( order.checkStatus("READY") ){ //if the enum value is ready then the waiter will drop it 
