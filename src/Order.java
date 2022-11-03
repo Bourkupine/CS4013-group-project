@@ -53,7 +53,7 @@ public class Order{
             if( item > 0 & item <= 13 ){
                 
                 //need to relate item number to whatever that no. is on the menu and put that in the array list... not just the no.
-                ordered.add(m.getFoodItemAtIndex(item)); //t adding item to the string for the bill
+                ordered.add(m.getFoodItemAtIndex(item-1)); //t adding item to the string for the bill
                 System.out.println("This is your current order " + "\n"); //printing what the customer has currently ordered so the can see what their order is currently
                 System.out.println(ordered.toString()); // this is the array list of what they are currently ordering
                 System.out.println("To order an item or another item enter the number of the item on the menu");
