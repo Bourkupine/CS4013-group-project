@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 
 public class Order{
-    private ArrayList<String> ordered = new ArrayList<>();
+    private ArrayList<FoodItem> ordered = new ArrayList<>();
     private Customer c; // bayan:
     private int total = 0; //thomas adding up the total amount for the bill
     private Menu m = new Menu(); // todo: needs to get menu method in restaurant chain.
@@ -53,7 +53,7 @@ public class Order{
             if( item > 0 & item <= 13 ){
                 
                 //need to relate item number to whatever that no. is on the menu and put that in the array list... not just the no.
-                ordered.add(m.getFoodItemAtIndex(item-1).getName()); //t adding item to the string for the bill
+                ordered.add(m.getFoodItemAtIndex(item-1)); //t adding item to the string for the bill
                 System.out.println("This is your current order " + "\n"); //printing what the customer has currently ordered so the can see what their order is currently
                 System.out.println(ordered.toString());
                 total += m.getFoodItemAtIndex(item-1).getPrice();
@@ -70,8 +70,8 @@ public class Order{
             else if (item == 14){
                 System.out.println("Enter the number on your order that you would like to remove");
                 int removeItem = order.nextInt();
-                total -= m.getFoodItemAtIndex(item-1).getPrice();
-                ordered.remove(removeItem + 1);
+                total -= ordered.get(removeItem - 1).getPrice();
+                ordered.remove(removeItem - 1);
                 System.out.println(m.getFoodItemAtIndex(removeItem-1 )+" was removed from the order");
                 
             }
@@ -116,8 +116,11 @@ public class Order{
     //this definitely wont work but going to leave it here for now 
     //also dont think i need to have a to string here maybe
     public String toString() {
-        
-        return ordered.toString();
+        String output = "";
+        for(FoodItem f : ordered) {
+            output = output + f.getName() + " ";
+        }
+        return output;
     }
     
     
