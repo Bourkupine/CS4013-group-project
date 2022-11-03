@@ -11,7 +11,7 @@ public class Booking {
     private Customer customer; //Customer that makes the booking
     private int numberOfPeople; //number of people at the table
     private LocalDateTime time; //time of booking. We will need to run a checker for this
-    private Table table;
+    private Table table = assignTable();
     private Restaurant rest; //booking is specific to a certain restaurant
 
 
@@ -35,7 +35,7 @@ public class Booking {
     }
     public Booking(Customer customer, int numberOfPeople, Restaurant rest) { //walk-in
         this.customer = customer;
-        this.numberOfPeople = numberOfPeople;
+        this.numberOfPeople = setPeople(numberOfPeople);
         this.time = LocalDateTime.now();
         this.rest = rest;
         assignTable();
@@ -59,12 +59,12 @@ public class Booking {
      *
      *@author Euan
      */
-    private void assignTable() {
+    private Table assignTable() {
 
-        rest.getTable(time.getHour(), numberOfPeople);
+        Table temp = rest.getTable(time.getHour(), numberOfPeople); //TODO Table is NULL, not initialised
         table.setReservedAtTime(time.getHour(), true);
 
-
+        return temp;
     }
 
     /**
