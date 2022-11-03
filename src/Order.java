@@ -12,7 +12,7 @@ public class Order{
     private ArrayList<FoodItem> ordered = new ArrayList<>();
     private Customer c; // bayan:
     private int total = 0; //thomas adding up the total amount for the bill
-    private Menu m ;  
+    private Menu m = new Menu();
     private Chef chef = new Chef("King");
     private foodStatus status;
     
