@@ -19,10 +19,6 @@ public class Bill{
         this.receipt = receipt;
     }
 
-    public void setTableAvailable(){ //after the bill is payed
-        //set reserved false
-
-    }
 
     @Override
     public String toString() { //printing the bill

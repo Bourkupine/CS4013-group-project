@@ -13,7 +13,6 @@ public class Order{
     private Customer c; // bayan:
     private int total = 0; //thomas adding up the total amount for the bill
     private Menu m = new Menu(); // todo: needs to get menu method in restaurant chain.
-    private Chef chef = new Chef("King");
     private foodStatus status;
     
     public Order(Customer c){
@@ -86,6 +85,10 @@ public class Order{
         return status;
     }
 
+    public ArrayList<FoodItem> getOrdered() {
+        return ordered;
+    }
+
     public boolean setStatus(String status) {
         return(status.equals("WAITING"));
     }
@@ -104,6 +107,7 @@ public class Order{
         return ( status.equals("READY")); 
     }
     
+
     /**
     * {@summary Gets what customer c is }
     @author Thomas
