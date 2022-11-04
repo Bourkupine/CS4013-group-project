@@ -37,8 +37,8 @@ public class Chef extends Staff {
             waiter.bellRings() ;  // this tells the waiter the food is ready to be dropped by the chef ringing the bell
         }  
     }
-    
+    public void delivered (){
+        order.setStatus("WAITING");
+    }
 }
-public void delivered (){
-    order.setStatus("WAITING");
-}
+
