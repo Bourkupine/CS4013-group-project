@@ -33,6 +33,37 @@ public class Restaurant {
         }
     }
 
+
+    public void makeBooking(Customer c, int people, int time) {
+
+        Booking book = new Booking(c, people);
+        bookings.add(book);
+        assignTable(time, people, book);
+
+    }
+
+    /**
+     * Assign a table to the booking
+     *
+     * @author Euan
+     */
+    private void assignTable(int hour, int people, Booking book) {
+
+
+
+        if(getTable(hour, people) != null) {
+            Table tempTable = getTable(hour, people);
+            book.setTable(tempTable);
+            tempTable.setReservedAtTime(hour, true);
+            System.out.println("Your booking has been created");
+
+        }
+        else {
+            System.out.printf("No available table at %d with %d people", hour, people);
+
+        }
+
+    }
     /**
      * Gets table at time and has numOfPeople
      *
@@ -42,6 +73,7 @@ public class Restaurant {
      *
      * @author Euan
      */
+
     public Table getTable(int hour, int numOfPeople) {
         for (Table table : getTableList()) {
             if(!table.getReservedAtTime(hour) && table.getNumberOfSeats() == numOfPeople) {

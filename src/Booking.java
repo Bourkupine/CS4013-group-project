@@ -10,9 +10,9 @@ public class Booking {
     private static int idCounter = 0; //used to keep a universal counter of all the bookings so we can set id = idCounter + 1
     private Customer customer; //Customer that makes the booking
     private int numberOfPeople; //number of people at the table
-    private LocalDateTime time; //time of booking. We will need to run a checker for this
-    private Table table = assignTable();
-    private Restaurant rest; //booking is specific to a certain restaurant
+    private int time; //time of booking. We will need to run a checker for this
+    private Table table ;
+    private Restaurant rest; //booking is specific to a certain restaurant TODO initialise this
 
 
     /**
@@ -24,28 +24,24 @@ public class Booking {
      * @param numberOfPeople number of people at a table
      * @param time time of booking (second constructor sets time to now)
      */
-    public Booking(Customer customer, int numberOfPeople, LocalDateTime time, Restaurant rest) { //Booking
+    public Booking(Customer customer, int numberOfPeople, int time) { //Booking
         this.customer = customer;
         this.numberOfPeople = setPeople(numberOfPeople); //TODO make sure numOfPeople isnt > 8
         this.time = time;
-        this.rest = rest;
-        assignTable();
         idCounter++;
         this.id = idCounter;
     }
-    public Booking(Customer customer, int numberOfPeople, Restaurant rest) { //walk-in
+    public Booking(Customer customer, int numberOfPeople) { //walk-in
         this.customer = customer;
         this.numberOfPeople = setPeople(numberOfPeople);
-        this.time = LocalDateTime.now();
-        this.rest = rest;
-        assignTable();
+        this.time = LocalDateTime.now().getHour();
         idCounter++;
         this.id = idCounter;
     }
 
     public int setPeople(int people) {
 
-        NavigableSet<Integer> tableSeats = new TreeSet<Integer>();
+        NavigableSet<Integer> tableSeats = new TreeSet<>();
 
         tableSeats.add(2);
         tableSeats.add(4);
@@ -54,18 +50,10 @@ public class Booking {
         return tableSeats.ceiling(people);
     }
 
-    /**
-     * Assign a table to the booking
-     *
-     *@author Euan
-     */
-    private Table assignTable() {
-
-        Table temp = rest.getTable(time.getHour(), numberOfPeople); //TODO Table is NULL, not initialised
-        table.setReservedAtTime(time.getHour(), true);
-
-        return temp;
+    public void setTable(Table table) {
+        this.table = table;
     }
+
 
     /**
      * Delete/cancel a booking
@@ -75,7 +63,7 @@ public class Booking {
      */
     public void cancelBooking(Object booking) {
         booking = null; //doesnt work; needs testing
-        table.setReservedAtTime(time.getHour(), false);
+        table.setReservedAtTime(time, false);
     }
 
     /**
@@ -84,7 +72,7 @@ public class Booking {
      * @param time time you wish to change your booking to
      * @author Euan
      */
-    public void laterTime(LocalDateTime time){
+    public void laterTime(int time){
         this.time = time;
     }
 
@@ -98,7 +86,7 @@ public class Booking {
         return numberOfPeople;
     }
 
-    public LocalDateTime getTime() {
+    public int getTime() {
         return time;
     }
 
