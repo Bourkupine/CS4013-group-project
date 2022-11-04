@@ -34,12 +34,11 @@ public class Restaurant {
     }
 
 
-    public void makeBooking(Customer c, int people) {
+    public void makeBooking(Customer c, int people, int time) {
 
         Booking book = new Booking(c, people);
         bookings.add(book);
-
-
+        assignTable(time, people, book);
 
     }
 
@@ -56,6 +55,7 @@ public class Restaurant {
             Table tempTable = getTable(hour, people);
             book.setTable(tempTable);
             tempTable.setReservedAtTime(hour, true);
+            System.out.println("Your booking has been created");
 
         }
         else {
