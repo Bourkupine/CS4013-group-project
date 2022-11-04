@@ -8,4 +8,13 @@ public class Manager extends Staff {
         super(name);
     }
 
+
+    public void employStaff(Staff staff) {}
+
+    public void fireStaff(Staff staff) {}
+
+
+
+
+
 }
