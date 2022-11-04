@@ -6,6 +6,7 @@ import java.util.*;
 
 public class Booking {
 
+    private static int totalId = 0;
     private int id;
     private static int idCounter = 0; //used to keep a universal counter of all the bookings so we can set id = idCounter + 1
     private Customer customer; //Customer that makes the booking
@@ -22,34 +23,28 @@ public class Booking {
      *
      * @param customer pass a customer //might need to change this to id or something
      * @param numberOfPeople number of people at a table
-     * @param time time of booking (second constructor sets time to now)
      */
-    public Booking(Customer customer, int numberOfPeople, int time) { //Booking
-        this.customer = customer;
-        this.numberOfPeople = setPeople(numberOfPeople); //TODO make sure numOfPeople isnt > 8
-        this.time = time;
-        idCounter++;
-        this.id = idCounter;
-    }
     public Booking(Customer customer, int numberOfPeople) { //walk-in
+        this.id = totalId;
+        totalId++;
         this.customer = customer;
-        this.numberOfPeople = setPeople(numberOfPeople);
+        this.numberOfPeople = numberOfPeople;//TODO make sure numOfPeople isnt > 8
         this.time = LocalDateTime.now().getHour();
         idCounter++;
         this.id = idCounter;
     }
 
-    public int setPeople(int people) {
-
-        NavigableSet<Integer> tableSeats = new TreeSet<>();
-
-        tableSeats.add(2);
-        tableSeats.add(4);
-        tableSeats.add(8);
-
-        return tableSeats.ceiling(people);
+    public Booking(Customer customer, int numberOfPeople, int time) { //Booking
+        this(customer, numberOfPeople);
+        this.time = time;
     }
 
+
+    /**
+     * sets a table to the booking
+     * @param table
+     * @author Euan
+     */
     public void setTable(Table table) {
         this.table = table;
     }
@@ -61,10 +56,6 @@ public class Booking {
      * @param booking: the booking you want to cancel
      * @author Euan
      */
-    public void cancelBooking(Object booking) {
-        booking = null; //doesnt work; needs testing
-        table.setReservedAtTime(time, false);
-    }
 
     /**
      * Change time of booking
@@ -77,6 +68,11 @@ public class Booking {
     }
 
     //Setters & Getters
+
+
+    public int getId() {
+        return id;
+    }
 
     public Customer getCustomer() {
         return customer;

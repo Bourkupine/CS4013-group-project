@@ -1,12 +1,17 @@
 //Euan: this can act like the main (overview?) class
 
 import java.util.ArrayList;
+import java.util.NavigableSet;
+import java.util.TreeSet;
 
 
 public class Restaurant {
 
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Table> tables = new ArrayList<>();
+    private ArrayList<Order> orders = new ArrayList<>();
+
+    private ArrayList<Staff> staff = new ArrayList<>();
     private Chef chef = new Chef("King");
     private Waiter waiter = new Waiter("Bob") ;
     
@@ -18,7 +23,7 @@ public class Restaurant {
             j++;
             Table t2 = new Table(j,4);
             j++;
-            Table t3 = new Table(j,5);
+            Table t3 = new Table(j,8); //Euan: changed to 8
             j++;
             tables.add(t1);
             tables.add(t2);
@@ -36,10 +41,37 @@ public class Restaurant {
 
     public void makeBooking(Customer c, int people, int time) {
 
-        Booking book = new Booking(c, people);
+        Booking book = new Booking(c, setPeople(people));
         bookings.add(book);
-        assignTable(time, people, book);
+        assignTable(time, setPeople(people), book);
 
+    }
+
+    /**
+     * Cancel a booking
+     *
+     * @param booking the booking you wish to delete
+     *
+     * @author Euan
+     */
+    public void cancelBooking(Booking booking) {
+        bookings.remove(booking);
+    }
+
+    /**
+     * Changes the
+     * @param people
+     * @return
+     */
+    public int setPeople(int people) {
+
+        NavigableSet<Integer> tableSeats = new TreeSet<>();
+
+        tableSeats.add(2);
+        tableSeats.add(4);
+        tableSeats.add(8);
+
+        return tableSeats.ceiling(people);
     }
 
     /**
@@ -59,7 +91,7 @@ public class Restaurant {
 
         }
         else {
-            System.out.printf("No available table at %d with %d people", hour, people);
+            System.out.printf("No available table at %d with %d people\n", hour, people);
 
         }
 
@@ -86,6 +118,11 @@ public class Restaurant {
     }
 
     //Getters and Setters
+
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
 
     public ArrayList<Booking> getBookings() {
         return bookings;
