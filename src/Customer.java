@@ -6,6 +6,7 @@
 public class Customer {
     private String name;//Customers name
     private int id;//Unique id number for customer
+    private static int totalId = 0;
     private String phoneNumber;//Phone number of customer
     private int loyalty;//number of times customer has been to restaurant
 
@@ -15,9 +16,10 @@ public class Customer {
      * @param id id number for customer
      * @author Ronan
      */
-    public Customer(String name, int id){
+    public Customer(String name){
         this.name=name;
-        this.id=id;
+        id = totalId;
+        totalId++;
         loyalty = 0;
     }
 
@@ -28,8 +30,8 @@ public class Customer {
      * @param phoneNumber phone number of customer
      * @author Ronan
      */
-    public Customer(String name, int id, String phoneNumber){
-        this(name,id);
+    public Customer(String name, String phoneNumber){
+        this(name);
         this.phoneNumber=phoneNumber;
     }
 
