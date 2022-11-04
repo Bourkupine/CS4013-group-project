@@ -22,6 +22,26 @@ public class Menu {
     }
 
     /**
+     * Adds a specified FoodItem to the menu
+     * @param f FoodItem to be added
+     * @author Bayan
+     */
+    public void addFood(FoodItem f) {
+        menu.add(f);
+        orderByType(menu);
+    }
+
+    /**
+     * Removes a specified FoodItem from the menu
+     * @param f FoodItem to be removed
+     * @author Bayan
+     */
+    public void removeFood(FoodItem f) {
+        menu.remove(f);
+        orderByType(menu);
+    }
+
+    /**
      * Orders the menu by type, i.e. starters, then mains, then desserts, then drinks
      * @param menu the ArrayList of FoodItems representing the menu
      * @author Bayan
@@ -59,7 +79,7 @@ public class Menu {
     @Override
     public String toString() {
         StringBuilder menuString = new StringBuilder("~~~~OUR MENU~~~~\n");
-        menuString.append(String.format("%-4s%-20s%5d%10s", "ID", "Name", "Price", "Type"));
+        menuString.append(String.format("%-4s%-20s%5s%10s", "ID", "Name", "Price", "Type"));
 
         for (int i = 1; i < menu.size() + 1; i++) {
             menuString.append("[" + i + "] " + menu.get(i-1).toString());
