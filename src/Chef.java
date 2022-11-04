@@ -14,7 +14,6 @@ public class Chef extends Staff {
         
         
         if(item.getType() == "Starter"){
-            
             return 5;
         }else if(item.getType()=="Main"){
             return 10;
@@ -22,13 +21,13 @@ public class Chef extends Staff {
         }else if(item.getType()=="Dessert"){
             return 5;
             
-        }else if(item.getType()=="Drinks"){
+        }else{
             return 1;
         }
         
     }
     
-    public void isDeliverable(Order order) { // this will tell the waiter wether the order is ready to be dropped yet or not
+    public void isDeliverable(Order order) throws InterruptedException { // this will tell the waiter wether the order is ready to be dropped yet or not
         if ( order.checkStatus("READY" ) ){
             for(FoodItem item : order.getOrdered()){
                 wait(timeToDelivery(item));
