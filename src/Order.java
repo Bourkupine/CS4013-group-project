@@ -12,10 +12,11 @@ public class Order{
     private ArrayList<FoodItem> ordered = new ArrayList<>();
     private Customer c; // bayan:
     private int total = 0; //thomas adding up the total amount for the bill
-    private Menu m = new Menu(); // todo: needs to get menu method in restaurant chain.
+    private Menu m; // todo: needs to get menu method in restaurant chain.//Ronan: fixed?
     private foodStatus status;
     
-    public Order(Customer c){
+    public Order(Customer c, Restaurant r){
+        m = r.getMenu();
         this.c = c; 
         status = foodStatus.ORDERING ;
         takeOrder(c);

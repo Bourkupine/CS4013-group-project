@@ -11,11 +11,18 @@ public class Restaurant {
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
 
+
+
+    private RestaurantChain rc;
+
+
     private ArrayList<Staff> staff = new ArrayList<>();
     private Chef chef = new Chef("King");
     private Waiter waiter = new Waiter("Bob") ;
     
-    public Restaurant(int amountOfTables) {
+    public Restaurant(int amountOfTables, RestaurantChain rc) {
+        this.rc = rc;
+
         int j = 1;
         int floor = amountOfTables/3;
         for (int i = 0; i < floor; i++) {
@@ -128,4 +135,6 @@ public class Restaurant {
         return bookings;
     }
     public ArrayList<Table> getTableList() {return tables;} //Euan: changed name to getTableList to not confuse with getTable
+
+    public Menu getMenu() {return rc.getMenu();}
 }

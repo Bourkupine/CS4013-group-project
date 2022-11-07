@@ -14,6 +14,7 @@ public class Booking {
     private int time; //time of booking. We will need to run a checker for this
     private Table table ;
     private Restaurant rest; //booking is specific to a certain restaurant TODO initialise this
+    //Ronan- possible solution to above is to have booking take a restaurant in constructor
 
 
     /**
