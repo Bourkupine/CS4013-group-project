@@ -5,8 +5,8 @@ public class Waiter extends Staff {
     private Chef chef ;
     //Ronan: does this cause an error? chef never gets initialized
     
-    public Waiter(String name){
-        super(name);
+    public Waiter(String name,String password){
+        super(name,password);
     }
 
     public void bellRings(){

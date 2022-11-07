@@ -6,8 +6,8 @@ public class Chef extends Staff {
     private Order order ;
    
     
-    public Chef(String name){
-        super(name);
+    public Chef(String name,String password){
+        super(name,password);
         
     }
     public int timeToDelivery(FoodItem item){

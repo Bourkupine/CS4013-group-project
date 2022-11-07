@@ -17,8 +17,8 @@ public class Restaurant {
 
 
     private ArrayList<Staff> staff = new ArrayList<>();
-    private Chef chef = new Chef("King");
-    private Waiter waiter = new Waiter("Bob") ;
+    private Chef chef = new Chef("King","testPassword");//These passwords are just placeholders
+    private Waiter waiter = new Waiter("Bob","testPassword") ;
     
     public Restaurant(int amountOfTables, RestaurantChain rc) {
         this.rc = rc;
