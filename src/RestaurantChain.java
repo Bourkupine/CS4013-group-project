@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ public class RestaurantChain {
     private ArrayList<Customer> customers = new ArrayList<>(); //An arraylist of all customers across every restaurant.
     private String name; //The name of the restaurant chain.
     private int amountOfRestaurants; //The amount of restaurants.
-    private ArrayList<FoodItem> menu = new ArrayList<>();
+    private Menu menu;
     private ArrayList<Restaurant> restaurants = new ArrayList<>();// ArrayList containing all restaurants in chain
 
     /**
@@ -23,5 +24,24 @@ public class RestaurantChain {
             restaurants.add(restaurant);
         }
 
+    }
+
+    public void generateMenu() {
+        ArrayList<FoodItem> f = new ArrayList<>();
+        f.add(new FoodItem("Garlic bread", 4, "starter"));
+        f.add(new FoodItem("Tomato soup", 4, "starter"));
+        f.add(new FoodItem("Hamburger", 4, "main"));
+        f.add(new FoodItem("Water", 4, "drink"));
+        f.add(new FoodItem("Lasagne", 4, "main"));
+        f.add(new FoodItem("Ice-cream", 4, "dessert"));
+        f.add(new FoodItem("Tea", 4, "drink"));
+        f.add(new FoodItem("Creme-brulee", 4, "dessert"));
+        f.add(new FoodItem("Pizza", 4, "main"));
+        f.add(new FoodItem("Salad", 4, "starter"));
+        menu = new Menu(f);
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 }
