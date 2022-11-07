@@ -9,4 +9,12 @@ public abstract class Staff {
         this.name=name;
         this.password=password;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
