@@ -79,7 +79,7 @@ public class Menu {
     @Override
     public String toString() {
         StringBuilder menuString = new StringBuilder("~~~~OUR MENU~~~~\n");
-        menuString.append(String.format("%-4s%-20s%5s%10s", "ID", "Name", "Price", "Type"));
+        menuString.append(String.format("%-4s%-20s%5s%10s%n", "ID", "Name", "Price", "Type"));
 
         for (int i = 1; i < menu.size() + 1; i++) {
             menuString.append("[" + i + "] " + menu.get(i-1).toString());
