@@ -11,6 +11,9 @@ public class Restaurant {
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
 
+    private double totalEarnings = 0;
+    private double dailyEarnings = 0;
+
 
 
     private RestaurantChain rc;
@@ -164,6 +167,19 @@ public class Restaurant {
 
     public ArrayList<Customer> getCustomers(){
         return rc.getCustomers();
+    }
+
+    /**
+     * add onto the daily earningsju
+     * @param amount amount to be added
+     * @author Euan
+     */
+    public void addToDailyEarnings(double amount) {
+        dailyEarnings += amount;
+    }
+    public void updateDailyAmount() {
+        totalEarnings += dailyEarnings;
+        dailyEarnings = 0;
     }
 
     public boolean areCustomersPresent(int hour){
