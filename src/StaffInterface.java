@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +14,70 @@ public class StaffInterface {
         this.r = r;
     }
 
-    public void run(){
+    /**
+     * Determines staff or customer
+     */
+    public void pick(){
+        boolean valid = false;
+        while(!valid){
+            System.out.println("Enter one for staff or two for customer");
+            int ans = in.nextInt();
+            if(ans == 1){
+                runStaff();
+            }
+            else if(ans == 2){
+                runCustomer();
+            }
+            else{
+                System.out.println("Please try again");
+            }
+        }
+
+    }
+
+    /**
+     * This method runs if a customer is using the system
+     */
+    public void runCustomer(){//This is required by documentation. Perhaps we can use this for walk ins?
+        boolean running = true;
+
+        while(running){
+            System.out.println("Enter a time: ");
+            int time = in.nextInt();//Need to check this
+            System.out.println("Enter number of people: ");
+            int num = in.nextInt();
+
+            if(r.getTable(time,num)!=null){
+                System.out.println("Table "+r.getTable(time,num).getTableNumber()+" is available");
+                System.out.println("Enter y to book, or n otherwise");
+                if(in.nextLine().toLowerCase().equals("y")){
+                    System.out.println("Enter name");
+                    String name = in.nextLine();
+                    boolean inList=false;
+                    for(Customer c: customerArr){
+                        if(c.getName().equals(name)){
+                            Booking b = new Booking(c,num);
+                            inList=true;
+
+                        }
+
+                    }
+                    if(!inList){
+                        Booking b = new Booking(new Customer(name),num);
+                    }
+                    running=false;
+                }
+            }
+        }
+
+
+
+    }
+
+    /**
+     * This method runs if a staff member is using the system
+     */
+    public void runStaff(){
 
 
 
@@ -36,7 +100,7 @@ public class StaffInterface {
                         break;
                     }
                 }
-                currentStaff = staffArr.get(index);
+                currentStaff = staffArr.get(index);//TODO add quit options
                 if(currentStaff instanceof Waiter){
                     System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, P)ay");
                     String input = in.nextLine();
@@ -81,17 +145,20 @@ public class StaffInterface {
                 String phone = in.nextLine();
                 Customer cust;
                 Order o;//Ronan: implementation of order and customer here is not ideal, just wanted a working version
+                boolean inList=false;
                 for(Customer c: customerArr){
                     if(c.getName().equals(name)){
                         cust = c;
                         o= new Order(cust,r);
                         r.addOrder(o);
+                        inList = true;
                     }
-                    else{
-                        cust  =new Customer(name,phone);//Constructor for customer checks if phone is 0
-                        o = new Order(cust,r);
-                        r.addOrder(o);
-                    }
+
+                }
+                if(!inList){
+                    cust  =new Customer(name,phone);//Constructor for customer checks if phone is 0
+                    o = new Order(cust,r);
+                    r.addOrder(o);
                 }
 
             case "r":
