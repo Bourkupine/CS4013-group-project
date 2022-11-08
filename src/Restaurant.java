@@ -16,6 +16,7 @@ public class Restaurant {
     private RestaurantChain rc;
 
 
+
     private ArrayList<Staff> staff = new ArrayList<>();
     private Chef chef = new Chef("King","testPassword");//These passwords are just placeholders
     private Waiter waiter = new Waiter("Bob","testPassword") ;
@@ -137,4 +138,8 @@ public class Restaurant {
     public ArrayList<Table> getTableList() {return tables;} //Euan: changed name to getTableList to not confuse with getTable
 
     public Menu getMenu() {return rc.getMenu();}
+
+    public ArrayList<Staff> getStaff() {
+        return staff;
+    }
 }
