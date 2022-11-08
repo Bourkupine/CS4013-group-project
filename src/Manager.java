@@ -9,9 +9,13 @@ public class Manager extends Staff {
     }
 
 
-    public void employStaff(Staff staff) {}
+    public void employStaff(Staff staff) {
+        getRest().getStaff().add(staff);
+    }
 
-    public void fireStaff(Staff staff) {}
+    public void fireStaff(Staff staff) {
+        getRest().getStaff().remove(staff);
+    }
 
 
 
