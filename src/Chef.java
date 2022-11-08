@@ -33,9 +33,14 @@ public class Chef extends Staff {
     //this is going to have the chef start making food
     //aka change ordered to ready
     //todo: i need to figure out how to get the hour to be now like present.
-    public void MakeFood() throws InterruptedException{
+    public void MakeFood(){
+        if(getRest().areCustomersPresent(hour)){
             for(FoodItem item : order.getOrdered()){
-                wait(timeToDelivery(item));
+                try {
+                    wait(timeToDelivery(item));
+                }catch (Exception ex){
+                    System.err.println("hlep");
+                }
             }
             order.setStatus("READY");
             isDeliverable(order);
