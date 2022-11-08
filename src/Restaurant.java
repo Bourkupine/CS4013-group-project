@@ -142,4 +142,8 @@ public class Restaurant {
     public ArrayList<Staff> getStaff() {
         return staff;
     }
+
+    public ArrayList<Customer> getCustomers(){
+        return rc.getCustomers();
+    }
 }

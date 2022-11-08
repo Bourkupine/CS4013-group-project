@@ -13,7 +13,6 @@ public class Customer {
     /**
      * Non phone number constructor (ideal for walk-ins)
      * @param name name of customer
-     * @param id id number for customer
      * @author Ronan
      */
     public Customer(String name){

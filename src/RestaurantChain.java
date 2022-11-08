@@ -44,4 +44,8 @@ public class RestaurantChain {
     public Menu getMenu() {
         return menu;
     }
+
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
 }
