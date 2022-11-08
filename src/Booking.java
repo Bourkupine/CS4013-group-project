@@ -30,7 +30,7 @@ public class Booking {
         totalId++;
         this.customer = customer;
         this.numberOfPeople = numberOfPeople;//TODO make sure numOfPeople isnt > 8
-        this.time = LocalDateTime.now().getHour();
+        this.time = LocalDateTime.now().getHour();//Ronan: this returns computers local time. Do we want this?
         idCounter++;
         this.id = idCounter;
     }
