@@ -14,12 +14,13 @@ public class Restaurant {
 
 
     private RestaurantChain rc;
+    private Restaurant r;
 
 
 
     private ArrayList<Staff> staff = new ArrayList<>();
-    //private Chef chef = new Chef("King","testPassword");//These passwords are just placeholders
-    //private Waiter waiter = new Waiter("Bob","testPassword") ;
+    private Chef chef = new Chef("King","testPassword",r);//These passwords are just placeholders
+    private Waiter waiter = new Waiter("Bob","testPassword",r) ;
     
     public Restaurant(int amountOfTables, RestaurantChain rc) {
         this.rc = rc;
@@ -45,6 +46,15 @@ public class Restaurant {
             tables.add(t);
         }
     }
+
+    public Chef getChef() {
+        return chef;
+    }
+
+    public Waiter getWaiter() {
+        return waiter;
+    }
+
 
 
     public void makeBooking(Customer c, int people, int time) {
@@ -158,7 +168,7 @@ public class Restaurant {
 
     public boolean areCustomersPresent(int hour){
         boolean present ;
-        if(getTable(hour, 1).getReservedAtTime(hour) ){ 
+        if(getTable(hour, 1).getReservedAtTime(hour) ){ //one person at least check if it is reserved 
             present = true;
         }else{
             present = false;

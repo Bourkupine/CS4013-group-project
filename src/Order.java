@@ -14,6 +14,7 @@ public class Order{
     private int total = 0; //thomas adding up the total amount for the bill
     private Menu m; // todo: needs to get menu method in restaurant chain.//Ronan: fixed?
     private foodStatus status;
+    private Restaurant r;
     
     public Order(Customer c, Restaurant r){
         m = r.getMenu();
@@ -66,6 +67,7 @@ public class Order{
                 
             }else if (item == 0){
                 status = foodStatus.ORDERED;
+                ;
             }
             else if (item == 14){
                 System.out.println("Enter the number on your order that you would like to remove");
