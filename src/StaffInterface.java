@@ -6,11 +6,15 @@ public class StaffInterface {
     private Restaurant r;
 
     Scanner in = new Scanner(System.in);
-    ArrayList<Staff> staffArr = r.getStaff();
-    ArrayList<Customer> customerArr = r.getCustomers();
+    ArrayList<Staff> staffArr;
+    ArrayList<Customer> customerArr;
 
     public StaffInterface(Restaurant r) {
+
         this.r = r;
+        staffArr = r.getStaff();
+        customerArr = r.getCustomers();
+        pick();
     }
 
     /**
@@ -83,12 +87,14 @@ public class StaffInterface {
             boolean pass = false;
             while(!pass){
 
-                System.out.println("Enter username and password");
-                String str = in.nextLine();
+                System.out.println("Enter username");
+                String name = in.nextLine();
 
-                String[] splitted = str.split(" ");
-                String name = splitted[0];
-                String password = splitted[1];
+                System.out.println("Enter password");
+                String password = in.nextLine();
+
+
+
 
                 if(valid(name,password,staffArr)){
                     Staff currentStaff;

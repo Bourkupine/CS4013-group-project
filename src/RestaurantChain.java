@@ -22,6 +22,7 @@ public class RestaurantChain {
         for (int i = 0; i < amountOfRestaurants; i++) {
             Restaurant restaurant = new Restaurant(15,this);//Ronan: 15 tables is arbitrary and can be changed
             restaurants.add(restaurant);
+            generateMenu();
         }
 
     }
