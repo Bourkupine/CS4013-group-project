@@ -5,6 +5,7 @@ public abstract class Staff {
     private String password;
     private Restaurant rest;
 
+
     public Staff(String name,String password, Restaurant rest){
         this.rest=rest;
         this.name=name;
