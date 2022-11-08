@@ -1,32 +1,50 @@
 //Bayan: A class to represent a table at a restaurant
 
+import java.util.ArrayList;
+
 public class Table {
     private final int tableNumber; //Bayan: Unique ID number for the table
     private final int numberOfSeats; //Bayan: Number of seats at the table
-    private boolean[] reserved = new boolean[13]; //Bayan: Indicates if the table is reserved at a specific time or not
+    private ArrayList<boolean[]> reserved = new ArrayList<>(); //Bayan: Indicates if the table is reserved at a specific time or not
 
     /**
      * Full-arg constructor.
      * @param tableNumber id number for the table
      * @param numberOfSeats number of seats at this table
-     * @author Bayan
+     * @author Bayan & Euan
      */
     public Table(int tableNumber, int numberOfSeats) {
         this.tableNumber = tableNumber;
         this.numberOfSeats = numberOfSeats;
-        for (int i = 0; i < 13; i++) {
-            reserved[i] = false; //Bayan: Tables are not reserved by default
+        for (int i = 0; i < 7; i++) {
+            reserved.add(new boolean[13]);
+        }
+        for (boolean[] b : reserved) {
+            for (int j = 0; j < 13; j++) {
+                b[j] = false;
+            }
         }
     }
 
     /**
-     * Sets the table to be reserved or not reserved.
+     * Sets the table to be reserved or not reserved today.
      * @param hour the time in hours in 24 hour clock
      * @param reserved reserved value for the table
      * @author Bayan
      */
     public void setReservedAtTime(int hour, boolean reserved) {
-        this.reserved[hour - 9] = reserved;
+        this.reserved.get(0)[hour - 9] = reserved; //Euan: updated for arraylist
+    }
+
+    /**
+     * Sets the table to be reserved or not reserved at a given day.
+     * @param hour the time in hours (24 hour format)
+     * @param day day of reservation
+     * @param reserved reserved value of table.
+     * @author Euan
+     */
+    public void setReservedAtTime(int hour, int day, boolean reserved) { //overloading
+        this.reserved.get(day)[hour - 9] = reserved;
     }
 
     /**
@@ -36,8 +54,20 @@ public class Table {
      * @author Bayan
      */
     public boolean getReservedAtTime(int hour) {
-        return reserved[hour - 9];
+        return reserved.get(0)[hour - 9];
     }
+
+    /**
+     * Gets reservation status for the table at a given day.
+     * @param hour the time in hours (24 hour format)
+     * @param day day of reservation
+     * @return reservation status (boolean)
+     * @author Euan
+     */
+    public boolean getReservedAtTime(int hour, int day) { //overloading
+        return reserved.get(day)[hour - 9];
+    }
+
 
     /**
      * Gets table number for the table.
