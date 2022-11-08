@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -79,50 +78,53 @@ public class StaffInterface {
      */
     public void runStaff(){
 
+        boolean running = true;
+        while(running){
+            boolean pass = false;
+            while(!pass){
 
+                System.out.println("Enter username and password");
+                String str = in.nextLine();
 
-        boolean pass = false;
-        while(!pass){
+                String[] splitted = str.split(" ");
+                String name = splitted[0];
+                String password = splitted[1];
 
-            System.out.println("Enter username and password");
-            String str = in.nextLine();
-
-            String[] splitted = str.split(" ");
-            String name = splitted[0];
-            String password = splitted[1];
-
-            if(valid(name,password,staffArr)){
-                Staff currentStaff;
-                int index=0;
-                for (Staff s: staffArr){
-                    if(s.getName().equals(name)&&s.getPassword().equals(password)){
-                        index = staffArr.indexOf(s);
-                        break;
+                if(valid(name,password,staffArr)){
+                    Staff currentStaff;
+                    int index=0;
+                    for (Staff s: staffArr){
+                        if(s.getName().equals(name)&&s.getPassword().equals(password)){
+                            index = staffArr.indexOf(s);
+                            break;
+                        }
                     }
+                    currentStaff = staffArr.get(index);//TODO add quit options
+                    if(currentStaff instanceof Waiter){
+                        System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, P)ay, L)og out");
+                        String input = in.nextLine();
+                        running=waiter(input,(Waiter)currentStaff);
+
+                    } else if (currentStaff instanceof Chef) {
+                        System.out.println("V)iew orders, U)pdate order, L)og out");
+                        String input = in.nextLine();
+                        running=chef(input,(Chef)currentStaff);
+
+                    } else{//Currently manager
+                        System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, P)ay, C)reate menu, H)ire Staff, F)ire Staff, L)og out");
+                        String input = in.nextLine();
+                        running=manager(input,(Manager)currentStaff);
+
+                    }
+
                 }
-                currentStaff = staffArr.get(index);//TODO add quit options
-                if(currentStaff instanceof Waiter){
-                    System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, P)ay");
-                    String input = in.nextLine();
-                    waiter(input,(Waiter)currentStaff);
-
-                } else if (currentStaff instanceof Chef) {
-                    System.out.println("V)iew orders, U)pdate order");
-                    String input = in.nextLine();
-                    chef(input,(Chef)currentStaff);
-
-                } else{//Currently manager
-                    System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, P)ay, C)reate menu, H)ire Staff, F)ire Staff");
-                    String input = in.nextLine();
-                    manager(input,(Manager)currentStaff);
-
+                else{
+                    System.out.println("Invalid username/password");
                 }
-
-            }
-            else{
-                System.out.println("Invalid username/password");
             }
         }
+        pick();
+
     }
 
     public boolean valid(String name, String pass, ArrayList<Staff> arr){
@@ -134,7 +136,7 @@ public class StaffInterface {
         return false;
     }
 
-    public void waiter(String str, Waiter w){
+    public boolean waiter(String str, Waiter w){
         String s = str.toLowerCase();
         switch (s){
             case "a":
@@ -150,7 +152,7 @@ public class StaffInterface {
                     if(c.getName().equals(name)){
                         cust = c;
                         o= new Order(cust,r);
-                        r.addOrder(o);
+                        r.addOrder(o);//need to check how we are doing this in waiter
                         inList = true;
                     }
 
@@ -171,21 +173,27 @@ public class StaffInterface {
                 //w.takeBooking();
             case "p":
 
+            case "l":
+                return false;
         }
+        return true;
     }
 
-    public void chef(String str,Chef c){
+    public boolean chef(String str,Chef c){
         String s = str.toLowerCase();
         switch (s){
             case "v":
 
             case "u":
 
-        }
+            case "l":
+                return false;
 
+        }
+        return true;
     }
 
-    public void manager(String str, Manager m){
+    public boolean manager(String str, Manager m){
         String s = str.toLowerCase();
         switch (s){
             case "a":
@@ -204,7 +212,11 @@ public class StaffInterface {
 
             case "f":
 
+            case "l":
+                return false;
+
         }
+        return true;
     }
 
 }
