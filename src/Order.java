@@ -107,6 +107,8 @@ public class Order{
     public boolean checkStatus(String status){ //this is used in is deliverable for the chef. 
         return ( status.equals("READY")); 
     }
+
+    
     
 
     /**

@@ -4,8 +4,8 @@
 
 public class Manager extends Staff {
 
-    public Manager(String name,String password){
-        super(name,password);
+    public Manager(String name,String password, Restaurant rest){
+        super(name,password,rest);
     }
 
 

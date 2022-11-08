@@ -86,4 +86,5 @@ public class Table {
     public int getNumberOfSeats() {
         return numberOfSeats;
     }
+
 }
