@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Order{
     private ArrayList<FoodItem> ordered = new ArrayList<>();
     private Customer c; // bayan:
-    private int total = 0; //thomas adding up the total amount for the bill
+    private double total = 0; //Euan: changed from int to double to resemble currency better
     private Menu m; // todo: needs to get menu method in restaurant chain.//Ronan: fixed?
     private foodStatus status;
     private Restaurant r;
@@ -44,10 +44,7 @@ public class Order{
         Scanner order = new Scanner(System.in);
         
         System.out.println(m.toString()); //t:this is printing the menu so the customer can choose their items
-        
-        
-        
-        
+
         while(status == foodStatus.ORDERING ){
             // Menu item input
             int item = order.nextInt();
@@ -120,7 +117,11 @@ public class Order{
     public Customer getCustomer() {
         return c;
     }
-    
+
+    public double getTotal() {
+        return total;
+    }
+
     @Override
     //this definitely wont work but going to leave it here for now 
     //also dont think i need to have a to string here maybe
