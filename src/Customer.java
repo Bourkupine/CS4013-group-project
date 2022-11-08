@@ -25,13 +25,15 @@ public class Customer {
     /**
      * Full arg constructor
      * @param name name of customer
-     * @param id id number for customer
      * @param phoneNumber phone number of customer
      * @author Ronan
      */
     public Customer(String name, String phoneNumber){
         this(name);
-        this.phoneNumber=phoneNumber;
+        if(!phoneNumber.equals("0")){
+            this.phoneNumber=phoneNumber;
+        }
+
     }
 
     //Below are getters and setters as neccessary

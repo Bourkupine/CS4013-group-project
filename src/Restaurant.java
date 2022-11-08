@@ -125,6 +125,14 @@ public class Restaurant {
         return null;
     }
 
+    public void addOrder(Order o){
+        orders.add(o);//Ronan: I don't think we ever actually added orders to the array anywhere? could be wrong
+    }
+
+    public void removeOrder(Order o){
+        orders.remove(o);
+    }
+
     //Getters and Setters
 
 
