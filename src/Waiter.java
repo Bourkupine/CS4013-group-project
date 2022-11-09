@@ -19,12 +19,5 @@ public class Waiter extends Staff {
         }
     }
 
-    public void takingOrder(Customer c,int hour){
-        if (getRest().areCustomersPresent(hour)){
-        Order order = new Order(c, getRest());
-        getRest().addOrder(order);//adds order to array in restaurant
-        }
-    }
-
 }
 

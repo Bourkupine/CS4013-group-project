@@ -20,7 +20,7 @@ public class RestaurantChain {
     public RestaurantChain(String name, int amountOfRestaurants) {
         this.name = name;
         for (int i = 0; i < amountOfRestaurants; i++) {
-            Restaurant restaurant = new Restaurant(15,this);//Ronan: 15 tables is arbitrary and can be changed
+            Restaurant restaurant = new Restaurant(15,this,i);//Ronan: 15 tables is arbitrary and can be changed
             restaurants.add(restaurant);
             generateMenu();
         }
