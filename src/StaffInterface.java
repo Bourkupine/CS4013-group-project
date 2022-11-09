@@ -291,8 +291,35 @@ public class StaffInterface {
         
         //CANCEL BOOKING
         case "h":
-
-        
+        //BAYAN did this
+        //hire
+        System.out.println("Enter staff name:");
+                String N = in.nextLine();
+                System.out.println("\nEnter staff password:");
+                String pass = in.nextLine();
+                System.out.println("""
+                                Enter staff position:
+                                [A] Manager
+                                [B] Chef
+                                [C] Waiter
+                                [D] Exit to menu
+                                """);
+                while (true) {
+                    if (in.nextLine().toUpperCase().equals("C")) {
+                        m.employStaff(new Waiter(N, pass, r));
+                        break;
+                    } else if (in.nextLine().toUpperCase().equals("B")) {
+                        m.employStaff(new Chef(N, pass, r));
+                        break;
+                    } else if (in.nextLine().toUpperCase().equals("A")) {
+                        m.employStaff(new Manager(N, pass, r));
+                        break;
+                    } else if (in.nextLine().toUpperCase().equals("D")) {
+                        break;
+                    } else {
+                        System.out.println("Please enter a valid input");
+                    }
+                }
         
         case "f":
         //FIRE
