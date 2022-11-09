@@ -95,6 +95,7 @@ public class StaffInterface {
 
                 if(valid(name,password,staffArr)){
                     Staff currentStaff;
+                    pass=true;
                     int index=0;
                     for (Staff s: staffArr){
                         if(s.getName().equals(name)&&s.getPassword().equals(password)){
@@ -102,8 +103,8 @@ public class StaffInterface {
                             break;
                         }
                     }
-                    currentStaff = staffArr.get(index);//TODO currently logged out after every action need to move while loop
-                    runStaff(currentStaff);
+                    currentStaff = staffArr.get(index);
+                    running=runStaff(currentStaff);
                 }
                 else{
                     System.out.println("Invalid username/password");
@@ -114,7 +115,7 @@ public class StaffInterface {
         
     }
 
-    public void runStaff(Staff currentStaff) {
+    public boolean runStaff(Staff currentStaff) {
         boolean running = true;
         while (running) {
             if (currentStaff instanceof Waiter) {
@@ -134,6 +135,7 @@ public class StaffInterface {
 
             }
         }
+        return false;
     }
     
     public boolean valid(String name, String pass, ArrayList<Staff> arr){
