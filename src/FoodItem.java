@@ -1,5 +1,7 @@
 //Bayan: A class to represent a food item at a restaurant
 
+import java.util.Objects;
+
 public class FoodItem {
     private String name;
     private double price;
@@ -53,5 +55,23 @@ public class FoodItem {
     @Override
     public String toString() {
         return String.format("%-20s%5.2f%10s", name, price, type);
+    }
+
+    /**
+     * Checks if a FoodItem is equal to another and returns true if so
+     * @param o Object to be compared against
+     * @return boolean
+     * @author Bayan
+     */
+    @Override
+    public boolean equals(Object o) {//todo: this only checks if the names are equal since you don't want to add the same name twice - check with team
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FoodItem foodItem = (FoodItem) o;
+        return Objects.equals(name, foodItem.name);
     }
 }
