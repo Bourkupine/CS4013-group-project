@@ -234,7 +234,9 @@ public class StaffInterface {
             case "v":
                 System.out.println(r.getOrders().toString());
             case "t":
-            //takebooking
+            //take booking
+            
+            Booking booking = new Booking(cust, 0, 0)
 
             case "p":
                  //PAY
