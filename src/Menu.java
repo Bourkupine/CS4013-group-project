@@ -27,8 +27,17 @@ public class Menu {
      * @author Bayan
      */
     public void addFood(FoodItem f) {
-        menu.add(f);
-        orderByType(menu);
+        boolean exists = false;
+        for (FoodItem food : menu) {
+            if (food.equals(f)) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            menu.add(f);
+            orderByType(menu);
+        }
     }
 
     /**
@@ -36,9 +45,25 @@ public class Menu {
      * @param f FoodItem to be removed
      * @author Bayan
      */
-    public void removeFood(FoodItem f) {
-        menu.remove(f);
-        orderByType(menu);
+    public boolean removeFood(FoodItem f) {
+        return menu.remove(f);
+    }
+
+    /**
+     * Removes a FoodItem with a specific name from the menu
+     * @param name name of the FoodItem
+     */
+    public boolean removeFood(String name) {
+        for (FoodItem f : menu) {
+            if (f.getName().equalsIgnoreCase(name)) {
+                return menu.remove(f);
+            }
+        }
+        return false;
+    }
+
+    public void clearMenu() {
+        menu.clear();
     }
 
     /**
@@ -79,7 +104,7 @@ public class Menu {
     @Override
     public String toString() {
         StringBuilder menuString = new StringBuilder("~~~~OUR MENU~~~~\n");
-        menuString.append(String.format("%-4s%-20s%5s%10s%n", "ID", "Name", "Price", "Type"));
+        menuString.append(String.format("%-4s%-20s%5s%10s\n", "ID", "Name", "Price", "Type"));
 
         for (int i = 1; i < menu.size() + 1; i++) {
             menuString.append("[" + i + "] " + menu.get(i-1).toString()).append("\n");
