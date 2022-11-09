@@ -1,12 +1,7 @@
-import java.util.ArrayList;
-
-
-
-
 
 public class Chef extends Staff {
     
-    private Restaurant rest;
+    private Restaurant rest;//TODO apparently this is null somehow????
     private Order order ;
    
     
@@ -35,7 +30,7 @@ public class Chef extends Staff {
     public void isDeliverable(Order o) { // this will tell the waiter wether the order is ready to be dropped yet or not
         if ( o.checkStatus("READY" ) ){
             //if the enum value is ready then the waiter will drop it 
-            rest.getWaiter().bellRings() ;  // this tells the waiter the food is ready to be dropped by the chef ringing the bell
+            getRest().getWaiter().bellRings() ;  // this tells the waiter the food is ready to be dropped by the chef ringing the bell
         }  
     }
     public void delivered (){
