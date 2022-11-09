@@ -1,4 +1,4 @@
-
+import java.util.Objects;
 
 public abstract class Staff {
     private String name;
@@ -22,5 +22,17 @@ public abstract class Staff {
 
     public Restaurant getRest() {
         return rest;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Staff staff = (Staff) o;
+        return Objects.equals(name, staff.name) && Objects.equals(password, staff.password) && Objects.equals(rest, staff.rest);
     }
 }
