@@ -23,7 +23,7 @@ public class StaffInterface {
     public void pick(){
         boolean valid = false;
         while(!valid){
-            System.out.println("Enter one for staff or two for customer");
+            System.out.println("Enter 1 for staff or 2 for customer");
             int ans = in.nextInt();
             if(ans == 1){
                 runStaff();
@@ -174,7 +174,7 @@ public class StaffInterface {
                 System.out.println("Enter the order you would like to remove");
 
             case "v":
-
+                System.out.println(r.getOrders().toString());
             case "t":
                 //w.takeBooking();
             case "p":
@@ -189,7 +189,7 @@ public class StaffInterface {
         String s = str.toLowerCase();
         switch (s){
             case "v":
-
+                System.out.println(r.getOrders().toString());
             case "u":
 
             case "l":
@@ -207,7 +207,7 @@ public class StaffInterface {
             case "r":
 
             case "v":
-
+                System.out.println(r.getOrders().toString());
             case "t":
 
             case "p":

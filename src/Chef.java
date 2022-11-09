@@ -45,6 +45,8 @@ public class Chef extends Staff {
             order.setStatus("READY");
             isDeliverable(order);
     }
+
+        //Is below supposed to take an order as a parameter(name needs changing then) or the order data field(remove parameter then)?
     
     public void isDeliverable(Order order) { // this will tell the waiter wether the order is ready to be dropped yet or not
         if ( order.checkStatus("READY" ) ){
