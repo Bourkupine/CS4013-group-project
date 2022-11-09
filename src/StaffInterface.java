@@ -23,17 +23,22 @@ public class StaffInterface {
     public void pick(){
         boolean valid = false;
         while(!valid){
-            System.out.println("Enter 1 for staff or 2 for customer");
-            int ans = in.nextInt();
-            if(ans == 1){
-                runStaff();
+            try{
+                System.out.println("Enter 1 for staff or 2 for customer");
+                int ans = in.nextInt();
+                if(ans == 1){
+                    runStaff();
+                }
+                else if(ans == 2){
+                    runCustomer();
+                }
+                else{
+                    System.out.println("Please enter 1 or 2");
+                }
+            }catch(Exception ex){
+                System.out.println("Please enter a number");
             }
-            else if(ans == 2){
-                runCustomer();
-            }
-            else{
-                System.out.println("Please try again");
-            }
+
         }
         
     }
