@@ -39,7 +39,35 @@ public class RestaurantChain {
         f.add(new FoodItem("Creme-brulee", 4, "dessert"));
         f.add(new FoodItem("Pizza", 4, "main"));
         f.add(new FoodItem("Salad", 4, "starter"));
-        menu = new Menu(f);
+        sortMenu(f);
+    }
+
+    public void sortMenu(ArrayList<FoodItem> f) {
+
+        ArrayList<FoodItem> starters = new ArrayList<>();
+        ArrayList<FoodItem> mains = new ArrayList<>();
+        ArrayList<FoodItem> desserts = new ArrayList<>();
+        ArrayList<FoodItem> drinks = new ArrayList<>();
+
+        //cycle through each item on menu, get its type and add it to its respective list
+        f.forEach(foodItem -> {
+            switch (foodItem.getType()) {
+                case "starter" -> starters.add(foodItem);
+                case "main" -> mains.add(foodItem);
+                case "dessert" -> desserts.add(foodItem);
+                default -> drinks.add(foodItem);
+            }
+        });
+
+        //join all the lists to one
+        starters.addAll(mains);
+        starters.addAll(desserts);
+        starters.addAll(drinks);
+
+        //set menu equal to the final list
+        menu = new Menu(starters);
+
+
     }
 
     public Menu getMenu() {
