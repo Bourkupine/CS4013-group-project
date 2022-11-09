@@ -242,6 +242,8 @@ public class StaffInterface {
             //need to show what tables are available
             System.out.println(r.getTableList()); // table list needs a to string so the manager and waiters can see what tables are available
             //take booking
+
+            //here i used ronans stuff and added to them
             System.out.println("Enter customer name: ");
             String Name = in.nextLine();
             System.out.println("Enter phone number(type 0 for walk in): ");
