@@ -52,15 +52,16 @@ public class Order{
                 
                 //need to relate item number to whatever that no. is on the menu and put that in the array list... not just the no.
                 ordered.add(m.getFoodItemAtIndex(item-1)); //t adding item to the string for the bill
-                System.out.println("This is your current order " + "\n"); //printing what the customer has currently ordered so the can see what their order is currently
-                System.out.println(ordered.toString());
+                System.out.printf("This is your current order\n %s\n", ordered.toString()); //printing what the customer has currently ordered so the can see what their order is currently
                 total += m.getFoodItemAtIndex(item-1).getPrice();
-                System.out.println("Your current total is " + total); // this is the array list of what they are currently ordering
-                System.out.println("To order an item or another item enter the number of the item on the menu");
-                System.out.println("To confirm your order enter the number 0");
-                System.out.println("To cancel an item enter the number 14 ");
-        
-                System.out.println("To cancel your order enter the number 15");
+                System.out.printf("""
+                                Your current total is €%f
+                                To order an item or another item enter the number of the item on the menu
+                                To confirm your order enter the number 0
+                                To cancel an item enter the number 14
+                                To cancel your order enter the number 15
+                                """, total); //Euan: cleaned up this chunk of print statements. Havent tested this with printf but i assume it works
+
                 
             }else if (item == 0){
                 status = foodStatus.ORDERED;
