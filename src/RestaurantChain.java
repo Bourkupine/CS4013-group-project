@@ -11,6 +11,7 @@ public class RestaurantChain {
     private int amountOfRestaurants; //The amount of restaurants.
     private Menu menu;
     private ArrayList<Restaurant> restaurants = new ArrayList<>();// ArrayList containing all restaurants in chain
+    
 
     /**
      * Full-arg constructor.
