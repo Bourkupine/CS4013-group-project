@@ -55,7 +55,7 @@ public class Order{
                 System.out.printf("This is your current order\n %s\n", ordered.toString()); //printing what the customer has currently ordered so the can see what their order is currently
                 total += m.getFoodItemAtIndex(item-1).getPrice();
                 System.out.printf("""
-                                Your current total is €%f
+                                Your current total is €%.2f
                                 To order an item or another item enter the number of the item on the menu
                                 To confirm your order enter the number 0
                                 To cancel an item enter the number 14
