@@ -82,7 +82,7 @@ public class Menu {
         menuString.append(String.format("%-4s%-20s%5s%10s%n", "ID", "Name", "Price", "Type"));
 
         for (int i = 1; i < menu.size() + 1; i++) {
-            menuString.append("[" + i + "] " + menu.get(i-1).toString());
+            menuString.append("[" + i + "] " + menu.get(i-1).toString()).append("\n");
         }
 
         return menuString.toString();
