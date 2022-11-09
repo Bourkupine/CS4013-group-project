@@ -41,7 +41,7 @@ public class StaffInterface {
     /**
      * This method runs if a customer is using the system
      */
-    public void runCustomer(){//This is required by documentation. Perhaps we can use this for walk ins?
+    public void runCustomer(){//This is required by documentation. Perhaps we can use this for walk ins??
         boolean running = true;
 
         while(running){
