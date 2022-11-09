@@ -64,7 +64,6 @@ public class Order{
                 
             }else if (item == 0){
                 status = foodStatus.ORDERED;
-                ;
             }
             else if (item == 14){
                 System.out.println("Enter the number on your order that you would like to remove");

@@ -30,26 +30,10 @@ public class Chef extends Staff {
         }
         
     }
-    //this is going to have the chef start making food
-    //aka change ordered to ready
-    //todo: i need to figure out how to get the hour to be now like present.
-    public void MakeFood(){
-        if(getRest().areCustomersPresent(hour)){
-            for(FoodItem item : order.getOrdered()){
-                try {
-                    wait(timeToDelivery(item));
-                }catch (Exception ex){
-                    System.err.println("hlep");
-                }
-            }
-            order.setStatus("READY");
-            isDeliverable(order);
-    }
-
         //Is below supposed to take an order as a parameter(name needs changing then)or the order data field(remove parameter then)?
     
-    public void isDeliverable(Order order) { // this will tell the waiter wether the order is ready to be dropped yet or not
-        if ( order.checkStatus("READY" ) ){
+    public void isDeliverable(Order o) { // this will tell the waiter wether the order is ready to be dropped yet or not
+        if ( o.checkStatus("READY" ) ){
             //if the enum value is ready then the waiter will drop it 
             rest.getWaiter().bellRings() ;  // this tells the waiter the food is ready to be dropped by the chef ringing the bell
         }  

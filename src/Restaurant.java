@@ -14,6 +14,7 @@ public class Restaurant {
     private double totalEarnings = 0;
     private double dailyEarnings = 0;
 
+    private int idNum ;
 
 
     private RestaurantChain rc;
@@ -25,9 +26,9 @@ public class Restaurant {
     private Chef chef = new Chef("King","testPassword",r);//These passwords are just placeholders
     private Waiter waiter = new Waiter("Bob","testPassword",r) ;
     
-    public Restaurant(int amountOfTables, RestaurantChain rc) {
+    public Restaurant(int amountOfTables, RestaurantChain rc, int idNum) {
         this.rc = rc;
-
+        this.idNum = idNum;
         int j = 1;
         int floor = amountOfTables/3;
         for (int i = 0; i < floor; i++) {
@@ -180,16 +181,5 @@ public class Restaurant {
     public void updateDailyAmount() {
         totalEarnings += dailyEarnings;
         dailyEarnings = 0;
-    }
-
-    public boolean areCustomersPresent(int hour){
-        boolean present ;
-        if(getTable(hour, 1).getReservedAtTime(hour) ){ //one person at least check if it is reserved 
-            present = true;
-        }else{
-            present = false;
-        }
-        return present;
-
     }
 }
