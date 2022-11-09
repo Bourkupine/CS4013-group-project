@@ -23,22 +23,17 @@ public class StaffInterface {
     public void pick(){
         boolean valid = false;
         while(!valid){
-            try{
-                System.out.println("Enter 1 for staff or 2 for customer");
-                int ans = in.nextInt();
-                if(ans == 1){
-                    runStaff();
-                }
-                else if(ans == 2){
-                    runCustomer();
-                }
-                else{
-                    System.out.println("Please enter 1 or 2");
-                }
-            }catch(Exception ex){
-                System.out.println("Please enter a number");
+            System.out.println("Enter 1 for staff or 2 for customer");
+            int ans = in.nextInt();
+            if(ans == 1){
+                runStaff();
             }
-
+            else if(ans == 2){
+                runCustomer();
+            }
+            else{
+                System.out.println("Please try again");
+            }
         }
         
     }
@@ -250,7 +245,7 @@ public class StaffInterface {
             int numberOfPeople = in.nextInt();
             System.out.println("Enter the time you want to book for");
             int time = in.nextInt();
-            Customer Cust;
+            Customer Cust = new Customer("default","08748484848484");
             boolean InList=false;
             
             for(Customer c: customerArr){
@@ -264,21 +259,39 @@ public class StaffInterface {
             }
             
             
-            Booking booking = new Booking(Cust, numberOfPeople, time); //TODO:Why isnt this initialized
+            Booking booking = new Booking(Cust, numberOfPeople, time); //TODO:Cust isnt initialized Why isnt this initialized
             
             case "p":
             //PAY
             case "c":
-            //CANCEL BOOKING
-            case "h":
-            //HIRE
-            case "f":
-            //FIRE
-            case "l":
-            return false;
-            
+            System.out.println("Enter the booking id you would like to cancel");
+            int bookingId = in.nextInt();
+            boolean exists = true;
+            for(int i = 0; i < r.getBookings().size();i++){
+            if(r.getBookings().get(i).getId() == bookingId){
+                r.getBookings().remove(i);
+                exists = true;
+                break;
+                
+            }
         }
-        return true;
+            if(!exists){
+                System.out.println("Booking doesnt exist");
+                
+            }
+        
+        //CANCEL BOOKING
+        case "h":
+
+        
+        
+        case "f":
+        //FIRE
+        case "l":
+        return false;
+        
     }
-    
+    return true;
+}
+
 }
