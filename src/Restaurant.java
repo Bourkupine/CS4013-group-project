@@ -25,6 +25,7 @@ public class Restaurant {
     private ArrayList<Staff> staff = new ArrayList<>();
     private Chef chef = new Chef("King","testPassword",r);//These passwords are just placeholders
     private Waiter waiter = new Waiter("Bob","testPassword",r) ;
+    private Manager manager = new Manager("goopy", "testPassword", r);
     
     public Restaurant(int amountOfTables, RestaurantChain rc, int idNum) {
         this.rc = rc;
@@ -168,6 +169,10 @@ public class Restaurant {
 
     public ArrayList<Customer> getCustomers(){
         return rc.getCustomers();
+    }
+
+    public Manager getManager() {
+        return manager;
     }
 
     /**
