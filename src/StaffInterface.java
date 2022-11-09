@@ -204,21 +204,46 @@ public class StaffInterface {
         String s = str.toLowerCase();
         switch (s){
             case "a":
+                 //Ronan: this could(probably should) be done in waiter and then just call waiter.addOrder() here
+                 System.out.println("Enter customer name: ");
+                 String name = in.nextLine();
+                 System.out.println("Enter phone number(type 0 for walk in): ");
+                 String phone = in.nextLine();
+                 Customer cust;
+                 Order o;//Ronan: implementation of order and customer here is not ideal, just wanted a working version
+                 boolean inList=false;
+                 for(Customer c: customerArr){
+                     if(c.getName().equals(name)){
+                         cust = c;
+                         o= new Order(cust,r);
+                         r.addOrder(o);//need to check how we are doing this in waiter
+                         inList = true;
+                     }
+ 
+                 }
+                 if(!inList){
+                     cust  =new Customer(name,phone);//Constructor for customer checks if phone is 0
+                     o = new Order(cust,r);
+                     r.addOrder(o);
+                 }
 
             case "r":
+            System.out.println(r.getOrders().toString());//TODO: Better implementation here
+            System.out.println("Enter the order you would like to remove");
 
             case "v":
                 System.out.println(r.getOrders().toString());
             case "t":
+            //takebooking
 
             case "p":
-
+                 //PAY
             case "c":
-
+                 //CANCEL BOOKING
             case "h":
-
+                 //HIRE
             case "f":
-
+                 //FIRE
             case "l":
                 return false;
 
