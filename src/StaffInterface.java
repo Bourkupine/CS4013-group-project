@@ -98,7 +98,7 @@ public class StaffInterface {
                 System.out.println("Enter password");
                 String password = in.nextLine();
                 
-                
+
                 
                 
                 if(valid(name,password,staffArr)){
@@ -110,7 +110,7 @@ public class StaffInterface {
                             break;
                         }
                     }
-                    currentStaff = staffArr.get(index);//TODO add quit options
+                    currentStaff = staffArr.get(index);//TODO currently logged out after every action need to move while loop
                     if(currentStaff instanceof Waiter){
                         System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, P)ay, L)og out");
                         String input = in.nextLine();
@@ -173,17 +173,22 @@ public class StaffInterface {
                 o = new Order(cust,r);
                 r.addOrder(o);
             }
+            return true;
             
             case "r":
             System.out.println(r.getOrders().toString());//TODO: Better implementation here
             System.out.println("Enter the order you would like to remove");
+            return true;
             
             case "v":
             System.out.println(r.getOrders().toString());
+            return true;
             case "t":
             //w.takeBooking();
+            return true;
+
             case "p":
-            
+            return true;
             case "l":
             return false;
         }
@@ -257,14 +262,16 @@ public class StaffInterface {
                 if(c.getName().equals(Name)){
                     Cust = c;
                     InList = true;
+                    Booking booking = new Booking(Cust, numberOfPeople, time);
                 }
             }
             if(!InList){
                 Cust  =new Customer(Name,Phone);//Constructor for customer checks if phone is 0
+                Booking booking = new Booking(Cust, numberOfPeople, time);
             }
             
             
-            Booking booking = new Booking(Cust, numberOfPeople, time); //TODO:Why isnt this initialized
+             //TODO:Better implementation of booking above(called twice)
             
             case "p":
             //PAY
