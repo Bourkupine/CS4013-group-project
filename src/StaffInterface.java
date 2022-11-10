@@ -203,7 +203,7 @@ public class StaffInterface {
                 System.out.println(r.getOrders().toString());
                 return true;
             case "a":
-
+                r.getChef().cooking(r.getOrders().get(0));
                 return true;
             case "u":
                 //update order
