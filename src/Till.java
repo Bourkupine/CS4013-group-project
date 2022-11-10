@@ -49,7 +49,10 @@ public class Till {
         if(cash && amountGiven>amountDue){
             change = amountGiven - amountDue;
         }
+        Bill bill = new Bill(order);
+        System.out.println(bill.toString());
         return change;
+
     }
 
     public int getAmountDue() {
