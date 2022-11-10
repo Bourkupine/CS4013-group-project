@@ -30,7 +30,7 @@ public class Table {
      * Sets the table to be reserved or not reserved today.
      * @param hour the time in hours in 24 hour clock
      * @param reserved reserved value for the table
-     * @author Bayan
+     * @author Bayan, Euan
      */
     public void setReservedAtTime(int hour, boolean reserved) {
         this.reserved.get(0)[hour - 9] = reserved; //Euan: updated for arraylist
@@ -51,7 +51,7 @@ public class Table {
      * Gets reservation status for the table.
      * @param hour the time in hours in 24 hour clock
      * @return reserved as boolean
-     * @author Bayan
+     * @author Bayan, Euan
      */
     public boolean getReservedAtTime(int hour) {
         return reserved.get(0)[hour - 9];
@@ -62,7 +62,7 @@ public class Table {
      * @param hour the time in hours (24 hour format)
      * @param day day of reservation
      * @return reservation status (boolean)
-     * @author Euan
+     * @author Bayan, Euan
      */
     public boolean getReservedAtTime(int hour, int day) { //overloading
         return reserved.get(day)[hour - 9];

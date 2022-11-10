@@ -17,6 +17,7 @@ public class RestaurantChain {
      * Full-arg constructor.
      * @param name name of chain
      * @param amountOfRestaurants amount of restaurants in the chain
+     * @author Bayan, Ronan
      */
     public RestaurantChain(String name, int amountOfRestaurants) {
         this.name = name;
@@ -28,6 +29,10 @@ public class RestaurantChain {
 
     }
 
+    /**
+     * generates the menu
+     * @author Bayan, Euan
+     */
     public void generateMenu() {
         ArrayList<FoodItem> f = new ArrayList<>();
         f.add(new FoodItem("Garlic bread", 4, "starter"));
@@ -43,6 +48,11 @@ public class RestaurantChain {
         sortMenu(f);
     }
 
+    /**
+     * sorts the menu by starters, then mains, then desserts, then drinks.
+     * @param f the menu to be sorted
+     * @author Euan
+     */
     public void sortMenu(ArrayList<FoodItem> f) {
 
         ArrayList<FoodItem> starters = new ArrayList<>();
@@ -67,14 +77,22 @@ public class RestaurantChain {
 
         //set menu equal to the final list
         menu = new Menu(starters);
-
-
     }
 
+    /**
+     * gets menu
+     * @return current menu as menu object
+     * @author Bayan
+     */
     public Menu getMenu() {
         return menu;
     }
 
+    /**
+     * gets customers
+     * @return customers as array list
+     * @author Ronan
+     */
     public ArrayList<Customer> getCustomers() {
         return customers;
     }

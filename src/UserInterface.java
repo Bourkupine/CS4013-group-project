@@ -9,6 +9,11 @@ public class UserInterface {
     ArrayList<Staff> staffArr;
     ArrayList<Customer> customerArr;
 
+    /**
+     * creates a user interface for restaurant
+     * @param r restaurant the interface belongs to
+     * @author Ronan
+     */
     public UserInterface(Restaurant r) {
 
         this.r = r;
@@ -19,6 +24,7 @@ public class UserInterface {
 
     /**
      * Determines staff or customer
+     * @author Ronan
      */
     public void pick() {
         boolean valid = false;
@@ -40,6 +46,7 @@ public class UserInterface {
 
     /**
      * This method runs if a customer is using the system
+     * @author Ronan
      */
     public void runCustomer() {//This is required by documentation. Perhaps we can use this for walk ins??
         boolean running = true;
@@ -78,6 +85,7 @@ public class UserInterface {
 
     /**
      * This method runs if a staff member is using the system
+     * @author Ronan
      */
     public void staffLogin() {
 
@@ -112,7 +120,13 @@ public class UserInterface {
         pick();
 
     }
-
+//todo: make this java doc
+    /**
+     *
+     * @param currentStaff
+     * @return
+     * @author Ronan, Bayan, Thomas
+     */
     public boolean runStaff(Staff currentStaff) {
         boolean running = true;
         while (running) {
@@ -136,6 +150,14 @@ public class UserInterface {
         return false;
     }
 
+    /**
+     * checks if a member is actually a staff member
+     * @param name name of member
+     * @param pass members password
+     * @param arr array of staff members
+     * @return true/false if they are a valid member
+     * @author Ronan
+     */
     public boolean valid(String name, String pass, ArrayList<Staff> arr) {
         for (Staff s : arr) {
             if (s.getName().equals(name) && s.getPassword().equals(pass)) {

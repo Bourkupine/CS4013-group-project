@@ -10,23 +10,25 @@ public class Restaurant {
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
-
+    private ArrayList<Staff> staff = new ArrayList<>();
     private double totalEarnings = 0;
     private double dailyEarnings = 0;
-
-    private int idNum ;
-
-
+    private int idNum ; //look bakc at this
     private RestaurantChain rc;
     private Restaurant r;
 
-
-
-    private ArrayList<Staff> staff = new ArrayList<>();
+    //todo: look back at these
     private Chef chef = new Chef("King","testPassword",r);//These passwords are just placeholders
     private Waiter waiter = new Waiter("Bob","testPassword",r) ;
     private Manager manager = new Manager("goopy", "testPassword", r);
-    
+
+    /**
+     *
+     * @param amountOfTables the amount of tables the restaurant has.
+     * @param rc the chain the restaurant is apart of
+     * @param idNum id number of the restaurant
+     * @author Ronan, Thomas, Euan
+     */
     public Restaurant(int amountOfTables, RestaurantChain rc, int idNum) {
         this.rc = rc;
         this.idNum = idNum;
@@ -60,9 +62,19 @@ public class Restaurant {
         return waiter;
     }
 
+    public Manager getManager() { //made by thomas but i moved here
+        return manager;
+    }
 
-
+    /**
+     * creates a booking for the restaurant and assigns it a table
+     * @param c Customer the booking belongs to
+     * @param people amount of people for the booking
+     * @param time time of booking
+     * @author Euan
+     */
     public void makeBooking(Customer c, int people, int time) {
+        //run people check here maybe?
 
         Booking book = new Booking(c, setPeople(people));
         bookings.add(book);
@@ -82,9 +94,10 @@ public class Restaurant {
     }
 
     /**
-     * Changes the
-     * @param people
-     * @return
+     * Changes the amount of people at a table to match the amount of seats
+     * @param people amount of people for booking
+     * @return new number matching the table seats
+     * @author Euan
      */
     public int setPeople(int people) {
 
@@ -98,14 +111,13 @@ public class Restaurant {
     }
 
     /**
-     * Assign a table to the booking
-     *
+     * Assigns a table to a booking
+     * @param hour time of booking
+     * @param people amount of people booking has
+     * @param book the booking its assigning to
      * @author Euan
      */
     private void assignTable(int hour, int people, Booking book) {
-
-
-
         if(getTable(hour, people) != null) {
             Table tempTable = getTable(hour, people);
             book.setTable(tempTable);
@@ -120,11 +132,11 @@ public class Restaurant {
 
     }
     /**
-     * Gets table at time and has numOfPeople
+     * Gets table at given time and that has a certain amount of people
      *
      * @param hour hour of booking
      * @param numOfPeople number of people at the table
-     * @return table
+     * @return table table that matches the given parameters (if it exists)
      *
      * @author Euan
      */
@@ -140,39 +152,74 @@ public class Restaurant {
         return null;
     }
 
+    /**
+     * add orders to the order array list
+     * @param o order to be added
+     * @author Ronan
+     */
     public void addOrder(Order o){
         orders.add(o);//Ronan: I don't think we ever actually added orders to the array anywhere? could be wrong
     }
 
+    /**
+     * remove an order from the order array list
+     * @param o order to be removed
+     * @author Ronan
+     */
     public void removeOrder(Order o){
         orders.remove(o);
     }
 
     //Getters and Setters
 
-
+    /**
+     * returns the arraylist of orders
+     * @return orders as arraylist
+     * @author Euan
+     */
     public ArrayList<Order> getOrders() {
         return orders;
     }
-    
 
+    /**
+     * returns the arraylist of bookings
+     * @return bookings as arraylist
+     * @author Euan
+     */
     public ArrayList<Booking> getBookings() {
         return bookings;
     }
+
+    /**
+     * returns the arraylist of tables
+     * @return tables as arraylist
+     * @author Euan
+     */
     public ArrayList<Table> getTableList() {return tables;} //Euan: changed name to getTableList to not confuse with getTable
 
+    /**
+     * gets current menu
+     * @return menu as a menu object
+     * @author Ronan
+     */
     public Menu getMenu() {return rc.getMenu();}
 
+    /**
+     * returns the arraylist of staff
+     * @return staff as arraylist
+     * @author Ronan
+     */
     public ArrayList<Staff> getStaff() {
         return staff;
     }
 
+    /**
+     * returns the arraylist of customers
+     * @return customers as arraylist
+     * @author Ronan
+     */
     public ArrayList<Customer> getCustomers(){
         return rc.getCustomers();
-    }
-
-    public Manager getManager() {
-        return manager;
     }
 
     /**
@@ -183,6 +230,11 @@ public class Restaurant {
     public void addToDailyEarnings(double amount) {
         dailyEarnings += amount;
     }
+
+    /**
+     * updates the total earnings and resets daily amount
+     * @author Euan
+     */
     public void updateDailyAmount() {
         totalEarnings += dailyEarnings;
         dailyEarnings = 0;
