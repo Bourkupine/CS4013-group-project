@@ -23,13 +23,16 @@ public class StaffInterface {
     public void pick(){
         boolean valid = false;
         while(!valid){
-            System.out.println("Enter 1 for staff or 2 for customer");
+            System.out.println("Enter 1 for staff, 2 for customer or 3 to quit");
             int ans = in.nextInt();
             if(ans == 1){
                 staffLogin();
             }
             else if(ans == 2){
                 runCustomer();
+            }
+            else if(ans == 3){
+                System.exit(0);
             }
             else{
                 System.out.println("Please try again");
@@ -87,7 +90,7 @@ public class StaffInterface {
             boolean pass = false;
             while(!pass){
                 
-                System.out.println("Enter username");
+                System.out.println("Enter username");//WHY THE FUCK DOES THIS SKIP SOMETIMES????????
                 String name = in.nextLine();
                 
                 System.out.println("Enter password");
