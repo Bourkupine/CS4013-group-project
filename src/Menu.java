@@ -8,7 +8,7 @@ public class Menu {
 
     public Menu(ArrayList<FoodItem> menu) {
         this.menu = menu;
-        orderByType(menu);
+        orderByType();
     }
 
     /**
@@ -36,7 +36,7 @@ public class Menu {
         }
         if (!exists) {
             menu.add(f);
-            orderByType(menu);
+            orderByType();
         }
     }
 
@@ -68,10 +68,9 @@ public class Menu {
 
     /**
      * Orders the menu by type, i.e. starters, then mains, then desserts, then drinks
-     * @param menu the ArrayList of FoodItems representing the menu
      * @author Bayan
      */
-    public void orderByType(ArrayList<FoodItem> menu) {
+    public void orderByType() {
         ArrayList<FoodItem> tempMenu = new ArrayList<>();
         for (FoodItem f : menu) {
             if(f.getType().equals("starter")) {

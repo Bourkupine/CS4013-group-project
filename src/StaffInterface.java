@@ -385,14 +385,11 @@ public class StaffInterface {
                     if (staff.getName().equalsIgnoreCase(staffName)) {
                         System.out.println(staff.getName() + " has been fired");
                         r.getStaff().remove(staff);
-                        break;
+                        return true;
                     }
                 }
 
-                if (staffArr.size() == r.getStaff().size()) {
-                    System.out.println("No staff found by that name");
-                }
-
+                System.out.println("No staff found by that name");
                 return true;
 
             case "l":
