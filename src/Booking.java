@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Booking {
+public class Booking implements ReadWrite{
 
     private static int totalId = 0;
     private int id;
@@ -107,6 +107,15 @@ public class Booking {
      */
     public int getTime() {
         return time;
+    }
+
+    /**
+     * Allows booking details to be printed to csv
+     * @return comma separated String for use in csv
+     * @author Ronan
+     */
+    public String toCsv(){
+        return customer+","+numberOfPeople+","+time;
     }
 
 }

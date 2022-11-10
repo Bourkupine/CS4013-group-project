@@ -240,4 +240,12 @@ public class Restaurant {
         totalEarnings += dailyEarnings;
         dailyEarnings = 0;
     }
+
+    public String toCsv(){
+        String str = "";
+        for(Table t: tables){
+            str=str.concat(idNum+","+t.getTableNumber()+","+t.getNumberOfSeats());
+        }
+        return str;
+    }
 }

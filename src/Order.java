@@ -8,7 +8,7 @@ import java.util.Formatter;
 import java.util.Scanner;
 
 
-public class Order{
+public class Order{//Ronan: do we need to write to csv here?
     private ArrayList<FoodItem> ordered = new ArrayList<>();
     private Customer c; // bayan:
     private double total = 0; //Euan: changed from int to double to resemble currency better
