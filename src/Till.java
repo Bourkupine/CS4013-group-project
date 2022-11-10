@@ -54,27 +54,51 @@ public class Till {
         return change;
 
     }
-
+/**
+ * 
+ * @return gets Amount due which is how much the customer owes us
+ * @author Thomas
+ */
     public int getAmountDue() {
         return amountDue;
     }
-
+/**
+ * 
+ * @return this is how much the customer has given us so far
+ * @author Thomas
+ */
     public int getAmountGiven() {
         return amountGiven;
     }
-
+/**
+ * 
+ * @return amount in the drawer currently
+ * @author Thomas
+ */
     public double getCashInDrawer() {
         return cashInDrawer;
     }
-
+/**
+ * 
+ * @return How much we have been payed with credit cards
+ * @author Thomas 
+ */
     public double getCreditCardT() {
         return creditCardT;
     }
-
+/**
+ * 
+ * @return gets the customers order
+ * @author Thomas
+ */
     public Order getOrder() {
         return order;
     }
-
+/**
+ * 
+ * @return gets the Restaurant
+ * @author Thomas
+ */
     public Restaurant getRest() {
         return rest;
     }
