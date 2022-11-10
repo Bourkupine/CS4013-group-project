@@ -27,6 +27,12 @@ public class Chef extends Staff {
     }
         //Is below supposed to take an order as a parameter(name needs changing then)or the order data field(remove parameter then)?
     
+    public void cooking(Order o){
+        if(o.checkStatus("ORDERED")){
+            o.setStatus("READY");
+        }
+    }
+    
     public void isDeliverable(Order o) { // this will tell the waiter wether the order is ready to be dropped yet or not
         if ( o.checkStatus("READY" ) ){
             //if the enum value is ready then the waiter will drop it 
