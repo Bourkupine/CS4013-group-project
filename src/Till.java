@@ -11,11 +11,12 @@ public class Till {
     Scanner in = new Scanner(System.in);
     private Restaurant rest;
     private boolean cash;
-    private int amountDue;
+    private double amountDue;
     private Order order;
     private double creditCardT;
     private double cashInDrawer;
     private int amountGiven;
+    private Customer c;
 /**
  * 
  * @param rest this is the restaurant the till is in
@@ -23,17 +24,18 @@ public class Till {
  * @param c this is the customer that owes us money grrr
  * @author Thomas
  */
-    public Till(Restaurant rest, int amountDue, Customer c){
+    public Till(Restaurant rest, int amountDue, Customer c, Order order){
         this.rest = rest;
-        //TODO:this.order = rest.getCustomerOrder(c, rest); this needs to get the order of the customer
-        //TODO:this.amountDue = (int) rest.getCustomerOrder(c, rest).getTotal();  this needs to get the total of the customers order
+        this.order = order;
+        this.c = c;
+        this.amountDue = order.getTotal();
     }
 /**
  * processes a payment from the customer for the order.
  * @return returns the change due to the customer if any
  * @author Thomas
  */
-    public int processPayment(){
+    public double processPayment(){
         System.out.println("1) Cash or 2) Card");
         int choice = in.nextInt();
         System.out.println("Enter amount given ");
@@ -45,7 +47,7 @@ public class Till {
         }else if(amountGiven > amountDue){
             creditCardT = creditCardT+amountDue;
         }
-        int change = 0;
+        double change = 0;
         if(cash && amountGiven>amountDue){
             change = amountGiven - amountDue;
         }
@@ -59,7 +61,7 @@ public class Till {
  * @return gets Amount due which is how much the customer owes us
  * @author Thomas
  */
-    public int getAmountDue() {
+    public double getAmountDue() {
         return amountDue;
     }
 /**
