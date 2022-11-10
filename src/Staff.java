@@ -21,7 +21,7 @@ public abstract class Staff {
     }
 
     public Restaurant getRest() {
-        return rest;
+        return this.rest;
     }
 
     @Override
