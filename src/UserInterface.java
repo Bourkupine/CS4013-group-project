@@ -176,22 +176,17 @@ public class UserInterface {
                 String name = in.next();
                 System.out.println("Enter phone number(type 0 for walk in): ");
                 String phone = in.next();
-                Customer cust;
-                Order o;//Ronan: implementation of order and customer here is not ideal, just wanted a working version
                 boolean inList = false;
                 for (Customer c : customerArr) {
                     if (c.getName().equals(name)) {
-                        cust = c;
-                        o = new Order(cust, r);
-                        r.addOrder(o);//need to check how we are doing this in waiter
+                        r.addOrder(new Order(c, r));//need to check how we are doing this in waiter
                         inList = true;
                     }
 
                 }
                 if (!inList) {
-                    cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
-                    o = new Order(cust, r);
-                    r.addOrder(o);
+                    Customer cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
+                    r.addOrder(new Order(cust, r));
                 }
                 return true;
 
@@ -240,29 +235,27 @@ public class UserInterface {
 
     public boolean manager(String str, Manager m) {
         String s = str.toLowerCase();
+        String name; //Bayan: defined some variables used across multiple cases here to keep naming convention consistent
+        String phone;
+        boolean inList;
         switch (s) {
             case "a": //Add order
                 //Ronan: this could(probably should) be done in waiter and then just call waiter.addOrder() here
                 System.out.println("Enter customer name: ");
-                String name = in.next();
+                name = in.next();
                 System.out.println("Enter phone number(type 0 for walk in): ");
-                String phone = in.next();
-                Customer cust;
-                Order o;//Ronan: implementation of order and customer here is not ideal, just wanted a working version
-                boolean inList = false;
+                phone = in.next();
+                inList = false;
                 for (Customer c : customerArr) {
                     if (c.getName().equals(name)) {
-                        cust = c;
-                        o = new Order(cust, r);
-                        r.addOrder(o);//need to check how we are doing this in waiter
+                        r.addOrder(new Order(c, r));//need to check how we are doing this in waiter
                         inList = true;
                     }
 
                 }
                 if (!inList) {
-                    cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
-                    o = new Order(cust, r);
-                    r.addOrder(o);
+                    Customer cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
+                    r.addOrder(new Order(cust, r));
                 }
                 return true;
 
@@ -278,36 +271,37 @@ public class UserInterface {
             case "t": //Take booking
                 //need to show what tables are available
                 System.out.println(r.getTableList()); // table list needs a to string so the manager and waiters can see what tables are available
+                //todo: find a way to return only available tables - also need to specify when the booking is for!!
                 //take booking
 
                 //here i used ronans stuff and added to them
                 System.out.println("Enter customer name: ");
-                String Name = in.next();
+                name = in.next();
                 System.out.println("Enter phone number(type 0 for walk in): ");
-                String Phone = in.next();
+                phone = in.next();
                 System.out.println("Enter the amount of people you are booking for");
                 int numberOfPeople = in.nextInt();
                 System.out.println("Enter the time you want to book for");
                 int time = in.nextInt();
-                Customer Cust = new Customer("default", "08748484848484");
-                boolean InList = false;
+                Customer cust = new Customer("default", "08748484848484");
+                inList = false;
 
                 for (Customer c : customerArr) {
-                    if (c.getName().equals(Name)) {
-                        Cust = c;
-                        InList = true;
-                        Booking booking = new Booking(Cust, numberOfPeople, time);
+                    if (c.getName().equals(name)) {
+                        cust = c;
+                        inList = true;
+                        Booking booking = new Booking(cust, numberOfPeople, time);
                     }
                 }
-                if (!InList) {
-                    Cust = new Customer(Name, Phone);//Constructor for customer checks if phone is 0
-                    Booking booking = new Booking(Cust, numberOfPeople, time);
+                if (!inList) {
+                    cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
+                    Booking booking = new Booking(cust, numberOfPeople, time);
                 }
 
                 return true;
                 //TODO:Better implementation of booking above(called twice)
             case "u":
-                System.out.println("Enter the booking id you would like to cancel");
+                System.out.println("Enter the booking ID you would like to cancel");
                 int bookingId = in.nextInt();
                 boolean exists = true;
                 for (int i = 0; i < r.getBookings().size(); i++) {
@@ -320,15 +314,14 @@ public class UserInterface {
                 }
                 if (!exists) {
                     System.out.println("Booking doesnt exist");
-
                 }
                 return true;
 
             case "p": //Pay
                 //TODO: make a pay thingy, do we need a till. would make it easier to add up details on money earned and shit
                 return true;
-            case "c": //Create menu
 
+            case "c": //Create menu
                 boolean menuing = true;
                 while (menuing) {
                     System.out.println("""
@@ -344,12 +337,12 @@ public class UserInterface {
                         System.out.println(r.getMenu());
                     } else if (input.equalsIgnoreCase("B")) {
                         System.out.println("Enter name of item");
-                        String foodName = in.next();
+                        name = in.next();
                         System.out.println("Enter price of item");
                         double foodPrice = in.nextDouble();
                         System.out.println("Enter type of item (starter, main, dessert, drink)");
                         String foodType = in.next();
-                        r.getMenu().addFood(new FoodItem(foodName, foodPrice, foodType));
+                        r.getMenu().addFood(new FoodItem(name, foodPrice, foodType));
                     } else if (input.equalsIgnoreCase("C")) {
                         System.out.println("Enter name of item");
                         if (r.getMenu().removeFood(in.next())) {
@@ -370,9 +363,9 @@ public class UserInterface {
 
             case "h": //Bayan: Hire staff
                 System.out.println("Enter staff name:");
-                String newName = in.next();
+                name = in.next();
                 System.out.println("\nEnter staff password:");
-                String newPass = in.next();
+                String password = in.next();
                 System.out.println("""
                         Enter staff position:
                         [A] Manager
@@ -382,13 +375,13 @@ public class UserInterface {
                         """);
                 while (true) {
                     if (in.next().equalsIgnoreCase("C")) {
-                        m.employStaff(new Waiter(newName, newPass, r));
+                        m.employStaff(new Waiter(name, password, r));
                         break;
                     } else if (in.next().equalsIgnoreCase("B")) {
-                        m.employStaff(new Chef(newName, newPass, r));
+                        m.employStaff(new Chef(name, password, r));
                         break;
                     } else if (in.next().equalsIgnoreCase("A")) {
-                        m.employStaff(new Manager(newName, newPass, r));
+                        m.employStaff(new Manager(name, password, r));
                         break;
                     } else if (in.next().equalsIgnoreCase("D")) {
                         break;
@@ -400,11 +393,11 @@ public class UserInterface {
 
             case "f": //Bayan: Fire staff
                 System.out.println("Enter staff name:");
-                String staffName = in.next();
+                name = in.next();
                 ArrayList<Staff> staffArr = r.getStaff();
 
                 for (Staff staff : staffArr) {
-                    if (staff.getName().equalsIgnoreCase(staffName)) {
+                    if (staff.getName().equalsIgnoreCase(name)) {
                         System.out.println(staff.getName() + " has been fired");
                         r.getStaff().remove(staff);
                         return true;
