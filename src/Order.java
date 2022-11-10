@@ -128,6 +128,8 @@ public class Order{
         }
     }
 
+    
+
     /**
      * Checks if the foodStatus is ready
      * @param status foodStatus as String

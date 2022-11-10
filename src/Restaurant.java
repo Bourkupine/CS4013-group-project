@@ -16,6 +16,7 @@ public class Restaurant {
     private int idNum ; //look bakc at this
     private RestaurantChain rc;
     private Restaurant r;
+    private Order order;
 
     //todo: look back at these
     private Chef chef = new Chef("King","testPassword",r);//These passwords are just placeholders
