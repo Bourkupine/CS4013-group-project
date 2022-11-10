@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StaffInterface {
+public class UserInterface {
 
     private Restaurant r;
 
@@ -9,7 +9,7 @@ public class StaffInterface {
     ArrayList<Staff> staffArr;
     ArrayList<Customer> customerArr;
 
-    public StaffInterface(Restaurant r) {
+    public UserInterface(Restaurant r) {
 
         this.r = r;
         staffArr = r.getStaff();
