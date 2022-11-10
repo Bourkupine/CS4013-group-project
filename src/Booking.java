@@ -18,12 +18,10 @@ public class Booking {
 
 
     /**
-     * @author Euan
-     *
      * Create Booking order
-     *
-     * @param customer pass a customer //might need to change this to id or something
+     * @param customer pass a customer
      * @param numberOfPeople number of people at a table
+     * @author Euan
      */
     public Booking(Customer customer, int numberOfPeople) { //walk-in
         this.id = totalId;
@@ -35,15 +33,22 @@ public class Booking {
         this.id = idCounter;
     }
 
-    public Booking(Customer customer, int numberOfPeople, int time) { //Booking
+    /**
+     * Create Booking order
+     * @param customer pass a customer
+     * @param numberOfPeople number of people for the booking
+     * @param time time in hours
+     * @author Euan
+     */
+    public Booking(Customer customer, int numberOfPeople, int time) { //Booking todo: account for days
         this(customer, numberOfPeople);
         this.time = time;
     }
 
 
     /**
-     * sets a table to the booking
-     * @param table
+     * Sets a table to the booking
+     * @param table the booking's Table
      * @author Euan
      */
     public void setTable(Table table) {
@@ -53,14 +58,12 @@ public class Booking {
 
     /**
      * Delete/cancel a booking
-     *
-     * @param booking: the booking you want to cancel
+     * @param booking the booking you want to cancel
      * @author Euan
      */
 
     /**
      * Change time of booking
-     *
      * @param time time you wish to change your booking to
      * @author Euan
      */
@@ -70,19 +73,38 @@ public class Booking {
 
     //Setters & Getters
 
-
+    /**
+     * Gets booking id
+     * @return id as int
+     * @author Euan
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Gets customer who made the booking
+     * @return customer as Customer
+     * @author Euan
+     */
     public Customer getCustomer() {
         return customer;
     }
 
+    /**
+     * Gets number of people in the booking
+     * @return numberOfPeople as int
+     * @author Euan
+     */
     public int getNumberOfPeople() {
         return numberOfPeople;
     }
 
+    /**
+     * Gets time of the booking in hours
+     * @return time as int
+     * @author Euan
+     */
     public int getTime() {
         return time;
     }

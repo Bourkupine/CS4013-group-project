@@ -6,6 +6,11 @@ public class Menu {
     private ArrayList<FoodItem> menu; //Bayan: An ArrayList of FoodItems to store the menu's data
 
 
+    /**
+     * Full-arg constructor
+     * @param menu ArrayList of FoodItems
+     * @author Bayan
+     */
     public Menu(ArrayList<FoodItem> menu) {
         this.menu = menu;
         orderByType();
@@ -52,6 +57,7 @@ public class Menu {
     /**
      * Removes a FoodItem with a specific name from the menu
      * @param name name of the FoodItem
+     * @author Bayan
      */
     public boolean removeFood(String name) {
         for (FoodItem f : menu) {
@@ -62,6 +68,9 @@ public class Menu {
         return false;
     }
 
+    /**
+     * Removes all FoodItems from the menu
+     */
     public void clearMenu() {
         menu.clear();
     }

@@ -15,7 +15,13 @@ public class Order{
     private Menu m; // todo: needs to get menu method in restaurant chain.//Ronan: fixed?
     private foodStatus status;
     private Restaurant r;
-    
+
+    /**
+     * Constructor that takes a Customer and Restaurant
+     * @param c Customer
+     * @param r Restaurant
+     * @author Thomas
+     */
     public Order(Customer c, Restaurant r){
         m = r.getMenu();
         this.c = c; 
@@ -23,7 +29,11 @@ public class Order{
         takeOrder(c);
         Bill bill = new Bill(this); //todo: WHY DOES THIS TAKE NULL AND NOT AN ORDER AGHHH maybe i can give it a customer ?
     }
-    
+
+    /**
+     * Enumerated values to represent the status of an order
+     * @author Thomas
+     */
     public enum foodStatus{
         WAITING,
         ORDERING,
@@ -31,13 +41,12 @@ public class Order{
         READY,
         DELIVERED;
     }
-    
+
     /**
-    *
-    * @author Thomas
-    * {@summary  order for the bill} 
-    * 
-    */
+     * Manages the ordering process
+     * @param c Customer making the order
+     * @author Thomas, Euan
+     */
     public void takeOrder(Customer c){
         //t: creating the scanner
         
@@ -79,49 +88,78 @@ public class Order{
                 status = foodStatus.WAITING ;
             }
         }
-    } 
-    
+    }
+
+    /**
+     * Gets foodStatus
+     * @return status as foodStatus
+     * @author Thomas
+     */
     public foodStatus getStatus() {
         return status;
     }
 
+    /**
+     * Gets ordered FoodItems
+     * @return ordered as ArrayList of FoodItem
+     * @author Thomas
+     */
     public ArrayList<FoodItem> getOrdered() {
         return ordered;
     }
 
+    /**
+     * Sets foodStatus of the order
+     * @param status foodStatus
+     * @return boolean
+     * @author Thomas
+     */
     public boolean setStatus(String status) {
         return(status.equals("WAITING"));
     }
-    
+
     /**
-    * {@summary will give a discount if thw customer has visited 10 or more times }
-    @author Thomas
-    */
+     * Calculates if a discount is applied to the order
+     * @author Thomas
+     */
     public void giveLoyaltyDiscount(){
         if (c.getLoyalty()%10 == 0){ //t when they get to 10 orders/visits the get a ten percent discount
             total -= total / 10;
         }
     }
-    
+
+    /**
+     * Checks if the foodStatus is ready
+     * @param status foodStatus as String
+     * @return boolean
+     */
     public boolean checkStatus(String status){ //this is used in is deliverable for the chef. 
         return ( status.equals("READY")); 
     }
 
-    
-    
-
     /**
-    * {@summary Gets what customer c is }
-    @author Thomas
-    */
+     * Gets the Customer
+     * @return c as Customer
+     * @author Thomas
+     */
     public Customer getCustomer() {
         return c;
     }
 
+    /**
+     * Returns order total
+     * @return total as double
+     * @author Thomas, Euan
+     */
     public double getTotal() {
         return total;
     }
 
+    /**
+     * Returns Order as a String
+     * @return String representation of the order
+     * @author Bayan
+     */
     @Override
     //this definitely wont work but going to leave it here for now 
     //also dont think i need to have a to string here maybe
@@ -132,7 +170,4 @@ public class Order{
         }
         return output;
     }
-    
-    
-    
 }

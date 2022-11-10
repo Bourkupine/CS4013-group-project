@@ -59,6 +59,7 @@ public class Customer {
     /**
      * Gets phone number of customer
      * @return phone number as String
+     * @author Ronan
      */
     public String getPhoneNumber() {
         return phoneNumber;
@@ -67,6 +68,7 @@ public class Customer {
     /**
      * Returns number of times customer has been to restaurant
      * @return number of visits as int
+     * @author Ronan
      */
     public int getLoyalty() { //Euan: changed this to not be static
         return loyalty;
@@ -74,7 +76,7 @@ public class Customer {
 
     /**
      * Call this method to increment the loyalty
-     *
+     * @author Euan
      */
     public void incrementLoyalty() {
         loyalty++; //this was needed to change to customer.loyalty as loyalty is now static because i need to access it in order to increment the loyalty and to use it in the if()
@@ -83,8 +85,9 @@ public class Customer {
     //Basic toString. Can modify if needed.
 
     /**
-     *
+     * Returns Customer as a String
      * @return a String representation of the customer
+     * @author Ronan
      */
     @Override
     public String toString(){
