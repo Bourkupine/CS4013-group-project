@@ -307,7 +307,8 @@ public class StaffInterface {
                 return true;
             case "c": //Create menu
 
-                while (true) {
+                boolean menuing = true;
+                while (menuing) {
                     System.out.println("""
                             [A] View menu
                             [B] Add item to menu
@@ -315,39 +316,33 @@ public class StaffInterface {
                             [D] Clear menu
                             [E] Exit
                             """);
-                    while (true) {
-                        if (in.next().equalsIgnoreCase("A")) {
-                            System.out.println(r.getMenu());
-                            break;
-                        } else if (in.next().equalsIgnoreCase("B")) {
-                            System.out.println("Enter name of item");
-                            String foodName = in.next();
-                            System.out.println("Enter price of item");
-                            double foodPrice = in.nextDouble();
-                            System.out.println("Enter type of item (starter, main, dessert, drink)");
-                            String foodType = in.next();
-                            r.getMenu().addFood(new FoodItem(foodName, foodPrice, foodType));
-                            break;
-                        } else if (in.next().equalsIgnoreCase("C")) {
-                            System.out.println("Enter name of item");
-                            if (r.getMenu().removeFood(in.next())) {
-                                System.out.println("Item removed from the menu");
-                            } else {
-                                System.out.println("Item not found");
-                            }
-                            break;
-                        } else if (in.next().equalsIgnoreCase("D")) {
-                            r.getMenu().clearMenu();
-                            System.out.println("Menu cleared");
-                            break;
-                        } else if (in.next().equalsIgnoreCase("E")) {
-                            break;
+
+                    String input = in.next();
+                    if (input.equalsIgnoreCase("A")) {
+                        System.out.println(r.getMenu());
+                    } else if (input.equalsIgnoreCase("B")) {
+                        System.out.println("Enter name of item");
+                        String foodName = in.next();
+                        System.out.println("Enter price of item");
+                        double foodPrice = in.nextDouble();
+                        System.out.println("Enter type of item (starter, main, dessert, drink)");
+                        String foodType = in.next();
+                        r.getMenu().addFood(new FoodItem(foodName, foodPrice, foodType));
+                    } else if (input.equalsIgnoreCase("C")) {
+                        System.out.println("Enter name of item");
+                        if (r.getMenu().removeFood(in.next())) {
+                            System.out.println("Item removed from the menu");
                         } else {
-                            System.out.println("Please enter a valid input");
+                            System.out.println("Item not found");
                         }
-                        break;
+                    } else if (input.equalsIgnoreCase("D")) {
+                        r.getMenu().clearMenu();
+                        System.out.println("Menu cleared");
+                    } else if (input.equalsIgnoreCase("E")) {
+                        menuing = false;
+                    } else {
+                        System.out.println("Please enter a valid input");
                     }
-                    break;
                 }
                 return true;
 
