@@ -132,10 +132,6 @@ public class Restaurant {
         }
 
     }
-
-    public Order getCustomerOrder(Customer c,Restaurant r) {
-        return order = Order(c,r);
-    }
     /**
      * Gets table at given time and that has a certain amount of people
      *
