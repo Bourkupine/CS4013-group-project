@@ -12,12 +12,12 @@ public class Chef extends Staff {
     public int timeToDelivery(FoodItem item){
         
         
-        if(item.getType() == "Starter"){
+        if(item.getType().equalsIgnoreCase("Starter")){
             return 5;
-        }else if(item.getType()=="Main"){
+        }else if(item.getType().equalsIgnoreCase("Main")){
             return 10;
             
-        }else if(item.getType()=="Dessert"){
+        }else if(item.getType().equalsIgnoreCase("Dessert")){
             return 5;
             
         }else{
