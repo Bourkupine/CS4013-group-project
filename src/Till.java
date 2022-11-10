@@ -4,7 +4,7 @@ import java.util.Scanner;
 //builds bill and a receipt 
 //
 /**
- * this is the till constructor
+ * this is the till class
  * @author Thomas
  */
 public class Till {
@@ -16,13 +16,23 @@ public class Till {
     private double creditCardT;
     private double cashInDrawer;
     private int amountGiven;
-
+/**
+ * 
+ * @param rest this is the restaurant the till is in
+ * @param amountDue this is how much the order came to
+ * @param c this is the customer that owes us money grrr
+ * @author Thomas
+ */
     public Till(Restaurant rest, int amountDue, Customer c){
         this.rest = rest;
         //TODO:this.order = rest.getCustomerOrder(c, rest); this needs to get the order of the customer
         //TODO:this.amountDue = (int) rest.getCustomerOrder(c, rest).getTotal();  this needs to get the total of the customers order
     }
-
+/**
+ * processes a payment from the customer for the order.
+ * @return returns the change due to the customer if any
+ * @author Thomas
+ */
     public int processPayment(){
         System.out.println("1) Cash or 2) Card");
         int choice = in.nextInt();
