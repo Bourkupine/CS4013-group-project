@@ -115,7 +115,7 @@ public class Booking implements ReadWrite{
      * @author Ronan
      */
     public String toCsv(){
-        return customer+","+numberOfPeople+","+time;
+        return id+","+numberOfPeople+","+time+","+table.getTableNumber()+","+customer.getId();
     }
 
 }

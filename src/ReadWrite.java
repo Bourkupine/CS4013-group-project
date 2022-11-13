@@ -8,6 +8,7 @@ import java.util.ArrayList;
  *
  * When using, I recommend using readFile first to store the csv file in an arraylist,
  * then updating that arraylist, then writing that arraylist back to file with writeFile.
+ * The updateFile method may also be used which does the above.
  *
  * Also, each element in the arraylist returned from readFile and used in writeFile is one row,
  * so needs to be comma-separated before passing to method.
@@ -53,6 +54,47 @@ public interface ReadWrite {
         out.close();
     }
 
+    /**
+     * Takes a non-empty file and adds an arrayList of comma seperated strings to it
+     * @param f file to write to
+     * @param s arrayList of strings to be added to file
+     * @throws java.io.FileNotFoundException if cannot find file to write to
+     * @throws java.io.IOException if error occurs while writing
+     */
+    public default void updateFile(File f, ArrayList<String> s)throws java.io.FileNotFoundException, java.io.IOException{
+        ArrayList<String> arr = readFile(f);
+        for(String s1:s){
+            arr.add(s1);
+        }
+        writeFile(f,arr);
+    }
 
+    /**
+     * This method takes a file and writes a single comma-seperated string to it
+     * @param f file to write to
+     * @param s String to be written
+     * @throws java.io.FileNotFoundException if cannot find file to write to
+     * @throws java.io.IOException if error occurs while writing
+     */
+    public default void writeFile(File f,String s)throws java.io.FileNotFoundException, java.io.IOException{
+        PrintWriter out = new PrintWriter(f);
+
+        out.println(s);
+
+        out.close();
+    }
+
+    /**
+     * This method takes a file and updates it with a single comma-seperated string
+     * @param f file to write to
+     * @param s String to be written
+     * @throws java.io.FileNotFoundException if cannot find file to write to
+     * @throws java.io.IOException if error occurs while writing
+     */
+    public default void updateFile(File f, String s)throws java.io.FileNotFoundException, java.io.IOException{
+        ArrayList<String> arr = readFile(f);
+        arr.add(s);
+        writeFile(f,arr);
+    }
 
 }

@@ -5,7 +5,7 @@ import java.util.NavigableSet;
 import java.util.TreeSet;
 
 
-public class Restaurant {
+public class Restaurant implements ReadWrite{
 
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Table> tables = new ArrayList<>();
@@ -224,7 +224,7 @@ public class Restaurant {
     }
 
     /**
-     * add onto the daily earningsju
+     * add onto the daily earnings
      * @param amount amount to be added
      * @author Euan
      */
@@ -241,11 +241,16 @@ public class Restaurant {
         dailyEarnings = 0;
     }
 
-    public String toCsv(){
-        String str = "";
-        for(Table t: tables){
-            str=str.concat(idNum+","+t.getTableNumber()+","+t.getNumberOfSeats());
+    /**
+     *
+     * @return ArrayList of Strings ideal for use in .csv file
+     */
+    public ArrayList<String> toCsv(){
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("RestId,TableId,NumSeats");
+        for(Table t:tables){
+            arr.add(idNum+","+t.getTableNumber()+","+t.getNumberOfSeats());
         }
-        return str;
+        return arr;
     }
 }
