@@ -27,7 +27,7 @@ public class Booking implements ReadWrite{
         this.id = totalId;
         totalId++;
         this.customer = customer;
-        this.numberOfPeople = numberOfPeople;//TODO make sure numOfPeople isnt > 8
+        this.numberOfPeople = numberOfPeople;
         this.time = LocalDateTime.now().getHour();//Ronan: this returns computers local time. Do we want this?
         idCounter++;
         this.id = idCounter;
