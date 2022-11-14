@@ -76,8 +76,7 @@ public class Restaurant implements ReadWrite{
      */
     public void makeBooking(Customer c, int people, int time)  {
         //run people check here maybe?
-
-        Booking book = new Booking(c, setPeople(people));
+        Booking book = new Booking(c, setPeople(people), this);
         bookings.add(book);
         assignTable(time, setPeople(people), book);
 
