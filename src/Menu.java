@@ -105,6 +105,15 @@ public class Menu {
     }
 
     /**
+     * Returns the number of elements in the menu
+     * @return number of elements in the menu ArrayList as int
+     * @author Bayan
+     */
+    public int getSize() {
+        return menu.size();
+    }
+
+    /**
      * Returns a string representation of the Menu object
      * @return Menu object as a string
      * @author Bayan
