@@ -4,7 +4,6 @@
 // scanner we need to take an order 
 // need to make a menu to
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.Scanner;
 
 
@@ -171,13 +170,16 @@ public class Order{//Ronan: do we need to write to csv here?
      * @author Bayan
      */
     @Override
-    //this definitely wont work but going to leave it here for now 
-    //also dont think i need to have a to string here maybe
     public String toString() {
-        String output = "";
-        for(FoodItem f : ordered) {
-            output = output + f.getName() + " ";
+        StringBuilder output = new StringBuilder(c.getName());
+        output.append("{");
+        for(int i = 0; i < ordered.size(); i++) {
+            output.append(ordered.get(i).getName());
+            if (i != ordered.size() - 1) {
+                output.append(", ");
+            }
         }
-        return output;
+        output.append("}");
+        return output.toString();
     }
 }
