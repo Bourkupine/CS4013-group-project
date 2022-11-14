@@ -96,4 +96,8 @@ public class RestaurantChain {
     public ArrayList<Customer> getCustomers() {
         return customers;
     }
+
+    public ArrayList<Restaurant> getRestaurants(){
+        return restaurants;
+    }
 }
