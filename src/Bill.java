@@ -14,6 +14,7 @@ public class Bill{
        order.getCustomer().incrementLoyalty(); // incrementing the loyalty as they have requested the bill and are about to pay
        this.order=order;
        Receipt r =new Receipt(order.getR(),order);
+       order.updateRestaurantTotal(order.getTotal());
     }
 
     /**
@@ -23,6 +24,8 @@ public class Bill{
     public String getReceipt() {
         return receipt;
     }
+
+
 
     /**
      * Receipt setter
