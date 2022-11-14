@@ -39,6 +39,15 @@ public class Order{//Ronan: do we need to write to csv here?
         READY,//this is so the chef can alert the waiter that an order is ready to be dropped 
         DELIVERED;// the waiter lets the chef know it is delivered with no problems 
     }
+
+    /**
+     * adds the order total to Daily Restaurant Earnings
+     * @param total order total as a double
+     * @author Euan
+     */
+    public void updateRestaurantTotal(double total) {
+        r.addToDailyEarnings(total);
+    }
     
     /**
     * Manages the ordering process
