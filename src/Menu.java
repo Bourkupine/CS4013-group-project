@@ -105,7 +105,7 @@ public class Menu {
     }
 
     /**
-     * Returns the number of elements in the menu
+     * Returns the number of FoodItems in the menu
      * @return number of elements in the menu ArrayList as int
      * @author Bayan
      */
