@@ -65,8 +65,8 @@ public class Order{//Ronan: do we need to write to csv here?
                                 Your current total is €%.2f
                                 To order an item or another item enter the number of the item on the menu
                                 To confirm your order enter the number 0
-                                To cancel an item enter the number """+(m.getSize() + 1)+"""
-                                To cancel your order enter the number 1""" + (m.getSize() + 2)
+                                To cancel an item enter the number """+(m.getSize() + 1)+ """
+                                \nTo cancel your order enter the number """ + (m.getSize() + 2)
                                 , total); //Euan: cleaned up this chunk of print statements. Havent tested this with printf but i assume it works
 
                 
