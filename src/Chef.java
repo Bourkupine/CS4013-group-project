@@ -36,7 +36,7 @@ public class Chef extends Staff {
      * @author Thomas
      */
     public void cooking(Order o){
-        if(o.checkStatus("ORDERED")){
+        if(o.checkStatus("ORDERED")){// chef recieves order and cooks it
             o.setStatus("READY");
         }
     }
@@ -57,7 +57,7 @@ public class Chef extends Staff {
      * Sets the order status back to waiting
      * @author Thomas
      */
-    public void delivered (){
+    public void delivered (){ // waiter tells the chef the food was delivered
         order.setStatus("WAITING");
     }
 }

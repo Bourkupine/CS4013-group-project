@@ -16,7 +16,7 @@ public class Customer {
      * @author Ronan
      */
     public Customer(String name){
-        this.name=name;
+        this.name=name;// this is the customers name
         id = totalId;
         totalId++;
         loyalty = 0;
@@ -30,7 +30,7 @@ public class Customer {
      */
     public Customer(String name, String phoneNumber){
         this(name);
-        if(!phoneNumber.equals("0")){
+        if(!phoneNumber.equals("0")){//this is for trsting purposes
             this.phoneNumber=phoneNumber;
         }
 
@@ -79,7 +79,7 @@ public class Customer {
      * @author Euan
      */
     public void incrementLoyalty() {
-        loyalty++; //this was needed to change to customer.loyalty as loyalty is now static because i need to access it in order to increment the loyalty and to use it in the if()
+        loyalty++; 
     }
 
     //Basic toString. Can modify if needed.
