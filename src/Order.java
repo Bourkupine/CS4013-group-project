@@ -41,6 +41,15 @@ public class Order{//Ronan: do we need to write to csv here?
     }
 
     /**
+     * adds the order total to Daily Restaurant Earnings
+     * @param total order total as a double
+     * @author Euan
+     */
+    public void updateRestaurantTotal(double total) {
+        r.addToDailyEarnings(total);
+    }
+
+    /**
      * Manages the ordering process
      * @param c Customer making the order
      * @author Thomas, Euan
