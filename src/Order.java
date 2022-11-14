@@ -37,7 +37,8 @@ public class Order{//Ronan: do we need to write to csv here?
         ORDERING,// when the order is being taken
         ORDERED,//to let the chef know there is an order done
         READY,//this is so the chef can alert the waiter that an order is ready to be dropped 
-        DELIVERED;// the waiter lets the chef know it is delivered with no problems 
+        DELIVERED;// the waiter lets the chef know it is delivered with no problems
+        //todo: are these being used (ready, delivered)
     }
 
     /**
@@ -61,25 +62,20 @@ public class Order{//Ronan: do we need to write to csv here?
         
         
         System.out.println(m.toString()); //t:this is printing the menu so the customer can choose their items
-        System.out.println("Enter the number corresponding to the food you want to order");
         while(status == foodStatus.ORDERING ){ // when the constructor of order is invoked takeOrder is invoked. take order runs when foodstatus is ordering
-            // Menu item input
-            int item = order.nextInt();//taking the no. of the item they want
-            if( item > 0 & item <= m.getSize() ){ // //m.getsize allows it to be dynamic menu instead of static
-                
-                ordered.add(m.getFoodItemAtIndex(item-1)); //t adding item to the string for the bill
-                System.out.printf("This is your current order\n %s\n", ordered.toString()); //printing what the customer has currently ordered so the can see what their order is currently
-                total += m.getFoodItemAtIndex(item-1).getPrice(); // adding up the total for the customer to see what their total is at
-                System.out.printf("""
+            System.out.printf("""
                 Your current total is €%.2f
                 To order an item or another item enter the number of the item on the menu
                 To confirm your order enter the number 0
                 To cancel an item enter the number\s"""+(m.getSize() + 1)+
-                "\nTo cancel your order enter the number " + (m.getSize() + 2)+"\n"
-                , total); //Euan: cleaned up this chunk of print statements. Havent tested this with printf but i assume it works
-                
-                
-            }else if (item == 0){ // this is exiting the system and commiting their order, finalising their order
+                            "\nTo cancel your order enter the number " + (m.getSize() + 2)+"\n", total); //Euan: cleaned up this chunk of print statements. Havent tested this with printf but i assume it works
+            System.out.printf("This is your current order\n %s\n", ordered.toString()); //printing what the customer has currently ordered so the can see what their order is currently
+            int item = order.nextInt();//taking the no. of the item they want
+
+            if( item > 0 & item <= m.getSize() ){ // //m.getsize allows it to be dynamic menu instead of static
+                ordered.add(m.getFoodItemAtIndex(item-1)); //t adding item to the string for the bill
+                total += m.getFoodItemAtIndex(item-1).getPrice(); // adding up the total for the customer to see what their total is at
+            } else if (item == 0){ // this is exiting the system and commiting their order, finalising their order
                 status = foodStatus.ORDERED; // lets the chef know the order is ready to be cooked
             }
             else if (item == m.getSize()+1){ //remove order function
