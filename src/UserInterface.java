@@ -75,14 +75,14 @@ public class UserInterface {
                     boolean inList = false;
                     for (Customer c : customerArr) {
                         if (c.getName().equals(name)) {//If customer has already visited, assign booking to them
-                            Booking b = new Booking(c, num);
+                            Booking b = new Booking(c, num,r);
                             inList = true;
                             
                         }
                         
                     }
                     if (!inList) {//Otherwise, create new customer
-                        Booking b = new Booking(new Customer(name), num);//Is this customer added to the array?
+                        Booking b = new Booking(new Customer(name), num,r);//Is this customer added to the array?
                     }
                     running = false;
                 }
@@ -239,12 +239,12 @@ public class UserInterface {
                 if (c.getName().equals(name)) {
                     cust = c;
                     inList = true;
-                    Booking booking = new Booking(cust, numberOfPeople, time);
+                    Booking booking = new Booking(cust, numberOfPeople, time,r);
                 }//If customer has already visited, assigns booking to them
             }
             if (!inList) {
                 cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
-                Booking booking = new Booking(cust, numberOfPeople, time);//Otherwise creates a new customer
+                Booking booking = new Booking(cust, numberOfPeople, time,r);//Otherwise creates a new customer
             }
             
             return true;
@@ -363,12 +363,12 @@ public class UserInterface {
                 if (c.getName().equals(name)) {
                     cust = c;
                     inList = true;
-                    Booking booking = new Booking(cust, numberOfPeople, time);
+                    Booking booking = new Booking(cust, numberOfPeople, time,r);
                 }//If customer has already visited, assigns booking to them
             }
             if (!inList) {
                 cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
-                Booking booking = new Booking(cust, numberOfPeople, time);//Otherwise creates a new customer
+                Booking booking = new Booking(cust, numberOfPeople, time,r);//Otherwise creates a new customer
             }
             
             return true;
