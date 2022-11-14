@@ -20,8 +20,6 @@ public class Till {
     /**
     * 
     * @param rest this is the restaurant the till is in
-    * @param amountDue this is how much the order came to
-    * @param c this is the customer that owes us money grrr
     * @author Thomas
     */
     public Till(Restaurant rest, Order order){

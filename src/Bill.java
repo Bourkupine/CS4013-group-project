@@ -7,7 +7,8 @@ public class Bill{
 
     public Bill(Order order){//thomas bill will take an object order
        order.getCustomer().incrementLoyalty(); // incrementing the loyalty as they have requested the bill and are about to pay
-       this.order=order; 
+       this.order=order;
+       Receipt r =new Receipt(order.getR(),order);
     }
     
 
