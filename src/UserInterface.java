@@ -341,6 +341,11 @@ public class UserInterface {
 
             case "p": //Pay
                 //TODO: make a pay thingy, do we need a till. would make it easier to add up details on money earned and shit
+                System.out.println("Select an order");
+                System.out.println(r.getOrders().toString());
+                int o = in.nextInt();
+                Till t =new Till(r,r.getOrders().get(o));
+                t.processPayment();
                 return true;
 
             case "c": //Create menu
