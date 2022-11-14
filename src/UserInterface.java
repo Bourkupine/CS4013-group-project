@@ -331,6 +331,10 @@ public class UserInterface {
             case "r": //Remove order
             System.out.println(r.getOrders().toString());//TODO: Better implementation here
             System.out.println("Enter the order you would like to remove");
+            int remove =in.nextInt();
+            r.removeOrder(r.getOrders().get(remove-1));
+            System.out.println("Order" + r.getOrders().get(remove-1) + "has been removed");
+            
             return true;
             
             case "v": //View orders
