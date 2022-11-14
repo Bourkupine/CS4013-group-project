@@ -26,7 +26,6 @@ public class Order{//Ronan: do we need to write to csv here?
         this.c = c; //initialising the customer to identify who is ordering
         status = foodStatus.ORDERING ; // setting the enum status to ordering as the constructor for order has been invoked hence crwating an order
         takeOrder(c); //commencing the take order method where a waiter or manager will take a customers order
-        Bill bill = new Bill(this); //todo: WHY DOES THIS TAKE NULL AND NOT AN ORDER AGHHH maybe i can give it a customer ?
     }
 
     /**
