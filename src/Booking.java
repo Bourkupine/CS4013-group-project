@@ -6,9 +6,7 @@ import java.util.*;
 
 public class Booking implements ReadWrite{
 
-    private static int totalId = 0;
-    private int id;
-    private static int idCounter = 0; //used to keep a universal counter of all the bookings so we can set id = idCounter + 1
+    private String id;
     private Customer customer; //Customer that makes the booking
     private int numberOfPeople; //number of people at the table
     private int time; //time of booking. We will need to run a checker for this
@@ -24,14 +22,11 @@ public class Booking implements ReadWrite{
      * @author Euan
      */
     public Booking(Customer customer, int numberOfPeople, Restaurant rest) { //walk-in
-        this.id = totalId;
         this.rest = rest;
-        totalId++;
         this.customer = customer;
         this.numberOfPeople = numberOfPeople;
         this.time = LocalDateTime.now().getHour();//Ronan: this returns computers local time. Do we want this?
-        idCounter++;
-        this.id = idCounter;
+        this.id = rest.getBookingId();
     }
 
     /**
@@ -69,10 +64,10 @@ public class Booking implements ReadWrite{
 
     /**
      * Gets booking id
-     * @return id as int
+     * @return id as String
      * @author Euan
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 

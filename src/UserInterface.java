@@ -375,10 +375,10 @@ public class UserInterface {
             //TODO:Better implementation of booking above(called twice)
             case "u"://Undo booking
             System.out.println("Enter the booking ID you would like to cancel");
-            int bookingId = in.nextInt();
-            boolean exists = true;
+            String bookingId = in.nextLine();
+            boolean exists = false;
             for (int i = 0; i < r.getBookings().size(); i++) {
-                if (r.getBookings().get(i).getId() == bookingId) {
+                if (r.getBookings().get(i).getId().equals(bookingId)) { //TODO error with types
                     r.getBookings().remove(i);
                     exists = true;
                     break;
