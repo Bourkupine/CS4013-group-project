@@ -52,10 +52,10 @@ public class Order{//Ronan: do we need to write to csv here?
         
         System.out.println(m.toString()); //t:this is printing the menu so the customer can choose their items
 
-        while(status == foodStatus.ORDERING ){
+        while(status == foodStatus.ORDERING ){ // when the constructor of order is invoked takeOrder is invoked. take order runs when foodstatus is ordering
             // Menu item input
-            int item = order.nextInt();
-            if( item > 0 & item <= 13 ){
+            int item = order.nextInt();//taking the no. of the item
+            if( item > 0 & item <= 13 ){ // 
                 
                 //need to relate item number to whatever that no. is on the menu and put that in the array list... not just the no.
                 ordered.add(m.getFoodItemAtIndex(item-1)); //t adding item to the string for the bill
