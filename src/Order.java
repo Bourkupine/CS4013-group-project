@@ -60,8 +60,8 @@ public class Order{//Ronan: do we need to write to csv here?
         Scanner order = new Scanner(System.in);
         
         
+        System.out.println(m.toString()); //t:this is printing the menu so the customer can choose their items
         while(status == foodStatus.ORDERING ){ // when the constructor of order is invoked takeOrder is invoked. take order runs when foodstatus is ordering
-            System.out.println(m.toString()); //t:this is printing the menu so the customer can choose their items
             // Menu item input
             int item = order.nextInt();//taking the no. of the item they want
             if( item > 0 & item <= m.getSize() ){ // //m.getsize allows it to be dynamic menu instead of static
