@@ -51,6 +51,7 @@ public class Till {
         if(cash && amountGiven>amountDue){
             change = amountGiven - amountDue;
         }
+        rest.removeOrder(order);
         Bill bill = new Bill(order);
         System.out.println(bill.toString());
         System.out.println("Give"+ getChange() );
