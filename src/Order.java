@@ -107,6 +107,14 @@ public class Order{//Ronan: do we need to write to csv here?
     public ArrayList<FoodItem> getOrdered() {
         return ordered;
     }
+/**
+ * get restaurant
+ * @return restaurant
+ * @author Thomas
+ */
+    public Restaurant getR() {
+        return r;
+    }
 
     /**
      * Sets foodStatus of the order
