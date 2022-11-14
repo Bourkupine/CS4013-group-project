@@ -23,8 +23,9 @@ public class Booking implements ReadWrite{
      * @param numberOfPeople number of people at a table
      * @author Euan
      */
-    public Booking(Customer customer, int numberOfPeople) { //walk-in
+    public Booking(Customer customer, int numberOfPeople, Restaurant rest) { //walk-in
         this.id = totalId;
+        this.rest = rest;
         totalId++;
         this.customer = customer;
         this.numberOfPeople = numberOfPeople;
@@ -40,8 +41,8 @@ public class Booking implements ReadWrite{
      * @param time time in hours
      * @author Euan
      */
-    public Booking(Customer customer, int numberOfPeople, int time) { //Booking todo: account for days
-        this(customer, numberOfPeople);
+    public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest) { //Booking todo: account for days
+        this(customer, numberOfPeople, rest);
         this.time = time;
     }
 
