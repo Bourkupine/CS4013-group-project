@@ -55,7 +55,7 @@ public class Order{//Ronan: do we need to write to csv here?
         while(status == foodStatus.ORDERING ){ // when the constructor of order is invoked takeOrder is invoked. take order runs when foodstatus is ordering
             // Menu item input
             int item = order.nextInt();//taking the no. of the item
-            if( item > 0 & item <= 13 ){ // 
+            if( item > 0 & item <= m.getSize() ){ // 
                 
                 //need to relate item number to whatever that no. is on the menu and put that in the array list... not just the no.
                 ordered.add(m.getFoodItemAtIndex(item-1)); //t adding item to the string for the bill
@@ -65,15 +65,15 @@ public class Order{//Ronan: do we need to write to csv here?
                                 Your current total is €%.2f
                                 To order an item or another item enter the number of the item on the menu
                                 To confirm your order enter the number 0
-                                To cancel an item enter the number 14
-                                To cancel your order enter the number 15
+                                To cancel an item enter the number "+(m.getSize() + 1)+"
+                                To cancel your order enter the number 1" + (m.getSize() + 2)+"
                                 """, total); //Euan: cleaned up this chunk of print statements. Havent tested this with printf but i assume it works
 
                 
             }else if (item == 0){
                 status = foodStatus.ORDERED;
             }
-            else if (item == 14){
+            else if (item == m.getSize()+1){
                 System.out.println("Enter the number on your order that you would like to remove");
                 int removeItem = order.nextInt();
                 total -= ordered.get(removeItem - 1).getPrice();
@@ -81,7 +81,7 @@ public class Order{//Ronan: do we need to write to csv here?
                 System.out.println(m.getFoodItemAtIndex(removeItem-1 )+" was removed from the order");
                 
             }
-            else if (item == 15){
+            else if (item == m.getSize()+2){
                 ordered.clear();
                 status = foodStatus.WAITING ;
             }
