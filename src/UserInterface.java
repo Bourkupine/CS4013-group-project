@@ -197,12 +197,23 @@ public class UserInterface {
                 return true;
 
             case "r"://Remove order
-                System.out.println(r.getOrders().toString());//TODO: Better implementation here
-                System.out.println("Enter the order you would like to remove");
+                if(r.getOrders().isEmpty()){
+                    System.out.println("No orders currently");
+                }
+                else{
+                    System.out.println(r.getOrders().toString());//TODO: Better implementation here
+                    System.out.println("Enter the order you would like to remove");
+                }
+
                 return true;
 
             case "v"://View current orders
-                System.out.println(r.getOrders().toString());
+                if(r.getOrders().isEmpty()){
+                    System.out.println("No orders currently");
+                }else{
+                    System.out.println(r.getOrders().toString());
+                }
+
                 return true;
             case "t"://Take a booking
                 //w.takeBooking();
@@ -211,11 +222,17 @@ public class UserInterface {
 
             case "p"://Take payment
                 //TODO: THIS WILL BE THE SAME FOR MANAGER
-                System.out.println("Select an order");
-                System.out.println(r.getOrders().toString());
-                int o = in.nextInt();
-                Till t =new Till(r,r.getOrders().get(o));
-                t.processPayment();
+                if(r.getOrders().isEmpty()){
+                    System.out.println("No orders currently");
+                }
+                else{
+                    System.out.println("Select an order");
+                    System.out.println(r.getOrders().toString());
+                    int o = in.nextInt();
+                    Till t =new Till(r,r.getOrders().get(o));
+                    t.processPayment();
+                }
+
                 return true;
             case "l"://Log out
 
@@ -234,7 +251,11 @@ public class UserInterface {
         String s = str.toLowerCase();
         switch (s) {
             case "v"://View orders
-                System.out.println(r.getOrders().toString());
+                if(r.getOrders().isEmpty()){
+                    System.out.println("No orders currently");
+                }else{
+                    System.out.println(r.getOrders().toString());
+                }
                 return true;
             case "a"://Acknowledge order (ie: cook order)
                 r.getChef().cooking(r.getOrders().get(0));
@@ -282,12 +303,21 @@ public class UserInterface {
                 return true;
 
             case "r": //Remove order
-                System.out.println(r.getOrders().toString());//TODO: Better implementation here
-                System.out.println("Enter the order you would like to remove");
+                if(r.getOrders().isEmpty()){
+                    System.out.println("No orders currently");
+                }
+                else{
+                    System.out.println(r.getOrders().toString());//TODO: Better implementation here
+                    System.out.println("Enter the order you would like to remove");
+                }
                 return true;
 
             case "v": //View orders
-                System.out.println(r.getOrders().toString());
+                if(r.getOrders().isEmpty()){
+                    System.out.println("No orders currently");
+                }else{
+                    System.out.println(r.getOrders().toString());
+                }
                 return true;
 
             case "t": //Take booking
