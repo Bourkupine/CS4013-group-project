@@ -74,7 +74,7 @@ public class Restaurant implements ReadWrite{
      * @param time time of booking
      * @author Euan
      */
-    public void makeBooking(Customer c, int people, int time) {
+    public void makeBooking(Customer c, int people, int time)  {
         //run people check here maybe?
 
         Booking book = new Booking(c, setPeople(people));
