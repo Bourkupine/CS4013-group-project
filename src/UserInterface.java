@@ -214,7 +214,7 @@ public class UserInterface {
                 System.out.println("Select an order");
                 System.out.println(r.getOrders().toString());
                 int o = in.nextInt();
-                Till t =new Till(r,r.getOrders().get(o).getCustomer(),r.getOrders().get(o));
+                Till t =new Till(r,r.getOrders().get(o));
                 t.processPayment();
                 return true;
             case "l"://Log out
