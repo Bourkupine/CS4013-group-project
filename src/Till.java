@@ -33,10 +33,12 @@ public class Till {
     * @author Thomas
     */
     public double processPayment(){
+        Bill bill = new Bill(order);
         System.out.println("1) Cash or 2) Card");
         int choice = in.nextInt();
         System.out.println("Enter amount given ");
         amountGiven = in.nextInt();
+        System.out.println(bill.toString());
         
         if(choice == 1 && amountGiven > amountDue){
             cash = true;
@@ -50,7 +52,6 @@ public class Till {
             change = amountGiven - amountDue;
         }
         rest.removeOrder(order);
-        Bill bill = new Bill(order);
         System.out.println(bill.toString());
         System.out.println("Give"+ getChange() );
         return change;
