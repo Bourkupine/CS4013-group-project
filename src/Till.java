@@ -24,7 +24,7 @@ public class Till {
  * @param c this is the customer that owes us money grrr
  * @author Thomas
  */
-    public Till(Restaurant rest, int amountDue, Customer c, Order order){
+    public Till(Restaurant rest, Customer c, Order order){
         this.rest = rest;
         this.order = order;
         this.c = c;

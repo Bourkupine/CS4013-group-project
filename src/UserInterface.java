@@ -211,6 +211,11 @@ public class UserInterface {
 
             case "p"://Take payment
                 //TODO: THIS WILL BE THE SAME FOR MANAGER
+                System.out.println("Select an order");
+                System.out.println(r.getOrders().toString());
+                int o = in.nextInt();
+                Till t =new Till(r,r.getOrders().get(o).getCustomer(),r.getOrders().get(o));
+                t.processPayment();
                 return true;
             case "l"://Log out
 

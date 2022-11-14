@@ -22,6 +22,6 @@ public class Bill{
 
     @Override
     public String toString() { //printing the bill
-        return  String.format("Total  €%f. Thank you for visiting Yum", order.getTotal());
+        return  String.format("Total  €%.2f. Thank you for visiting Yum", order.getTotal());
     }
 }
