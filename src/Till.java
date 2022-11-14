@@ -17,7 +17,6 @@ public class Till {
     private double creditCardT;
     private double cashInDrawer;
     private int amountGiven;
-    private Customer c;
     /**
     * 
     * @param rest this is the restaurant the till is in
@@ -25,10 +24,9 @@ public class Till {
     * @param c this is the customer that owes us money grrr
     * @author Thomas
     */
-    public Till(Restaurant rest, Customer c, Order order){
+    public Till(Restaurant rest, Order order){
         this.rest = rest;
         this.order = order;
-        this.c = c;
         this.amountDue = order.getTotal();
     }
     /**
