@@ -77,8 +77,8 @@ public class Order{//Ronan: do we need to write to csv here?
                 int removeItem = order.nextInt(); // the index no. that they want removed
                 total -= ordered.get(removeItem - 1).getPrice(); //minusing the price of the item from the total
                 ordered.remove(removeItem - 1); //removing the item from the list of ordered stuff
-                System.out.println(ordered.get(removeItem-1 )+" was removed from the order");//letting the customer know what was removed
-                
+                System.out.println(ordered.get(removeItem )+" was removed from the order");//letting the customer know what was removed
+                break;
             }
             else if (item == m.getSize()+2){
                 ordered.clear();
