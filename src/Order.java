@@ -23,10 +23,10 @@ public class Order{//Ronan: do we need to write to csv here?
      * @author Thomas
      */
     public Order(Customer c, Restaurant r){
-        m = r.getMenu();
-        this.c = c; 
-        status = foodStatus.ORDERING ;
-        takeOrder(c);
+        m = r.getMenu(); //getting the menu for the order
+        this.c = c; //initialising the customer to identify who is ordering
+        status = foodStatus.ORDERING ; // setting the enum status to ordering as the constructor for order has been invoked hence crwating an order
+        takeOrder(c); //commencing the take order method where a waiter or manager will take a customers order
         Bill bill = new Bill(this); //todo: WHY DOES THIS TAKE NULL AND NOT AN ORDER AGHHH maybe i can give it a customer ?
     }
 
@@ -35,11 +35,11 @@ public class Order{//Ronan: do we need to write to csv here?
      * @author Thomas
      */
     public enum foodStatus{
-        WAITING,
-        ORDERING,
-        ORDERED,
-        READY,
-        DELIVERED;
+        WAITING,//set to this by the waiter when an order has been dropped
+        ORDERING,// when the order is being taken
+        ORDERED,//to let the chef know there is an order done
+        READY,//this is so the chef can alert the waiter that an order is ready to be dropped 
+        DELIVERED;// the waiter lets the chef know it is delivered with no problems 
     }
 
     /**
