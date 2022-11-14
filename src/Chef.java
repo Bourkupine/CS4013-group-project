@@ -9,7 +9,7 @@ public class Chef extends Staff {
      * @author Thomas
      */
     public Chef(String name,String password,Restaurant rest){
-        super(name,password,rest);
+        super(name,password,rest);//the name of the chef his password and restaurant 
         
     }
 //    public int timeToDelivery(FoodItem item){
