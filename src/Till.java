@@ -23,9 +23,9 @@ public class Till {
     * @author Thomas
     */
     public Till(Restaurant rest, Order order){
-        this.rest = rest;
-        this.order = order;
-        this.amountDue = order.getTotal();
+        this.rest = rest;//this is the restaurant
+        this.order = order;//this is the order
+        this.amountDue = order.getTotal();//this is the amount the customer owes
     }
     /**
     * processes a payment from the customer for the order.
@@ -33,10 +33,10 @@ public class Till {
     * @author Thomas
     */
     public double processPayment(){
-        Bill bill = new Bill(order);
-        System.out.println("1) Cash or 2) Card");
-        int choice = in.nextInt();
-        System.out.println("Enter amount given ");
+        Bill bill = new Bill(order);//this creates a bill for said order
+        System.out.println("1) Cash or 2) Card");//is the customer paying in cash or card
+        int choice = in.nextInt(); //they decide what they pay with
+        System.out.println("Enter amount given "); //this is the amount the customer gives
         amountGiven = in.nextInt();
         System.out.println(bill.toString());
         
