@@ -14,6 +14,7 @@ public class Restaurant implements ReadWrite{
     private double totalEarnings = 0;
     private double dailyEarnings = 0;
     private int idNum ; //look bakc at this
+    private int bookingId = 0;
     private RestaurantChain rc;
     private Restaurant r;
     private Order order;
@@ -79,6 +80,7 @@ public class Restaurant implements ReadWrite{
         Booking book = new Booking(c, setPeople(people), this);
         bookings.add(book);
         assignTable(time, setPeople(people), book);
+        bookingId++;
 
     }
 
@@ -238,6 +240,15 @@ public class Restaurant implements ReadWrite{
     public void updateDailyAmount() {
         totalEarnings += dailyEarnings;
         dailyEarnings = 0;
+    }
+
+    /**
+     * get the next booking ID number
+     * @return returns ID as an int
+     * @author Euan
+     */
+    public String getBookingId() {
+        return String.format("%d_%d", idNum, bookingId);
     }
 
     /**
