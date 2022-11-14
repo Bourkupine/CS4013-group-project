@@ -56,13 +56,6 @@ public class Booking implements ReadWrite{
         this.table = table;
     }
 
-
-    /**
-     * Delete/cancel a booking
-     * @param booking the booking you want to cancel
-     * @author Euan
-     */
-
     /**
      * Change time of booking
      * @param time time you wish to change your booking to
