@@ -10,7 +10,7 @@ public class Manager extends Staff {
      * @author Thomas
      */
     public Manager(String name,String password, Restaurant rest){
-        super(name,password,rest);
+        super(name,password,rest);//managers name password and restaurant
     }
 
     /**
@@ -19,7 +19,7 @@ public class Manager extends Staff {
      * @author Bayan
      */
     public void addToMenu(FoodItem food) {
-        getRest().getMenu().addFood(food);
+        getRest().getMenu().addFood(food);//goes to the restaurant and gets menu in the restaurant then adds fooditem to said menu
     }
 
     /**
@@ -28,7 +28,7 @@ public class Manager extends Staff {
      * @author Bayan
      */
     public void removeFromMenu(FoodItem food) {
-        getRest().getMenu().removeFood(food);
+        getRest().getMenu().removeFood(food);//goes to the restaurant and gets menu in the restaurant then takes the fooditem out of said menu
     }
 
     /**
@@ -37,7 +37,7 @@ public class Manager extends Staff {
      * @author Ronan, Bayan
      */
     public void employStaff(Staff staff) {
-        getRest().getStaff().add(staff);
+        getRest().getStaff().add(staff); //calls the method from staff in said restaurant and adds a staff member
     }
 
     /**
@@ -46,6 +46,6 @@ public class Manager extends Staff {
      * @author Ronan, Bayan
      */
     public void fireStaff(Staff staff) {
-        getRest().getStaff().remove(staff);
+        getRest().getStaff().remove(staff);//calls the method from staff in said restaurant and adds a staff member
     }
 }

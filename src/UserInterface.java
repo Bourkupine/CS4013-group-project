@@ -180,6 +180,7 @@ public class UserInterface {
     * This method runs if a waiter is logged in
     * @param str option passed from runStaff()
     * @param w waiter who is logged in
+    * @author Thomas, Ronan
     * @return false to log out, true otherwise
     */
     public boolean waiter(String str, Waiter w) {
@@ -274,6 +275,7 @@ public class UserInterface {
     /**
     * This runs if a chef is logged in
     * @param str option passed from runStaff()
+    * @author Thomas, Ronan
     * @param c chef who is currently logged in
     * @return false to log out, true otherwise
     */
@@ -299,6 +301,7 @@ public class UserInterface {
     /**
     * This runs if a manager is logged in
     * @param str option passed from runStaff()
+    * @author Thomas, Ronan
     * @param m manager who is currently logged in
     * @return false to log out, true otherwise
     */

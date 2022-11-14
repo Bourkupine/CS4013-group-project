@@ -65,7 +65,7 @@ public class FoodItem {
      */
     @Override
     public boolean equals(Object o) {//todo: this only checks if the names are equal since you don't want to add the same name twice - check with team
-        if (this == o) {
+        if (this == o) { 
             return true;
         }
         if (o == null || getClass() != o.getClass()) {

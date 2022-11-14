@@ -12,8 +12,8 @@ public class Menu {
      * @author Bayan
      */
     public Menu(ArrayList<FoodItem> menu) {
-        this.menu = menu;
-        orderByType();
+        this.menu = menu;// this is the menu
+        orderByType();//this will 
     }
 
     /**
