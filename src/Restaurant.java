@@ -76,6 +76,7 @@ public class Restaurant implements ReadWrite{
      * @param time time of booking
      * @author Euan
      */
+    /*
     public void makeBooking(Customer c, int people, int time)  {
         //run people check here maybe?
         Booking book = new Booking(c, setPeople(people), this);
@@ -84,7 +85,7 @@ public class Restaurant implements ReadWrite{
         bookingId++;
 
     }
-
+*/
     /**
      * Cancel a booking
      *
@@ -141,7 +142,7 @@ public class Restaurant implements ReadWrite{
 
     public Table getTable(int hour, int numOfPeople) {
         for (Table table : getTableList()) {
-            if(!table.getReservedAtTime(hour) && table.getNumberOfSeats() == numOfPeople) {
+            if(!table.getReservedAtTime(hour) && table.getNumberOfSeats() >= numOfPeople) {
                 return table;
             }
         }

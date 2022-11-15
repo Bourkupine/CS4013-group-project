@@ -16,20 +16,7 @@ public class Booking implements ReadWrite{
     private LocalDate date;
 
 
-    /**
-     * Create Booking order
-     * @param customer pass a customer
-     * @param numberOfPeople number of people at a table
-     * @author Euan
-     */
-    public Booking(Customer customer, int numberOfPeople, Restaurant rest, LocalDate date) { //walk-in
-        this.rest = rest;
-        this.customer = customer;
-        this.numberOfPeople = numberOfPeople;
-        this.time = LocalDateTime.now().getHour();//Ronan: this returns computers local time. Do we want this?
-        this.id = rest.getBookingId();
-        this.date=date;
-    }
+
 
     /**
      * Create Booking order
@@ -39,7 +26,11 @@ public class Booking implements ReadWrite{
      * @author Euan
      */
     public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest, LocalDate date) { //Booking todo: account for days
-        this(customer, numberOfPeople, rest, date);//the customer, number of people and restaurant the booking is in
+        this.rest = rest;
+        this.customer = customer;
+        this.numberOfPeople = numberOfPeople;
+        this.id = rest.getBookingId();
+        this.date=date;
         this.time = time; //the time of the booking
     }
 

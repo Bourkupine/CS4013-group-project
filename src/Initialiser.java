@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -17,10 +18,7 @@ public class Initialiser {
         int num = in.nextInt();
         RestaurantChain rc = new RestaurantChain("Yum's",num);
         System.out.println("Enter date");
-        String[] split = in.next().split("/");
-        String day =split[0];
-        String month = split[1];
-        String year = split[2];
+        LocalDate date = LocalDate.parse(in.next());
 
         boolean validId=false;
         while(!validId){
