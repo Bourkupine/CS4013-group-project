@@ -36,7 +36,7 @@ public class Booking implements ReadWrite{
      * @param time time in hours
      * @author Euan
      */
-    public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest) { //Booking todo: account for days
+    public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest ) { //Booking todo: account for days
         this(customer, numberOfPeople, rest);//the customer, number of people and restaurant the booking is in
         this.time = time; //the time of the booking
     }
