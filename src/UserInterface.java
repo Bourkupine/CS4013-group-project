@@ -208,7 +208,7 @@ public class UserInterface {
             case "v"://View current orders
                 System.out.println(r.getOrders().toString());
                 return true;
-                case "t"://Take a booking
+            case "t"://Take a booking
                 //need to show what tables are available
                 //todo: find a way to return only available tables - also need to specify when the booking is for!!
                 //take booking
@@ -300,12 +300,12 @@ public class UserInterface {
 
     /**
     * This runs if a manager is logged in
-    * //@param str option passed from runStaff()
+    * @param str option passed from runStaff()
     * @author Thomas, Ronan
-    * //@param m manager who is currently logged in
+    * @param m manager who is currently logged in
     * @return false to log out, true otherwise
     */
-    /*
+
     public boolean manager(String str, Manager m) {
         String s = str.toLowerCase();
         String name; //Bayan: defined some variables used across multiple cases here to keep naming convention consistent
@@ -344,54 +344,47 @@ public class UserInterface {
             case "v": //View orders
                 System.out.println(r.getOrders().toString());
                 return true;
-            
-            case "t": //Take booking
+
+            case "t"://Take a booking
                 //need to show what tables are available
-                System.out.println(r.getTableList()); // table list needs a to string so the manager and waiters can see what tables are available
                 //todo: find a way to return only available tables - also need to specify when the booking is for!!
                 //take booking
-
-                //here I used ronans stuff and added to them
-                System.out.println("Enter customer name: ");
-                name = in.next();
-                System.out.println("Enter phone number(type 0 for walk in): ");
-                phone = in.next();
-                System.out.println("Enter the amount of people you are booking for");
-                int numberOfPeople = in.nextInt();
-                System.out.println("Enter the time you want to book for");
-                int time = in.nextInt();
-                Customer cust = new Customer("default", "08748484848484");
-                inList = false;
-
-                for (Customer c : customerArr) {
-                    if (c.getName().equals(name)) {
-                        cust = c;
-                        inList = true;
-                        Booking booking = new Booking(cust, numberOfPeople, time,r);
-                    }//If customer has already visited, assigns booking to them
-                }
-                if (!inList) {
-                    cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
-                    Booking booking = new Booking(cust, numberOfPeople, time,r);//Otherwise creates a new customer
-                }
-
-                return true;
-                //TODO:Better implementation of booking above(called twice)
-            case "u"://Undo booking
-                System.out.println("Enter the booking ID you would like to cancel");
-                String bookingId = in.nextLine();
-                boolean exists = false;
-                for (int i = 0; i < r.getBookings().size(); i++) {
-                    if (r.getBookings().get(i).getId().equals(bookingId)) { //TODO error with types
-                        r.getBookings().remove(i);
-                        exists = true;
-                        break;
-
+                boolean running=true;
+                while(running){
+                    //here I used ronans stuff and added to them
+                    System.out.println("Enter customer name: ");
+                    name = in.next();
+                    System.out.println("Enter phone number(type 0 for walk in): ");
+                    phone = in.next();
+                    int numberOfPeople=0;
+                    boolean lessthen8 = false;
+                    while(!lessthen8){
+                        System.out.println("Enter number of people: ");
+                        numberOfPeople = in.nextInt();
+                        if(numberOfPeople>8){
+                            System.out.println("No more then 8 people per booking");
+                        }else{
+                            lessthen8 = true;
+                        }
                     }
+                    boolean validDate=false;
+                    LocalDate d= today;
+                    while(!validDate){
+                        System.out.println("Enter the date you want to book for");
+                        d = LocalDate.parse(in.next());
+                        validDate = validDate(d);
+                        if(!validDate){
+                            System.out.println("Bookings no more than 6 days in advance");
+                        }
+                    }
+
+                    System.out.println("Enter time you are booking for in 24 hr clock");//TODO validate time
+                    int time = in.nextInt();
+                    running= booking(time,numberOfPeople,name);
+
                 }
-                if (!exists) {
-                    System.out.println("Booking doesnt exist");
-                }
+
+
                 return true;
             
             case "p": //Pay
@@ -496,7 +489,7 @@ public class UserInterface {
         return true;
     }
 
-*/
+
 
     /**
      * Checks if a given date is within 6 days of today

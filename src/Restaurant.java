@@ -85,7 +85,7 @@ public class Restaurant implements ReadWrite{
         bookingId++;
 
     }
-*/
+*///Ronan: I've commented this out cause it's not used but idk if we need it
     /**
      * Cancel a booking
      *
