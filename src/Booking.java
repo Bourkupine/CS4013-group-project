@@ -1,6 +1,7 @@
 //Euan: everytime a user creates a new booking, it will make an object here
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -11,8 +12,8 @@ public class Booking implements ReadWrite{
     private int numberOfPeople; //number of people at the table
     private int time; //time of booking. We will need to run a checker for this
     private Table table ;
-    private Restaurant rest; //booking is specific to a certain restaurant TODO initialise this
-    //Ronan- possible solution to above is to have booking take a restaurant in constructor
+    private Restaurant rest; //booking is specific to a certain restaurant
+    private LocalDate date;
 
 
     /**
@@ -21,12 +22,13 @@ public class Booking implements ReadWrite{
      * @param numberOfPeople number of people at a table
      * @author Euan
      */
-    public Booking(Customer customer, int numberOfPeople, Restaurant rest) { //walk-in
+    public Booking(Customer customer, int numberOfPeople, Restaurant rest, LocalDate date) { //walk-in
         this.rest = rest;
         this.customer = customer;
         this.numberOfPeople = numberOfPeople;
         this.time = LocalDateTime.now().getHour();//Ronan: this returns computers local time. Do we want this?
         this.id = rest.getBookingId();
+        this.date=date;
     }
 
     /**
@@ -36,8 +38,8 @@ public class Booking implements ReadWrite{
      * @param time time in hours
      * @author Euan
      */
-    public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest ) { //Booking todo: account for days
-        this(customer, numberOfPeople, rest);//the customer, number of people and restaurant the booking is in
+    public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest, LocalDate date) { //Booking todo: account for days
+        this(customer, numberOfPeople, rest, date);//the customer, number of people and restaurant the booking is in
         this.time = time; //the time of the booking
     }
 

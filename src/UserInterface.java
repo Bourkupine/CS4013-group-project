@@ -1,4 +1,6 @@
 import java.io.File;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,17 +13,20 @@ public class UserInterface {
     Scanner in = new Scanner(System.in);
     ArrayList<Staff> staffArr;
     ArrayList<Customer> customerArr;
+
+    LocalDate today;
     
     /**
     * creates a user interface for restaurant
     * @param r restaurant the interface belongs to
     * @author Ronan
     */
-    public UserInterface(Restaurant r,String day, String month, String year) {
+    public UserInterface(Restaurant r,LocalDate date) {
         
         this.r = r;
         staffArr = r.getStaff();
         customerArr = r.getCustomers();
+        today=date;
         pick();
     }
     
@@ -223,7 +228,6 @@ public class UserInterface {
             return true;
             case "t"://Take a booking
             //need to show what tables are available
-            System.out.println(r.getTableList()); // table list needs a to string so the manager and waiters can see what tables are available
             //todo: find a way to return only available tables - also need to specify when the booking is for!!
             //take booking
             
@@ -234,10 +238,19 @@ public class UserInterface {
             phone = in.next();
             System.out.println("Enter the amount of people you are booking for");
             int numberOfPeople = in.nextInt();
-            System.out.println("Enter the time you want to book for");
+            boolean validDate=false;
+            LocalDate d= today;
+            while(!validDate){
+                System.out.println("Enter the date you want to book for");
+                d = LocalDate.parse(in.next());
+                validDate = validDate(d);
+            }
+
+            System.out.println("Enter time you are booking for in 24 hr clock");//TODO validate time
             int time = in.nextInt();
             Customer cust = new Customer("default", "08748484848484");
             inList = false;
+            r.assignTable((int)today.until(d,ChronoUnit.DAYS),time,numberOfPeople);
             
             for (Customer c : customerArr) {
                 if (c.getName().equals(name)) {
@@ -494,6 +507,14 @@ public class UserInterface {
             case "l"://logout
             return false;
             
+        }
+        return true;
+    }
+
+    public boolean validDate(LocalDate date){
+        LocalDate later = date.plusDays(6);
+        if(today.until(later, ChronoUnit.DAYS)>6 || date.isBefore(today)){
+            return false;
         }
         return true;
     }

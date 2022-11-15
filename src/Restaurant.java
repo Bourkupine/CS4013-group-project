@@ -120,7 +120,7 @@ public class Restaurant implements ReadWrite{
      * @param people amount of people booking has
      * @author Bayan
      */
-    private Table assignTable(int daysInAdvance, int hour, int people) {
+    public Table assignTable(int daysInAdvance, int hour, int people) {
         for (Table t : tables) {
             if (!t.getReservedAtTime(hour, daysInAdvance)) {
                 return t;

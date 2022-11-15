@@ -28,7 +28,7 @@ public class Initialiser {
             int id = in.nextInt();
             if(id<num &&id>0){
                 validId=true;
-                UserInterface ui = new UserInterface(rc.getRestaurants().get(id),day,month,year);
+                UserInterface ui = new UserInterface(rc.getRestaurants().get(id),date);
                 //TODO pass files to userInterface
             }
             else {
