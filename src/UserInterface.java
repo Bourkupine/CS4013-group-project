@@ -17,7 +17,7 @@ public class UserInterface {
     * @param r restaurant the interface belongs to
     * @author Ronan
     */
-    public UserInterface(Restaurant r) {
+    public UserInterface(Restaurant r,String day, String month, String year) {
         
         this.r = r;
         staffArr = r.getStaff();
