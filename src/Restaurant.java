@@ -1,5 +1,6 @@
 //Euan: this can act like the main (overview?) class
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.NavigableSet;
 import java.util.TreeSet;
@@ -114,25 +115,20 @@ public class Restaurant implements ReadWrite{
 
     /**
      * Assigns a table to a booking
+     * @param daysInAdvance the amount of days in advance the booking is for
      * @param hour time of booking
      * @param people amount of people booking has
-     * @param book the booking its assigning to
-     * @author Euan
+     * @author Bayan
      */
-    private void assignTable(int hour, int people, Booking book) {
-        if(getTable(hour, people) != null) {
-            Table tempTable = getTable(hour, people);
-            book.setTable(tempTable);
-            tempTable.setReservedAtTime(hour, true);
-            System.out.println("Your booking has been created");
-
+    private Table assignTable(int daysInAdvance, int hour, int people) {
+        for (Table t : tables) {
+            if (!t.getReservedAtTime(hour, daysInAdvance)) {
+                return t;
+            }
         }
-        else {
-            System.out.printf("No available table at %d with %d people\n", hour, people);
-
-        }
-
+        return null;
     }
+
     /**
      * Gets table at given time and that has a certain amount of people
      *
