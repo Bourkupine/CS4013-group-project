@@ -18,7 +18,7 @@ public class Customer {
     public Customer(String name){
         this.name=name;// this is the customers name
         id = totalId;
-        totalId++;
+        totalId++;//incrementing the id after a customer has been created so the next customer will have a different id
         loyalty = 0;
     }
 
@@ -30,7 +30,7 @@ public class Customer {
      */
     public Customer(String name, String phoneNumber){
         this(name);
-        if(!phoneNumber.equals("0")){//this is for trsting purposes
+        if(!phoneNumber.equals("0")){//this is for testing purposes
             this.phoneNumber=phoneNumber;
         }
 
