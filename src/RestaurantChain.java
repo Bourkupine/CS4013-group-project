@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -5,12 +8,13 @@ import java.util.ArrayList;
  * A class to represent a chain of restaurants.
  */
 
-public class RestaurantChain {
+public class RestaurantChain implements ReadWrite{
     private ArrayList<Customer> customers = new ArrayList<>(); //An arraylist of all customers across every restaurant.
     private String name; //The name of the restaurant chain.
     private int amountOfRestaurants; //The amount of restaurants.
     private Menu menu;
     private ArrayList<Restaurant> restaurants = new ArrayList<>();// ArrayList containing all restaurants in chain
+    File rest; //Contains details of all restaurants
     
 
     /**
@@ -25,8 +29,15 @@ public class RestaurantChain {
             Restaurant restaurant = new Restaurant(15,this,i);//Ronan: 15 tables is arbitrary and can be changed
             restaurants.add(restaurant);
             generateMenu();
+
         }
 
+    }
+
+    public RestaurantChain(String name, int amountOfRestaurants, File rest){
+        this(name,amountOfRestaurants);
+        this.rest=rest;
+        writeDetails();
     }
 
     /**
@@ -77,6 +88,22 @@ public class RestaurantChain {
 
         //set menu equal to the final list
         menu = new Menu(starters);
+    }
+
+    /**
+     * Writes details of all restaurants in chain to their csv file
+     */
+    public void writeDetails(){
+        try{
+            for(Restaurant r:restaurants){
+                updateFile(rest,r.toCsv());//TODO fix formatting
+            }
+        }
+        catch (IOException ioe){
+            System.out.println("Error writing restaurant details to csv");
+        }
+
+
     }
 
     /**

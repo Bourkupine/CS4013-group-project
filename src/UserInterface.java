@@ -1,9 +1,12 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
     
     private Restaurant r;
+    File bookings;
+    File money;
     
     Scanner in = new Scanner(System.in);
     ArrayList<Staff> staffArr;

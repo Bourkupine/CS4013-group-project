@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -37,5 +39,16 @@ public class Initialiser {
 
 
 
+    }
+    public static File[] files(){
+        File restaurants = new File("restaurants.csv");
+        File bookings = new File("bookings.csv");
+        File money = new File("money.csv");
+        File[] arr = new File[3];
+        arr[0]=restaurants;
+        arr[1]=bookings;
+        arr[2]=money;
+
+        return arr;
     }
 }

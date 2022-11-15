@@ -62,11 +62,18 @@ public interface ReadWrite {
      * @throws java.io.IOException if error occurs while writing
      */
     public default void updateFile(File f, ArrayList<String> s)throws java.io.FileNotFoundException, java.io.IOException{
-        ArrayList<String> arr = readFile(f);
-        for(String s1:s){
-            arr.add(s1);
+        if(f.length()==0){
+            writeFile(f,s);
         }
-        writeFile(f,arr);
+        else{
+            ArrayList<String> arr = readFile(f);
+            for(String s1:s){
+                arr.add(s1);
+            }
+            writeFile(f,arr);
+
+        }
+
     }
 
     /**
