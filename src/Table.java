@@ -87,4 +87,8 @@ public class Table {
         return numberOfSeats;
     }
 
+    public String toString(){
+        return "Table "+tableNumber+" has "+numberOfSeats+" seats";
+    }
+
 }
