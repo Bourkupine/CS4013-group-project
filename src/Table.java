@@ -3,8 +3,8 @@
 import java.util.ArrayList;
 
 public class Table {
-    private final int tableNumber; //Bayan: Unique ID number for the table
-    private final int numberOfSeats; //Bayan: Number of seats at the table
+    private final int TABLENUMBER; //Bayan: Unique ID number for the table
+    private final int NUMBEROFSEATS; //Bayan: Number of seats at the table
     private ArrayList<boolean[]> reserved = new ArrayList<>(); //Bayan: Indicates if the table is reserved at a specific time or not
 
     /**
@@ -14,8 +14,8 @@ public class Table {
      * @author Bayan + Euan
      */
     public Table(int tableNumber, int numberOfSeats) {
-        this.tableNumber = tableNumber;
-        this.numberOfSeats = numberOfSeats;
+        this.TABLENUMBER = tableNumber;
+        this.NUMBEROFSEATS = numberOfSeats;
         for (int i = 0; i < 7; i++) {
             reserved.add(new boolean[13]);
         }
@@ -75,7 +75,7 @@ public class Table {
      * @author Bayan
      */
     public int getTableNumber() {
-        return tableNumber;
+        return TABLENUMBER;
     }
 
     /**
@@ -84,11 +84,11 @@ public class Table {
      * @author Bayan
      */
     public int getNumberOfSeats() {
-        return numberOfSeats;
+        return NUMBEROFSEATS;
     }
 
     public String toString(){
-        return "Table "+tableNumber+" has "+numberOfSeats+" seats";
+        return "Table "+ TABLENUMBER +" has "+NUMBEROFSEATS+" seats";
     }
 
 }

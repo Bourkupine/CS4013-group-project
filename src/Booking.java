@@ -1,9 +1,6 @@
 //Euan: everytime a user creates a new booking, it will make an object here
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
 
 public class Booking implements ReadWrite{
 
