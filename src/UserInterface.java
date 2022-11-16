@@ -292,10 +292,10 @@ public class UserInterface {
                 System.out.println(r.getOrders().toString());
                 return true;
             case "a"://Acknowledge order (ie: cook order)
-                r.getChef().cooking(r.getOrders().get(0));
+                c.cooking(r.getOrders().get(0));
                 return true;
             case "u"://update order
-                r.getChef().isDeliverable(r.getOrders().get(0));
+                c.isDeliverable(r.getOrders().get(0));
                 return true;
             case "l"://log out
                 return false;
