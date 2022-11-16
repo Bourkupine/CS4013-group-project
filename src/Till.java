@@ -32,6 +32,9 @@ public class Till {
     * @return returns the change due to the customer if any
     * @author Thomas
     */
+
+    //TODO is there really a point of returning change if we are going to tell them how much to give,
+    //also method is called but returned type is never used
     public double processPayment(){
         Bill bill = new Bill(order);//this creates a bill for said order
         System.out.println("1) Cash or 2) Card");//is the customer paying in cash or card
@@ -53,66 +56,9 @@ public class Till {
         }
         rest.removeOrder(order);
         System.out.println(bill.toString());
-        System.out.println("Give"+ getChange() );
+        System.out.printf("Give %f", change);
         return change;
         
     }
-    /**
-    * 
-    * @return gets Amount due which is how much the customer owes us
-    * @author Thomas
-    */
-    public double getAmountDue() {
-        return amountDue;
-    }
-    /**
-    * getting the change 
-    * @return change
-    * @author Thomas
-    */
-    public double getChange() {
-        return change;
-    }
-    /**
-    * 
-    * @return this is how much the customer has given us so far
-    * @author Thomas
-    */
-    public double getAmountGiven() {
-        return amountGiven;
-    }
-    /**
-    * 
-    * @return amount in the drawer currently
-    * @author Thomas
-    */
-    public double getCashInDrawer() {
-        return cashInDrawer;
-    }
-    /**
-    * 
-    * @return How much we have been payed with credit cards
-    * @author Thomas 
-    */
-    public double getCreditCardT() {
-        return creditCardT;
-    }
-    /**
-    * 
-    * @return gets the customers order
-    * @author Thomas
-    */
-    public Order getOrder() {
-        return order;
-    }
-    /**
-    * 
-    * @return gets the Restaurant
-    * @author Thomas
-    */
-    public Restaurant getRest() {
-        return rest;
-    }
-    
     
 }
