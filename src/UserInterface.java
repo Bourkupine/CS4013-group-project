@@ -35,8 +35,7 @@ public class UserInterface {
     * @author Ronan
     */
     public void pick() {
-        boolean valid = false;
-        while (!valid) {
+        while (true) {
             System.out.println("Enter 1 for staff, 2 for customer or 3 to quit");
             int ans = in.nextInt();
             if (ans == 1) {
@@ -142,7 +141,7 @@ public class UserInterface {
             } else {//Currently manager
                 System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo Booking P)ay, C)reate menu, H)ire Staff, F)ire Staff, L)og out");
                 String input = in.next();
-                //running = manager(input, (Manager) currentStaff);
+                running = manager(input, (Manager) currentStaff);
                 
             }
         }
@@ -517,14 +516,14 @@ public class UserInterface {
                 boolean inList = false;
                 for (Customer c : customerArr) {
                     if (c.getName().equals(name)) {//If customer has already visited, assign booking to them
-                        Booking b = new Booking(c, num,time,r,today);
+                        Booking b = new Booking(c, num,time,r,today, null);
                         inList = true;
 
                     }
 
                 }
                 if (!inList) {//Otherwise, create new customer
-                    Booking b = new Booking(new Customer(name), num,time,r,today);//Is this customer added to the array?
+                    Booking b = new Booking(new Customer(name), num,time,r,today, null);//Is this customer added to the array?
                 }
                 System.out.println("Booking successful");
 

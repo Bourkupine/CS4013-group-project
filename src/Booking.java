@@ -25,13 +25,14 @@ public class Booking implements ReadWrite{
      * @param time time in hours
      * @author Euan
      */
-    public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest, LocalDate date) { //Booking todo: account for days
+    public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest, LocalDate date, Table table) { //Booking todo: account for days
         this.rest = rest;
         this.customer = customer;
         this.numberOfPeople = numberOfPeople;
         this.id = rest.getBookingId();
         this.date=date;
         this.time = time; //the time of the booking
+        this.table = table;
     }
 
 
@@ -97,7 +98,7 @@ public class Booking implements ReadWrite{
      * @author Ronan
      */
     public String toCsv(){
-        return id+","+numberOfPeople+","+time+","+table.getTableNumber()+","+customer.getId();
+        return id+","+numberOfPeople+","+date+","+time+","+table.getTableNumber()+","+customer.getId();
     }
 
 }
