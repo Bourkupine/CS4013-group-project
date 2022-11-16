@@ -95,6 +95,7 @@ public class RestaurantChain implements ReadWrite{
      */
     public void writeDetails(){
         try{
+            clearFile(rest);
             for(Restaurant r:restaurants){
                 updateFile(rest,r.toCsv());//TODO fix formatting
             }

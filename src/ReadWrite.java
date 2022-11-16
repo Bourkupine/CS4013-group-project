@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.PrintWriter;
@@ -63,15 +65,25 @@ public interface ReadWrite {
      */
     public default void updateFile(File f, ArrayList<String> s)throws java.io.FileNotFoundException, java.io.IOException{
         if(f.length()==0){
-            writeFile(f,s);
+            FileWriter out = new FileWriter(f,false);
+
+
+            for(String s1: s){
+                out.write(s1);
+                out.write("\n");
+            }
+            out.close();
         }
         else{
-            ArrayList<String> arr = readFile(f);
-            for(String s1:s){
-                arr.add(s1);
-            }
-            writeFile(f,arr);
+            FileWriter out = new FileWriter(f,true);
 
+
+            for(String s1: s){
+                out.append(s1);
+                out.append("\n");
+                System.out.println(s);
+            }
+            out.close();
         }
 
     }
@@ -99,9 +111,22 @@ public interface ReadWrite {
      * @throws java.io.IOException if error occurs while writing
      */
     public default void updateFile(File f, String s)throws java.io.FileNotFoundException, java.io.IOException{
-        ArrayList<String> arr = readFile(f);
+        ArrayList<String> arr = new ArrayList<>();
         arr.add(s);
-        writeFile(f,arr);
+        updateFile(f,arr);
     }
+
+    /**
+     * Clears a given file
+     * @param f file to be cleared
+     * @throws IOException If error occurs during operations
+     */
+    public default void clearFile(File f) throws IOException{
+        PrintWriter out = new PrintWriter(f);
+        out.write("");
+        out.close();
+    }
+
+
 
 }
