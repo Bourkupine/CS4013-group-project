@@ -81,7 +81,6 @@ public interface ReadWrite {
             for(String s1: s){
                 out.append(s1);
                 out.append("\n");
-                System.out.println(s);
             }
             out.close();
         }

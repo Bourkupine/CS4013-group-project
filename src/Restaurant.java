@@ -254,7 +254,7 @@ public class Restaurant implements ReadWrite{
      */
     public ArrayList<String> toCsv(){
         ArrayList<String> arr = new ArrayList<>();
-        arr.add("RestId,TableId,NumSeats");
+        //arr.add("RestId,TableId,NumSeats");
         for(Table t:tables){
             arr.add(idNum+","+t.getTableNumber()+","+t.getNumberOfSeats());
         }
