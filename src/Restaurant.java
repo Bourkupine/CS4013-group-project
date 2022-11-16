@@ -17,13 +17,6 @@ public class Restaurant implements ReadWrite{
     private int idNum ; //look bakc at this
     private int bookingId = 0;
     private RestaurantChain rc;
-    private Restaurant r;
-    private Order order;
-
-    //todo: look back at these
-    private Chef chef = new Chef("King","testPassword",r);//These passwords are just placeholders
-    private Waiter waiter = new Waiter("Bob","testPassword",r) ;
-    private Manager manager = new Manager("goopy", "testPassword", r);
 
     /**
      *
@@ -57,18 +50,6 @@ public class Restaurant implements ReadWrite{
         }
     }
 
-    public Chef getChef() {
-        return chef;
-    }
-
-    public Waiter getWaiter() {
-        return waiter;
-    }
-
-    public Manager getManager() { //made by thomas but i moved here
-        return manager;
-    }
-
     /**
      * creates a booking for the restaurant and assigns it a table
      * @param c Customer the booking belongs to
@@ -98,6 +79,15 @@ public class Restaurant implements ReadWrite{
     }
 
     /**
+     * Adds a booking to bookings
+     * @param booking the booking to be added
+     * @author Bayan
+     */
+    public void addBooking(Booking booking) {
+        bookings.add(booking);
+    }
+
+    /**
      * Changes the amount of people at a table to match the amount of seats
      * @param people amount of people for booking
      * @return new number matching the table seats
@@ -123,7 +113,7 @@ public class Restaurant implements ReadWrite{
      */
     public Table assignTable(int daysInAdvance, int hour, int people) {
         for (Table t : tables) {
-            if (!t.getReservedAtTime(hour, daysInAdvance)) {
+            if (!t.getReservedAtTime(hour, daysInAdvance) && t.getNumberOfSeats() >= people) {
                 return t;
             }
         }
@@ -246,6 +236,15 @@ public class Restaurant implements ReadWrite{
      */
     public String getBookingId() {
         return String.format("%d_%d", idNum, bookingId);
+    }
+
+    /**
+     * Gets the restaurant chain this restaurant is a part of
+     * @return rc as RestaurantChain
+     * @author Bayan
+     */
+    public RestaurantChain getRestaurantChain() {
+        return rc;
     }
 
     /**

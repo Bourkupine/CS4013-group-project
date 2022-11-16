@@ -129,4 +129,17 @@ public class RestaurantChain implements ReadWrite{
     public ArrayList<Restaurant> getRestaurants(){
         return restaurants;
     }
+
+    public Customer findCustomer(Customer c) {
+        return findCustomer(c.getName());
+    }
+
+    public Customer findCustomer(String name) {
+        for (Customer cust : customers) {
+            if (cust.getName().equals(name)) {
+                return cust;
+            }
+        }
+        return new Customer(name);
+    }
 }

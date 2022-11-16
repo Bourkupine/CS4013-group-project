@@ -53,7 +53,7 @@ public class UserInterface {
     
     /**
     * This method runs if a customer is using the system
-    * @author Ronan
+    * @author Ronan, Bayan
     */
     public void runCustomer() {
         boolean running = true;
@@ -61,11 +61,24 @@ public class UserInterface {
         while (running) {
             System.out.println("Enter name");
             String name = in.next();
-            System.out.println("Enter a time in 24hr clock: ");
-            int time = in.nextInt();//Need to check this
-            int num = 0 ;
+            LocalDate d = today; //todo: error if someone inputs date wrong it will automatically use today's date
+            boolean validDate = false;
+            while (!validDate){
+                System.out.println("Enter the date you want to book for");
+                d = LocalDate.parse(in.next());
+                validDate = validDate(d);
+                if (!validDate) {
+                    System.out.println("Bookings no more than 6 days in advance");
+                }
+            }
+            int time = 0;
+            while (time > 9 && time > 21) { //todo: check if we need variables for each restaurant's opening and closing time
+                System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
+                time = in.nextInt();//Need to check this
+            }
+            int num = 0;
             boolean lessthen8 = false;
-            while(!lessthen8){
+            while (!lessthen8) {
                 System.out.println("Enter number of people: ");
                 num = in.nextInt();
                 if(num>8){
@@ -75,7 +88,7 @@ public class UserInterface {
                 }
             }
             
-            running = booking(time,num,name);
+            running = booking(d, time, num, name);
         }
         
         
@@ -194,55 +207,49 @@ public class UserInterface {
                     r.addOrder(new Order(cust, r));//This is for new customers
                 }
                 return true;
-            
-            case "r"://Remove order
-                System.out.println(r.getOrders().toString());//TODO: Better implementation here
-                System.out.println("Enter the order you would like to remove");
-                int remove =in.nextInt();
-                r.removeOrder(r.getOrders().get(remove-1));
-                System.out.println("Order" + r.getOrders().get(remove-1) + "has been removed");
 
-                return true;
-            
             case "v"://View current orders
                 System.out.println(r.getOrders().toString());
                 return true;
+
             case "t"://Take a booking
                 //need to show what tables are available
                 //todo: find a way to return only available tables - also need to specify when the booking is for!!
                 //take booking
                 boolean running=true;
-                while(running){
+                while(running) {
                     //here I used ronans stuff and added to them
                     System.out.println("Enter customer name: ");
                     name = in.next();
                     System.out.println("Enter phone number(type 0 for walk in): ");
                     phone = in.next();
-                    int numberOfPeople=0;
+                    int numberOfPeople = 0;
                     boolean lessthen8 = false;
-                    while(!lessthen8){
+                    while(!lessthen8) {
                         System.out.println("Enter number of people: ");
                         numberOfPeople = in.nextInt();
-                        if(numberOfPeople>8){
+                        if(numberOfPeople > 8){
                             System.out.println("No more then 8 people per booking");
-                        }else{
+                        } else {
                             lessthen8 = true;
                         }
                     }
-                    boolean validDate=false;
-                    LocalDate d= today;
-                    while(!validDate){
+                    boolean validDate = false;
+                    LocalDate d = today;
+                    while (!validDate){
                         System.out.println("Enter the date you want to book for");
                         d = LocalDate.parse(in.next());
                         validDate = validDate(d);
-                        if(!validDate){
+                        if (!validDate) {
                             System.out.println("Bookings no more than 6 days in advance");
                         }
                     }
-
-                    System.out.println("Enter time you are booking for in 24 hr clock");//TODO validate time
-                    int time = in.nextInt();
-                    running= booking(time,numberOfPeople,name);
+                    int time = 0;
+                    while (time > 9 && time > 21) {
+                        System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
+                        time = in.nextInt();//Need to check this
+                    }
+                    running = booking(d, time, numberOfPeople, name);
 
                 }
 
@@ -349,7 +356,7 @@ public class UserInterface {
                 //todo: find a way to return only available tables - also need to specify when the booking is for!!
                 //take booking
                 boolean running=true;
-                while(running){
+                while (running){
                     //here I used ronans stuff and added to them
                     System.out.println("Enter customer name: ");
                     name = in.next();
@@ -367,7 +374,7 @@ public class UserInterface {
                         }
                     }
                     boolean validDate=false;
-                    LocalDate d= today;
+                    LocalDate d = today;
                     while(!validDate){
                         System.out.println("Enter the date you want to book for");
                         d = LocalDate.parse(in.next());
@@ -376,14 +383,14 @@ public class UserInterface {
                             System.out.println("Bookings no more than 6 days in advance");
                         }
                     }
-
-                    System.out.println("Enter time you are booking for in 24 hr clock");//TODO validate time
-                    int time = in.nextInt();
-                    running= booking(time,numberOfPeople,name);
+                    int time = 0;
+                    while (time > 9 && time > 21) {
+                        System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
+                        time = in.nextInt();//Need to check this
+                    }
+                    running = booking(d, time, numberOfPeople, name);
 
                 }
-
-
                 return true;
             
             case "p": //Pay
@@ -501,37 +508,40 @@ public class UserInterface {
     }
 
     /**
-     * Creates bookings
-     * @param time time of booking
-     * @param num number of people booking is for
-     * @param name name of customer making booking
+     * Creates a booking at a specific date and time
+     * @param d the date of the booking
+     * @param time the time of the booking in hours
+     * @param num the number of people for the booking
+     * @param name the name of the customer making the booking
      * @return false after booking is complete
+     * @author Ronan, Bayan
      */
-    public boolean booking(int time, int num,String name){
-        if (r.getTable(time, num) != null) {//If there is an available table
-            System.out.println("Table " + r.getTable(time, num).getTableNumber() + " is available");
+    private boolean booking(LocalDate d, int time, int num, String name) {
+        int daysInAdvance = (int)today.until(d, ChronoUnit.DAYS);
+        Table t = r.assignTable(daysInAdvance, time, num);
+        if (t != null) {//If there is an available table
+            System.out.println("Table " + t.getTableNumber() + " is available");
             System.out.println("Enter y to book, or n otherwise");
-            if (in.next().toLowerCase().equals("y")) {
-                r.getTable(time,5).setReservedAtTime(time,true);
-                boolean inList = false;
-                for (Customer c : customerArr) {
-                    if (c.getName().equals(name)) {//If customer has already visited, assign booking to them
-                        Booking b = new Booking(c, num,time,r,today, null);
-                        inList = true;
-
-                    }
-
-                }
-                if (!inList) {//Otherwise, create new customer
-                    Booking b = new Booking(new Customer(name), num,time,r,today, null);//Is this customer added to the array?
-                }
+            if (in.next().equalsIgnoreCase("y")) {
+                t.setReservedAtTime(time, daysInAdvance, true);
+                Customer c = r.getRestaurantChain().findCustomer(name);
+                Booking booking = new Booking(c, num, time, r, today, t);
+                r.addBooking(booking);
                 System.out.println("Booking successful");
-
             }
         }
         return false;
     }
 
-
-    
+    /**
+     * Overloaded booking method that creates a booking for today
+     * @param time time of booking
+     * @param num number of people booking is for
+     * @param name name of customer making booking
+     * @return false after booking is complete
+     * @author Bayan
+     */
+    private boolean booking(int time, int num, String name) {
+        return booking(today, time, num, name);
+    }
 }
