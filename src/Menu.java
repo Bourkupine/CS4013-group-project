@@ -23,7 +23,7 @@ public class Menu {
      * @author Bayan
      */
     public FoodItem getFoodItemAtIndex(int index) {
-        return menu.get(index);
+        return menu.get(index);//getting the item at the index
     }
 
     /**
@@ -32,16 +32,16 @@ public class Menu {
      * @author Bayan
      */
     public void addFood(FoodItem f) {
-        boolean exists = false;
-        for (FoodItem food : menu) {
-            if (food.equals(f)) {
+        boolean exists = false; //a boolean for
+        for (FoodItem food : menu) { //looping through the menu to see if it exists
+            if (food.equals(f)) {//if it is there you can tadd it again
                 exists = true;
-                break;
+                break;//get out and dont add it
             }
         }
-        if (!exists) {
+        if (!exists) { //if it doesnt exist add it
             menu.add(f);
-            orderByType();
+            orderByType();//this is ordering the menu by its type, starter,main,dessert,drinks 
         }
     }
 
@@ -51,7 +51,7 @@ public class Menu {
      * @author Bayan
      */
     public boolean removeFood(FoodItem f) {
-        return menu.remove(f);
+        return menu.remove(f); //removing an item from the menu
     }
 
     /**
@@ -59,7 +59,7 @@ public class Menu {
      * @param name name of the FoodItem
      * @author Bayan
      */
-    public boolean removeFood(String name) {
+    public boolean removeFood(String name) { 
         for (FoodItem f : menu) {
             if (f.getName().equalsIgnoreCase(name)) {
                 return menu.remove(f);
@@ -72,7 +72,7 @@ public class Menu {
      * Removes all FoodItems from the menu
      */
     public void clearMenu() {
-        menu.clear();
+        menu.clear();//clears the menu to remake it
     }
 
     /**
@@ -82,16 +82,16 @@ public class Menu {
     public void orderByType() {
         ArrayList<FoodItem> tempMenu = new ArrayList<>();
         for (FoodItem f : menu) {
-            if(f.getType().equals("starter")) {
+            if(f.getType().equals("starter")) { //if the type is starter add it, starter is first
                 tempMenu.add(f);
             }
         }
-        for (FoodItem f : menu) {
+        for (FoodItem f : menu) { //main is second
             if(f.getType().equals("main")) {
                 tempMenu.add(f);
             }
         }
-        for (FoodItem f : menu) {
+        for (FoodItem f : menu) { //
             if(f.getType().equals("dessert")) {
                 tempMenu.add(f);
             }
