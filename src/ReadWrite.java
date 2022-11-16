@@ -99,8 +99,6 @@ public interface ReadWrite {
      * This method takes a file and writes a single comma-seperated string to it
      * @param f file to write to
      * @param s String to be written
-     * @throws java.io.FileNotFoundException if cannot find file to write to
-     * @throws java.io.IOException if error occurs while writing
      */
     public default void writeFile(File f,String s){
         PrintWriter out = null;
