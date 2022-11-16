@@ -2,7 +2,7 @@
 
 public class Waiter extends Staff {
     private boolean canIDrop = false ;
-    private Restaurant r;
+
     //Ronan: does this cause an error? chef never gets initialized
 
     /**
@@ -30,7 +30,7 @@ public class Waiter extends Staff {
      */
     public void dropFood(){
         if (canIDrop){
-            r.getChef().delivered();
+            getRest().getChef().delivered();
         }
     }
 
