@@ -527,6 +527,7 @@ public class UserInterface {
                 Customer c = r.getRestaurantChain().findCustomer(name);
                 Booking booking = new Booking(c, num, time, r, today, t);
                 r.addBooking(booking);
+                booking.updateFile(bookings,booking.toCsv());
                 System.out.println("Booking successful");
             }
         }

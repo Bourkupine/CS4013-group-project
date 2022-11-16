@@ -94,16 +94,13 @@ public class RestaurantChain implements ReadWrite{
      * Writes details of all restaurants in chain to their csv file
      */
     public void writeDetails(){
-        try{
-            clearFile(rest);
-            writeFile(rest,"RestId,TableId,NumSeats");
-            for(Restaurant r:restaurants){
-                updateFile(rest,r.toCsv());//TODO fix formatting
-            }
+
+        clearFile(rest);
+        writeFile(rest,"RestId,TableId,NumSeats");
+        for(Restaurant r:restaurants){
+            updateFile(rest,r.toCsv());//TODO fix formatting
         }
-        catch (IOException ioe){
-            System.out.println("Error writing restaurant details to csv");
-        }
+
 
 
     }

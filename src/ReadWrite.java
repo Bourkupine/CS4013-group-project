@@ -1,8 +1,5 @@
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
-import java.io.File;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -24,11 +21,15 @@ public interface ReadWrite {
      *
      * @param f .csv file to read from
      * @return an ArrayList of comma-separated strings, with each element representing one row
-     * @throws java.io.FileNotFoundException if cannot find file to read from
      */
-    public default ArrayList<String> readFile(File f)throws java.io.FileNotFoundException{
+    public default ArrayList<String> readFile(File f){
 
-        Scanner in = new Scanner(f);
+        Scanner in = null;
+        try {
+            in = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error finding file");
+        }
         ArrayList<String>arr=new ArrayList<>();
         while(in.hasNextLine()){
             arr.add(in.nextLine());
@@ -43,11 +44,14 @@ public interface ReadWrite {
      *
      * @param f .csv file to write to
      * @param s an arraylist of comma-separated strings to write to file
-     * @throws java.io.FileNotFoundException if cannot find file to write to
-     * @throws java.io.IOException if error occurs while writing
      */
-    public default void writeFile(File f,ArrayList<String> s)throws java.io.FileNotFoundException, java.io.IOException{
-        PrintWriter out = new PrintWriter(f);
+    public default void writeFile(File f,ArrayList<String> s){
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter(f);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error writing to file");
+        }
 
         for(String test: s){
             out.print(test);
@@ -60,30 +64,34 @@ public interface ReadWrite {
      * Takes a non-empty file and adds an arrayList of comma seperated strings to it
      * @param f file to write to
      * @param s arrayList of strings to be added to file
-     * @throws java.io.FileNotFoundException if cannot find file to write to
-     * @throws java.io.IOException if error occurs while writing
      */
-    public default void updateFile(File f, ArrayList<String> s)throws java.io.FileNotFoundException, java.io.IOException{
-        if(f.length()==0){
-            FileWriter out = new FileWriter(f,false);
+    public default void updateFile(File f, ArrayList<String> s){
+        try{
+            if(f.length()==0){
+                FileWriter out = new FileWriter(f,false);
 
 
-            for(String s1: s){
-                out.write(s1);
-                out.write("\n");
+                for(String s1: s){
+                    out.write(s1);
+                    out.write("\n");
+                }
+                out.close();
             }
-            out.close();
-        }
-        else{
-            FileWriter out = new FileWriter(f,true);
+            else{
+                FileWriter out = new FileWriter(f,true);
 
 
-            for(String s1: s){
-                out.append(s1);
-                out.append("\n");
+                for(String s1: s){
+                    out.append(s1);
+                    out.append("\n");
+                }
+                out.close();
             }
-            out.close();
+        }catch (IOException ioe){
+            System.out.println("Error updating file");
         }
+
+
 
     }
 
@@ -94,8 +102,13 @@ public interface ReadWrite {
      * @throws java.io.FileNotFoundException if cannot find file to write to
      * @throws java.io.IOException if error occurs while writing
      */
-    public default void writeFile(File f,String s)throws java.io.FileNotFoundException, java.io.IOException{
-        PrintWriter out = new PrintWriter(f);
+    public default void writeFile(File f,String s){
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter(f);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error writing to file");;
+        }
 
         out.println(s);
 
@@ -106,10 +119,8 @@ public interface ReadWrite {
      * This method takes a file and updates it with a single comma-seperated string
      * @param f file to write to
      * @param s String to be written
-     * @throws java.io.FileNotFoundException if cannot find file to write to
-     * @throws java.io.IOException if error occurs while writing
      */
-    public default void updateFile(File f, String s)throws java.io.FileNotFoundException, java.io.IOException{
+    public default void updateFile(File f, String s){
         ArrayList<String> arr = new ArrayList<>();
         arr.add(s);
         updateFile(f,arr);
@@ -118,12 +129,9 @@ public interface ReadWrite {
     /**
      * Clears a given file
      * @param f file to be cleared
-     * @throws IOException If error occurs during operations
      */
-    public default void clearFile(File f) throws IOException{
-        PrintWriter out = new PrintWriter(f);
-        out.write("");
-        out.close();
+    public default void clearFile(File f) {
+        writeFile(f,"");
     }
 
 
