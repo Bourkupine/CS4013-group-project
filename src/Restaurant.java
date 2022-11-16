@@ -230,11 +230,12 @@ public class Restaurant implements ReadWrite{
     }
 
     /**
-     * get the next booking ID number
+     * Increments and get the next booking ID number
      * @return returns ID as an int
      * @author Euan
      */
     public String getBookingId() {
+        bookingId++;
         return String.format("%d_%d", idNum, bookingId);
     }
 
