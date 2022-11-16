@@ -39,7 +39,7 @@ public class Table {
     /**
      * Sets the table to be reserved or not reserved at a given day.
      * @param hour the time in hours (24 hour format)
-     * @param day day of reservation
+     * @param day days in advance of reservation
      * @param reserved reserved value of table.
      * @author Euan
      */
