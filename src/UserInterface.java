@@ -72,10 +72,10 @@ public class UserInterface {
                 }
             }
             int time = 0;
-            while (time > 9 && time > 21) { //todo: check if we need variables for each restaurant's opening and closing time
+            do { //todo: check if we need variables for each restaurant's opening and closing time
                 System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
                 time = in.nextInt();//Need to check this
-            }
+            }while (time < 9 || time > 21);
             int num = 0;
             boolean lessthen8 = false;
             while (!lessthen8) {
