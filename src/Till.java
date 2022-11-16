@@ -16,7 +16,7 @@ public class Till {
     private Order order;
     private double creditCardT;
     private double cashInDrawer;
-    private int amountGiven;
+    private double amountGiven;
     /**
     * 
     * @param rest this is the restaurant the till is in
@@ -78,7 +78,7 @@ public class Till {
     * @return this is how much the customer has given us so far
     * @author Thomas
     */
-    public int getAmountGiven() {
+    public double getAmountGiven() {
         return amountGiven;
     }
     /**
