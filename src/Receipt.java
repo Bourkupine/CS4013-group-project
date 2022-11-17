@@ -14,6 +14,6 @@ public class Receipt implements ReadWrite{
     }
 
     public String toCsv(){
-        return o.getDate()+",€"+o.getTotal();
+        return o.getDate().toString()+","+o.getTotal();
     }
 }
