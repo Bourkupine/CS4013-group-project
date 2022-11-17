@@ -63,4 +63,10 @@ public abstract class Staff {
         Staff staff = (Staff) o;
         return Objects.equals(name, staff.name) && Objects.equals(password, staff.password) && Objects.equals(rest, staff.rest);
     }
+
+    public void printOrders() {
+        for (Order order : rest.getOrders()) {
+            System.out.println(order);
+        }
+    }
 }

@@ -209,7 +209,7 @@ public class UserInterface {
                 return true;
 
             case "v"://View current orders
-                System.out.println(r.getOrders().toString());
+                w.printOrders();
                 return true;
 
             case "t"://Take a booking
@@ -289,7 +289,7 @@ public class UserInterface {
         String s = str.toLowerCase();
         switch (s) {
             case "v"://View orders
-                System.out.println(r.getOrders().toString());
+                c.printOrders();
                 return true;
             case "a"://Acknowledge order (ie: cook order)
                 c.cooking(r.getOrders().get(0));
@@ -348,7 +348,7 @@ public class UserInterface {
                 return true;
 
             case "v": //View orders
-                System.out.println(r.getOrders().toString());
+                m.printOrders();
                 return true;
 
             case "t"://Take a booking
