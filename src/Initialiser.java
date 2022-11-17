@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * This class will be run at beginning to set everything up
  */
-public class Initialiser {
+public class Initialiser implements ReadWrite{
 
     public Initialiser(){
         run();
@@ -38,9 +38,12 @@ public class Initialiser {
 
 
     }
-    public static File[] files(){
+    public File[] files(){
         File restaurants = new File("restaurants.csv");
         File bookings = new File("bookings.csv");
+        if(bookings.length()==0){
+            writeFile(bookings,"Fix");
+        }
         File money = new File("money.csv");
         File[] arr = new File[3];
         arr[0]=restaurants;

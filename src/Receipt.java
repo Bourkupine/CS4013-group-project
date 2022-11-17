@@ -10,6 +10,7 @@ public class Receipt implements ReadWrite{
     public Receipt(Restaurant r, Order o) {
         this.r = r;
         this.o = o;
+        writeFile(r.getMoney(),toCsv());
     }
 
     public String toCsv(){
