@@ -16,6 +16,7 @@ public class Till {
     private Order order;
     private double creditCardT;
     private double cashInDrawer;
+    private double amountDue;//TODO: this is in constructor but never used???
     /**
     * 
     * @param rest this is the restaurant the till is in

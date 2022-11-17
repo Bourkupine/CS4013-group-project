@@ -295,7 +295,7 @@ public class UserInterface {
                 c.cooking(r.getOrders().get(0));
                 return true;
             case "u"://update order
-                c.isDeliverable(r.getOrders().get(0));
+                //c.isDeliverable(r.getOrders().get(0));
                 return true;
             case "l"://log out
                 return false;

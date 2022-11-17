@@ -18,7 +18,7 @@ public class Initialiser implements ReadWrite{
         System.out.println("Enter date");
         LocalDate date = LocalDate.parse(in.next());
         File[] f = files();
-        RestaurantChain rc = new RestaurantChain("Yum's",num,f[0],f[1],f[2],date);
+        RestaurantChain rc = new RestaurantChain("Yum's",num,f[0],f[1],f[2],date);//TODO: employ staff
 
         boolean validId=false;
         while(!validId){

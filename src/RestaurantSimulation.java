@@ -4,6 +4,6 @@
 public class RestaurantSimulation {
 
     public static void main(String[] args) {
-        RestaurantChain rc = new RestaurantChain("Yum's",15);
+        Initialiser i = new Initialiser();
     }
 }
