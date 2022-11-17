@@ -19,10 +19,8 @@ public class Waiter extends Staff {
     /**
      * when called, the order is ready so the waiter gets permission to bring the order to a table
      * @author Thomas
-     */
-    public void bellRings(){
-      canIDrop = true ;
-    }
+    /* */
+
 
     public void getReadyOrders(){
        for(Order r: getRest().getOrders()){
@@ -37,7 +35,9 @@ public class Waiter extends Staff {
      * @author Thomas
      */
     public void dropFood(Order r){
+        
        r.setStatus("Delivered");
+        
     }
 
     
