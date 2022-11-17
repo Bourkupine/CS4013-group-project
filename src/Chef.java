@@ -52,13 +52,5 @@ public class Chef extends Staff {
              ;  // this tells the waiter the food is ready to be dropped by the chef ringing the bell
         }  
     }
-
-    /**
-     * Sets the order status back to waiting
-     * @author Thomas
-     */
-    public void delivered (){ // waiter tells the chef the food was delivered
-        order.setStatus("WAITING");
-    }
 }
 
