@@ -1,4 +1,5 @@
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -14,26 +15,23 @@ public class RestaurantChain implements ReadWrite{
     File rest; //Contains details of all restaurants
     
 
+
+
     /**
      * Full-arg constructor.
      * @param name name of chain
      * @param amountOfRestaurants amount of restaurants in the chain
      * @author Bayan, Ronan
      */
-    public RestaurantChain(String name, int amountOfRestaurants) {
+    public RestaurantChain(String name, int amountOfRestaurants, File rest,File booking, File money, LocalDate d){
         this.name = name;
+        this.rest=rest;
         for (int i = 0; i < amountOfRestaurants; i++) {
-            Restaurant restaurant = new Restaurant(15,this,i);//Ronan: 15 tables is arbitrary and can be changed
+            Restaurant restaurant = new Restaurant(15,this,i,d,booking,money);//Ronan: 15 tables is arbitrary and can be changed
             restaurants.add(restaurant);
             generateMenu();
 
         }
-
-    }
-
-    public RestaurantChain(String name, int amountOfRestaurants, File rest){
-        this(name,amountOfRestaurants);
-        this.rest=rest;
         writeDetails();
     }
 

@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -16,9 +15,10 @@ public class Initialiser implements ReadWrite{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter number of restaurants");
         int num = in.nextInt();
-        RestaurantChain rc = new RestaurantChain("Yum's",num);
         System.out.println("Enter date");
         LocalDate date = LocalDate.parse(in.next());
+        File[] f = files();
+        RestaurantChain rc = new RestaurantChain("Yum's",num,f[0],f[1],f[2],date);
 
         boolean validId=false;
         while(!validId){
@@ -42,9 +42,12 @@ public class Initialiser implements ReadWrite{
         File restaurants = new File("restaurants.csv");
         File bookings = new File("bookings.csv");
         if(bookings.length()==0){
-            writeFile(bookings,"Fix");
+            writeFile(bookings,"ReservationId, numPeople, date, time, tableNo, customerId");
         }
         File money = new File("money.csv");
+        if(money.length()==0){
+            writeFile(money,"Date,Total");
+        }
         File[] arr = new File[3];
         arr[0]=restaurants;
         arr[1]=bookings;

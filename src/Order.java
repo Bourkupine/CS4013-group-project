@@ -3,17 +3,19 @@
 // i need to make a receipt with the customers details 
 // scanner we need to take an order 
 // need to make a menu to
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class Order{//Ronan: do we need to write to csv here?
+public class Order{
     private ArrayList<FoodItem> ordered = new ArrayList<>();
     private Customer c; // bayan:
     private double total = 0; //Euan: changed from int to double to resemble currency better
     private Menu m; // todo: needs to get menu method in restaurant chain.//Ronan: fixed?
     private orderStatus status;
     private Restaurant r;
+    private LocalDate date;//Today's date
     
     /**
     * Constructor that takes a Customer and Restaurant
@@ -22,11 +24,13 @@ public class Order{//Ronan: do we need to write to csv here?
     * @author Thomas
     */
     public Order(Customer c, Restaurant r){
+        this.r = r; //initialising restaurant
         m = r.getMenu(); //getting the menu for the order
         this.c = c; //initialising the customer to identify who is ordering
-        status = orderStatus.ORDERING ; // setting the enum status to ordering as the constructor for order has been invoked hence crwating an order
+        status = orderStatus.ORDERING ; // setting the enum status to ordering as the constructor for order has been invoked hence creating an order
+        date=r.getDate();//Today's date
         takeOrder(c); //commencing the take order method where a waiter or manager will take a customers order
-        this.r = r; //initialising restaurant 
+
     }
 
     /**
@@ -36,6 +40,7 @@ public class Order{//Ronan: do we need to write to csv here?
      */
     public Order(Booking b) {
         this(b.getCustomer(), b.getRest());
+
     }
 
     /**
@@ -177,7 +182,15 @@ public class Order{//Ronan: do we need to write to csv here?
     public double getTotal() {
         return total;
     }
-    
+
+    /**
+     * Returns date of order
+     * @return date of order as LocalDate
+     */
+    public LocalDate getDate() {
+        return date;
+    }
+
     /**
     * Returns Order as a String
     * @return String representation of the order

@@ -244,11 +244,11 @@ public class UserInterface {
                             System.out.println("Bookings no more than 6 days in advance");
                         }
                     }
-                    int time = 0;
-                    while (time > 9 && time > 21) {
+                    int time;
+                    do {
                         System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
                         time = in.nextInt();//Need to check this
-                    }
+                    }while (time < 9 || time > 21);
                     running = booking(d, time, numberOfPeople, name);
 
                 }
@@ -383,11 +383,11 @@ public class UserInterface {
                             System.out.println("Bookings no more than 6 days in advance");
                         }
                     }
-                    int time = 0;
-                    while (time > 9 && time > 21) {
+                    int time;
+                    do {
                         System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
                         time = in.nextInt();//Need to check this
-                    }
+                    }while (time < 9 || time > 21);
                     running = booking(d, time, numberOfPeople, name);
 
                 }

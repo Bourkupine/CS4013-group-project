@@ -1,6 +1,7 @@
 //Euan: this can act like the main (overview?) class
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.NavigableSet;
 import java.util.TreeSet;
@@ -14,20 +15,29 @@ public class Restaurant implements ReadWrite{
     private ArrayList<Staff> staff = new ArrayList<>();
     private double totalEarnings = 0;
     private double dailyEarnings = 0;
-    private int idNum ; //look bakc at this
+    private int idNum ; //look back at this
     private int bookingId = 0;
     private RestaurantChain rc;
+    private LocalDate date;//Today's date
     private File booking;
     private File money;
+
+
 
     /**
      *
      * @param amountOfTables the amount of tables the restaurant has.
      * @param rc the chain the restaurant is apart of
      * @param idNum id number of the restaurant
+     * @param date today's date
+     * @param booking .csv file containing details of bookings
+     * @param money .csv file containing details of money obtained
      * @author Ronan, Thomas, Euan
      */
-    public Restaurant(int amountOfTables, RestaurantChain rc, int idNum) {
+    public Restaurant(int amountOfTables, RestaurantChain rc, int idNum,LocalDate date, File booking, File money){
+        this.booking=booking;
+        this.money=money;
+        this.date=date;
         this.rc = rc;
         this.idNum = idNum;
         int j = 1;
@@ -50,21 +60,6 @@ public class Restaurant implements ReadWrite{
             j++;
             tables.add(t);
         }
-    }
-
-    /**
-     *
-     * @param amountOfTables the amount of tables the restaurant has.
-     * @param rc the chain the restaurant is apart of
-     * @param idNum id number of the restaurant
-     * @author Ronan, Thomas, Euan
-     * @param booking .csv file containing details of bookings
-     * @param money .csv file containing details of money obtained
-     */
-    public Restaurant(int amountOfTables, RestaurantChain rc, int idNum, File booking, File money){
-        this(amountOfTables,rc,idNum);
-        this.booking=booking;
-        this.money=money;
     }
 
     /**
@@ -290,6 +285,10 @@ public class Restaurant implements ReadWrite{
 
     public File getMoney() {
         return money;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     /**
