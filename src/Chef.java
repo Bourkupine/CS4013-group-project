@@ -49,16 +49,8 @@ public class Chef extends Staff {
     public void isDeliverable(Order o) { // this will tell the waiter whether the order is ready to be dropped yet or not
         if ( o.checkStatus("READY" ) ){
             //if the enum value is ready then the waiter will drop it 
-            super.getRest().getWaiter().bellRings() ;  // this tells the waiter the food is ready to be dropped by the chef ringing the bell
+             ;  // this tells the waiter the food is ready to be dropped by the chef ringing the bell
         }  
-    }
-
-    /**
-     * Sets the order status back to waiting
-     * @author Thomas
-     */
-    public void delivered (){ // waiter tells the chef the food was delivered
-        order.setStatus("WAITING");
     }
 }
 

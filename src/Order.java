@@ -12,7 +12,7 @@ public class Order{//Ronan: do we need to write to csv here?
     private Customer c; // bayan:
     private double total = 0; //Euan: changed from int to double to resemble currency better
     private Menu m; // todo: needs to get menu method in restaurant chain.//Ronan: fixed?
-    private foodStatus status;
+    private orderStatus status;
     private Restaurant r;
     
     /**
@@ -24,7 +24,7 @@ public class Order{//Ronan: do we need to write to csv here?
     public Order(Customer c, Restaurant r){
         m = r.getMenu(); //getting the menu for the order
         this.c = c; //initialising the customer to identify who is ordering
-        status = foodStatus.ORDERING ; // setting the enum status to ordering as the constructor for order has been invoked hence crwating an order
+        status = orderStatus.ORDERING ; // setting the enum status to ordering as the constructor for order has been invoked hence crwating an order
         takeOrder(c); //commencing the take order method where a waiter or manager will take a customers order
         this.r = r; //initialising restaurant 
     }
@@ -42,8 +42,7 @@ public class Order{//Ronan: do we need to write to csv here?
     * Enumerated values to represent the status of an order
     * @author Thomas
     */
-    public enum foodStatus{
-        WAITING,//set to this by the waiter when an order has been dropped
+    public enum orderStatus{
         ORDERING,// when the order is being taken
         ORDERED,//to let the chef know there is an order done
         READY,//this is so the chef can alert the waiter that an order is ready to be dropped 
@@ -72,7 +71,7 @@ public class Order{//Ronan: do we need to write to csv here?
         
         
         System.out.println(m.toString()); //t:this is printing the menu so the customer can choose their items
-        while(status == foodStatus.ORDERING ){ // when the constructor of order is invoked takeOrder is invoked. take order runs when foodstatus is ordering
+        while(status == orderStatus.ORDERING ){ // when the constructor of order is invoked takeOrder is invoked. take order runs when foodstatus is ordering
             System.out.printf("""
                 Your current total is €%.2f
                 To order an item or another item enter the number of the item on the menu
@@ -86,7 +85,8 @@ public class Order{//Ronan: do we need to write to csv here?
                 ordered.add(m.getFoodItemAtIndex(item-1)); //t adding item to the string for the bill
                 total += m.getFoodItemAtIndex(item-1).getPrice(); // adding up the total for the customer to see what their total is at
             } else if (item == 0){ // this is exiting the system and commiting their order, finalising their order
-                status = foodStatus.ORDERED; // lets the chef know the order is ready to be cooked
+                status = orderStatus.ORDERED; // lets the chef know the order is ready to be cooked
+                r.getChef
             }
             else if (item == m.getSize()+1){ //remove order function
                 System.out.println(ordered.toString());
@@ -99,7 +99,6 @@ public class Order{//Ronan: do we need to write to csv here?
             }
             else if (item == m.getSize()+2){
                 ordered.clear();
-                status = foodStatus.WAITING ;
             }
         }
     }
@@ -109,7 +108,7 @@ public class Order{//Ronan: do we need to write to csv here?
     * @return status as foodStatus
     * @author Thomas
     */
-    public foodStatus getStatus() {
+    public orderStatus getStatus() {
         return status;
     }
     

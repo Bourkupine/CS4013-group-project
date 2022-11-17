@@ -24,14 +24,20 @@ public class Waiter extends Staff {
       canIDrop = true ;
     }
 
+    public void getReadyOrders(){
+       for(Order r: getRest().getOrders()){
+        if(r.checkStatus("Ready")){
+            dropFood(r);
+        }
+       }
+    }
+
     /**
-     * if canIDrop = true, drops food to table and tells the chef its been delivered
+     * drops food to table and tells the chef its been delivered
      * @author Thomas
      */
-    public void dropFood(){
-        if (canIDrop){
-            getRest().getChef().delivered();
-        }
+    public void dropFood(Order r){
+       r.setStatus("Delivered");
     }
 
     
