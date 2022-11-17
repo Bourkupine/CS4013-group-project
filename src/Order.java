@@ -28,7 +28,16 @@ public class Order{//Ronan: do we need to write to csv here?
         takeOrder(c); //commencing the take order method where a waiter or manager will take a customers order
         this.r = r; //initialising restaurant 
     }
-    
+
+    /**
+     * Constructor to create an order from a booking
+     * @param b Booking
+     * @author Euan
+     */
+    public Order(Booking b) {
+        this(b.getCustomer(), b.getRest());
+    }
+
     /**
     * Enumerated values to represent the status of an order
     * @author Thomas

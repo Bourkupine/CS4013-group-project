@@ -22,7 +22,7 @@ public class Booking implements ReadWrite{
      * @param time time in hours
      * @author Euan
      */
-    public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest, LocalDate date, Table table) { //Booking todo: account for days
+    public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest, LocalDate date, Table table) {
         this.rest = rest;
         this.customer = customer;
         this.numberOfPeople = numberOfPeople;
@@ -98,4 +98,7 @@ public class Booking implements ReadWrite{
         return id+","+numberOfPeople+","+date+","+time+","+table.getTableNumber()+","+customer.getId();
     }
 
+    public Restaurant getRest() {
+        return rest;
+    }
 }
