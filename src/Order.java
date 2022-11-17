@@ -86,6 +86,7 @@ public class Order{//Ronan: do we need to write to csv here?
                 total += m.getFoodItemAtIndex(item-1).getPrice(); // adding up the total for the customer to see what their total is at
             } else if (item == 0){ // this is exiting the system and commiting their order, finalising their order
                 status = orderStatus.ORDERED; // lets the chef know the order is ready to be cooked
+                r.getChef
             }
             else if (item == m.getSize()+1){ //remove order function
                 System.out.println(ordered.toString());

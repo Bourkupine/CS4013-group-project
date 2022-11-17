@@ -33,7 +33,7 @@ public class Waiter extends Staff {
     }
 
     /**
-     * if canIDrop = true, drops food to table and tells the chef its been delivered
+     * drops food to table and tells the chef its been delivered
      * @author Thomas
      */
     public void dropFood(Order r){
