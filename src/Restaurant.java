@@ -1,5 +1,6 @@
 //Euan: this can act like the main (overview?) class
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.NavigableSet;
 import java.util.TreeSet;
@@ -16,6 +17,8 @@ public class Restaurant implements ReadWrite{
     private int idNum ; //look bakc at this
     private int bookingId = 0;
     private RestaurantChain rc;
+    private File booking;
+    private File money;
 
     /**
      *
@@ -47,6 +50,21 @@ public class Restaurant implements ReadWrite{
             j++;
             tables.add(t);
         }
+    }
+
+    /**
+     *
+     * @param amountOfTables the amount of tables the restaurant has.
+     * @param rc the chain the restaurant is apart of
+     * @param idNum id number of the restaurant
+     * @author Ronan, Thomas, Euan
+     * @param booking .csv file containing details of bookings
+     * @param money .csv file containing details of money obtained
+     */
+    public Restaurant(int amountOfTables, RestaurantChain rc, int idNum, File booking, File money){
+        this(amountOfTables,rc,idNum);
+        this.booking=booking;
+        this.money=money;
     }
 
     /**
@@ -138,6 +156,24 @@ public class Restaurant implements ReadWrite{
         }
         //temporary response if no available tables:
         System.out.println("No available tables at that time");
+        return null;
+    }
+
+    public Chef getChef(){
+        for(Staff s:staff){
+            if(s instanceof Chef){
+                return (Chef)s;
+            }
+        }
+        return null;
+    }
+
+    public Waiter getWaiter(){
+        for(Staff s:staff){
+            if(s instanceof Waiter){
+                return (Waiter)s;
+            }
+        }
         return null;
     }
 
@@ -246,6 +282,14 @@ public class Restaurant implements ReadWrite{
      */
     public RestaurantChain getRestaurantChain() {
         return rc;
+    }
+
+    public File getBooking() {
+        return booking;
+    }
+
+    public File getMoney() {
+        return money;
     }
 
     /**
