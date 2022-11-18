@@ -8,14 +8,14 @@ import java.util.Scanner;
 public class UserInterface {
     
     private Restaurant r;
-    File bookings;
-    File money;
+    private File bookings;
+    private File money;
     
-    Scanner in = new Scanner(System.in);
-    ArrayList<Staff> staffArr;
-    ArrayList<Customer> customerArr;
+    private Scanner in = new Scanner(System.in);
+    private ArrayList<Staff> staffArr;
+    private ArrayList<Customer> customerArr;
 
-    LocalDate today;
+    private LocalDate today;
     
     /**
     * creates a user interface for restaurant
@@ -37,7 +37,7 @@ public class UserInterface {
     * Determines staff or customer
     * @author Ronan
     */
-    public void pick() {
+    private void pick() {
         while (true) {
             System.out.println("Enter 1 for staff, 2 for customer or 3 to quit");
             int ans = in.nextInt();
@@ -58,7 +58,7 @@ public class UserInterface {
     * This method runs if a customer is using the system
     * @author Ronan, Bayan
     */
-    public void runCustomer() {
+    private void runCustomer() {
         boolean running = true;
         
         while (running) {
@@ -101,7 +101,7 @@ public class UserInterface {
     * This method runs if a staff member is using the system to allow them to login
     * @author Ronan
     */
-    public void staffLogin() {
+    private void staffLogin() {
         
         boolean running = true;
         while (running) {
@@ -141,7 +141,7 @@ public class UserInterface {
     * @return false once logout, allowing staffLogin() loop to break
     * @author Ronan, Bayan, Thomas
     */
-    public boolean runStaff(Staff currentStaff) {
+    private boolean runStaff(Staff currentStaff) {
         boolean running = true;
         while (running) {
             if (currentStaff instanceof Waiter) {
@@ -172,7 +172,7 @@ public class UserInterface {
     * @return true/false if they are a valid member
     * @author Ronan
     */
-    public boolean valid(String name, String pass, ArrayList<Staff> arr) {
+    private boolean valid(String name, String pass, ArrayList<Staff> arr) {
         for (Staff s : arr) {
             if (s.getName().equals(name) && s.getPassword().equals(pass)) {
                 return true;
@@ -188,7 +188,7 @@ public class UserInterface {
     * @author Thomas, Ronan
     * @return false to log out, true otherwise
     */
-    public boolean waiter(String str, Waiter w) {
+    private boolean waiter(String str, Waiter w) {
         String s = str.toLowerCase();
         switch (s) {
             case "a"://Add order
@@ -288,7 +288,7 @@ public class UserInterface {
     * @param c chef who is currently logged in
     * @return false to log out, true otherwise
     */
-    public boolean chef(String str, Chef c) {
+    private boolean chef(String str, Chef c) {
         String s = str.toLowerCase();
         switch (s) {
             case "v"://View orders
@@ -315,7 +315,7 @@ public class UserInterface {
     * @return false to log out, true otherwise
     */
 
-    public boolean manager(String str, Manager m) {
+    private boolean manager(String str, Manager m) {
         String s = str.toLowerCase();
         String name; //Bayan: defined some variables used across multiple cases here to keep naming convention consistent
         String phone;
@@ -509,7 +509,7 @@ public class UserInterface {
      * @param date date to be checked
      * @return true if within 6 days, false otherwise
      */
-    public boolean validDate(LocalDate date){
+    private boolean validDate(LocalDate date){
 
         return today.until(date, ChronoUnit.DAYS) <= 6 && !date.isBefore(today);
     }
@@ -558,7 +558,7 @@ public class UserInterface {
      * @return LocalDate
      * @author Ronan
      */
-    public LocalDate valiDate(){
+    private LocalDate valiDate(){
         boolean valid = false;
         LocalDate date = LocalDate.now();
         while(!valid){
