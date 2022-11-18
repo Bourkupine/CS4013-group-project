@@ -21,6 +21,7 @@ public class Initialiser implements ReadWrite{
                 System.out.println("Must create 1 or more restaurants");
             }else{
                 num = in.nextInt();
+                validNum=true;
             }
 
         }
