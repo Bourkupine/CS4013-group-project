@@ -35,7 +35,7 @@ public class Waiter extends Staff {
     public void dropFood(Order r){
         
        r.setStatus("Delivered");
-        
+      r.getR().getOrders().remove(r); //removing roder from array list because the order is done
     }
 
 }
