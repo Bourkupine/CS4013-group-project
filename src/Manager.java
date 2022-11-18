@@ -1,11 +1,8 @@
 //Bayan: a class to represent a manager at a restaurant
 
-import java.text.Normalizer;
 import java.time.LocalDate;
 import java.util.Formatter;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 
 public class Manager extends Staff implements ReadWrite{
 

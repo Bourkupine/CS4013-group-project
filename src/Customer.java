@@ -5,7 +5,7 @@
  */
 public class Customer {
     private String name;//Customers name
-    private int id;//Unique id number for customer
+    private final int id;//Unique id number for customer
     private static int totalId = 0;
     private String phoneNumber;//Phone number of customer
     private int loyalty;//number of times customer has been to restaurant
@@ -36,7 +36,7 @@ public class Customer {
 
     }
 
-    //Below are getters and setters as neccessary
+    //Below are getters and setters as necessary
 
     /**
      * Gets name of customer
@@ -63,7 +63,7 @@ public class Customer {
      */
     public String getPhoneNumber() {
         return phoneNumber;
-    }
+    } //TODO: idea: send user a "message" to remind of booking
 
     /**
      * Returns number of times customer has been to restaurant

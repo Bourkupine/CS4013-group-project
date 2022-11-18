@@ -1,6 +1,7 @@
 //Bayan: A class to represent a menu for a restaurant chain
 
 import java.util.ArrayList;
+import java.util.Formatter;
 
 public class Menu {
     private ArrayList<FoodItem> menu; //Bayan: An ArrayList of FoodItems to store the menu's data
@@ -45,6 +46,7 @@ public class Menu {
         }
     }
 
+    //TODO boolean value is never used for removeFood()
     /**
      * Removes a specified FoodItem from the menu
      * @param f FoodItem to be removed
@@ -121,10 +123,11 @@ public class Menu {
     @Override
     public String toString() {
         StringBuilder menuString = new StringBuilder("~~~~OUR MENU~~~~\n");
-        menuString.append(String.format("%-4s%-20s%5s%10s\n", "ID", "Name", "Price", "Type"));
+        Formatter fm = new Formatter(menuString);
+        fm.format("%-4s%-20s%5s%10s\n", "ID", "Name", "Price", "Type");
 
         for (int i = 1; i < menu.size() + 1; i++) {
-            menuString.append("[" + i + "] " + menu.get(i-1).toString()).append("\n");
+            fm.format("[%d] %s\n", i, menu.get(i - 1).toString());
         }
 
         return menuString.toString();

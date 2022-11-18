@@ -51,7 +51,7 @@ public class Order{
         ORDERING,// when the order is being taken
         ORDERED,//to let the chef know there is an order done
         READY,//this is so the chef can alert the waiter that an order is ready to be dropped 
-        DELIVERED;// the waiter lets the chef know it is delivered with no problems
+        DELIVERED// the waiter lets the chef know it is delivered with no problems
         //todo: are these being used (ready, delivered)
     }
 
@@ -140,6 +140,7 @@ public class Order{
     * @return boolean
     * @author Thomas
     */
+    //TODO: return boolean value is never used
     public boolean setStatus(String status) {
         return(status.equals("WAITING"));
     }
@@ -148,6 +149,7 @@ public class Order{
     * Calculates if a discount is applied to the order
     * @author Thomas
     */
+    //TODO: apparently this is never called
     public void giveLoyaltyDiscount(){
         if (c.getLoyalty()%10 == 0){ //t when they get to 10 orders/visits the get a ten percent discount
             total -= total / 10;
