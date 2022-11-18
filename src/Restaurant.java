@@ -3,6 +3,7 @@
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
@@ -21,6 +22,8 @@ public class Restaurant implements ReadWrite{
     private LocalDate date;//Today's date
     private File booking;
     private File money;
+
+    private HashMap<LocalDate, Double> dailyAmounts = new HashMap<>();
 
 
 
@@ -289,6 +292,10 @@ public class Restaurant implements ReadWrite{
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public HashMap<LocalDate, Double> getDailyAmounts() {
+        return dailyAmounts;
     }
 
     /**

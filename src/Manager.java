@@ -1,6 +1,14 @@
 //Bayan: a class to represent a manager at a restaurant
 
+import java.text.Normalizer;
+import java.time.LocalDate;
+import java.util.Formatter;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Manager extends Staff {
+
 
     /**
      * Full-arg constructor
@@ -47,5 +55,44 @@ public class Manager extends Staff {
      */
     public void fireStaff(Staff staff) {
         getRest().getStaff().remove(staff);//calls the method from staff in said restaurant and adds a staff member
+    }
+
+    /**
+     * Fills values into Hashmap from CSV file
+     * @author Euan
+     */
+    public void fillHashMap() {
+        //TODO read from CSV and fill values to Hashmap with:
+        //dailyAmounts.put(DATE, AMOUNT);
+    }
+
+    /**
+     * This method will generate a graph based on the restaurants daily earnings in a given time period
+     * @param start start date
+     * @param end end date
+     * @return returns the graph as a String
+     * @author Euan
+     */
+    public String generateGraph(LocalDate start, LocalDate end) {
+
+        //styled as :
+        // [2022-02-11]: €900.00   |=========
+        // [2022-02-12]: €1,200.00 |============
+
+        StringBuilder sb = new StringBuilder();
+        Formatter fm = new Formatter(sb);
+
+        String bars = "";
+
+        assert start.isBefore(end) : "Start date is after end date"; //not sure if this is required, but it should make sure end is not before start
+        while (start.isBefore(end.plusDays(1))) {
+
+            bars = "=".repeat((int) (getRest().getDailyAmounts().get(start) - (getRest().getDailyAmounts().get(start)%100)) / 100);
+
+            fm.format("[%s]: €%,-8.2f |%s\n",start.toString(), getRest().getDailyAmounts().get(start), bars);
+            start = start.plusDays(1);
+        }
+
+        return sb.toString();
     }
 }
