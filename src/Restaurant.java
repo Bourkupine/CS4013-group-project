@@ -137,6 +137,21 @@ public class Restaurant implements ReadWrite{
     }
 
     /**
+     * Fills values into Hashmap from CSV file
+     * @author Euan
+     */
+    public void fillHashMap() {
+
+        ArrayList<String> values = readFile(money);
+
+        values.forEach(row -> {
+            String[] s = row.split(",");
+            dailyAmounts.put(LocalDate.parse(s[0]),Double.parseDouble(s[1]));
+        });
+
+    }
+
+    /**
      * Gets table at given time and that has a certain amount of people
      *
      * @param hour hour of booking

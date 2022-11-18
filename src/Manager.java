@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Manager extends Staff {
+public class Manager extends Staff implements ReadWrite{
 
 
     /**
@@ -55,15 +55,6 @@ public class Manager extends Staff {
      */
     public void fireStaff(Staff staff) {
         getRest().getStaff().remove(staff);//calls the method from staff in said restaurant and adds a staff member
-    }
-
-    /**
-     * Fills values into Hashmap from CSV file
-     * @author Euan
-     */
-    public void fillHashMap() {
-        //TODO read from CSV and fill values to Hashmap with:
-        //dailyAmounts.put(DATE, AMOUNT);
     }
 
     /**
