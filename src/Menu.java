@@ -124,10 +124,10 @@ public class Menu {
     public String toString() {
         StringBuilder menuString = new StringBuilder("~~~~OUR MENU~~~~\n");
         Formatter fm = new Formatter(menuString);
-        fm.format("%-4s%-20s%5s%10s\n", "ID", "Name", "Price", "Type");
+        fm.format("%-5s%-20s%5s%10s\n", "ID", "Name", "Price", "Type");
 
         for (int i = 1; i < menu.size() + 1; i++) {
-            fm.format("[%d] %s\n", i, menu.get(i - 1).toString());
+            fm.format("%-5s%3s\n", String.format("[%d]", i), menu.get(i - 1).toString());
         }
 
         return menuString.toString();
