@@ -12,7 +12,7 @@ public class Bill{
     public Bill(Order order){//thomas bill will take an object order
        order.getCustomer().incrementLoyalty(); // incrementing the loyalty as they have requested the bill and are about to pay
        this.order=order;
-       Receipt r = new Receipt(order.getR(),order);
+       new Receipt(order.getR(),order); //create the Receipt. Since we will never re-access it, doesn't need to be stored
        order.updateRestaurantTotal(order.getTotal());
     }
 
