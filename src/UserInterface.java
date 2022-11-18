@@ -1,6 +1,5 @@
 import java.io.File;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,28 +7,26 @@ import java.util.Scanner;
 public class UserInterface {
     
     private Restaurant r;
-    private File bookings;
-    private File money;
+    File bookings;
+    File money;
     
-    private Scanner in = new Scanner(System.in);
-    private ArrayList<Staff> staffArr;
-    private ArrayList<Customer> customerArr;
+    Scanner in = new Scanner(System.in);
+    ArrayList<Staff> staffArr;
+    ArrayList<Customer> customerArr;
 
-    private LocalDate today;
+    LocalDate today;
     
     /**
     * creates a user interface for restaurant
     * @param r restaurant the interface belongs to
     * @author Ronan
     */
-    public UserInterface(Restaurant r,LocalDate date, File bookings, File money) {
+    public UserInterface(Restaurant r,LocalDate date) {
         
         this.r = r;
         staffArr = r.getStaff();
         customerArr = r.getCustomers();
         today=date;
-        this.bookings=bookings;
-        this.money=money;
         pick();
     }
     
@@ -37,7 +34,7 @@ public class UserInterface {
     * Determines staff or customer
     * @author Ronan
     */
-    private void pick() {
+    public void pick() {
         while (true) {
             System.out.println("Enter 1 for staff, 2 for customer or 3 to quit");
             int ans = in.nextInt();
@@ -58,7 +55,7 @@ public class UserInterface {
     * This method runs if a customer is using the system
     * @author Ronan, Bayan
     */
-    private void runCustomer() {
+    public void runCustomer() {
         boolean running = true;
         
         while (running) {
@@ -67,8 +64,8 @@ public class UserInterface {
             LocalDate d = today; //todo: error if someone inputs date wrong it will automatically use today's date
             boolean validDate = false;
             while (!validDate){
-
-                d = valiDate();
+                System.out.println("Enter the date you want to book for");
+                d = LocalDate.parse(in.next());
                 validDate = validDate(d);
                 if (!validDate) {
                     System.out.println("Bookings no more than 6 days in advance");
@@ -101,7 +98,7 @@ public class UserInterface {
     * This method runs if a staff member is using the system to allow them to login
     * @author Ronan
     */
-    private void staffLogin() {
+    public void staffLogin() {
         
         boolean running = true;
         while (running) {
@@ -141,7 +138,7 @@ public class UserInterface {
     * @return false once logout, allowing staffLogin() loop to break
     * @author Ronan, Bayan, Thomas
     */
-    private boolean runStaff(Staff currentStaff) {
+    public boolean runStaff(Staff currentStaff) {
         boolean running = true;
         while (running) {
             if (currentStaff instanceof Waiter) {
@@ -155,7 +152,7 @@ public class UserInterface {
                 running = chef(input, (Chef) currentStaff);
                 
             } else {//Currently manager
-                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo Booking P)ay, C)reate menu, H)ire Staff, F)ire Staff,D)elete csv data, L)og out");
+                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo Booking P)ay, C)reate menu, H)ire Staff, F)ire Staff, L)og out");
                 String input = in.next();
                 running = manager(input, (Manager) currentStaff);
                 
@@ -172,7 +169,7 @@ public class UserInterface {
     * @return true/false if they are a valid member
     * @author Ronan
     */
-    private boolean valid(String name, String pass, ArrayList<Staff> arr) {
+    public boolean valid(String name, String pass, ArrayList<Staff> arr) {
         for (Staff s : arr) {
             if (s.getName().equals(name) && s.getPassword().equals(pass)) {
                 return true;
@@ -188,7 +185,7 @@ public class UserInterface {
     * @author Thomas, Ronan
     * @return false to log out, true otherwise
     */
-    private boolean waiter(String str, Waiter w) {
+    public boolean waiter(String str, Waiter w) {
         String s = str.toLowerCase();
         switch (s) {
             case "a"://Add order
@@ -288,7 +285,7 @@ public class UserInterface {
     * @param c chef who is currently logged in
     * @return false to log out, true otherwise
     */
-    private boolean chef(String str, Chef c) {
+    public boolean chef(String str, Chef c) {
         String s = str.toLowerCase();
         switch (s) {
             case "v"://View orders
@@ -296,9 +293,7 @@ public class UserInterface {
                 return true;
             case "a"://Acknowledge order (ie: cook order)
                 c.cooking(r.getOrders().get(0));
-                return true;
-            case "u"://update order
-                //c.isDeliverable(r.getOrders().get(0));
+                r.getWaiter().getReadyOrders();
                 return true;
             case "l"://log out
                 return false;
@@ -315,7 +310,7 @@ public class UserInterface {
     * @return false to log out, true otherwise
     */
 
-    private boolean manager(String str, Manager m) {
+    public boolean manager(String str, Manager m) {
         String s = str.toLowerCase();
         String name; //Bayan: defined some variables used across multiple cases here to keep naming convention consistent
         String phone;
@@ -379,7 +374,8 @@ public class UserInterface {
                     boolean validDate=false;
                     LocalDate d = today;
                     while(!validDate){
-                        d = valiDate();
+                        System.out.println("Enter the date you want to book for");
+                        d = LocalDate.parse(in.next());
                         validDate = validDate(d);
                         if(!validDate){
                             System.out.println("Bookings no more than 6 days in advance");
@@ -490,12 +486,7 @@ public class UserInterface {
                 System.out.println("No staff found by that name");
                 return true;
 
-            case "d"://Clear csvs
-                m.factoryReset(bookings,money);
-                System.exit(0);
-                return true;
-
-            case "l"://logout
+                case "l"://logout
                 return false;
 
         }
@@ -509,7 +500,7 @@ public class UserInterface {
      * @param date date to be checked
      * @return true if within 6 days, false otherwise
      */
-    private boolean validDate(LocalDate date){
+    public boolean validDate(LocalDate date){
 
         return today.until(date, ChronoUnit.DAYS) <= 6 && !date.isBefore(today);
     }
@@ -551,26 +542,5 @@ public class UserInterface {
      */
     private boolean booking(int time, int num, String name) {
         return booking(today, time, num, name);
-    }
-
-    /**
-     * Ensures dates are written in correct format
-     * @return LocalDate
-     * @author Ronan
-     */
-    private LocalDate valiDate(){
-        boolean valid = false;
-        LocalDate date = LocalDate.now();
-        while(!valid){
-            try{
-                System.out.println("Enter date");
-                date = LocalDate.parse(in.next());
-                valid=true;
-            }
-            catch (DateTimeParseException dtpe){
-                System.out.println("Enter date in format YYYY-MM-DD");
-            }
-        }
-        return date;
     }
 }
