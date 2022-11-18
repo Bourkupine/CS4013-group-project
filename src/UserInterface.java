@@ -552,7 +552,7 @@ public class UserInterface {
 
     /**
      * Ensures dates are written in correct format
-     * @return LocalDate
+     * @return date in correct format as LocalDate
      * @author Ronan
      */
     private LocalDate valiDate(){
