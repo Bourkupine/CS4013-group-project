@@ -154,7 +154,7 @@ public class UserInterface {
                 String input = in.next();
                 running = chef(input, (Chef) currentStaff);
                 
-            } else {//Currently manager
+            } else {//TODO implement undo booking
                 System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo Booking P)ay, C)reate menu, H)ire Staff, F)ire Staff,D)elete csv data, L)og out");
                 String input = in.next();
                 running = manager(input, (Manager) currentStaff);
