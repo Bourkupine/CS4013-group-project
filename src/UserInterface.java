@@ -21,12 +21,14 @@ public class UserInterface {
     * @param r restaurant the interface belongs to
     * @author Ronan
     */
-    public UserInterface(Restaurant r,LocalDate date) {
+    public UserInterface(Restaurant r,LocalDate date, File bookings, File money) {
         
         this.r = r;
         staffArr = r.getStaff();
         customerArr = r.getCustomers();
         today=date;
+        this.bookings=bookings;
+        this.money=money;
         pick();
     }
     
@@ -152,7 +154,7 @@ public class UserInterface {
                 running = chef(input, (Chef) currentStaff);
                 
             } else {//Currently manager
-                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo Booking P)ay, C)reate menu, H)ire Staff, F)ire Staff, L)og out");
+                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo Booking P)ay, C)reate menu, H)ire Staff, F)ire Staff,D)elete csv data, L)og out");
                 String input = in.next();
                 running = manager(input, (Manager) currentStaff);
                 
@@ -488,7 +490,11 @@ public class UserInterface {
                 System.out.println("No staff found by that name");
                 return true;
 
-                case "l"://logout
+            case "d"://Clear csvs
+                m.factoryReset(bookings,money);
+                return true;
+
+            case "l"://logout
                 return false;
 
         }

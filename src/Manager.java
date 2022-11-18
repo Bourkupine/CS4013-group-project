@@ -1,5 +1,6 @@
 //Bayan: a class to represent a manager at a restaurant
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Formatter;
 
@@ -17,6 +18,11 @@ public class Manager extends Staff implements ReadWrite{
     public Manager(String name,String password, Restaurant rest){
         super(name,password,rest);//managers name password and restaurant
         employStaff(this);
+    }
+
+    public void factoryReset(File f1, File f2){
+        clearFile(f1);
+        clearFile(f2);
     }
 
     /**
@@ -52,7 +58,7 @@ public class Manager extends Staff implements ReadWrite{
      * @author Ronan, Bayan
      */
     public void fireStaff(Staff staff) {
-        getRest().getStaff().remove(staff);//calls the method from staff in said restaurant and adds a staff member
+        getRest().getStaff().remove(staff);//calls the method from staff in said restaurant and removes a staff member
     }
 
     /**

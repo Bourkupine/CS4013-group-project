@@ -26,8 +26,7 @@ public class Initialiser implements ReadWrite{
             int id = in.nextInt();
             if(id<num &&id>=0){
                 validId=true;
-                UserInterface ui = new UserInterface(rc.getRestaurants().get(id),date);
-                //TODO pass files to userInterface
+                UserInterface ui = new UserInterface(rc.getRestaurants().get(id),date,f[1],f[2]);
             }
             else {
                 System.out.println("Please enter an id between 0 and "+num);
