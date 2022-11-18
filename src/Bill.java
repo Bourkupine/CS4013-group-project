@@ -2,8 +2,7 @@
 
 public class Bill{
 
-    private Receipt receipt ;
-    private Order order;
+    private final Order order;
 
     /**
      * Bill constructor
@@ -13,7 +12,7 @@ public class Bill{
     public Bill(Order order){//thomas bill will take an object order
        order.getCustomer().incrementLoyalty(); // incrementing the loyalty as they have requested the bill and are about to pay
        this.order=order;
-       receipt =new Receipt(order.getR(),order);
+       Receipt r = new Receipt(order.getR(),order);
        order.updateRestaurantTotal(order.getTotal());
     }
 
