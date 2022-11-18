@@ -492,6 +492,7 @@ public class UserInterface {
 
             case "d"://Clear csvs
                 m.factoryReset(bookings,money);
+                System.exit(0);
                 return true;
 
             case "l"://logout
