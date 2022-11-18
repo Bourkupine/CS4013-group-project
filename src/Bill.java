@@ -2,7 +2,7 @@
 
 public class Bill{
 
-    private String receipt ;
+    private Receipt receipt ;
     private Order order;
 
     /**
@@ -13,7 +13,7 @@ public class Bill{
     public Bill(Order order){//thomas bill will take an object order
        order.getCustomer().incrementLoyalty(); // incrementing the loyalty as they have requested the bill and are about to pay
        this.order=order;
-       Receipt r =new Receipt(order.getR(),order);
+       receipt =new Receipt(order.getR(),order);
        order.updateRestaurantTotal(order.getTotal());
     }
 
@@ -21,7 +21,7 @@ public class Bill{
      * receipt getter
      * @return receipt as a String
      */
-    public String getReceipt() {
+    public Receipt getReceipt() {
         return receipt;
     }
 
@@ -32,7 +32,7 @@ public class Bill{
      * @param receipt set receipt to a String
      * @author Thomas
      */
-    public void setReceipt(String receipt) {
+    public void setReceipt(Receipt receipt) {
         this.receipt = receipt;
     }
 
