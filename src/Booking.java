@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 public class Booking implements ReadWrite{
 
-    private String id;
-    private Customer customer; //Customer that makes the booking
+    private final String id;
+    private final Customer customer; //Customer that makes the booking
     private int numberOfPeople; //number of people at the table
     private int time; //time of booking. We will need to run a checker for this
     private Table table ;
-    private Restaurant rest; //booking is specific to a certain restaurant
+    private final Restaurant rest; //booking is specific to a certain restaurant
     private LocalDate date;
 
 
@@ -33,6 +33,9 @@ public class Booking implements ReadWrite{
     }
 
 
+    //Getters & Setters:
+
+
     /**
      * Sets a table to the booking
      * @param table the booking's Table
@@ -47,11 +50,9 @@ public class Booking implements ReadWrite{
      * @param time time you wish to change your booking to
      * @author Euan
      */
-    public void laterTime(int time){
+    public void setTime(int time){
         this.time = time;
     }
-
-    //Setters & Getters
 
     /**
      * Gets booking id
