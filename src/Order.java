@@ -205,7 +205,7 @@ public class Order{
         for(int i = 0; i < ordered.size(); i++) {
             output.append(ordered.get(i).getName());
             if (i != ordered.size() - 1) {
-                output.append(", ");
+                output.append(",\n");
             }
         }
         output.append("}");
