@@ -13,8 +13,18 @@ public class Initialiser implements ReadWrite{
 
     public void run(){
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter number of restaurants");
-        int num = in.nextInt();
+        boolean validNum=false;
+        int num = 0;
+        while(!validNum){
+            System.out.println("Enter number of restaurants");
+            if(in.nextInt()<=0){
+                System.out.println("Must create 1 or more restaurants");
+            }else{
+                num = in.nextInt();
+            }
+
+        }
+
         System.out.println("Enter date");
         LocalDate date = LocalDate.parse(in.next());
         File[] f = files();
@@ -30,6 +40,7 @@ public class Initialiser implements ReadWrite{
             }
             else {
                 System.out.println("Please enter an id between 0 and "+num);
+                System.out.println("Note: 1st restaurant is id 0, 2nd is 1...");
             }
         }
 

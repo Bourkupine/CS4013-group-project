@@ -1,5 +1,6 @@
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -66,8 +67,8 @@ public class UserInterface {
             LocalDate d = today; //todo: error if someone inputs date wrong it will automatically use today's date
             boolean validDate = false;
             while (!validDate){
-                System.out.println("Enter the date you want to book for");
-                d = LocalDate.parse(in.next());
+
+                d = valiDate();
                 validDate = validDate(d);
                 if (!validDate) {
                     System.out.println("Bookings no more than 6 days in advance");
@@ -378,8 +379,7 @@ public class UserInterface {
                     boolean validDate=false;
                     LocalDate d = today;
                     while(!validDate){
-                        System.out.println("Enter the date you want to book for");
-                        d = LocalDate.parse(in.next());
+                        d = valiDate();
                         validDate = validDate(d);
                         if(!validDate){
                             System.out.println("Bookings no more than 6 days in advance");
@@ -551,5 +551,26 @@ public class UserInterface {
      */
     private boolean booking(int time, int num, String name) {
         return booking(today, time, num, name);
+    }
+
+    /**
+     * Ensures dates are written in correct format
+     * @return LocalDate
+     * @author Ronan
+     */
+    public LocalDate valiDate(){
+        boolean valid = false;
+        LocalDate date = LocalDate.now();
+        while(!valid){
+            try{
+                System.out.println("Enter date");
+                date = LocalDate.parse(in.next());
+                valid=true;
+            }
+            catch (DateTimeParseException dtpe){
+                System.out.println("Enter date in format YYYY-MM-DD");
+            }
+        }
+        return date;
     }
 }
