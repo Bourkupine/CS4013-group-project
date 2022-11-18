@@ -24,7 +24,7 @@ public class Initialiser implements ReadWrite{
         while(!validId){
             System.out.println("Enter restaurant id");
             int id = in.nextInt();
-            if(id<num &&id>0){
+            if(id<num &&id>=0){
                 validId=true;
                 UserInterface ui = new UserInterface(rc.getRestaurants().get(id),date);
                 //TODO pass files to userInterface

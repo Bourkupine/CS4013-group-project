@@ -19,6 +19,7 @@ public class Manager extends Staff implements ReadWrite{
      */
     public Manager(String name,String password, Restaurant rest){
         super(name,password,rest);//managers name password and restaurant
+        employStaff(this);
     }
 
     /**

@@ -30,6 +30,7 @@ public class RestaurantChain implements ReadWrite{
             Restaurant restaurant = new Restaurant(15,this,i,d,booking,money);//Ronan: 15 tables is arbitrary and can be changed
             restaurants.add(restaurant);
             generateMenu();
+            managers();
 
         }
         writeDetails();
@@ -98,6 +99,16 @@ public class RestaurantChain implements ReadWrite{
 
 
 
+    }
+
+    /**
+     * Populates each restaurant with a manager
+     * @author Ronan
+     */
+    public void managers (){
+        for(Restaurant r: restaurants){
+            Manager m = new Manager("Chris","123",r);
+        }
     }
 
     /**
