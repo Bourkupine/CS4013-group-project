@@ -17,25 +17,6 @@ public class Bill{
        order.updateRestaurantTotal(order.getTotal());
     }
 
-    /**
-     * receipt getter
-     * @return receipt as a String
-     */
-    public Receipt getReceipt() {
-        return receipt;
-    }
-
-
-
-    /**
-     * Receipt setter
-     * @param receipt set receipt to a String
-     * @author Thomas
-     */
-    public void setReceipt(Receipt receipt) {
-        this.receipt = receipt;
-    }
-
 
     /**
      * prints the bill
