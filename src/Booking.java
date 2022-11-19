@@ -91,6 +91,15 @@ public class Booking implements ReadWrite{
     }
 
     /**
+     * Gets date of the booking
+     * @return date as LocalDate
+     * @author Bayan
+     */
+    public LocalDate getDate() {
+        return date;
+    }
+
+    /**
      * Allows booking details to be printed to csv
      * @return comma separated String for use in csv
      * @author Ronan

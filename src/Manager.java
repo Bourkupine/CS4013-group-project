@@ -3,6 +3,7 @@
 import java.io.File;
 import java.time.LocalDate;
 import java.util.Formatter;
+import java.util.Scanner;
 
 
 public class Manager extends Staff implements ReadWrite{
@@ -26,24 +27,6 @@ public class Manager extends Staff implements ReadWrite{
     }
 
     /**
-     * Adds a FoodItem to the menu of the restaurant
-     * @param food FoodItem to be added
-     * @author Bayan
-     */
-    public void addToMenu(FoodItem food) {
-        getRest().getMenu().addFood(food);//goes to the restaurant and gets menu in the restaurant then adds fooditem to said menu
-    }
-
-    /**
-     * Removes a FoodItem from the menu of the restaurant
-     * @param food FoodItem to be removed
-     * @author Bayan
-     */
-    public void removeFromMenu(FoodItem food) {
-        getRest().getMenu().removeFood(food);//goes to the restaurant and gets menu in the restaurant then takes the fooditem out of said menu
-    }
-
-    /**
      * Adds a Staff to the restaurant
      * @param staff Staff to be added
      * @author Ronan, Bayan
@@ -54,11 +37,68 @@ public class Manager extends Staff implements ReadWrite{
 
     /**
      * Removes a Staff from the restaurant
-     * @param staff Staff to be removed
+     * @param name name of the staff to be fired
      * @author Ronan, Bayan
      */
-    public void fireStaff(Staff staff) {
-        getRest().getStaff().remove(staff);//calls the method from staff in said restaurant and removes a staff member
+    public boolean fireStaff(String name) {
+        Restaurant r = getRest();
+        for (Staff staff : r.getStaff()) {
+            if (staff.getName().equalsIgnoreCase(name)) {
+                r.getStaff().remove(staff);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A method for Managers to use to manage the menu using the CLI
+     * @param in Scanner to read input
+     * @author Bayan
+     */
+    public void manageMenu(Scanner in) {
+        Restaurant r = getRest();
+        boolean menuing = true;
+        while (menuing) {
+            System.out.println("""
+                    [A] View menu
+                    [B] Add item to menu
+                    [C] Remove item from menu
+                    [D] Clear menu
+                    [E] Exit
+                    """);
+
+            String input = in.next();
+            if (input.equalsIgnoreCase("A")) {
+                System.out.println(r.getMenu());
+            } else if (input.equalsIgnoreCase("B")) {
+                System.out.println("Enter name of item");
+                String name = in.next();
+                System.out.println("Enter price of item");
+                double foodPrice = in.nextDouble();
+                System.out.println("Enter type of item (starter, main, dessert, drink)");
+                String foodType = in.next();
+                if (r.getMenu().addFood(new FoodItem(name, foodPrice, foodType))) {
+                    System.out.println("Item added successfully");
+                } else {
+                    System.out.println("Item already exists on menu");
+                }
+            } else if (input.equalsIgnoreCase("C")) {
+                System.out.println("Enter name of item");
+                if (r.getMenu().removeFood(in.next())) {
+                    System.out.println("Item removed from the menu");
+                } else {
+                    System.out.println("Item not found");
+                }
+            } else if (input.equalsIgnoreCase("D")) {
+                r.getMenu().clearMenu();
+                System.out.println("Menu cleared");
+            } else if (input.equalsIgnoreCase("E")) {
+                menuing = false;
+            } else {
+                System.out.println("Please enter a valid input");
+            }
+        }
     }
 
     /**
@@ -84,7 +124,7 @@ public class Manager extends Staff implements ReadWrite{
 
             bars = "=".repeat((int) (getRest().getDailyAmounts().get(start) - (getRest().getDailyAmounts().get(start)%100)) / 100);
 
-            fm.format("[%s]: €%,-8.2f |%s\n",start.toString(), getRest().getDailyAmounts().get(start), bars);
+            fm.format("[%s]: €%,-8.2f |%s\n",start, getRest().getDailyAmounts().get(start), bars);
             start = start.plusDays(1);
         }
 

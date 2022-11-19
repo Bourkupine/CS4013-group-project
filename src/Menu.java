@@ -32,28 +32,15 @@ public class Menu {
      * @param f FoodItem to be added
      * @author Bayan
      */
-    public void addFood(FoodItem f) {
-        boolean exists = false; //a boolean for
-        for (FoodItem food : menu) { //looping through the menu to see if it exists
-            if (food.equals(f)) {//if it is there you can tadd it again
-                exists = true;
-                break;//get out and dont add it
+    public boolean addFood(FoodItem f) {
+        for (FoodItem food : menu) {
+            if (food.equals(f)) {
+                return false;
             }
         }
-        if (!exists) { //if it doesnt exist add it
-            menu.add(f);
-            orderByType();//this is ordering the menu by its type, starter,main,dessert,drinks 
-        }
-    }
-
-    //TODO boolean value is never used for removeFood()
-    /**
-     * Removes a specified FoodItem from the menu
-     * @param f FoodItem to be removed
-     * @author Bayan
-     */
-    public boolean removeFood(FoodItem f) {
-        return menu.remove(f); //removing an item from the menu
+        menu.add(f);
+        orderByType();
+        return true;
     }
 
     /**
@@ -81,7 +68,7 @@ public class Menu {
      * Orders the menu by type, i.e. starters, then mains, then desserts, then drinks
      * @author Bayan
      */
-    public void orderByType() {
+    private void orderByType() {
         ArrayList<FoodItem> tempMenu = new ArrayList<>();
         for (FoodItem f : menu) {
             if(f.getType().equals("starter")) { //if the type is starter add it, starter is first

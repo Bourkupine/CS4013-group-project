@@ -64,7 +64,7 @@ public class FoodItem {
      * @author Bayan
      */
     @Override
-    public boolean equals(Object o) {//todo: this only checks if the names are equal since you don't want to add the same name twice - check with team
+    public boolean equals(Object o) {
         if (this == o) { 
             return true;
         }

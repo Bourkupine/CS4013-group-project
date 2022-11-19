@@ -260,19 +260,9 @@ public class UserInterface {
 
 
             case "p"://Take payment
-            
-                if(r.getOrders().isEmpty()){
-                    System.out.println("No orders currently");
-                }
-                else{
-                    System.out.println("Select an order");
-                    System.out.println(r.getOrders().toString());
-                    int o = in.nextInt();
-                    Till t =new Till(r,r.getOrders().get(o));
-                    t.processPayment();
-                }
-
+                pay();
                 return true;
+
             case "l"://Log out
 
                 return false;
@@ -393,52 +383,12 @@ public class UserInterface {
                 return true;
             
             case "p": //Pay
-                System.out.println("Select an order");
-                System.out.println(r.getOrders().toString());
-                int o = in.nextInt();
-                Till t =new Till(r,r.getOrders().get(o));
-                t.processPayment();
+                pay();
                 return true;
             
             
             case "c": //Create menu
-                boolean menuing = true;
-                while (menuing) {
-                    System.out.println("""
-                    [A] View menu
-                    [B] Add item to menu
-                    [C] Remove item from menu
-                    [D] Clear menu
-                    [E] Exit
-                    """);
-
-                    String input = in.next();
-                    if (input.equalsIgnoreCase("A")) {
-                        System.out.println(r.getMenu());
-                    } else if (input.equalsIgnoreCase("B")) {
-                        System.out.println("Enter name of item");
-                        name = in.next();
-                        System.out.println("Enter price of item");
-                        double foodPrice = in.nextDouble();
-                        System.out.println("Enter type of item (starter, main, dessert, drink)");
-                        String foodType = in.next();
-                        r.getMenu().addFood(new FoodItem(name, foodPrice, foodType));
-                    } else if (input.equalsIgnoreCase("C")) {
-                        System.out.println("Enter name of item");
-                        if (r.getMenu().removeFood(in.next())) {
-                            System.out.println("Item removed from the menu");
-                        } else {
-                            System.out.println("Item not found");
-                        }
-                    } else if (input.equalsIgnoreCase("D")) {
-                        r.getMenu().clearMenu();
-                        System.out.println("Menu cleared");
-                    } else if (input.equalsIgnoreCase("E")) {
-                        menuing = false;
-                    } else {
-                        System.out.println("Please enter a valid input");
-                    }
-                }
+                m.manageMenu(in);
                 return true;
 
             case "h": //Bayan: Hire staff
@@ -474,17 +424,11 @@ public class UserInterface {
             case "f": //Bayan: Fire staff
                 System.out.println("Enter staff name:");
                 name = in.next();
-                ArrayList<Staff> staffArr = r.getStaff();
-
-                for (Staff staff : staffArr) {
-                    if (staff.getName().equalsIgnoreCase(name)) {
-                        System.out.println(staff.getName() + " has been fired");
-                        r.getStaff().remove(staff);
-                        return true;
-                    }
+                if (m.fireStaff(name)) {
+                    System.out.println(name + "has been fired");
+                } else {
+                    System.out.println("No staff found by that name");
                 }
-
-                System.out.println("No staff found by that name");
                 return true;
 
             case "d"://Clear csvs
@@ -569,5 +513,18 @@ public class UserInterface {
             }
         }
         return date;
+    }
+
+    private void pay() {
+        if(r.getOrders().isEmpty()){
+            System.out.println("No orders currently");
+        }
+        else{
+            System.out.println("Select an order");
+            System.out.println(r.getOrders().toString());
+            int o = in.nextInt();
+            Till t =new Till(r,r.getOrders().get(o));
+            t.processPayment();
+        }
     }
 }
