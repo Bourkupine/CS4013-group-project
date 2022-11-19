@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class RestaurantChain implements ReadWrite{
     private ArrayList<Customer> customers = new ArrayList<>(); //An arraylist of all customers across every restaurant.
-    private String name; //The name of the restaurant chain.
+    private final String name; //The name of the restaurant chain.
     private int amountOfRestaurants; //The amount of restaurants.
-    private Menu menu;
+    private Menu menu; //todo: this needs to be moved to restaurant since each restaurant has its own menu
     private ArrayList<Restaurant> restaurants = new ArrayList<>();// ArrayList containing all restaurants in chain
     File rest; //Contains details of all restaurants
     
@@ -40,7 +40,7 @@ public class RestaurantChain implements ReadWrite{
      * generates the menu
      * @author Bayan, Euan
      */
-    public void generateMenu() {
+    public void generateMenu() { //todo: this was for testing, should be done in UI, need to store menu items in csv
         ArrayList<FoodItem> f = new ArrayList<>();
         f.add(new FoodItem("Garlic bread", 4, "starter"));
         f.add(new FoodItem("Tomato soup", 4, "starter"));
@@ -60,7 +60,7 @@ public class RestaurantChain implements ReadWrite{
      * @param f the menu to be sorted
      * @author Euan
      */
-    public void sortMenu(ArrayList<FoodItem> f) {
+    public void sortMenu(ArrayList<FoodItem> f) { //todo: check if we need this, it exists in the Menu class
 
         ArrayList<FoodItem> starters = new ArrayList<>();
         ArrayList<FoodItem> mains = new ArrayList<>();
