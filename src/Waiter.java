@@ -29,13 +29,13 @@ public class Waiter extends Staff {
     }
 
     /**
-     * drops food to table and tells the chef its been delivered
+     * drops food to table and tells the chef it's been delivered
      * @author Thomas
      */
     public void dropFood(Order r){
         
        r.setStatus("Delivered");
-      r.getR().getOrders().remove(r); //removing roder from array list because the order is done
+      r.getR().getOrders().remove(r); //removing order from array list because the order is done
     }
 
 }

@@ -3,8 +3,8 @@
 import java.util.ArrayList;
 
 public class Table {
-    private final int TABLENUMBER; //Bayan: Unique ID number for the table
-    private final int NUMBEROFSEATS; //Bayan: Number of seats at the table
+    private final int tableNumber; //Bayan: Unique ID number for the table
+    private final int numberOfSeats; //Bayan: Number of seats at the table
     private ArrayList<boolean[]> reserved = new ArrayList<>(); //Bayan: Indicates if the table is reserved at a specific time or not
 
     /**
@@ -14,8 +14,8 @@ public class Table {
      * @author Bayan + Euan
      */
     public Table(int tableNumber, int numberOfSeats) {
-        this.TABLENUMBER = tableNumber;
-        this.NUMBEROFSEATS = numberOfSeats;
+        this.tableNumber = tableNumber;
+        this.numberOfSeats = numberOfSeats;
         for (int i = 0; i < 7; i++) {
             reserved.add(new boolean[13]);
         }
@@ -28,7 +28,7 @@ public class Table {
 
     /**
      * Sets the table to be reserved or not reserved today.
-     * @param hour the time in hours in 24 hour clock
+     * @param hour the time in hours in 24-hour clock
      * @param reserved reserved value for the table
      * @author Bayan, Euan
      */
@@ -38,7 +38,7 @@ public class Table {
 
     /**
      * Sets the table to be reserved or not reserved at a given day.
-     * @param hour the time in hours (24 hour format)
+     * @param hour the time in hours (24-hour format)
      * @param day days in advance of reservation
      * @param reserved reserved value of table.
      * @author Euan
@@ -49,7 +49,7 @@ public class Table {
 
     /**
      * Gets reservation status for the table.
-     * @param hour the time in hours in 24 hour clock
+     * @param hour the time in hours in 24-hour clock
      * @return reserved as boolean
      * @author Bayan, Euan
      */
@@ -59,7 +59,7 @@ public class Table {
 
     /**
      * Gets reservation status for the table at a given day.
-     * @param hour the time in hours (24 hour format)
+     * @param hour the time in hours (24-hour format)
      * @param day day of reservation
      * @return reservation status (boolean)
      * @author Bayan, Euan
@@ -75,7 +75,7 @@ public class Table {
      * @author Bayan
      */
     public int getTableNumber() {
-        return TABLENUMBER;
+        return tableNumber;
     }
 
     /**
@@ -84,11 +84,11 @@ public class Table {
      * @author Bayan
      */
     public int getNumberOfSeats() {
-        return NUMBEROFSEATS;
+        return numberOfSeats;
     }
 
     public String toString(){
-        return "Table "+ TABLENUMBER +" has "+NUMBEROFSEATS+" seats";
+        return "Table "+ tableNumber +" has "+ numberOfSeats +" seats";
     }
 
 }
