@@ -11,7 +11,7 @@ public class Initialiser implements ReadWrite{
         run();
     }
 
-    public void run(){
+    private void run(){
         Scanner in = new Scanner(System.in);
         boolean validNum=false;
         int num = 0;
@@ -49,7 +49,7 @@ public class Initialiser implements ReadWrite{
 
 
     }
-    public File[] files(){
+    private File[] files(){
         File restaurants = new File("restaurants.csv");
         File bookings = new File("bookings.csv");
         if(bookings.length()==0){
