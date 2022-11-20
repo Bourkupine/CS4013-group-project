@@ -19,6 +19,8 @@ public class Restaurant implements ReadWrite{
     private int idNum ; //look back at this
     private int bookingId = 0;
     private RestaurantChain rc;
+    private Menu menu;
+    private File menuCsv;
     private LocalDate date;//Today's date
     private File booking;
     private File money;
@@ -37,12 +39,13 @@ public class Restaurant implements ReadWrite{
      * @param money .csv file containing details of money obtained
      * @author Ronan, Thomas, Euan
      */
-    public Restaurant(int amountOfTables, RestaurantChain rc, int idNum,LocalDate date, File booking, File money){
+    public Restaurant(int amountOfTables, RestaurantChain rc, int idNum,LocalDate date, File booking, File money,File menuCsv){
         this.booking=booking;
         this.money=money;
         this.date=date;
         this.rc = rc;
         this.idNum = idNum;
+        this.menuCsv=menuCsv;
         int j = 1;
         int floor = amountOfTables/3;
         for (int i = 0; i < floor; i++) {
@@ -63,6 +66,7 @@ public class Restaurant implements ReadWrite{
             j++;
             tables.add(t);
         }
+        generateMenu();
     }
 
     /**
@@ -93,6 +97,25 @@ public class Restaurant implements ReadWrite{
     public void cancelBooking(Booking booking) {
         bookings.remove(booking);
     }
+
+    /**
+     * Generates menu from csv file
+     */
+    public void generateMenu() { //todo: this was for testing, should be done in UI, need to store menu items in csv
+        ArrayList<FoodItem> f = new ArrayList<>();
+        ArrayList<String> temp = readFile(menuCsv);
+        for(String s: temp){
+            String[] splitted = s.split(",");
+            if(splitted[0].equals(String.valueOf(idNum))){
+                f.add(new FoodItem(splitted[1],Double.parseDouble(splitted[2]),splitted[3]));
+            }
+
+        }
+
+        menu=new Menu(f);
+    }
+
+
 
     /**
      * Adds a booking to bookings
@@ -240,7 +263,7 @@ public class Restaurant implements ReadWrite{
      * @return menu as a menu object
      * @author Ronan
      */
-    public Menu getMenu() {return rc.getMenu();}
+    public Menu getMenu() {return menu;}
 
     /**
      * returns the arraylist of staff
