@@ -2,6 +2,7 @@
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
@@ -86,9 +87,19 @@ public class Manager extends Staff implements ReadWrite{
                 }
             } else if (input.equalsIgnoreCase("C")) {
                 System.out.println("Enter name of item");
-                if (r.getMenu().removeFood(in.next())) {
+                String item = in.next();
+                if (r.getMenu().removeFood(item)) {
                     System.out.println("Item removed from the menu");
-
+                    ArrayList<String> temp =readFile(getRest().getMenuCsv());
+                    int index=0;
+                    for(String s:temp){
+                        String[] split = s.split(",");
+                        if(split[0].equals(String.valueOf(getRest().getIdNum())) && split[1].equals(item)){
+                            index=temp.indexOf(s);
+                        }
+                    }
+                    temp.remove(index);
+                    writeFile(getRest().getMenuCsv(),temp);
                 } else {
                     System.out.println("Item not found");
                 }

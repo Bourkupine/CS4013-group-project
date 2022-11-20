@@ -102,10 +102,6 @@ public class Menu {
         return menu.size();
     }
 
-    public ArrayList<FoodItem> getMenu() {
-        return menu;
-    }
-
     /**
      * Returns a string representation of the Menu object
      * @return Menu object as a string
