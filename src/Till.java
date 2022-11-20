@@ -16,7 +16,7 @@ public class Till {
     private Order order;
     private double creditCardT;
     private double cashInDrawer;
-    private double amountDue;//TODO: this is in constructor but never used???
+
     /**
     * 
     * @param rest this is the restaurant the till is in
@@ -25,7 +25,6 @@ public class Till {
     public Till(Restaurant rest, Order order){
         this.rest = rest;//this is the restaurant
         this.order = order;//this is the order
-        this.amountDue = order.getTotal();//this is the amount the customer owes
     }
     /**
     * processes a payment from the customer for the order.
