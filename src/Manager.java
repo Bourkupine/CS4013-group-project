@@ -80,6 +80,7 @@ public class Manager extends Staff implements ReadWrite{
                 String foodType = in.next();
                 if (r.getMenu().addFood(new FoodItem(name, foodPrice, foodType))) {
                     System.out.println("Item added successfully");
+                    updateFile(getRest().getMenuCsv(),getRest().getIdNum()+","+name+","+foodPrice+","+foodType);
                 } else {
                     System.out.println("Item already exists on menu");
                 }
@@ -87,6 +88,7 @@ public class Manager extends Staff implements ReadWrite{
                 System.out.println("Enter name of item");
                 if (r.getMenu().removeFood(in.next())) {
                     System.out.println("Item removed from the menu");
+
                 } else {
                     System.out.println("Item not found");
                 }

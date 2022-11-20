@@ -336,6 +336,14 @@ public class Restaurant implements ReadWrite{
         return dailyAmounts;
     }
 
+    public File getMenuCsv() {
+        return menuCsv;
+    }
+
+    public int getIdNum() {
+        return idNum;
+    }
+
     /**
      *
      * @return ArrayList of Strings ideal for use in .csv file
