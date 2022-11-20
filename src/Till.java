@@ -39,6 +39,22 @@ public class Till {
         Bill bill = new Bill(order);//this creates a bill for said order
         System.out.println( order.getTotal() + " is the total");
         double amountDue = order.getTotal();
+        double tip;
+        double totalTips = 0;
+        System.out.println("Would you like to tip ?");
+        System.out.println("1)Yes  2)No");
+        int YN = in.nextInt();
+        if(YN == 1  ){
+            System.out.println("How much would you like to tip?");
+            tip = in.nextInt();
+            totalTips = totalTips + tip; 
+            double total = order.getTotal() + tip ;
+            System.out.println( total + ": is the total");
+            System.out.println("You tipped :" + tip);
+
+
+        }else{ tip = 0;}
+        
         System.out.println("1) Cash or 2) Card");//is the customer paying in cash or card
         int choice = in.nextInt(); //they decide what they pay with
         System.out.println("Enter amount given "); //this is the amount the customer gives
