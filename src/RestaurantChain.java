@@ -10,7 +10,7 @@ public class RestaurantChain implements ReadWrite{
     private ArrayList<Customer> customers = new ArrayList<>(); //An arraylist of all customers across every restaurant.
     private final String name; //The name of the restaurant chain.
     private int amountOfRestaurants; //The amount of restaurants.
-    private Menu menu; //todo: this needs to be moved to restaurant since each restaurant has its own menu
+     //todo: this needs to be moved to restaurant since each restaurant has its own menu
     private ArrayList<Restaurant> restaurants = new ArrayList<>();// ArrayList containing all restaurants in chain
     File rest; //Contains details of all restaurants
     
@@ -23,68 +23,18 @@ public class RestaurantChain implements ReadWrite{
      * @param amountOfRestaurants amount of restaurants in the chain
      * @author Bayan, Ronan
      */
-    public RestaurantChain(String name, int amountOfRestaurants, File rest,File booking, File money, LocalDate d){
+    public RestaurantChain(String name, int amountOfRestaurants, File rest,File booking, File money,File menuCsv, LocalDate d){
         this.name = name;
         this.rest=rest;
         for (int i = 0; i < amountOfRestaurants; i++) {
-            Restaurant restaurant = new Restaurant(15,this,i,d,booking,money);//Ronan: 15 tables is arbitrary and can be changed
+            Restaurant restaurant = new Restaurant(15,this,i,d,booking,money,menuCsv);//Ronan: 15 tables is arbitrary and can be changed
             restaurants.add(restaurant);
-            generateMenu();
             managers();
 
         }
         writeDetails();
     }
 
-    /**
-     * generates the menu
-     * @author Bayan, Euan
-     */
-    public void generateMenu() { //todo: this was for testing, should be done in UI, need to store menu items in csv
-        ArrayList<FoodItem> f = new ArrayList<>();
-        f.add(new FoodItem("Garlic bread", 4, "starter"));
-        f.add(new FoodItem("Tomato soup", 4, "starter"));
-        f.add(new FoodItem("Hamburger", 4, "main"));
-        f.add(new FoodItem("Water", 4, "drink"));
-        f.add(new FoodItem("Lasagne", 4, "main"));
-        f.add(new FoodItem("Ice-cream", 4, "dessert"));
-        f.add(new FoodItem("Tea", 4, "drink"));
-        f.add(new FoodItem("Creme-brulee", 4, "dessert"));
-        f.add(new FoodItem("Pizza", 4, "main"));
-        f.add(new FoodItem("Salad", 4, "starter"));
-        sortMenu(f);
-    }
-
-    /**
-     * sorts the menu by starters, then mains, then desserts, then drinks.
-     * @param f the menu to be sorted
-     * @author Euan
-     */
-    public void sortMenu(ArrayList<FoodItem> f) { //todo: check if we need this, it exists in the Menu class
-
-        ArrayList<FoodItem> starters = new ArrayList<>();
-        ArrayList<FoodItem> mains = new ArrayList<>();
-        ArrayList<FoodItem> desserts = new ArrayList<>();
-        ArrayList<FoodItem> drinks = new ArrayList<>();
-
-        //cycle through each item on menu, get its type and add it to its respective list
-        f.forEach(foodItem -> {
-            switch (foodItem.getType()) {
-                case "starter" -> starters.add(foodItem);
-                case "main" -> mains.add(foodItem);
-                case "dessert" -> desserts.add(foodItem);
-                default -> drinks.add(foodItem);
-            }
-        });
-
-        //join all the lists to one
-        starters.addAll(mains);
-        starters.addAll(desserts);
-        starters.addAll(drinks);
-
-        //set menu equal to the final list
-        menu = new Menu(starters);
-    }
 
     /**
      * Writes details of all restaurants in chain to their csv file
@@ -109,15 +59,6 @@ public class RestaurantChain implements ReadWrite{
         for(Restaurant r: restaurants){
             Manager m = new Manager("Chris","123",r);
         }
-    }
-
-    /**
-     * gets menu
-     * @return current menu as menu object
-     * @author Bayan
-     */
-    public Menu getMenu() {
-        return menu;
     }
 
     /**
