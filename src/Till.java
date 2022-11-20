@@ -52,6 +52,7 @@ public class Till {
         }else if(amountGiven > amountDue){
             creditCardT = creditCardT+amountDue;
             change = 0;
+            System.out.printf("Give %f", change);
         }
         
         if(cash && amountGiven>amountDue){
@@ -59,7 +60,6 @@ public class Till {
         }
         rest.removeOrder(order);
         System.out.println(bill.toString());
-        System.out.printf("Give %f", change);
         return change;
         
     }

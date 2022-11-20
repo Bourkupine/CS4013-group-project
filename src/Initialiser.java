@@ -17,10 +17,10 @@ public class Initialiser implements ReadWrite{
         int num = 0;
         while(!validNum){
             System.out.println("Enter number of restaurants");
-            if(in.nextInt()<=0){
+            num=in.nextInt();
+            if(num<=0){
                 System.out.println("Must create 1 or more restaurants");
             }else{
-                num = in.nextInt();
                 validNum=true;
             }
 

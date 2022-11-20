@@ -404,16 +404,17 @@ public class UserInterface {
                 [D] Exit
                 """);
                 while (true) {
-                    if (in.next().equalsIgnoreCase("C")) {
+                    String type = in.next();
+                    if (type.equalsIgnoreCase("C")) {
                         m.employStaff(new Waiter(name, password, r));
                         break;
-                    } else if (in.next().equalsIgnoreCase("B")) {
+                    } else if (type.equalsIgnoreCase("B")) {
                         m.employStaff(new Chef(name, password, r));
                         break;
-                    } else if (in.next().equalsIgnoreCase("A")) {
+                    } else if (type.equalsIgnoreCase("A")) {
                         m.employStaff(new Manager(name, password, r));
                         break;
-                    } else if (in.next().equalsIgnoreCase("D")) {
+                    } else if (type.equalsIgnoreCase("D")) {
                         break;
                     } else {
                         System.out.println("Please enter a valid input");
