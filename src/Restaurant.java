@@ -24,6 +24,7 @@ public class Restaurant implements ReadWrite{
     private LocalDate date;//Today's date
     private File booking;
     private File money;
+    private File staffCsv;
 
     private HashMap<LocalDate, Double> dailyAmounts = new HashMap<>();
 
@@ -39,13 +40,14 @@ public class Restaurant implements ReadWrite{
      * @param money .csv file containing details of money obtained
      * @author Ronan, Thomas, Euan
      */
-    public Restaurant(int amountOfTables, RestaurantChain rc, int idNum,LocalDate date, File booking, File money,File menuCsv){
+    public Restaurant(int amountOfTables, RestaurantChain rc, int idNum,LocalDate date, File booking, File money,File menuCsv,File staffCsv){
         this.booking=booking;
         this.money=money;
         this.date=date;
         this.rc = rc;
         this.idNum = idNum;
         this.menuCsv=menuCsv;
+        this.staffCsv=staffCsv;
         int j = 1;
         int floor = amountOfTables/3;
         for (int i = 0; i < floor; i++) {
@@ -342,6 +344,15 @@ public class Restaurant implements ReadWrite{
 
     public int getIdNum() {
         return idNum;
+    }
+
+    public File getStaffCsv() {
+        return staffCsv;
+    }
+
+    public File[] getDeletableCsv(){
+        File[] f = {booking,money,staffCsv};
+        return f;
     }
 
     /**

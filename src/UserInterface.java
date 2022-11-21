@@ -432,7 +432,7 @@ public class UserInterface {
                 return true;
 
             case "d"://Clear csvs
-                m.factoryReset(bookings,money);
+                m.factoryReset(r.getDeletableCsv());
                 System.exit(0);
                 return true;
 

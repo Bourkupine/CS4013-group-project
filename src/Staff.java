@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public abstract class Staff {
+public abstract class Staff{
     private String name;
     private String password;
     private Restaurant rest;
@@ -68,5 +68,14 @@ public abstract class Staff {
         for (Order order : rest.getOrders()) {
             System.out.println(order);
         }
+    }
+
+    /**
+     *
+     * @return a comma seperated string representation of object
+     */
+    public String toCsv(){
+        String type = getClass().getCanonicalName();
+        return rest.getIdNum()+","+type+","+name+","+password;
     }
 }

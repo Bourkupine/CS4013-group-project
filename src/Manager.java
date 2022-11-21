@@ -19,12 +19,12 @@ public class Manager extends Staff implements ReadWrite{
      */
     public Manager(String name,String password, Restaurant rest){
         super(name,password,rest);//managers name password and restaurant
-        employStaff(this);
     }
 
-    public void factoryReset(File f1, File f2){
-        clearFile(f1);
-        clearFile(f2);
+    public void factoryReset(File[] files){
+        for(File f1:files){
+            clearFile(f1);
+        }
     }
 
     /**
@@ -34,6 +34,7 @@ public class Manager extends Staff implements ReadWrite{
      */
     public void employStaff(Staff staff) {
         getRest().getStaff().add(staff); //calls the method from staff in said restaurant and adds a staff member
+        updateFile(getRest().getStaffCsv(), staff.toCsv());
     }
 
     /**
@@ -46,6 +47,10 @@ public class Manager extends Staff implements ReadWrite{
         for (Staff staff : r.getStaff()) {
             if (staff.getName().equalsIgnoreCase(name)) {
                 r.getStaff().remove(staff);
+                writeFile(getRest().getStaffCsv(),"RestId,Type,Name,Password");
+                for(Staff s1:r.getStaff()){
+                    updateFile(getRest().getStaffCsv(),s1.toCsv());
+                }
                 return true;
             }
         }

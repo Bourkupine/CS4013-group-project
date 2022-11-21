@@ -29,9 +29,9 @@ public class RestaurantChain implements ReadWrite{
         this.rest=f[0];
         this.customer=f[4];
         for (int i = 0; i < amountOfRestaurants; i++) {
-            Restaurant restaurant = new Restaurant(15,this,i,d,f[1],f[2],f[3]);//Ronan: 15 tables is arbitrary and can be changed
+            Restaurant restaurant = new Restaurant(15,this,i,d,f[1],f[2],f[3],f[5]);//Ronan: 15 tables is arbitrary and can be changed
             restaurants.add(restaurant);
-            managers();
+            staff(restaurant);
 
         }
         updateCustomers();
@@ -90,14 +90,38 @@ public class RestaurantChain implements ReadWrite{
     }
 
     /**
-     * Populates each restaurant with a manager
+     * Populates each restaurant with staff from csv
      * @author Ronan
      */
-    public void managers (){
-        for(Restaurant r: restaurants){
-            Manager m = new Manager("Chris","123",r);
+    public void staff (Restaurant r){
+        ArrayList<String> temp = readFile(r.getStaffCsv());
+        if(temp.size()>1){//ie: if any staff exist in restaurants
+            for(int i=1;i<temp.size();i++){
+                String[] split = temp.get(i).split(",");
+                if(Integer.parseInt(split[0])==r.getIdNum()){
+                    switch(split[1]){
+                        case "Waiter":
+                            r.getStaff().add(new Waiter(split[2],split[3],getRestaurants().get(r.getIdNum())));
+                            break;
+                        case "Chef":
+                            r.getStaff().add(new Chef(split[2],split[3],getRestaurants().get(r.getIdNum())));
+                            break;
+                        case "Manager":
+                            r.getStaff().add(new Manager(split[2],split[3],getRestaurants().get(r.getIdNum())));
+                            break;
+                    }
+                }
+
+            }
+        }
+        if(r.getStaff().size()==0){// if no staff were assigned to a given restaurant, give them a default manager and write it to csv
+            Manager m = new Manager("Chris","123",getRestaurants().get(r.getIdNum()));
+            r.getStaff().add(m);
+            updateFile(r.getStaffCsv(),m.toCsv());
         }
     }
+
+
 
     /**
      * gets customers

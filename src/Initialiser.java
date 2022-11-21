@@ -67,12 +67,17 @@ public class Initialiser implements ReadWrite{
         if(customers.length()==0){
             writeFile(customers,"Name,PhoneNum,Loyalty");
         }
-        File[] arr = new File[5];
+        File staff = new File("staff.csv");
+        if(staff.length()==0){
+            writeFile(staff,"RestId,Type,Name,Password");
+        }
+        File[] arr = new File[6];
         arr[0]=restaurants;
         arr[1]=bookings;
         arr[2]=money;
         arr[3]=menu;
         arr[4]=customers;
+        arr[5]=staff;
 
         return arr;
     }
