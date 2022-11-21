@@ -12,7 +12,7 @@ public class UserInterface {
     private File money;
     
     private Scanner in = new Scanner(System.in);
-
+    
     private LocalDate today;
     
     /**
@@ -81,457 +81,467 @@ public class UserInterface {
                     System.out.println("Bookings no more than 6 days in advance");
                 }
             }
-
+            
             //time
-
-
+            
+            
             int time = 0;
             do { //todo: check if we need variables for each restaurant's opening and closing time
+            System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
+            time = in.nextInt();//Need to check this
+        }while (time < 9 || time > 21);
+        
+        
+        running = booking(d, time, num, name);
+    }
+    
+    
+}
+
+/**
+* This method runs if a staff member is using the system to allow them to login
+* @author Ronan
+*/
+private void staffLogin() {
+    
+    boolean running = true;
+    while (running) {
+        boolean pass = false;
+        while (!pass) {
+            
+            System.out.println("Enter username");
+            String name = in.next();
+            
+            System.out.println("Enter password");
+            String password = in.next();
+            
+            if (valid(name, password, r.getStaff())) {//If a valid username was entered
+                Staff currentStaff;
+                pass = true;
+                int index = 0;
+                for (Staff s : r.getStaff()) {
+                    if (s.getName().equals(name) && s.getPassword().equals(password)) {
+                        index = r.getStaff().indexOf(s);
+                        break;
+                    }
+                }
+                currentStaff = r.getStaff().get(index);
+                running = runStaff(currentStaff);//When you log out, this sets running to false, exiting the loop
+            } else {
+                System.out.println("Invalid username/password");
+            }
+        }
+    }
+    pick();
+    
+}
+
+/**
+* When a staff member logs in, this is called
+* @param currentStaff Staff that is currently logged in
+* @return false once logout, allowing staffLogin() loop to break
+* @author Ronan, Bayan, Thomas
+*/
+private boolean runStaff(Staff currentStaff) {
+    boolean running = true;
+    while (running) {
+        if (currentStaff instanceof Waiter) {
+            System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, P)ay, L)og out");
+            String input = in.next();
+            running = waiter(input, (Waiter) currentStaff);
+            
+        } else if (currentStaff instanceof Chef) {
+            System.out.println("V)iew orders, A)cknowledge,U)pdate order, L)og out");
+            String input = in.next();
+            running = chef(input, (Chef) currentStaff);
+            
+        } else {//Currently manager
+            System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, M)oney generated, U)ndo Booking, P)ay, C)reate menu, H)ire Staff, F)ire Staff,D)elete csvs, L)og out");
+            String input = in.next();
+            running = manager(input, (Manager) currentStaff);
+            
+        }
+    }
+    return false;
+}
+
+/**
+* checks if a member is actually a staff member
+* @param name name of member
+* @param pass members password
+* @param arr array of staff members
+* @return true/false if they are a valid member
+* @author Ronan
+*/
+private boolean valid(String name, String pass, ArrayList<Staff> arr) {
+    for (Staff s : arr) {
+        if (s.getName().equals(name) && s.getPassword().equals(pass)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+* This method runs if a waiter is logged in
+* @param str option passed from runStaff()
+* @param w waiter who is logged in
+* @author Thomas, Ronan
+* @return false to log out, true otherwise
+*/
+private boolean waiter(String str, Waiter w) {
+    String s = str.toLowerCase();
+    switch (s) {
+        case "a"://Add order
+        //Ronan: this could(probably should) be done in waiter and then just call waiter.addOrder() here
+        System.out.println("Enter customer name: ");
+        String name = in.next();
+        System.out.println("Enter phone number(type 0 for walk in): ");
+        String phone = in.next();
+        boolean inList = false;
+        for (Customer c : r.getRestaurantChain().getCustomers()) {
+            if (c.getName().equals(name)) {
+                r.addOrder(new Order(c, r));//need to check how we are doing this in waiter
+                inList = true;//If the customer is in the list of customers, the booking is assigned to them
+            }
+            
+        }
+        if (!inList) {
+            Customer cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
+            r.getRestaurantChain().addCustomer(cust);
+            r.addOrder(new Order(cust, r));//This is for new customers
+        }
+        return true;
+        
+        case "v"://View current orders
+        w.printOrders();
+        return true;
+        
+        case "t"://Take a booking
+        //need to show what tables are available
+        //todo: find a way to return only available tables - also need to specify when the booking is for!!
+        //take booking
+        boolean running=true;
+        while(running) {
+            //here I used ronans stuff and added to them
+            System.out.println("Enter customer name: ");
+            name = in.next();
+            System.out.println("Enter phone number(type 0 for walk in): ");
+            phone = in.next();
+            int numberOfPeople = 0;
+            boolean lessthen8 = false;
+            while(!lessthen8) {
+                System.out.println("Enter number of people: ");
+                numberOfPeople = in.nextInt();
+                if(numberOfPeople > 8){
+                    System.out.println("No more then 8 people per booking");
+                } else {
+                    lessthen8 = true;
+                }
+            }
+            boolean validDate = false;
+            LocalDate d = today;
+            while (!validDate){
+                System.out.println("Enter the date you want to book for");
+                d = LocalDate.parse(in.next());
+                validDate = validDate(d);
+                if (!validDate) {
+                    System.out.println("Bookings no more than 6 days in advance");
+                }
+            }
+            int time;
+            do {
                 System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
                 time = in.nextInt();//Need to check this
             }while (time < 9 || time > 21);
-
+            running = booking(d, time, numberOfPeople, name);
             
-            running = booking(d, time, num, name);
         }
         
         
-    }
-    
-    /**
-    * This method runs if a staff member is using the system to allow them to login
-    * @author Ronan
-    */
-    private void staffLogin() {
+        return true;
         
-        boolean running = true;
-        while (running) {
-            boolean pass = false;
-            while (!pass) {
-                
-                System.out.println("Enter username");
-                String name = in.next();
-                
-                System.out.println("Enter password");
-                String password = in.next();
-                
-                if (valid(name, password, r.getStaff())) {//If a valid username was entered
-                    Staff currentStaff;
-                    pass = true;
-                    int index = 0;
-                    for (Staff s : r.getStaff()) {
-                        if (s.getName().equals(name) && s.getPassword().equals(password)) {
-                            index = r.getStaff().indexOf(s);
-                            break;
-                        }
-                    }
-                    currentStaff = r.getStaff().get(index);
-                    running = runStaff(currentStaff);//When you log out, this sets running to false, exiting the loop
-                } else {
-                    System.out.println("Invalid username/password");
-                }
-            }
-        }
-        pick();
         
-    }
-    
-    /**
-    * When a staff member logs in, this is called
-    * @param currentStaff Staff that is currently logged in
-    * @return false once logout, allowing staffLogin() loop to break
-    * @author Ronan, Bayan, Thomas
-    */
-    private boolean runStaff(Staff currentStaff) {
-        boolean running = true;
-        while (running) {
-            if (currentStaff instanceof Waiter) {
-                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, P)ay, L)og out");
-                String input = in.next();
-                running = waiter(input, (Waiter) currentStaff);
-                
-            } else if (currentStaff instanceof Chef) {
-                System.out.println("V)iew orders, A)cknowledge,U)pdate order, L)og out");
-                String input = in.next();
-                running = chef(input, (Chef) currentStaff);
-                
-            } else {//Currently manager
-                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo Booking P)ay, C)reate menu, H)ire Staff, F)ire Staff,D)elete csvs, L)og out");
-                String input = in.next();
-                running = manager(input, (Manager) currentStaff);
-                
-            }
-        }
+        case "p"://Take payment
+        pay();
+        return true;
+        
+        case "l"://Log out
+        
         return false;
     }
-    
-    /**
-    * checks if a member is actually a staff member
-    * @param name name of member
-    * @param pass members password
-    * @param arr array of staff members
-    * @return true/false if they are a valid member
-    * @author Ronan
-    */
-    private boolean valid(String name, String pass, ArrayList<Staff> arr) {
-        for (Staff s : arr) {
-            if (s.getName().equals(name) && s.getPassword().equals(pass)) {
-                return true;
-            }
-        }
+    return true;//Ronan:this is never used, perhaps change above return trues to break?
+}
+
+/**
+* This runs if a chef is logged in
+* @param str option passed from runStaff()
+* @author Thomas, Ronan
+* @param c chef who is currently logged in
+* @return false to log out, true otherwise
+*/
+private boolean chef(String str, Chef c) {
+    String s = str.toLowerCase();
+    switch (s) {
+        case "v"://View orders
+        c.printOrders();
+        return true;
+        case "a"://Acknowledge order (ie: cook order)
+        c.cooking(r.getOrders().get(0));
+        r.getWaiter().getReadyOrders();
+        return true;
+        case "l"://log out
+        
         return false;
+        
     }
-    
-    /**
-    * This method runs if a waiter is logged in
-    * @param str option passed from runStaff()
-    * @param w waiter who is logged in
-    * @author Thomas, Ronan
-    * @return false to log out, true otherwise
-    */
-    private boolean waiter(String str, Waiter w) {
-        String s = str.toLowerCase();
-        switch (s) {
-            case "a"://Add order
-                //Ronan: this could(probably should) be done in waiter and then just call waiter.addOrder() here
-                System.out.println("Enter customer name: ");
-                String name = in.next();
-                System.out.println("Enter phone number(type 0 for walk in): ");
-                String phone = in.next();
-                boolean inList = false;
-                for (Customer c : r.getRestaurantChain().getCustomers()) {
-                    if (c.getName().equals(name)) {
-                        r.addOrder(new Order(c, r));//need to check how we are doing this in waiter
-                        inList = true;//If the customer is in the list of customers, the booking is assigned to them
-                    }
+    return true;
+}
 
-                }
-                if (!inList) {
-                    Customer cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
-                    r.getRestaurantChain().addCustomer(cust);
-                    r.addOrder(new Order(cust, r));//This is for new customers
-                }
-                return true;
+/**
+* This runs if a manager is logged in
+* @param str option passed from runStaff()
+* @author Thomas, Ronan
+* @param m manager who is currently logged in
+* @return false to log out, true otherwise
+*/
 
-            case "v"://View current orders
-                w.printOrders();
-                return true;
-
-            case "t"://Take a booking
-                //need to show what tables are available
-                //todo: find a way to return only available tables - also need to specify when the booking is for!!
-                //take booking
-                boolean running=true;
-                while(running) {
-                    //here I used ronans stuff and added to them
-                    System.out.println("Enter customer name: ");
-                    name = in.next();
-                    System.out.println("Enter phone number(type 0 for walk in): ");
-                    phone = in.next();
-                    int numberOfPeople = 0;
-                    boolean lessthen8 = false;
-                    while(!lessthen8) {
-                        System.out.println("Enter number of people: ");
-                        numberOfPeople = in.nextInt();
-                        if(numberOfPeople > 8){
-                            System.out.println("No more then 8 people per booking");
-                        } else {
-                            lessthen8 = true;
-                        }
-                    }
-                    boolean validDate = false;
-                    LocalDate d = today;
-                    while (!validDate){
-                        System.out.println("Enter the date you want to book for");
-                        d = LocalDate.parse(in.next());
-                        validDate = validDate(d);
-                        if (!validDate) {
-                            System.out.println("Bookings no more than 6 days in advance");
-                        }
-                    }
-                    int time;
-                    do {
-                        System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
-                        time = in.nextInt();//Need to check this
-                    }while (time < 9 || time > 21);
-                    running = booking(d, time, numberOfPeople, name);
-
-                }
-
-
-                return true;
-
-
-            case "p"://Take payment
-                pay();
-                return true;
-
-            case "l"://Log out
-
-                return false;
+private boolean manager(String str, Manager m) {
+    String s = str.toLowerCase();
+    String name; //Bayan: defined some variables used across multiple cases here to keep naming convention consistent
+    String phone;
+    boolean inList;
+    switch (s) {
+        case "a": //Add order
+        //Ronan: this could(probably should) be done in waiter and then just call waiter.addOrder() here
+        System.out.println("Enter customer name: ");
+        name = in.next();
+        System.out.println("Enter phone number(type 0 for walk in): ");
+        phone = in.next();
+        inList = false;
+        for (Customer c : r.getRestaurantChain().getCustomers()) {
+            if (c.getName().equals(name)) {
+                r.addOrder(new Order(c, r));//need to check how we are doing this in waiter
+                inList = true;//If the customer is in the list of customers, the booking is assigned to them
+            }
+            
         }
-        return true;//Ronan:this is never used, perhaps change above return trues to break?
-    }
-    
-    /**
-    * This runs if a chef is logged in
-    * @param str option passed from runStaff()
-    * @author Thomas, Ronan
-    * @param c chef who is currently logged in
-    * @return false to log out, true otherwise
-    */
-    private boolean chef(String str, Chef c) {
-        String s = str.toLowerCase();
-        switch (s) {
-            case "v"://View orders
-                c.printOrders();
-                return true;
-            case "a"://Acknowledge order (ie: cook order)
-                c.cooking(r.getOrders().get(0));
-                r.getWaiter().getReadyOrders();
-                return true;
-            case "l"://log out
-
-                return false;
+        if (!inList) {
+            Customer cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
+            r.getRestaurantChain().addCustomer(cust);
+            r.addOrder(new Order(cust, r));//This is for new customers
+        }
+        return true;
+        
+        case "r": //Remove order
+        System.out.println(r.getOrders().toString());//TODO: Better implementation here
+        System.out.println("Enter the order you would like to remove");
+        int remove =in.nextInt();
+        r.removeOrder(r.getOrders().get(remove-1));
+        System.out.println("Order" + r.getOrders().get(remove-1) + "has been removed");
+        
+        return true;
+        
+        case "v": //View orders
+        m.printOrders();
+        return true;
+        
+        case "t"://Take a booking
+        //need to show what tables are available
+        //todo: find a way to return only available tables - also need to specify when the booking is for!!
+        //take booking
+        boolean running=true;
+        while (running){
+            //here I used ronans stuff and added to them
+            System.out.println("Enter customer name: ");
+            name = in.next();
+            System.out.println("Enter phone number(type 0 for walk in): ");
+            phone = in.next();
+            int numberOfPeople=0;
+            boolean lessthen8 = false;
+            while(!lessthen8){
+                System.out.println("Enter number of people: ");
+                numberOfPeople = in.nextInt();
+                if(numberOfPeople>8){
+                    System.out.println("No more then 8 people per booking");
+                }else{
+                    lessthen8 = true;
+                }
+            }
+            boolean validDate=false;
+            LocalDate d = today;
+            while(!validDate){
+                d = valiDate();
+                validDate = validDate(d);
+                if(!validDate){
+                    System.out.println("Bookings no more than 6 days in advance");
+                }
+            }
+            int time;
+            do {
+                System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
+                time = in.nextInt();//Need to check this
+            }while (time < 9 || time > 21);
+            running = booking(d, time, numberOfPeople, name);
             
         }
         return true;
-    }
 
-    /**
-    * This runs if a manager is logged in
-    * @param str option passed from runStaff()
-    * @author Thomas, Ronan
-    * @param m manager who is currently logged in
-    * @return false to log out, true otherwise
-    */
-
-    private boolean manager(String str, Manager m) {
-        String s = str.toLowerCase();
-        String name; //Bayan: defined some variables used across multiple cases here to keep naming convention consistent
-        String phone;
-        boolean inList;
-        switch (s) {
-            case "a": //Add order
-                //Ronan: this could(probably should) be done in waiter and then just call waiter.addOrder() here
-                System.out.println("Enter customer name: ");
-                name = in.next();
-                System.out.println("Enter phone number(type 0 for walk in): ");
-                phone = in.next();
-                inList = false;
-                for (Customer c : r.getRestaurantChain().getCustomers()) {
-                    if (c.getName().equals(name)) {
-                        r.addOrder(new Order(c, r));//need to check how we are doing this in waiter
-                        inList = true;//If the customer is in the list of customers, the booking is assigned to them
-                    }
-
-                }
-                if (!inList) {
-                    Customer cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
-                    r.getRestaurantChain().addCustomer(cust);
-                    r.addOrder(new Order(cust, r));//This is for new customers
-                }
-                return true;
-
-                case "r": //Remove order
-                System.out.println(r.getOrders().toString());//TODO: Better implementation here
-                System.out.println("Enter the order you would like to remove");
-                int remove =in.nextInt();
-                r.removeOrder(r.getOrders().get(remove-1));
-                System.out.println("Order" + r.getOrders().get(remove-1) + "has been removed");
-
-                return true;
-
-            case "v": //View orders
-                m.printOrders();
-                return true;
-
-            case "t"://Take a booking
-                //need to show what tables are available
-                //todo: find a way to return only available tables - also need to specify when the booking is for!!
-                //take booking
-                boolean running=true;
-                while (running){
-                    //here I used ronans stuff and added to them
-                    System.out.println("Enter customer name: ");
-                    name = in.next();
-                    System.out.println("Enter phone number(type 0 for walk in): ");
-                    phone = in.next();
-                    int numberOfPeople=0;
-                    boolean lessthen8 = false;
-                    while(!lessthen8){
-                        System.out.println("Enter number of people: ");
-                        numberOfPeople = in.nextInt();
-                        if(numberOfPeople>8){
-                            System.out.println("No more then 8 people per booking");
-                        }else{
-                            lessthen8 = true;
-                        }
-                    }
-                    boolean validDate=false;
-                    LocalDate d = today;
-                    while(!validDate){
-                        d = valiDate();
-                        validDate = validDate(d);
-                        if(!validDate){
-                            System.out.println("Bookings no more than 6 days in advance");
-                        }
-                    }
-                    int time;
-                    do {
-                        System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
-                        time = in.nextInt();//Need to check this
-                    }while (time < 9 || time > 21);
-                    running = booking(d, time, numberOfPeople, name);
-
-                }
-                return true;
-            
-            case "p": //Pay
-                pay();
-                return true;
-            
-            
-            case "c": //Create menu
-                m.manageMenu(in);
-                return true;
-
-            case "h": //Bayan: Hire staff
-                System.out.println("Enter staff name:");
-                name = in.next();
-                System.out.println("\nEnter staff password:");
-                String password = in.next();
-                System.out.println("""
-                Enter staff position:
-                [A] Manager
-                [B] Chef
-                [C] Waiter
-                [D] Exit
-                """);
-                while (true) {
-                    String type = in.next();
-                    if (type.equalsIgnoreCase("C")) {
-                        m.employStaff(new Waiter(name, password, r));
-                        break;
-                    } else if (type.equalsIgnoreCase("B")) {
-                        m.employStaff(new Chef(name, password, r));
-                        break;
-                    } else if (type.equalsIgnoreCase("A")) {
-                        m.employStaff(new Manager(name, password, r));
-                        break;
-                    } else if (type.equalsIgnoreCase("D")) {
-                        break;
-                    } else {
-                        System.out.println("Please enter a valid input");
-                    }
-                }
-                return true;
-
-            case "f": //Bayan: Fire staff
-                System.out.println("Enter staff name:");
-                name = in.next();
-                if (m.fireStaff(name)) {
-                    System.out.println(name + "has been fired");
-                } else {
-                    System.out.println("No staff found by that name");
-                }
-                return true;
-
-            case "d"://Clear csvs
-                m.factoryReset(r.getDeletableCsv());
-                System.exit(0);
-                return true;
-
-            case "l"://logout
-
-                return false;
-
+        case "m":
+        
+        System.out.println("please give when you want the graph the start");
+        LocalDate start = valiDate();
+        System.out.println("please print when you want thee graph to end");
+        LocalDate end = valiDate();
+        
+        m.generateGraph(start,end);
+        
+        
+        case "p": //Pay
+        pay();
+        return true;
+        
+        
+        case "c": //Create menu
+        m.manageMenu(in);
+        return true;
+        
+        case "h": //Bayan: Hire staff
+        System.out.println("Enter staff name:");
+        name = in.next();
+        System.out.println("\nEnter staff password:");
+        String password = in.next();
+        System.out.println("""
+        Enter staff position:
+        [A] Manager
+        [B] Chef
+        [C] Waiter
+        [D] Exit
+        """);
+        while (true) {
+            String type = in.next();
+            if (type.equalsIgnoreCase("C")) {
+                m.employStaff(new Waiter(name, password, r));
+                break;
+            } else if (type.equalsIgnoreCase("B")) {
+                m.employStaff(new Chef(name, password, r));
+                break;
+            } else if (type.equalsIgnoreCase("A")) {
+                m.employStaff(new Manager(name, password, r));
+                break;
+            } else if (type.equalsIgnoreCase("D")) {
+                break;
+            } else {
+                System.out.println("Please enter a valid input");
+            }
         }
         return true;
-    }
-
-
-
-    /**
-     * Checks if a given date is within 6 days of today
-     * @param date date to be checked
-     * @return true if within 6 days, false otherwise
-     */
-    private boolean validDate(LocalDate date){
-
-        return today.until(date, ChronoUnit.DAYS) <= 6 && !date.isBefore(today);
-    }
-
-    /**
-     * Creates a booking at a specific date and time
-     * @param d the date of the booking
-     * @param time the time of the booking in hours
-     * @param num the number of people for the booking
-     * @param name the name of the customer making the booking
-     * @return false after booking is complete
-     * @author Ronan, Bayan
-     */
-    private boolean booking(LocalDate d, int time, int num, String name) {
-        int daysInAdvance = (int)today.until(d, ChronoUnit.DAYS);
-        Table t = r.assignTable(daysInAdvance, time, num);
-        if (t != null) {//If there is an available table
-            System.out.println("Table " + t.getTableNumber() + " is available");
-            System.out.println("Enter y to book, or n otherwise");
-            if (in.next().equalsIgnoreCase("y")) {
-                t.setReservedAtTime(time, daysInAdvance, true);
-                Customer c = r.getRestaurantChain().findCustomer(name);
-                Booking booking = new Booking(c, num, time, r, today, t);
-                r.addBooking(booking);
-                booking.updateFile(bookings,booking.toCsv());
-                System.out.println("Booking successful");
-            }
+        
+        case "f": //Bayan: Fire staff
+        System.out.println("Enter staff name:");
+        name = in.next();
+        if (m.fireStaff(name)) {
+            System.out.println(name + "has been fired");
+        } else {
+            System.out.println("No staff found by that name");
         }
+        return true;
+        
+        case "d"://Clear csvs
+        m.factoryReset(r.getDeletableCsv());
+        System.exit(0);
+        return true;
+        
+        case "l"://logout
+        
         return false;
+        
     }
+    return true;
+}
 
-    /**
-     * Overloaded booking method that creates a booking for today
-     * @param time time of booking
-     * @param num number of people booking is for
-     * @param name name of customer making booking
-     * @return false after booking is complete
-     * @author Bayan
-     */
-    private boolean booking(int time, int num, String name) {
-        return booking(today, time, num, name);
-    }
 
-    /**
-     * Ensures dates are written in correct format
-     * @return LocalDate
-     * @author Ronan
-     */
-    private LocalDate valiDate(){
-        boolean valid = false;
-        LocalDate date = LocalDate.now();
-        while(!valid){
-            try{
-                System.out.println("Enter date");
-                date = LocalDate.parse(in.next());
-                valid=true;
-            }
-            catch (DateTimeParseException dtpe){
-                System.out.println("Enter date in format YYYY-MM-DD");
-            }
-        }
-        return date;
-    }
 
-    private void pay() {
-        if(r.getOrders().isEmpty()){
-            System.out.println("No orders currently");
-        }
-        else{
-            System.out.println("Select an order");
-            System.out.println(r.getOrders().toString());
-            int o = in.nextInt();
-            Till t =new Till(r,r.getOrders().get(o));
-            t.processPayment();
+/**
+* Checks if a given date is within 6 days of today
+* @param date date to be checked
+* @return true if within 6 days, false otherwise
+*/
+private boolean validDate(LocalDate date){
+    
+    return today.until(date, ChronoUnit.DAYS) <= 6 && !date.isBefore(today);
+}
+
+/**
+* Creates a booking at a specific date and time
+* @param d the date of the booking
+* @param time the time of the booking in hours
+* @param num the number of people for the booking
+* @param name the name of the customer making the booking
+* @return false after booking is complete
+* @author Ronan, Bayan
+*/
+private boolean booking(LocalDate d, int time, int num, String name) {
+    int daysInAdvance = (int)today.until(d, ChronoUnit.DAYS);
+    Table t = r.assignTable(daysInAdvance, time, num);
+    if (t != null) {//If there is an available table
+        System.out.println("Table " + t.getTableNumber() + " is available");
+        System.out.println("Enter y to book, or n otherwise");
+        if (in.next().equalsIgnoreCase("y")) {
+            t.setReservedAtTime(time, daysInAdvance, true);
+            Customer c = r.getRestaurantChain().findCustomer(name);
+            Booking booking = new Booking(c, num, time, r, today, t);
+            r.addBooking(booking);
+            booking.updateFile(bookings,booking.toCsv());
+            System.out.println("Booking successful");
         }
     }
+    return false;
+}
+
+/**
+* Overloaded booking method that creates a booking for today
+* @param time time of booking
+* @param num number of people booking is for
+* @param name name of customer making booking
+* @return false after booking is complete
+* @author Bayan
+*/
+private boolean booking(int time, int num, String name) {
+    return booking(today, time, num, name);
+}
+
+/**
+* Ensures dates are written in correct format
+* @return LocalDate
+* @author Ronan
+*/
+private LocalDate valiDate(){
+    boolean valid = false;
+    LocalDate date = LocalDate.now();
+    while(!valid){
+        try{
+            System.out.println("Enter date");
+            date = LocalDate.parse(in.next());
+            valid=true;
+        }
+        catch (DateTimeParseException dtpe){
+            System.out.println("Enter date in format YYYY-MM-DD");
+        }
+    }
+    return date;
+}
+
+private void pay() {
+    if(r.getOrders().isEmpty()){
+        System.out.println("No orders currently");
+    }
+    else{
+        System.out.println("Select an order");
+        System.out.println(r.getOrders().toString());
+        int o = in.nextInt();
+        Till t =new Till(r,r.getOrders().get(o));
+        t.processPayment();
+    }
+}
 }
