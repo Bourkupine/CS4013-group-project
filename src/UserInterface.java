@@ -60,6 +60,18 @@ public class UserInterface {
         while (running) {
             System.out.println("Enter name");
             String name = in.next();
+            int num = 0;
+            boolean lessthen8 = false;
+            while (!lessthen8) {
+                System.out.println("Enter number of people: ");
+                num = in.nextInt();
+                if(num>8){
+                    System.out.println("No more then 8 people per booking");
+                }else{
+                    num = r.setPeople(num); //change the amount of people to fit the table seats
+                    lessthen8 = true;
+                }
+            }
             LocalDate d = today; //todo: error if someone inputs date wrong it will automatically use today's date
             boolean validDate = false;
             while (!validDate){
@@ -69,22 +81,16 @@ public class UserInterface {
                     System.out.println("Bookings no more than 6 days in advance");
                 }
             }
+
+            //time
+
+
             int time = 0;
             do { //todo: check if we need variables for each restaurant's opening and closing time
                 System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
                 time = in.nextInt();//Need to check this
             }while (time < 9 || time > 21);
-            int num = 0;
-            boolean lessthen8 = false;
-            while (!lessthen8) {
-                System.out.println("Enter number of people: ");
-                num = in.nextInt();
-                if(num>8){
-                    System.out.println("No more then 8 people per booking");
-                }else{
-                    lessthen8 = true;
-                }
-            }
+
             
             running = booking(d, time, num, name);
         }
