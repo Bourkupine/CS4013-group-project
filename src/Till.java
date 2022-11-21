@@ -62,10 +62,10 @@ public class Till {
         System.out.println(bill.toString());
         
         
-        if(choice == 1 && amountGiven > amountDue){
+        if(choice == 1 && amountGiven >= amountDue){
             cash = true;
             cashInDrawer = cashInDrawer+amountDue;
-        }else if(amountGiven > amountDue){
+        }else if(amountGiven < amountDue){
             creditCardT = creditCardT+amountDue;
             change = 0;
             System.out.printf("Give %f", change);
