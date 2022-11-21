@@ -13,6 +13,7 @@ public class Bill implements ReadWrite{
        order.getCustomer().incrementLoyalty(); // incrementing the loyalty as they have requested the bill and are about to pay
        this.order=order;
        updateFile(order.getR().getMoney(),toCsv());
+       order.getR().getRestaurantChain().updateCustomerCsv();
        order.updateRestaurantTotal(order.getTotal());
     }
 

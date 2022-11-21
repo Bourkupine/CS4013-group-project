@@ -29,7 +29,7 @@ public class Initialiser implements ReadWrite{
         System.out.println("Enter date");
         LocalDate date = LocalDate.parse(in.next());
         File[] f = files();
-        RestaurantChain rc = new RestaurantChain("Yum's",num,f[0],f[1],f[2],f[3],date);//TODO: employ staff
+        RestaurantChain rc = new RestaurantChain("Yum's",num,f,date);//TODO: employ staff
 
         boolean validId=false;
         while(!validId){
@@ -60,7 +60,13 @@ public class Initialiser implements ReadWrite{
             writeFile(money,"Date,Total");
         }
         File menu = new File("menu.csv");
+        if(menu.length()==0){
+            writeFile(menu,"RestId,Food,Price,Type");
+        }
         File customers = new File("customers.csv");
+        if(customers.length()==0){
+            writeFile(customers,"Name,PhoneNum,Loyalty");
+        }
         File[] arr = new File[5];
         arr[0]=restaurants;
         arr[1]=bookings;

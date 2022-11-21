@@ -105,6 +105,7 @@ public class Manager extends Staff implements ReadWrite{
                 }
             } else if (input.equalsIgnoreCase("D")) {
                 r.getMenu().clearMenu();
+                writeFile(getRest().getMenuCsv(),"RestId,Food,Price,Type");
                 System.out.println("Menu cleared");
             } else if (input.equalsIgnoreCase("E")) {
                 menuing = false;

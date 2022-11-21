@@ -12,8 +12,6 @@ public class UserInterface {
     private File money;
     
     private Scanner in = new Scanner(System.in);
-    private ArrayList<Staff> staffArr;
-    private ArrayList<Customer> customerArr;
 
     private LocalDate today;
     
@@ -25,8 +23,6 @@ public class UserInterface {
     public UserInterface(Restaurant r,LocalDate date, File bookings, File money) {
         
         this.r = r;
-        staffArr = r.getStaff();
-        customerArr = r.getCustomers();
         today=date;
         this.bookings=bookings;
         this.money=money;
@@ -113,17 +109,17 @@ public class UserInterface {
                 System.out.println("Enter password");
                 String password = in.next();
                 
-                if (valid(name, password, staffArr)) {//If a valid username was entered
+                if (valid(name, password, r.getStaff())) {//If a valid username was entered
                     Staff currentStaff;
                     pass = true;
                     int index = 0;
-                    for (Staff s : staffArr) {
+                    for (Staff s : r.getStaff()) {
                         if (s.getName().equals(name) && s.getPassword().equals(password)) {
-                            index = staffArr.indexOf(s);
+                            index = r.getStaff().indexOf(s);
                             break;
                         }
                     }
-                    currentStaff = staffArr.get(index);
+                    currentStaff = r.getStaff().get(index);
                     running = runStaff(currentStaff);//When you log out, this sets running to false, exiting the loop
                 } else {
                     System.out.println("Invalid username/password");
@@ -197,7 +193,7 @@ public class UserInterface {
                 System.out.println("Enter phone number(type 0 for walk in): ");
                 String phone = in.next();
                 boolean inList = false;
-                for (Customer c : customerArr) {
+                for (Customer c : r.getRestaurantChain().getCustomers()) {
                     if (c.getName().equals(name)) {
                         r.addOrder(new Order(c, r));//need to check how we are doing this in waiter
                         inList = true;//If the customer is in the list of customers, the booking is assigned to them
@@ -206,6 +202,7 @@ public class UserInterface {
                 }
                 if (!inList) {
                     Customer cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
+                    r.getRestaurantChain().addCustomer(cust);
                     r.addOrder(new Order(cust, r));//This is for new customers
                 }
                 return true;
@@ -288,6 +285,7 @@ public class UserInterface {
                 r.getWaiter().getReadyOrders();
                 return true;
             case "l"://log out
+
                 return false;
             
         }
@@ -315,7 +313,7 @@ public class UserInterface {
                 System.out.println("Enter phone number(type 0 for walk in): ");
                 phone = in.next();
                 inList = false;
-                for (Customer c : customerArr) {
+                for (Customer c : r.getRestaurantChain().getCustomers()) {
                     if (c.getName().equals(name)) {
                         r.addOrder(new Order(c, r));//need to check how we are doing this in waiter
                         inList = true;//If the customer is in the list of customers, the booking is assigned to them
@@ -324,6 +322,7 @@ public class UserInterface {
                 }
                 if (!inList) {
                     Customer cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
+                    r.getRestaurantChain().addCustomer(cust);
                     r.addOrder(new Order(cust, r));//This is for new customers
                 }
                 return true;
@@ -438,6 +437,7 @@ public class UserInterface {
                 return true;
 
             case "l"://logout
+
                 return false;
 
         }

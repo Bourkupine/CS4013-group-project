@@ -12,7 +12,8 @@ public class RestaurantChain implements ReadWrite{
     private int amountOfRestaurants; //The amount of restaurants.
      //todo: this needs to be moved to restaurant since each restaurant has its own menu
     private ArrayList<Restaurant> restaurants = new ArrayList<>();// ArrayList containing all restaurants in chain
-    File rest; //Contains details of all restaurants
+    private File rest; //Contains details of all restaurants
+    private File customer;
     
 
 
@@ -23,15 +24,17 @@ public class RestaurantChain implements ReadWrite{
      * @param amountOfRestaurants amount of restaurants in the chain
      * @author Bayan, Ronan
      */
-    public RestaurantChain(String name, int amountOfRestaurants, File rest,File booking, File money,File menuCsv, LocalDate d){
+    public RestaurantChain(String name, int amountOfRestaurants, File[] f, LocalDate d){
         this.name = name;
-        this.rest=rest;
+        this.rest=f[0];
+        this.customer=f[4];
         for (int i = 0; i < amountOfRestaurants; i++) {
-            Restaurant restaurant = new Restaurant(15,this,i,d,booking,money,menuCsv);//Ronan: 15 tables is arbitrary and can be changed
+            Restaurant restaurant = new Restaurant(15,this,i,d,f[1],f[2],f[3]);//Ronan: 15 tables is arbitrary and can be changed
             restaurants.add(restaurant);
             managers();
 
         }
+        updateCustomers();
         writeDetails();
     }
 
@@ -49,6 +52,41 @@ public class RestaurantChain implements ReadWrite{
 
 
 
+    }
+
+    /**
+     * Adds a customer to the arrayList of customers
+     * @param c Customer to be added
+     */
+    public void addCustomer(Customer c){
+        customers.add(c);
+        updateFile(customer,c.toCsv());
+    }
+
+    /**
+     * Populates customer arraylist using customer csv
+     */
+    public void updateCustomers(){
+        ArrayList<String> temp = readFile(customer);
+        if(temp.size()>1){
+            for(int i=1;i<temp.size();i++){
+                String[] split = temp.get(i).split(",");
+                customers.add(new Customer(split[0],split[1],Integer.parseInt(split[2])));
+            }
+        }
+    }
+
+    /**
+     * Writes customer csv using arraylist
+     * Used whenever a customer pays, thus incrementing their loyalty
+     */
+    public void updateCustomerCsv(){
+        ArrayList<String> s = new ArrayList<>();
+        s.add("Name,PhoneNum,Loyalty");
+        for (Customer c: customers){
+            s.add(c.toCsv());
+        }
+        writeFile(customer,s);
     }
 
     /**
