@@ -201,13 +201,23 @@ public class Order{
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder(c.getName());
-        output.append("\n");
-        for(int i = 0; i < ordered.size(); i++) {
+        for (int i = 0; i < ordered.size(); i++) {
             output.append(ordered.get(i).getName());
             if (i != ordered.size() - 1) {
-                output.append(",\n");
+                output.append(", ");
             }
         }
         return output.toString();
+    }
+
+    /**
+     * Prints order details to standard output
+     * @author Bayan
+     */
+    public void printOrder() {
+        for (FoodItem f : ordered) {
+            System.out.println(String.format("%-20s%05.2f\n", f.getName(), f.getPrice()));
+        }
+        System.out.println("Total: " + total);
     }
 }
