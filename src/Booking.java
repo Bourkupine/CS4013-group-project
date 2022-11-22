@@ -32,28 +32,6 @@ public class Booking implements ReadWrite{
         this.table = table;
     }
 
-
-    //Getters & Setters:
-
-
-    /**
-     * Sets a table to the booking
-     * @param table the booking's Table
-     * @author Euan
-     */
-    public void setTable(Table table) {
-        this.table = table;
-    }
-
-    /**
-     * Change time of booking
-     * @param time time you wish to change your booking to
-     * @author Euan
-     */
-    public void setTime(int time){
-        this.time = time;
-    }
-
     /**
      * Gets booking id
      * @return id as String
@@ -70,33 +48,6 @@ public class Booking implements ReadWrite{
      */
     public Customer getCustomer() {
         return customer;
-    }
-
-    /**
-     * Gets number of people in the booking
-     * @return numberOfPeople as int
-     * @author Euan
-     */
-    public int getNumberOfPeople() {
-        return numberOfPeople;
-    }
-
-    /**
-     * Gets time of the booking in hours
-     * @return time as int
-     * @author Euan
-     */
-    public int getTime() {
-        return time;
-    }
-
-    /**
-     * Gets date of the booking
-     * @return date as LocalDate
-     * @author Bayan
-     */
-    public LocalDate getDate() {
-        return date;
     }
 
     /**
