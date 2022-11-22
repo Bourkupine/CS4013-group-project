@@ -59,6 +59,10 @@ public class Booking implements ReadWrite{
         return id+","+numberOfPeople+","+date.toString()+","+time+","+table.getTableNumber()+","+customer.getId();
     }
 
+    /**
+     * gets the restaurant the booking is in
+     * @return the restaurant as a Restaurant object
+     */
     public Restaurant getRest() {
         return rest;
     }
