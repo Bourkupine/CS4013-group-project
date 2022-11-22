@@ -56,12 +56,13 @@ public class Till implements ReadWrite {
         double amountGiven = 0;
         
         while(amountGiven < amountDue){
-            System.out.println(amountDue +" left to pay");
+            System.out.println((amountDue - amountGiven) +" left to pay");
             System.out.println("Enter amount given "); //this is the amount the customer gives
             amountGiven += in.nextInt();
         }
         
         if(amountGiven> amountDue){
+            change = amountGiven - amountDue ;
             System.out.println(change + " is the change");
         }
         order.getCustomer().incrementLoyalty();
