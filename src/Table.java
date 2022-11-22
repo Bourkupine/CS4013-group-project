@@ -27,16 +27,6 @@ public class Table {
     }
 
     /**
-     * Sets the table to be reserved or not reserved today.
-     * @param hour the time in hours in 24-hour clock
-     * @param reserved reserved value for the table
-     * @author Bayan, Euan
-     */
-    public void setReservedAtTime(int hour, boolean reserved) {
-        this.reserved.get(0)[hour - 9] = reserved; //Euan: updated for arraylist
-    }
-
-    /**
      * Sets the table to be reserved or not reserved at a given day.
      * @param hour the time in hours (24-hour format)
      * @param day days in advance of reservation
@@ -45,16 +35,6 @@ public class Table {
      */
     public void setReservedAtTime(int hour, int day, boolean reserved) { //overloading
         this.reserved.get(day)[hour - 9] = reserved;
-    }
-
-    /**
-     * Gets reservation status for the table.
-     * @param hour the time in hours in 24-hour clock
-     * @return reserved as boolean
-     * @author Bayan, Euan
-     */
-    public boolean getReservedAtTime(int hour) {
-        return reserved.get(0)[hour - 9];
     }
 
     /**

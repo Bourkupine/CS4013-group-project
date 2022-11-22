@@ -16,7 +16,7 @@ public class Restaurant implements ReadWrite{
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
     private ArrayList<Staff> staff = new ArrayList<>();
-    private double totalEarnings = 0;
+    private double totalEarnings = 0;//TODO: Check if we can get total earnings in user interface.
     private double dailyEarnings = 0;
     private int idNum ; //look back at this
     private int bookingId = 0;
@@ -49,6 +49,7 @@ public class Restaurant implements ReadWrite{
         this.rc = rc;
         this.idNum = idNum;
         this.menuCsv=menuCsv;
+        fillHashMap();
         this.staffCsv=staffCsv;
         int j = 1;
         int floor = amountOfTables/3;
@@ -75,24 +76,6 @@ public class Restaurant implements ReadWrite{
     }
 
     /**
-     * creates a booking for the restaurant and assigns it a table
-     * @param c Customer the booking belongs to
-     * @param people amount of people for the booking
-     * @param time time of booking
-     * @author Euan
-     */
-    //TODO: below???
-    /*
-    public void makeBooking(Customer c, int people, int time)  {
-        //run people check here maybe?
-        Booking book = new Booking(c, setPeople(people), this);
-        bookings.add(book);
-        assignTable(time, setPeople(people), book);
-        bookingId++;
-
-    }
-*///Ronan: I've commented this out cause it's not used but idk if we need it
-    /**
      * Cancel a booking
      * @param name the name of the customer removing the booking
      * @param bookingId the unique id of the booking
@@ -109,6 +92,7 @@ public class Restaurant implements ReadWrite{
 
     /**
      * Generates menu from csv file
+     * @author ronan
      */
     public void generateMenu() { //todo: this was for testing, should be done in UI, need to store menu items in csv
         ArrayList<FoodItem> f = new ArrayList<>();
@@ -121,7 +105,7 @@ public class Restaurant implements ReadWrite{
 
         }
 
-        menu=new Menu(f);
+        menu = new Menu(f);
     }
 
 
@@ -223,26 +207,10 @@ public class Restaurant implements ReadWrite{
     }
 
     /**
-     * Gets table at given time and that has a certain amount of people
-     *
-     * @param hour hour of booking
-     * @param numOfPeople number of people at the table
-     * @return table table that matches the given parameters (if it exists)
-     *
-     * @author Euan
+     * Returns first Chef in Staff ArrayList
+     * @author ronan
+     * @return a chef
      */
-
-    public Table getTable(int hour, int numOfPeople) {
-        for (Table table : getTableList()) {
-            if(!table.getReservedAtTime(hour) && table.getNumberOfSeats() >= numOfPeople) {
-                return table;
-            }
-        }
-        //temporary response if no available tables:
-        System.out.println("No available tables at that time");
-        return null;
-    }
-
     public Chef getChef(){
         for(Staff s:staff){
             if(s instanceof Chef){
@@ -251,7 +219,11 @@ public class Restaurant implements ReadWrite{
         }
         return null;
     }
-
+    /**
+     * Returns first waiter in Staff ArrayList
+     * @author ronan
+     * @return a waiter
+     */
     public Waiter getWaiter(){
         for(Staff s:staff){
             if(s instanceof Waiter){
@@ -267,7 +239,7 @@ public class Restaurant implements ReadWrite{
      * @author Ronan
      */
     public void addOrder(Order o){
-        orders.add(o);//Ronan: I don't think we ever actually added orders to the array anywhere? could be wrong
+        orders.add(o);
     }
 
     /**
@@ -278,8 +250,6 @@ public class Restaurant implements ReadWrite{
     public void removeOrder(Order o){
         orders.remove(o);
     }
-
-    //Getters and Setters
 
     /**
      * returns the arraylist of orders
@@ -297,14 +267,7 @@ public class Restaurant implements ReadWrite{
      */
     public ArrayList<Booking> getBookings() {
         return bookings;
-    }
-
-    /**
-     * returns the arraylist of tables
-     * @return tables as arraylist
-     * @author Euan
-     */
-    public ArrayList<Table> getTableList() {return tables;} //Euan: changed name to getTableList to not confuse with getTable
+    } //TODO: IMPLEMENT VIEW BOOKINGS HEY DO IT NOW PLS THANKS BOOB
 
     /**
      * gets current menu
@@ -323,15 +286,6 @@ public class Restaurant implements ReadWrite{
     }
 
     /**
-     * returns the arraylist of customers
-     * @return customers as arraylist
-     * @author Ronan
-     */
-    public ArrayList<Customer> getCustomers(){
-        return rc.getCustomers();
-    }
-
-    /**
      * add onto the daily earnings
      * @param amount amount to be added
      * @author Euan
@@ -347,7 +301,7 @@ public class Restaurant implements ReadWrite{
     public void updateDailyAmount() {
         totalEarnings += dailyEarnings;
         dailyEarnings = 0;
-    }
+    }//TODO: WHY NO USEY EUAN SEEMS TO KNOW THIS IS FOR EUAN
 
     /**
      * Increments and get the next booking ID number

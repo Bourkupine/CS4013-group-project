@@ -36,7 +36,7 @@ public class Chef extends Staff {
      * @author Thomas
      */
     public void cooking(Order o){
-        if(o.checkStatus("ORDERED")){// chef receives order and cooks it
+        if(o.isReady("ORDERED")){// chef receives order and cooks it
             o.setStatus("READY");
         }
     }

@@ -21,6 +21,11 @@ public class Manager extends Staff implements ReadWrite{
         super(name,password,rest);//managers name password and restaurant
     }
 
+    /**
+     * Deleted the filed in the passed file array
+     * @param files array of files to be deleted
+     * @author Ronan
+     */
     public void factoryReset(File[] files){
         for(File f1:files){
             deleteFile(f1);

@@ -27,9 +27,12 @@ public class Till implements ReadWrite {
         Scanner in = new Scanner(System.in);
         change = 0;
         amountGiven = 0;
-        
         System.out.println( order.getTotal() + " is the total");
+        order.getCustomer().incrementLoyalty();
         double amountDue = order.getTotal();
+        if (order.isDiscounted()) {
+            amountDue = amountDue / 10;
+        }
         double tip;
         double totalTips = 0;
         double total = order.getTotal();
@@ -65,7 +68,6 @@ public class Till implements ReadWrite {
             change = amountGiven - amountDue ;
             System.out.println(change + " is the change");
         }
-        order.getCustomer().incrementLoyalty();
         order.updateRestaurantTotal(order.getTotal());
         order.getR().getRestaurantChain().updateCustomerCsv();
         printReceipt(order);

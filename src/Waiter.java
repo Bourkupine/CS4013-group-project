@@ -22,7 +22,7 @@ public class Waiter extends Staff {
      */
     public void getReadyOrders(){
        for(Order r: getRest().getOrders()){
-          if(r.checkStatus("Ready")){
+          if(r.isReady("Ready")){
             dropFood(r);
           }
        }

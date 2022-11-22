@@ -67,14 +67,8 @@ public class Customer implements ReadWrite{
         return id;
     }
 
-    /**
-     * Gets phone number of customer
-     * @return phone number as String
-     * @author Ronan
-     */
-    public String getPhoneNumber() {
-        return phoneNumber;
-    } //TODO: idea: send user a "message" to remind of booking
+
+    //TODO: idea: send user a "message" to remind of booking
 
     /**
      * Returns number of times customer has been to restaurant
@@ -105,6 +99,10 @@ public class Customer implements ReadWrite{
         return "Customer "+name+" (id "+id+") has made "+loyalty+" visits.";
     }
 
+    /**
+     * @author ronan
+     * @return name phone number and loyalty of the customer
+     */
     public String toCsv(){
         return name+","+phoneNumber+","+loyalty;
     }

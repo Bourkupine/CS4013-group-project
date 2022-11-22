@@ -140,6 +140,12 @@ public class RestaurantChain implements ReadWrite{
         return findCustomer(c.getName());
     }
 
+    /**
+     * Returns first customer in the Customer ArrayList with the same name
+     * @author Bayan
+     * @param name Name of the Customer
+     * @return customer as Customer
+     */
     public Customer findCustomer(String name) {
         for (Customer cust : customers) {
             if (cust.getName().equals(name)) {
