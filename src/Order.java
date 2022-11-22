@@ -201,14 +201,13 @@ public class Order{
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder(c.getName());
-        output.append("{");
+        output.append("\n");
         for(int i = 0; i < ordered.size(); i++) {
             output.append(ordered.get(i).getName());
             if (i != ordered.size() - 1) {
                 output.append(",\n");
             }
         }
-        output.append("}");
         return output.toString();
     }
 }
