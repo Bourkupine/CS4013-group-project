@@ -414,6 +414,8 @@ public class UserInterface {
                 LocalDate end = valiDate();
 
                 m.generateGraph(start,end);
+                System.out.println("\n"+"This is the total earning for the restaurant since it was started = ");
+                r.getTotalEarnings();
 
             case "u": //undo booking
                 undoBooking();

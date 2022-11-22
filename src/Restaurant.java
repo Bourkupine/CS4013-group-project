@@ -16,7 +16,7 @@ public class Restaurant implements ReadWrite{
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
     private ArrayList<Staff> staff = new ArrayList<>();
-    private double totalEarnings = 0;//TODO: Check if we can get total earnings in user interface.
+    private double totalEarnings = 0;
     private double dailyEarnings = 0;
     private int idNum ; //look back at this
     private int bookingId = 0;
@@ -241,6 +241,15 @@ public class Restaurant implements ReadWrite{
     public void addOrder(Order o){
         orders.add(o);
     }
+
+    /**
+    * To see the total earnings of the restaurant. 
+    * @return total earnings for the restaurant
+    * @author Thomas
+    */
+    public double getTotalEarnings() {
+        return totalEarnings;
+    }
     
     /**
     * remove an order from the order array list
@@ -260,9 +269,9 @@ public class Restaurant implements ReadWrite{
         return orders;
     }
     /**
-     * returns all the bookings that are currently made
-     * @return arraylist of all the bookings
-     */
+    * returns all the bookings that are currently made
+    * @return arraylist of all the bookings
+    */
     public ArrayList<Booking> getBookings() {
         return bookings;
     }
