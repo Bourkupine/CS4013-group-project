@@ -378,6 +378,9 @@ public class UserInterface {
                             lessthen8 = true;
                         }
                     }
+                    System.out.println("These are all the bookings we currently have available ");
+                    r.getAvailableBookings();
+                    System.out.println("Please select a date within the next 6 days");
                     boolean validDate=false;
                     LocalDate d = today;
                     while(!validDate){
@@ -391,6 +394,12 @@ public class UserInterface {
                     do {
                         System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
                         time = in.nextInt();//Need to check this
+                        if(r.getBookings().get(time) == null){
+                            System.out.println("Your booking is for " + time + " on " + validDate + "Please arrive on time" + "\n" + "If you are later then 15 minutes your booking will be forefeited");
+                            break ;
+                        }else{
+                            System.out.println("There is no tables available at this time choose another time.");
+                        }
                     }while (time < 9 || time > 21);
                     running = booking(d, time, numberOfPeople, name);
 

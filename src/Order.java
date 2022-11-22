@@ -121,7 +121,6 @@ public class Order{
     * @return boolean
     * @author Thomas
     */
-    //TODO: return boolean value is never used
     public void setStatus(String status) {
         for(orderStatus st : orderStatus.values()) {
             if (status.equalsIgnoreCase(st.toString())) {
@@ -134,7 +133,6 @@ public class Order{
     * Calculates if a discount is applied to the order
     * @author Thomas
     */
-    //TODO: apparently this is never called
     public boolean isDiscounted(){
         return c.getLoyalty()%10 == 0; //t when they get to 10 orders/visits the get a ten percent discount
     }
