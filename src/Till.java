@@ -1,4 +1,3 @@
-import java.text.BreakIterator;
 import java.util.Scanner;
 //what else does a till do 
 //prints bill
@@ -29,7 +28,6 @@ public class Till implements ReadWrite {
         change = 0;
         amountGiven = 0;
         
-        Bill bill = new Bill(order);//this creates a bill for said order
         System.out.println( order.getTotal() + " is the total");
         double amountDue = order.getTotal();
         double tip;
