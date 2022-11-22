@@ -24,7 +24,7 @@ public class Bill implements ReadWrite{
      */
     @Override
     public String toString() { //printing the bill
-        return  String.format("Total  €%.2f. Thank you for visiting Yum", order.getTotal());
+        return  String.format(order.toString()+ "/n" + "Total  €%.2f. Thank you for visiting Yum", order.getTotal());
     }
 
     private String toCsv(){
