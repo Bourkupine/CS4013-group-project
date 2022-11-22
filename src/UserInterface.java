@@ -552,8 +552,8 @@ public class UserInterface {
             System.out.println("Select an order");
             System.out.println(r.getOrders().toString());
             int o = in.nextInt();
-            Till t =new Till(r,r.getOrders().get(o));
-            t.processPayment();
+            Till t =new Till(r);
+            t.processPayment(r.getOrders().get(o));
         }
     }
     private boolean undoBooking() {
