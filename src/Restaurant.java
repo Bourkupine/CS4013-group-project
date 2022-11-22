@@ -1,7 +1,9 @@
 //Euan: this can act like the main (overview?) class
 
+import java.awt.print.Book;
 import java.io.File;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NavigableSet;
@@ -69,6 +71,7 @@ public class Restaurant implements ReadWrite{
             tables.add(t);
         }
         generateMenu();
+        fillBookings();
     }
 
     /**
@@ -126,6 +129,44 @@ public class Restaurant implements ReadWrite{
      */
     public void addBooking(Booking booking) {
         bookings.add(booking);
+    }
+
+    /**
+     * Fill table 2d array with current bookings from csv
+     * @author Euan
+     */
+    public void fillBookings() {
+        for (int i = 1; i < readFile(booking).size(); i++) {
+            String[] s = readFile(booking).get(i).split(",");
+            String str = s[0];
+            String[] temp = str.split("_");
+            if(Integer.parseInt(temp[0]) == idNum) {
+                Customer customer = null;
+                Table table = null;
+                int time = Integer.parseInt(s[3]);
+                LocalDate date = LocalDate.parse(s[2]);
+                if ((int)this.date.until(date, ChronoUnit.DAYS) >= 0) {
+
+                    for (Customer c : rc.getCustomers()) {
+                        if (c.getId() == Integer.parseInt(s[5])) {
+                            customer = c;
+                        }
+                    }
+                    for (Table t : tables) {
+                        if (t.getTableNumber() == Integer.parseInt(s[4])) {
+                            table = t;
+                            t.setReservedAtTime(time, (int)this.date.until(date, ChronoUnit.DAYS), true);
+                        }
+                    }
+                    int numOfPeople = Integer.parseInt(s[1]);
+
+                    Booking b = new Booking(customer, numOfPeople, time, this, date, table);
+                    bookings.add(b);
+                }
+
+            }
+
+        }
     }
 
     /**
@@ -322,9 +363,6 @@ public class Restaurant implements ReadWrite{
         return rc;
     }
 
-    public File getBooking() {
-        return booking;
-    }
 
     public File getMoney() {
         return money;
