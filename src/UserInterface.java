@@ -6,33 +6,33 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
-    
+
     private Restaurant r;
     private File bookings;
     private File money;
-    
+
     private Scanner in = new Scanner(System.in);
 
     private LocalDate today;
-    
+
     /**
-    * creates a user interface for restaurant
-    * @param r restaurant the interface belongs to
-    * @author Ronan
-    */
+     * creates a user interface for restaurant
+     * @param r restaurant the interface belongs to
+     * @author Ronan
+     */
     public UserInterface(Restaurant r,LocalDate date, File bookings, File money) {
-        
+
         this.r = r;
         today=date;
         this.bookings=bookings;
         this.money=money;
         pick();
     }
-    
+
     /**
-    * Determines staff or customer
-    * @author Ronan
-    */
+     * Determines staff or customer
+     * @author Ronan
+     */
     private void pick() {
         while (true) {
             System.out.println("Enter 1 for staff, 2 for customer or 3 to quit");
@@ -47,74 +47,84 @@ public class UserInterface {
                 System.out.println("Please try again");
             }
         }
-        
+
     }
-    
+
     /**
-    * This method runs if a customer is using the system
-    * @author Ronan, Bayan
-    */
+     * This method runs if a customer is using the system
+     * @author Ronan, Bayan
+     */
     private void runCustomer() {
         boolean running = true;
-        
+
         while (running) {
             System.out.println("Enter name");
             String name = in.next();
-            int num = 0;
-            boolean lessthen8 = false;
-            while (!lessthen8) {
-                System.out.println("Enter number of people: ");
-                num = in.nextInt();
-                if(num>8){
-                    System.out.println("No more then 8 people per booking");
-                }else{
-                    num = r.setPeople(num); //change the amount of people to fit the table seats
-                    lessthen8 = true;
+            System.out.println("C)reate booking, U)ndo booking, Q)uit");
+            String selection = in.next();
+            if (selection.equalsIgnoreCase("c")) {
+                int num = 0;
+                boolean lessthen8 = false;
+                while (!lessthen8) {
+                    System.out.println("Enter number of people: ");
+                    num = in.nextInt();
+                    if (num > 8) {
+                        System.out.println("No more then 8 people per booking");
+                    } else {
+                        num = r.setPeople(num); //change the amount of people to fit the table seats
+                        lessthen8 = true;
+                    }
                 }
-            }
-            LocalDate d = today; //todo: error if someone inputs date wrong it will automatically use today's date
-            boolean validDate = false;
-            while (!validDate){
-                d = valiDate();
-                validDate = validDate(d);
-                if (!validDate) {
-                    System.out.println("Bookings no more than 6 days in advance");
+                LocalDate d = today; //todo: error if someone inputs date wrong it will automatically use today's date
+                boolean validDate = false;
+                while (!validDate) {
+                    d = valiDate();
+                    validDate = validDate(d);
+                    if (!validDate) {
+                        System.out.println("Bookings no more than 6 days in advance");
+                    }
                 }
+
+                //time
+
+
+                int time = 0;
+                do { //todo: check if we need variables for each restaurant's opening and closing time
+                    System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
+                    time = in.nextInt();//Need to check this
+                } while (time < 9 || time > 21);
+
+
+                running = booking(d, time, num, name);
+            } else if (selection.equalsIgnoreCase("u")) {
+                running = !undoBooking();
+            } else if (selection.equalsIgnoreCase("q")) {
+                running = false;
+            } else {
+                System.out.println("Please input a valid option");
             }
-
-            //time
-
-
-            int time = 0;
-            do { //todo: check if we need variables for each restaurant's opening and closing time
-                System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
-                time = in.nextInt();//Need to check this
-            }while (time < 9 || time > 21);
-
-            
-            running = booking(d, time, num, name);
         }
-        
-        
+
+
     }
-    
+
     /**
-    * This method runs if a staff member is using the system to allow them to login
-    * @author Ronan
-    */
+     * This method runs if a staff member is using the system to allow them to login
+     * @author Ronan
+     */
     private void staffLogin() {
-        
+
         boolean running = true;
         while (running) {
             boolean pass = false;
             while (!pass) {
-                
+
                 System.out.println("Enter username");
                 String name = in.next();
-                
+
                 System.out.println("Enter password");
                 String password = in.next();
-                
+
                 if (valid(name, password, r.getStaff())) {//If a valid username was entered
                     Staff currentStaff;
                     pass = true;
@@ -133,46 +143,46 @@ public class UserInterface {
             }
         }
         pick();
-        
+
     }
-    
+
     /**
-    * When a staff member logs in, this is called
-    * @param currentStaff Staff that is currently logged in
-    * @return false once logout, allowing staffLogin() loop to break
-    * @author Ronan, Bayan, Thomas
-    */
+     * When a staff member logs in, this is called
+     * @param currentStaff Staff that is currently logged in
+     * @return false once logout, allowing staffLogin() loop to break
+     * @author Ronan, Bayan, Thomas
+     */
     private boolean runStaff(Staff currentStaff) {
         boolean running = true;
         while (running) {
             if (currentStaff instanceof Waiter) {
-                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, P)ay, L)og out");
+                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo booking P)ay, L)og out");
                 String input = in.next();
                 running = waiter(input, (Waiter) currentStaff);
-                
+
             } else if (currentStaff instanceof Chef) {
                 System.out.println("V)iew orders, A)cknowledge,U)pdate order, L)og out");
                 String input = in.next();
                 running = chef(input, (Chef) currentStaff);
-                
+
             } else {//Currently manager
-                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo Booking P)ay, C)reate menu, H)ire Staff, F)ire Staff,D)elete csvs, L)og out");
+                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, M)oney generated, U)ndo booking, P)ay, C)reate menu, H)ire Staff, F)ire Staff,D)elete csvs, L)og out");
                 String input = in.next();
                 running = manager(input, (Manager) currentStaff);
-                
+
             }
         }
         return false;
     }
-    
+
     /**
-    * checks if a member is actually a staff member
-    * @param name name of member
-    * @param pass members password
-    * @param arr array of staff members
-    * @return true/false if they are a valid member
-    * @author Ronan
-    */
+     * checks if a member is actually a staff member
+     * @param name name of member
+     * @param pass members password
+     * @param arr array of staff members
+     * @return true/false if they are a valid member
+     * @author Ronan
+     */
     private boolean valid(String name, String pass, ArrayList<Staff> arr) {
         for (Staff s : arr) {
             if (s.getName().equals(name) && s.getPassword().equals(pass)) {
@@ -181,14 +191,14 @@ public class UserInterface {
         }
         return false;
     }
-    
+
     /**
-    * This method runs if a waiter is logged in
-    * @param str option passed from runStaff()
-    * @param w waiter who is logged in
-    * @author Thomas, Ronan
-    * @return false to log out, true otherwise
-    */
+     * This method runs if a waiter is logged in
+     * @param str option passed from runStaff()
+     * @param w waiter who is logged in
+     * @author Thomas, Ronan
+     * @return false to log out, true otherwise
+     */
     private boolean waiter(String str, Waiter w) {
         String s = str.toLowerCase();
         switch (s) {
@@ -257,10 +267,10 @@ public class UserInterface {
                     running = booking(d, time, numberOfPeople, name);
 
                 }
-
-
                 return true;
 
+            case "u": //undo booking
+                undoBooking();
 
             case "p"://Take payment
                 pay();
@@ -272,14 +282,14 @@ public class UserInterface {
         }
         return true;//Ronan:this is never used, perhaps change above return trues to break?
     }
-    
+
     /**
-    * This runs if a chef is logged in
-    * @param str option passed from runStaff()
-    * @author Thomas, Ronan
-    * @param c chef who is currently logged in
-    * @return false to log out, true otherwise
-    */
+     * This runs if a chef is logged in
+     * @param str option passed from runStaff()
+     * @author Thomas, Ronan
+     * @param c chef who is currently logged in
+     * @return false to log out, true otherwise
+     */
     private boolean chef(String str, Chef c) {
         String s = str.toLowerCase();
         switch (s) {
@@ -293,18 +303,18 @@ public class UserInterface {
             case "l"://log out
 
                 return false;
-            
+
         }
         return true;
     }
 
     /**
-    * This runs if a manager is logged in
-    * @param str option passed from runStaff()
-    * @author Thomas, Ronan
-    * @param m manager who is currently logged in
-    * @return false to log out, true otherwise
-    */
+     * This runs if a manager is logged in
+     * @param str option passed from runStaff()
+     * @author Thomas, Ronan
+     * @param m manager who is currently logged in
+     * @return false to log out, true otherwise
+     */
 
     private boolean manager(String str, Manager m) {
         String s = str.toLowerCase();
@@ -333,7 +343,7 @@ public class UserInterface {
                 }
                 return true;
 
-                case "r": //Remove order
+            case "r": //Remove order
                 System.out.println(r.getOrders().toString());//TODO: Better implementation here
                 System.out.println("Enter the order you would like to remove");
                 int remove =in.nextInt();
@@ -386,12 +396,24 @@ public class UserInterface {
 
                 }
                 return true;
-            
+
+            case "m":
+
+                System.out.println("please give when you want the graph the start");
+                LocalDate start = valiDate();
+                System.out.println("please print when you want thee graph to end");
+                LocalDate end = valiDate();
+
+                m.generateGraph(start,end);
+
+            case "u": //undo booking
+                undoBooking();
+
             case "p": //Pay
                 pay();
                 return true;
-            
-            
+
+
             case "c": //Create menu
                 m.manageMenu(in);
                 return true;
@@ -402,12 +424,12 @@ public class UserInterface {
                 System.out.println("\nEnter staff password:");
                 String password = in.next();
                 System.out.println("""
-                Enter staff position:
-                [A] Manager
-                [B] Chef
-                [C] Waiter
-                [D] Exit
-                """);
+        Enter staff position:
+        [A] Manager
+        [B] Chef
+        [C] Waiter
+        [D] Exit
+        """);
                 while (true) {
                     String type = in.next();
                     if (type.equalsIgnoreCase("C")) {
@@ -530,8 +552,21 @@ public class UserInterface {
             System.out.println("Select an order");
             System.out.println(r.getOrders().toString());
             int o = in.nextInt();
-            Till t =new Till(r,r.getOrders().get(o));
-            t.processPayment();
+            Till t =new Till(r);
+            t.processPayment(r.getOrders().get(o));
+        }
+    }
+    private boolean undoBooking() {
+        System.out.println("Input customer name");
+        String name = in.next();
+        System.out.println("Input booking id");
+        String bookingId = in.next();
+        if (r.cancelBooking(name, bookingId)) {
+            System.out.println("Booking removed successfully");
+            return true;
+        } else {
+            System.out.println("No booking found with those details");
+            return false;
         }
     }
 }

@@ -94,13 +94,17 @@ public class Restaurant implements ReadWrite{
 *///Ronan: I've commented this out cause it's not used but idk if we need it
     /**
      * Cancel a booking
-     *
-     * @param booking the booking you wish to delete
-     *
-     * @author Euan
+     * @param name the name of the customer removing the booking
+     * @param bookingId the unique id of the booking
+     * @author Bayan
      */
-    public void cancelBooking(Booking booking) {
-        bookings.remove(booking);
+    public boolean cancelBooking(String name, String bookingId) {
+        for (Booking b : bookings) {
+            if (b.getId().equals(bookingId) && b.getCustomer().getName().equalsIgnoreCase(name)) {
+                return bookings.remove(b);
+            }
+        }
+        return false;
     }
 
     /**
