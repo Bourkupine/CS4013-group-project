@@ -74,15 +74,14 @@ public class Till implements ReadWrite {
         
     }
     /**
-    * prints the receipt
-    * @return returns the receipt as a formatted String
-    */
-    private String printReceipt(Order order) { 
-        return  
-        String.format(order.toString()+ "\n"
-        + "Amount given = " + amountGiven + "\n"
-        + "Change = " + change + "\n"
-        + "Total  €%.2f. Thank you for visiting Yum", order.getTotal());
+     * Prints the receipt to standard output
+     * @author Bayan
+     */
+    private void printReceipt(Order order) {
+        order.printOrder();
+        System.out.println("Amount given: " + amountGiven);
+        System.out.println("Change: " + change);
+        System.out.println("Thank you for visiting Yum");
     }
     
     private String toCsv(Order order){
