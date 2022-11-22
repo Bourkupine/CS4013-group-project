@@ -66,6 +66,9 @@ public class Till implements ReadWrite {
         if(amountGiven> amountDue){
             System.out.println(change + " is the change");
         }
+        order.getCustomer().incrementLoyalty();
+        order.updateRestaurantTotal(order.getTotal());
+        order.getR().getRestaurantChain().updateCustomerCsv();
         printReceipt(order);
         updateFile(rest.getMoney(), toCsv(order));
         rest.removeOrder(order);
