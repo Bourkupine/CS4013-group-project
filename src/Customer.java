@@ -68,7 +68,10 @@ public class Customer implements ReadWrite{
     }
 
 
-    //TODO: idea: send user a "message" to remind of booking
+    public String sendMessage(Booking booking){ //if we could implement this it would send a message to the customer 
+        String message = "Your booking is on the ----------";
+        return message;
+    }
 
     /**
      * Returns number of times customer has been to restaurant
