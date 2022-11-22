@@ -47,7 +47,7 @@ public class RestaurantChain implements ReadWrite{
         clearFile(rest);
         writeFile(rest,"RestId,TableId,NumSeats");
         for(Restaurant r:restaurants){
-            updateFile(rest,r.toCsv());//TODO fix formatting
+            updateFile(rest,r.toCsv());
         }
 
 

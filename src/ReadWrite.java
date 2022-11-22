@@ -132,6 +132,12 @@ public interface ReadWrite {
         writeFile(f,"");
     }
 
-
+    /**
+     * Deletes a given file
+     * @param f file to be deleted
+     */
+    public default void deleteFile(File f) {
+        f.delete();
+    }
 
 }

@@ -23,7 +23,7 @@ public class Manager extends Staff implements ReadWrite{
 
     public void factoryReset(File[] files){
         for(File f1:files){
-            clearFile(f1);
+            deleteFile(f1);
         }
     }
 
@@ -127,7 +127,7 @@ public class Manager extends Staff implements ReadWrite{
      * @return returns the graph as a String
      * @author Euan
      */
-    public String generateGraph(LocalDate start, LocalDate end) {
+    public void generateGraph(LocalDate start, LocalDate end) {
 
         //styled as :
         // [2022-02-11]: €900.00   |=========
@@ -147,6 +147,6 @@ public class Manager extends Staff implements ReadWrite{
             start = start.plusDays(1);
         }
 
-        return sb.toString();
+        System.out.println(sb.toString());
     }
 }
