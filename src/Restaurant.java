@@ -166,6 +166,7 @@ public class Restaurant implements ReadWrite{
 
                     Booking b = new Booking(customer, numOfPeople, time, this, date, table);
                     bookings.add(b);
+                    bookingId = Integer.parseInt(temp[1]);
                 }
 
             }
