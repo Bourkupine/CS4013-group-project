@@ -6,11 +6,11 @@ public class Booking implements ReadWrite{
 
     private final String id;
     private final Customer customer; //Customer that makes the booking
-    private int numberOfPeople; //number of people at the table
-    private int time; //time of booking. We will need to run a checker for this
-    private Table table ;
+    private final int numberOfPeople; //number of people at the table
+    private final int time; //time of booking. We will need to run a checker for this
+    private final Table table ;
     private final Restaurant rest; //booking is specific to a certain restaurant
-    private LocalDate date;
+    private final LocalDate date;
 
 
 
