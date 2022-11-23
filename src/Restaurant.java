@@ -200,11 +200,30 @@ public class Restaurant implements ReadWrite{
         
         ArrayList<String> values = readFile(money);
 
+        String[] s = values.get(1).split(",");
 
-        for(int i = 1; i < values.size(); i++) {
-            String[] s = values.get(i).split(",");
-            if (Integer.parseInt(s[0]) == idNum) {
-                dailyAmounts.put(LocalDate.parse(s[1]), Double.parseDouble(s[2]));
+        LocalDate prev = LocalDate.parse(s[1]);
+        LocalDate date;
+        double d = Double.parseDouble(s[2]);
+
+        if (values.size() > 2) {
+
+            for (int i = 2; i < values.size(); i++) {
+                s = values.get(i).split(",");
+                date = LocalDate.parse(s[1]);
+                if (i + 1 == values.size()) {
+                    d += Double.parseDouble(s[2]);
+                    dailyAmounts.put(prev, d);
+                    return;
+                } else if (prev.isEqual(date)) {
+                    d += Double.parseDouble(s[2]);
+                } else if (date.isEqual(prev)) {
+                    dailyAmounts.put(prev, d);
+                    d = 0;
+                }
+
+                prev = date;
+
             }
         }
     }
