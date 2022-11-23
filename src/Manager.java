@@ -129,7 +129,6 @@ public class Manager extends Staff implements ReadWrite{
      * This method will generate a graph based on the restaurants daily earnings in a given time period
      * @param start start date
      * @param end end date
-     * @return returns the graph as a String
      * @author Euan
      */
     public void generateGraph(LocalDate start, LocalDate end) {

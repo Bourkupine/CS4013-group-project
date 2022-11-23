@@ -72,7 +72,6 @@ public class RestaurantChain implements ReadWrite{
             for(int i=1;i<temp.size();i++){
                 String[] split = temp.get(i).split(",");
                 addCustomer(new Customer(split[0],split[1],Integer.parseInt(split[2])));
-                System.out.println("customer made");
             }
         }
     }
