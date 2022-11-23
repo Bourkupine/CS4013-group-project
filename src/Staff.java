@@ -83,7 +83,9 @@ public abstract class Staff{
     public void printBookings(LocalDate date) {
         for (Booking b : rest.getBookings()) {
             if (date.equals(b.getDate()) || date.isAfter(b.getDate())) {
-                System.out.println(b);
+                if (!b.isCompleted()) {
+                    System.out.println(b);
+                }
             }
         }
     }

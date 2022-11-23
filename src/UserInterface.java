@@ -457,12 +457,11 @@ public class UserInterface {
                 String bookingId = in.next();
                 Booking b = r.getBookingWithId(bookingId);
                 if(b!=null){
+                    b.setCompleted(true);
                     r.addOrder(new Order(b));
                     break;
                 }
             }
-
-
         }
 
     }

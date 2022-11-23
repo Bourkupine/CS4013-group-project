@@ -11,6 +11,7 @@ public class Booking implements ReadWrite{
     private final Table table ;
     private final Restaurant rest; //booking is specific to a certain restaurant
     private final LocalDate date;
+    private boolean completed;
 
 
 
@@ -30,6 +31,7 @@ public class Booking implements ReadWrite{
         this.date=date;
         this.time = time; //the time of the booking
         this.table = table;
+        completed = false;
     }
 
     /**
@@ -74,6 +76,24 @@ public class Booking implements ReadWrite{
      */
     public LocalDate getDate() {
         return date;
+    }
+
+    /**
+     * Returns if a booking has been completed or not
+     * @return completed as boolean
+     * @author Bayan
+     */
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    /**
+     * Sets the value of completed
+     * @param completed the value to be set to completed
+     * @author Bayan
+     */
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     /**
