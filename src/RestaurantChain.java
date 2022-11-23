@@ -29,13 +29,14 @@ public class RestaurantChain implements ReadWrite{
         this.name = name;
         this.rest=f[0];
         this.customer=f[4];
+        updateCustomers();
         for (int i = 0; i < amountOfRestaurants; i++) {
             Restaurant restaurant = new Restaurant(15,this,i,d,f[1],f[2],f[3],f[5]);//Ronan: 15 tables is arbitrary and can be changed
             restaurants.add(restaurant);
             staff(restaurant);
 
         }
-        updateCustomers();
+
         writeDetails();
     }
 
@@ -64,15 +65,19 @@ public class RestaurantChain implements ReadWrite{
     /**
      * Populates customer arraylist using customer csv
      */
+
     public void updateCustomers(){
         ArrayList<String> temp = readFile(customer);
         if(temp.size()>1){
             for(int i=1;i<temp.size();i++){
                 String[] split = temp.get(i).split(",");
-                customers.add(new Customer(split[0],split[1],Integer.parseInt(split[2])));
+                addCustomer(new Customer(split[0],split[1],Integer.parseInt(split[2])));
+                System.out.println("customer made");
             }
         }
     }
+
+
 
     /**
      * Writes customer csv using arraylist
@@ -150,6 +155,7 @@ public class RestaurantChain implements ReadWrite{
         if (arr.size() == 0) {
             Customer c = new Customer(name, phoneNumber);
             customers.add(c);
+            updateCustomerCsv();
             return c;
         } else if (arr.size() == 1) {
             return arr.get(0);

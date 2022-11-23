@@ -371,7 +371,7 @@ public class UserInterface {
                 System.out.println("Bookings no more than 6 days in advance");
             }
         }
-        int time=0;
+        int selectedTime=0;
         int daysInAdvance = (int)today.until(d, ChronoUnit.DAYS);
         for (int i : r.getSuitableTimesAtDate(daysInAdvance, numberOfPeople)) {
             System.out.printf("%02d:00 ", i);
@@ -379,17 +379,17 @@ public class UserInterface {
         }
         System.out.println("Input the time (in hours) you would like to book for, e.g. 18 to book 18:00");
         while (true) {
-            int selectedTime = in.nextInt();
+            selectedTime = in.nextInt();
             if (r.getSuitableTimesAtDate(daysInAdvance, numberOfPeople).contains(selectedTime)) {
                 break;
             } else {
                 System.out.println("Please input an available time in hours");
             }
         }
-        Table t = r.assignTable(daysInAdvance, time, numberOfPeople);
-        t.setReservedAtTime(time, daysInAdvance, true);
+        Table t = r.assignTable(daysInAdvance, selectedTime, numberOfPeople);
+        t.setReservedAtTime(selectedTime, daysInAdvance, true);
         Customer c = r.getRestaurantChain().findCustomer(name, phone);
-        Booking booking = new Booking(c, numberOfPeople, time, r, today, t);
+        Booking booking = new Booking(c, numberOfPeople, selectedTime, r, today, t);
         r.addBooking(booking);
         booking.updateFile(bookings,booking.toCsv());
         System.out.println("Booking successful, your table number is " + t.getTableNumber());

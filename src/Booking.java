@@ -75,4 +75,23 @@ public class Booking implements ReadWrite{
     public LocalDate getDate() {
         return date;
     }
+
+    /**
+     * returns a string representation of a booking
+     * @return booking as String
+     * @author Euan, Bayan
+     */
+    @Override
+    public String toString() {
+
+
+
+        return String.format("""
+                Booking ID: %s
+                Customer name: %s
+                Number of people: %d
+                Date & time: %s %02d:00
+                Table Number: %d
+                """, id, customer.getName(), numberOfPeople, date, time, table.getTableNumber());
+    }
 }

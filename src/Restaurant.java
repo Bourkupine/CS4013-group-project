@@ -124,37 +124,41 @@ public class Restaurant implements ReadWrite{
     * @author Euan
     */
     public void fillBookings() {
-        for (int i = 1; i < readFile(booking).size(); i++) {
-            String[] s = readFile(booking).get(i).split(",");
-            String str = s[0];
-            String[] temp = str.split("_");
-            if(Integer.parseInt(temp[0]) == idNum) {
-                Customer customer = null;
-                Table table = null;
-                int time = Integer.parseInt(s[3]);
-                LocalDate date = LocalDate.parse(s[2]);
-                if ((int)this.date.until(date, ChronoUnit.DAYS) >= 0) {
-                    
-                    for (Customer c : rc.getCustomers()) {
-                        if (c.getId() == Integer.parseInt(s[5])) {
-                            customer = c;
+        if (readFile(booking).size() > 0) {
+            for (int i = 1; i < readFile(booking).size(); i++) {
+                String[] s = readFile(booking).get(i).split(",");
+                String str = s[0];
+                String[] temp = str.split("_");
+                if (Integer.parseInt(temp[0]) == idNum) {
+                    Customer customer = null;
+                    Table table = null;
+                    int time = Integer.parseInt(s[3]);
+                    LocalDate date = LocalDate.parse(s[2]);
+                    if ((int) this.date.until(date, ChronoUnit.DAYS) >= 0) {
+
+                        for (Customer c : rc.getCustomers()) {
+                            if (c.getId() == Integer.parseInt(s[5])) {
+                                customer = c;
+                            }
                         }
-                    }
-                    for (Table t : tables) {
-                        if (t.getTableNumber() == Integer.parseInt(s[4])) {
-                            table = t;
-                            t.setReservedAtTime(time, (int)this.date.until(date, ChronoUnit.DAYS), true);
+                        for (Table t : tables) {
+                            if (t.getTableNumber() == Integer.parseInt(s[4])) {
+                                table = t;
+                                t.setReservedAtTime(time, (int) this.date.until(date, ChronoUnit.DAYS), true);
+                            }
                         }
+                        int numOfPeople = Integer.parseInt(s[1]);
+
+                        Booking b = new Booking(customer, numOfPeople, time, this, date, table);
+                        System.out.println("booking made");
+                        bookings.add(b);
+                        bookingId = Integer.parseInt(temp[1]);
                     }
-                    int numOfPeople = Integer.parseInt(s[1]);
-                    
-                    Booking b = new Booking(customer, numOfPeople, time, this, date, table);
-                    bookings.add(b);
-                    bookingId = Integer.parseInt(temp[1]);
+
                 }
-                
+
+
             }
-            
         }
     }
     
@@ -371,15 +375,14 @@ public class Restaurant implements ReadWrite{
 
     public ArrayList<Integer> getSuitableTimesAtDate(int daysInAdvance, int numberOfPeople) {
         ArrayList<Integer> availableTimes = new ArrayList<>();
-        for (Table t : tables) {
-            if (t.getNumberOfSeats() >= numberOfPeople) {
-                for (int i = 0; i < 13; i++) {
-                    if (!t.getReservedAtTime(i, daysInAdvance)) {
-                        availableTimes.add(i+9);
+        for (int i = 9; i < 22; i++) {
+            for (Table t : tables) {
+                    if (t.getTableNumber() == setPeople(numberOfPeople) && !t.getReservedAtTime(i, daysInAdvance)) {
+                        availableTimes.add(i);
+                        break;
                     }
                 }
             }
-        }
         return availableTimes;
     }
     

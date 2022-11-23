@@ -45,7 +45,7 @@ public class Table {
      * @author Bayan, Euan
      */
     public boolean getReservedAtTime(int hour, int day) { //overloading
-        return reserved.get(day)[hour - 9];
+        return reserved.get(day)[hour-9];
     }
 
 
