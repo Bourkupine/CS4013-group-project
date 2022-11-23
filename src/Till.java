@@ -18,7 +18,6 @@ public class Till implements ReadWrite {
     }
     /**
     * processes a payment from the customer for the order.
-    * @return returns the change due to the customer if any
     * @author Thomas
     */
     
@@ -81,9 +80,11 @@ public class Till implements ReadWrite {
      */
     private void printReceipt(Order order) {
         order.printOrder();
-        System.out.println("Amount given: " + amountGiven);
-        System.out.println("Change: " + change);
-        System.out.println("Thank you for visiting Yum");
+        System.out.printf("""
+                Amount given: %.2f
+                Change: %.2f
+                Thank you for visiting Yum
+                """, amountGiven, change);
     }
     
     private String toCsv(Order order){
