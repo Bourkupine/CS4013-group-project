@@ -353,15 +353,16 @@ public class UserInterface {
                             System.out.println("Bookings no more than 6 days in advance");
                         }
                     }
-                    int time;
+                    int time=0;
                     do {
-                        System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
-                        time = in.nextInt();//Need to check this
-                        if(r.getBookings().get(time) == null){
-                            System.out.println("Your booking is for " + time + " on " + validDate + "Please arrive on time" + "\n" + "If you are later then 15 minutes your booking will be forefeited");
-                            break ;
-                        }else{
+                        try{
+                            System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
+                            time = in.nextInt();//Need to check this
+                            r.getBookings().get(time);
                             System.out.println("There is no tables available at this time choose another time.");
+                        }catch(IndexOutOfBoundsException ex){
+                            System.out.println("Your booking is for " + time + " on " + d + ". Please arrive on time" + "\n" + "If you are later then 15 minutes your booking will be forefeited");
+                            break ;
                         }
                     }while (time < 9 || time > 21);
                     running = booking(d, time, numberOfPeople, name);
