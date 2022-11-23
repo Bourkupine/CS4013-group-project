@@ -18,6 +18,9 @@ public class Booking implements ReadWrite{
      * @param customer pass a customer
      * @param numberOfPeople number of people for the booking
      * @param time time in hours
+     * @param rest restaurant the booking is for
+     * @param date date of the booking
+     * @param table table the booking is for
      * @author Euan
      */
     public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest, LocalDate date, Table table) {

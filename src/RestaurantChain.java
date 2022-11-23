@@ -20,6 +20,8 @@ public class RestaurantChain implements ReadWrite{
      * Full-arg constructor.
      * @param name name of chain
      * @param amountOfRestaurants amount of restaurants in the chain
+     * @param f files that data is read from
+     * @param d the current date
      * @author Bayan, Ronan
      */
     public RestaurantChain(String name, int amountOfRestaurants, File[] f, LocalDate d){
@@ -92,6 +94,7 @@ public class RestaurantChain implements ReadWrite{
 
     /**
      * Populates each restaurant with staff from csv
+     * @param r the restaurant being populated
      * @author Ronan
      */
     public void staff (Restaurant r){
@@ -146,6 +149,7 @@ public class RestaurantChain implements ReadWrite{
      * Returns all customers with the specified name to be chosen from. If no customer is found, one is created.
      * @author Bayan
      * @param name Name of the Customer
+     * @param phoneNumber Phone number of the Customer
      * @return customer as Customer
      */
     public Customer findCustomer(String name, String phoneNumber) {

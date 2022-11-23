@@ -30,15 +30,17 @@ public class Restaurant implements ReadWrite{
     private HashMap<LocalDate, Double> dailyAmounts = new HashMap<>();
 
     /**
-    *
-    * @param amountOfTables the amount of tables the restaurant has.
-    * @param rc the chain the restaurant is apart of
-    * @param idNum id number of the restaurant
-    * @param date today's date
-    * @param booking .csv file containing details of bookings
-    * @param money .csv file containing details of money obtained
-    * @author Ronan, Thomas, Euan
-    */
+     * Constructor for a restaurant
+     * @param amountOfTables the amount of tables the restaurant has.
+     * @param rc the chain the restaurant is apart of
+     * @param idNum id number of the restaurant
+     * @param date today's date
+     * @param booking .csv file containing details of bookings
+     * @param money .csv file containing details of money obtained
+     * @param menuCsv .csv file containing details of menu
+     * @param staffCsv .csv file containing details of staff
+     * @author Ronan, Thomas, Euan
+     */
     public Restaurant(int amountOfTables, RestaurantChain rc, int idNum,LocalDate date, File booking, File money,File menuCsv,File staffCsv){
         this.booking=booking;
         this.money=money;
@@ -71,13 +73,14 @@ public class Restaurant implements ReadWrite{
         generateMenu();
         fillBookings();
     }
-    
+
     /**
-    * Cancel a booking
-    * @param name the name of the customer removing the booking
-    * @param bookingId the unique id of the booking
-    * @author Bayan
-    */
+     * Cancel a booking
+     * @param name the name of the customer removing the booking
+     * @param bookingId the unique id of the booking
+     * @return if the booking was cancelled successfully as boolean
+     * @author Bayan
+     */
     public boolean cancelBooking(String name, String bookingId) {
         for (Booking b : bookings) {
             if (b.getId().equals(bookingId) && b.getCustomer().getName().equalsIgnoreCase(name)) {
@@ -172,14 +175,15 @@ public class Restaurant implements ReadWrite{
         
         return tableSeats.ceiling(people);
     }
-    
+
     /**
-    * Assigns a table to a booking
-    * @param daysInAdvance the amount of days in advance the booking is for
-    * @param hour time of booking
-    * @param people amount of people booking has
-    * @author Bayan
-    */
+     * Assigns a table to a booking
+     * @param daysInAdvance the amount of days in advance the booking is for
+     * @param hour time of booking
+     * @param people amount of people booking has
+     * @return the table available for the booking as Table
+     * @author Bayan
+     */
     public Table assignTable(int daysInAdvance, int hour, int people) {
         for (Table t : tables) {
             if (!t.getReservedAtTime(hour, daysInAdvance) && t.getNumberOfSeats() >= people) {

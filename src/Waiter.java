@@ -30,6 +30,7 @@ public class Waiter extends Staff {
 
     /**
      * drops food to table and tells the chef it's been delivered
+     * @param r the order being delivered
      * @author Thomas
      */
     public void dropFood(Order r){

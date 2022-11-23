@@ -19,6 +19,9 @@ public class UserInterface {
     /**
      * creates a user interface for restaurant
      * @param r restaurant the interface belongs to
+     * @param date today's date
+     * @param bookings a file containing all booking info
+     * @param money a file containing all money info
      * @author Ronan
      */
     public UserInterface(Restaurant r,LocalDate date, File bookings, File money) {

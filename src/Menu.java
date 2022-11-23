@@ -10,6 +10,7 @@ public class Menu {
     /**
      * Full-arg constructor
      * @param menu ArrayList of FoodItems
+     * @param r Restaurant the menu is for
      * @author Bayan
      */
     public Menu(ArrayList<FoodItem> menu, Restaurant r) {
@@ -31,6 +32,7 @@ public class Menu {
     /**
      * Adds a specified FoodItem to the menu
      * @param f FoodItem to be added
+     * @return if the food was added successfully as boolean
      * @author Bayan
      */
     public boolean addFood(FoodItem f) {
@@ -47,6 +49,7 @@ public class Menu {
     /**
      * Removes a FoodItem with a specific name from the menu
      * @param name name of the FoodItem
+     * @return if the food was removed successfully as boolean
      * @author Bayan
      */
     public boolean removeFood(String name) { 

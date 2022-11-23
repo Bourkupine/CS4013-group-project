@@ -112,7 +112,6 @@ public class Order{
     /**
     * Sets foodStatus of the order
     * @param status foodStatus
-    * @return boolean
     * @author Thomas
     */
     public void setStatus(String status) {

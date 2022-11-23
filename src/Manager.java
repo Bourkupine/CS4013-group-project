@@ -43,6 +43,7 @@ public class Manager extends Staff implements ReadWrite{
     /**
      * Removes a Staff from the restaurant
      * @param name name of the staff to be fired
+     * @return boolean if staff was fired successfully as boolean
      * @author Ronan, Bayan
      */
     public boolean fireStaff(String name) {
