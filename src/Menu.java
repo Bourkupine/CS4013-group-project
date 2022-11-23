@@ -76,22 +76,22 @@ public class Menu {
     private void orderByType() {
         ArrayList<FoodItem> tempMenu = new ArrayList<>();
         for (FoodItem f : menu) {
-            if(f.getType().equals("starter")) { //if the type is starter add it, starter is first
+            if(f.getType().equalsIgnoreCase("starter")) { //if the type is starter add it, starter is first
                 tempMenu.add(f);
             }
         }
         for (FoodItem f : menu) { //main is second
-            if(f.getType().equals("main")) {
+            if(f.getType().equalsIgnoreCase("main")) {
                 tempMenu.add(f);
             }
         }
         for (FoodItem f : menu) { //
-            if(f.getType().equals("dessert")) {
+            if(f.getType().equalsIgnoreCase("dessert")) {
                 tempMenu.add(f);
             }
         }
         for (FoodItem f : menu) {
-            if(f.getType().equals("drink")) {
+            if(f.getType().equalsIgnoreCase("drink")) {
                 tempMenu.add(f);
             }
         }
