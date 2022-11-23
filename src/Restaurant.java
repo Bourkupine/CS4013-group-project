@@ -374,7 +374,7 @@ public class Restaurant implements ReadWrite{
         for (Table t : tables) {
             if (t.getNumberOfSeats() >= numberOfPeople) {
                 for (int i = 0; i < 13; i++) {
-                    if (t.getReservedAtTime(i, daysInAdvance)) {
+                    if (!t.getReservedAtTime(i, daysInAdvance)) {
                         availableTimes.add(i+9);
                     }
                 }
