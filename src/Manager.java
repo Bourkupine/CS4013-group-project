@@ -158,7 +158,7 @@ public class Manager extends Staff implements ReadWrite{
                 temp = temp.plusDays(1);
             }
 
-            fm.format("\nTotal earnings %s - %s: %f", start.toString(), end.toString(), total);
+            fm.format("\nTotal earnings %s - %s: €%,.2f", start.toString(), end.toString(), total);
             System.out.println(sb.toString());
         } else {
             System.out.println("Start date is after end date");
