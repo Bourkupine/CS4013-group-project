@@ -42,7 +42,7 @@ public class Till implements ReadWrite {
             System.out.println("Enter tip amount");
             tip = in.nextInt();
             totalTips = totalTips + tip; 
-            total = order.getTotal() + tip ;
+            amountDue= order.getTotal() + tip ;
             System.out.println( total + ": is the total");
             System.out.println("You tipped :" + tip);
             

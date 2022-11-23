@@ -151,10 +151,11 @@ public class Manager extends Staff implements ReadWrite{
                     bars = "=".repeat((int) (getRest().getDailyAmounts().get(temp) - (getRest().getDailyAmounts().get(temp) % 100)) / 100);
                     total += getRest().getDailyAmounts().get(temp);
                     fm.format("[%s]: €%,-8.2f |%s\n", temp, getRest().getDailyAmounts().get(temp), bars);
-                    start = start.plusDays(1);
+
                 } else {
-                    fm.format("[%s]: €%-8.2f |%s\n", temp, 0.0, "");
+                    fm.format("[%s]: €%-8.2f |\n", temp, 0.0);
                 }
+                temp = temp.plusDays(1);
             }
 
             fm.format("\nTotal earnings %s - %s: %f", start.toString(), end.toString(), total);
