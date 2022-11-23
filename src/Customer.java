@@ -104,6 +104,7 @@ public class Customer implements ReadWrite{
     }
 
     /**
+     * Returns a customer's data in csv format
      * @author Ronan
      * @return name phone number and loyalty of the customer
      */
