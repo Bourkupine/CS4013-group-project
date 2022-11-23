@@ -199,13 +199,14 @@ public class Restaurant implements ReadWrite{
     public void fillHashMap() {
         
         ArrayList<String> values = readFile(money);
-        values.remove(0); //todo check this with ronan
-        
-        values.forEach(row -> {
-            String[] s = row.split(",");
-            dailyAmounts.put(LocalDate.parse(s[0]),Double.parseDouble(s[1]));
-        });
-        
+
+
+        for(int i = 1; i < values.size(); i++) {
+            String[] s = values.get(i).split(",");
+            if (Integer.parseInt(s[0]) == idNum) {
+                dailyAmounts.put(LocalDate.parse(s[1]), Double.parseDouble(s[2]));
+            }
+        }
     }
     
     /**
