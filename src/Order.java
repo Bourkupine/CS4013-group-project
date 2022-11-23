@@ -1,12 +1,7 @@
-// Thomas : This is for the order 
-// i need to increment the loayalty badge fro the customer. 
-// i need to make a receipt with the customers details 
-// scanner we need to take an order 
-// need to make a menu to
+// Thomas : This is for the order
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 public class Order{
     private ArrayList<FoodItem> ordered = new ArrayList<>();
@@ -41,7 +36,7 @@ public class Order{
     public Order(Booking b) {
         this(b.getCustomer(), b.getRest());
 
-    }//TODO:USE IN USER INTERFACE
+    }
 
     /**
     * Enumerated values to represent the status of an order
@@ -69,8 +64,6 @@ public class Order{
     * @author Thomas, Euan
     */
     public void takeOrder(Customer c){
-        //t: creating the scanner
-        
         Scanner order = new Scanner(System.in);
 
         System.out.println(m.toString()); //t:this is printing the menu so the customer can choose their items
@@ -129,24 +122,26 @@ public class Order{
             }
         }
     }
-    
+
     /**
-    * Calculates if a discount is applied to the order
-    * @author Thomas
-    */
+     * Calculates if a discount is applied to the order
+     * @return boolean if loyalty discount is applied as boolean
+     * @author Thomas
+     */
     public boolean isDiscounted(){
         return c.getLoyalty()%10 == 0; //t when they get to 10 orders/visits the get a ten percent discount
     }
-    
-    
-    
+
+
+
     /**
-    * Checks if the foodStatus is ready
-    * @param status foodStatus as String
-    * @return boolean
-    */
+     * Checks if the foodStatus is ready
+     * @param status foodStatus as String
+     * @return boolean
+     * @author Thomas
+     */
     public boolean isReady(String status){ //this is used in is deliverable for the chef.
-        return ( status.equals("READY")); 
+        return ( status.equals("READY"));
     }
     
     /**
@@ -170,6 +165,7 @@ public class Order{
     /**
      * Returns date of order
      * @return date of order as LocalDate
+     * @author Ronan
      */
     public LocalDate getDate() {
         return date;

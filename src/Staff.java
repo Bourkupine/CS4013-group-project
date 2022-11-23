@@ -91,8 +91,9 @@ public abstract class Staff{
     }
 
     /**
-     *
+     * Returns a Staff object's data in csv format
      * @return a comma seperated string representation of object
+     * @author Ronan
      */
     public String toCsv(){
         String type = getClass().getCanonicalName();

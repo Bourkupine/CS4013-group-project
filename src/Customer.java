@@ -23,7 +23,7 @@ public class Customer implements ReadWrite{
     }
 
     /**
-     * Full arg constructor
+     * Constructor with name and phone number
      * @param name name of customer
      * @param phoneNumber phone number of customer
      * @author Ronan
@@ -34,10 +34,11 @@ public class Customer implements ReadWrite{
     }
 
     /**
-     * Constructor for customers who have already been to restaurant
+     * Full-arg constructor
      * @param name name of customer
      * @param phoneNumber phone number of customer
      * @param loyalty amount of visits to restaurant
+     * @author Ronan
      */
     public Customer(String name, String phoneNumber, int loyalty){
         this(name,phoneNumber);
@@ -64,7 +65,12 @@ public class Customer implements ReadWrite{
         return id;
     }
 
-
+    /**
+     * Sends a message reminder for a booking to a customer
+     * @param booking the booking needing a reminder
+     * @return message as String
+     * @author Thomas
+     */
     public String sendMessage(Booking booking){ //if we could implement this it would send a message to the customer 
         String message = "Your booking is on the ----------";
         return message;
@@ -87,8 +93,6 @@ public class Customer implements ReadWrite{
         loyalty++; 
     }
 
-    //Basic toString. Can modify if needed.
-
     /**
      * Returns Customer as a String
      * @return a String representation of the customer
@@ -100,7 +104,7 @@ public class Customer implements ReadWrite{
     }
 
     /**
-     * @author ronan
+     * @author Ronan
      * @return name phone number and loyalty of the customer
      */
     public String toCsv(){

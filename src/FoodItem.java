@@ -75,6 +75,11 @@ public class FoodItem {
         return Objects.equals(name, foodItem.name);
     }
 
+    /**
+     * Returns a string of the FoodItem in csv format
+     * @return Details of the FoodItem in csv format
+     * @author Ronan
+     */
     public String toCsv(){
         return name+","+price+","+type;
     }

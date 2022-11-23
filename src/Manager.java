@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
-
 public class Manager extends Staff implements ReadWrite{
-
 
     /**
      * Full-arg constructor

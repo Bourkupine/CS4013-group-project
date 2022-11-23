@@ -13,11 +13,8 @@ public class Booking implements ReadWrite{
     private final LocalDate date;
     private boolean completed;
 
-
-
-
     /**
-     * Create Booking order
+     * Create a Booking
      * @param customer pass a customer
      * @param numberOfPeople number of people for the booking
      * @param time time in hours
@@ -72,6 +69,7 @@ public class Booking implements ReadWrite{
 
     /**
      * Gets the date of the booking
+     * @return the date of the booking as LocalDate
      * @author Bayan
      */
     public LocalDate getDate() {
@@ -103,9 +101,6 @@ public class Booking implements ReadWrite{
      */
     @Override
     public String toString() {
-
-
-
         return String.format("""
                 Booking ID: %s
                 Customer name: %s

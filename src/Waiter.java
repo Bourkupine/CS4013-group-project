@@ -18,7 +18,6 @@ public class Waiter extends Staff {
     /**
      * when called, the order is ready so the waiter gets permission to bring the order to a table
      * @author Thomas
-     *
      */
     public void getReadyOrders(){
        for(Order r: getRest().getOrders()){

@@ -7,7 +7,6 @@ public class Menu {
     private ArrayList<FoodItem> menu; //Bayan: An ArrayList of FoodItems to store the menu's data
     private Restaurant r;
 
-
     /**
      * Full-arg constructor
      * @param menu ArrayList of FoodItems
@@ -61,6 +60,7 @@ public class Menu {
 
     /**
      * Removes all FoodItems from the menu
+     * @author Bayan
      */
     public void clearMenu() {
         menu.clear();//clears the menu to remake it
@@ -122,6 +122,11 @@ public class Menu {
         return menuString.toString();
     }
 
+    /**
+     * Returns a String ArrayList of menu items in csv format
+     * @return String ArrayList of menu items in csv format
+     * @author Ronan
+     */
     public ArrayList<String> toCsv(){
         ArrayList<String> arr = new ArrayList<>();
         for(FoodItem f: menu){
