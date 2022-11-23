@@ -87,7 +87,7 @@ public class Till implements ReadWrite {
     }
     
     private String toCsv(Order order){
-        return order.getDate().toString()+","+order.getTotal();
+        return rest.getIdNum()+","+order.getDate().toString()+","+order.getTotal();
     }
     
 }
