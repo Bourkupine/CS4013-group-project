@@ -368,6 +368,20 @@ public class Restaurant implements ReadWrite{
     public int getIdNum() {
         return idNum;
     }
+
+    public ArrayList<Integer> getSuitableTimesAtDate(int daysInAdvance, int numberOfPeople) {
+        ArrayList<Integer> availableTimes = new ArrayList<>();
+        for (Table t : tables) {
+            if (t.getNumberOfSeats() >= numberOfPeople) {
+                for (int i = 0; i < 13; i++) {
+                    if (t.getReservedAtTime(i, daysInAdvance)) {
+                        availableTimes.add(i+9);
+                    }
+                }
+            }
+        }
+        return availableTimes;
+    }
     
     public File getStaffCsv() {
         return staffCsv;

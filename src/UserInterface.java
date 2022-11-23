@@ -75,7 +75,7 @@ public class UserInterface {
                         lessthen8 = true;
                     }
                 }
-                LocalDate d = today; //todo: error if someone inputs date wrong it will automatically use today's date
+                LocalDate d = today;
                 boolean validDate = false;
                 while (!validDate) {
                     d = valiDate();
@@ -84,17 +84,12 @@ public class UserInterface {
                         System.out.println("Bookings no more than 6 days in advance");
                     }
                 }
-
                 //time
-
-
                 int time = 0;
-                do { //todo: check if we need variables for each restaurant's opening and closing time
+                do {
                     System.out.println("Enter the hour in 24hr clock between 9 and 21: ");
                     time = in.nextInt();//Need to check this
                 } while (time < 9 || time > 21);
-
-
                 running = booking(d, time, num, name);
             } else if (selection.equalsIgnoreCase("u")) {
                 running = !undoBooking();
@@ -413,7 +408,6 @@ public class UserInterface {
                 LocalDate end = valiDate();
 
                 m.generateGraph(start,end);
-                System.out.println("\n"+"This is the total earnings for the restaurant since it was started: " + r.getTotalEarnings());
                 return true;
 
             case "u": //undo booking
