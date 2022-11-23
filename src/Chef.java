@@ -37,6 +37,7 @@ public class Chef extends Staff {
      */
     public void cooking(Order o){
         if(o.isReady("ORDERED")){// chef receives order and cooks it
+            System.out.println("Food is ready");
             o.setStatus("READY");
         }
     }
