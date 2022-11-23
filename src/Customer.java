@@ -104,6 +104,6 @@ public class Customer implements ReadWrite{
      * @return name phone number and loyalty of the customer
      */
     public String toCsv(){
-        return name+","+phoneNumber+","+loyalty;
+        return name+","+phoneNumber+","+loyalty+","+id;
     }
 }
