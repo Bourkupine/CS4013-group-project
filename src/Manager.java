@@ -148,10 +148,14 @@ public class Manager extends Staff implements ReadWrite{
         if (start.isBefore(end)) {
             while (temp.isBefore(end.plusDays(1))) {
 
-                bars = "=".repeat((int) (getRest().getDailyAmounts().get(temp) - (getRest().getDailyAmounts().get(temp) % 100)) / 100);
-                total += getRest().getDailyAmounts().get(temp);
-                fm.format("[%s]: €%,-8.2f |%s\n", temp, getRest().getDailyAmounts().get(temp), bars);
-                start = start.plusDays(1);
+                if (getRest().getDailyAmounts().containsKey(temp)) {
+                    bars = "=".repeat((int) (getRest().getDailyAmounts().get(temp) - (getRest().getDailyAmounts().get(temp) % 100)) / 100);
+                    total += getRest().getDailyAmounts().get(temp);
+                    fm.format("[%s]: €%,-8.2f |%s\n", temp, getRest().getDailyAmounts().get(temp), bars);
+                    start = start.plusDays(1);
+                } else {
+                    fm.format("[%s]: €%-8.2f |%s\n", temp, 0.0, "");
+                }
             }
 
             fm.format("\nTotal earnings %s - %s: %f", start.toString(), end.toString(), total);
