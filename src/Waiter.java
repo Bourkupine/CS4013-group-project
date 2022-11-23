@@ -24,6 +24,7 @@ public class Waiter extends Staff {
        for(Order r: getRest().getOrders()){
           if(r.isReady("Ready")){
             dropFood(r);
+            System.out.println("Food has been dropped");
           }
        }
     }
