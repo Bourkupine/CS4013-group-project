@@ -57,7 +57,7 @@ public class Initialiser implements ReadWrite{
         }
         File money = new File("money.csv");
         if(money.length()==0){
-            writeFile(money,"Date,Total");
+            writeFile(money,"RestId,Date,Total");
         }
         File menu = new File("menu.csv");
         if(menu.length()==0){
