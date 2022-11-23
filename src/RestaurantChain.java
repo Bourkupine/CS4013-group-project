@@ -68,12 +68,12 @@ public class RestaurantChain implements ReadWrite{
      * @author Ronan
      */
 
-    public void updateCustomers(){
+    public void updateCustomers(){//TODO some customers not entering array
         ArrayList<String> temp = readFile(customer);
         if(temp.size()>1){
             for(int i=1;i<temp.size();i++){
                 String[] split = temp.get(i).split(",");
-                addCustomer(new Customer(split[0],split[1],Integer.parseInt(split[2])));
+                customers.add(new Customer(split[0],split[1],Integer.parseInt(split[2])));
             }
         }
     }
@@ -85,7 +85,7 @@ public class RestaurantChain implements ReadWrite{
      */
     public void updateCustomerCsv(){
         ArrayList<String> s = new ArrayList<>();
-        s.add("Name,PhoneNum,Loyalty");
+        s.add("Name,PhoneNum,Loyalty,IdNum");
         for (Customer c: customers){
             s.add(c.toCsv());
         }
