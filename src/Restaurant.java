@@ -198,6 +198,7 @@ public class Restaurant implements ReadWrite{
     public void fillHashMap() {
         
         ArrayList<String> values = readFile(money);
+        values.remove(0); //todo check this with ronan
         
         values.forEach(row -> {
             String[] s = row.split(",");
