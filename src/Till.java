@@ -55,7 +55,7 @@ public class Till implements ReadWrite {
         System.out.println("1) Cash or 2) Card");//is the customer paying in cash or card
         int choice = in.nextInt(); //they decide what they pay with
         
-        double amountGiven = 0;
+       
         
         while(amountGiven < amountDue){
             System.out.println((amountDue - amountGiven) +" left to pay");
