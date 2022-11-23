@@ -66,4 +66,12 @@ public class Booking implements ReadWrite{
     public Restaurant getRest() {
         return rest;
     }
+
+    /**
+     * Gets the date of the booking
+     * @author Bayan
+     */
+    public LocalDate getDate() {
+        return date;
+    }
 }

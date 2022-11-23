@@ -151,17 +151,17 @@ public class UserInterface {
         boolean running = true;
         while (running) {
             if (currentStaff instanceof Waiter) {
-                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo booking P)ay, L)og out");
+                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, U)ndo booking, S)ee bookings P)ay, L)og out");
                 String input = in.next();
                 running = waiter(input, (Waiter) currentStaff);
 
             } else if (currentStaff instanceof Chef) {
-                System.out.println("V)iew orders, A)cknowledge,U)pdate order, L)og out");
+                System.out.println("V)iew orders, A)cknowledge, U)pdate order, L)og out");
                 String input = in.next();
                 running = chef(input, (Chef) currentStaff);
 
             } else {//Currently manager
-                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, M)oney generated, U)ndo booking, P)ay, C)reate menu, H)ire Staff, F)ire Staff,D)elete csvs, L)og out");
+                System.out.println("A)dd order, R)emove order, V)iew orders, T)ake booking, M)oney generated, U)ndo booking, S)ee bookings, P)ay, C)reate menu, H)ire Staff, F)ire Staff, D)elete CSVs, L)og out");
                 String input = in.next();
                 running = manager(input, (Manager) currentStaff);
 
@@ -266,6 +266,9 @@ public class UserInterface {
 
             case "u": //undo booking
                 undoBooking();
+
+            case "s": //see all bookings
+                w.printBookings(today);
 
             case "p"://Take payment
                 pay();
@@ -412,6 +415,9 @@ public class UserInterface {
 
             case "u": //undo booking
                 undoBooking();
+
+            case "s": //see all bookings
+                m.printBookings(today);
 
             case "p": //Pay
                 pay();

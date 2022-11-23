@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Objects;
 
 public abstract class Staff{
@@ -64,9 +65,26 @@ public abstract class Staff{
         return Objects.equals(name, staff.name) && Objects.equals(password, staff.password) && Objects.equals(rest, staff.rest);
     }
 
+    /**
+     * Prints all orders in the restaurant to standard output
+     * @author Bayan
+     */
     public void printOrders() {
         for (Order order : rest.getOrders()) {
             System.out.println(order);
+        }
+    }
+
+    /**
+     * Prints all bookings on the specified date and onwards to standard output
+     * @param date the earliest date that you want bookings for
+     * @author Bayan
+     */
+    public void printBookings(LocalDate date) {
+        for (Booking b : rest.getBookings()) {
+            if (date.equals(b.getDate()) || date.isAfter(b.getDate())) {
+                System.out.println(b);
+            }
         }
     }
 
