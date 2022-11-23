@@ -200,31 +200,32 @@ public class Restaurant implements ReadWrite{
     public void fillHashMap() {
         
         ArrayList<String> values = readFile(money);
+        if(values.size()>1){
+            String[] s = values.get(1).split(",");
 
-        String[] s = values.get(1).split(",");
+            LocalDate prev = LocalDate.parse(s[1]);
+            LocalDate date;
+            double d = Double.parseDouble(s[2]);
 
-        LocalDate prev = LocalDate.parse(s[1]);
-        LocalDate date;
-        double d = Double.parseDouble(s[2]);
+            if (values.size() > 2) {
 
-        if (values.size() > 2) {
+                for (int i = 2; i < values.size(); i++) {
+                    s = values.get(i).split(",");
+                    date = LocalDate.parse(s[1]);
+                    if (i + 1 == values.size()) {
+                        d += Double.parseDouble(s[2]);
+                        dailyAmounts.put(prev, d);
+                        return;
+                    } else if (prev.isEqual(date)) {
+                        d += Double.parseDouble(s[2]);
+                    } else if (date.isEqual(prev)) {
+                        dailyAmounts.put(prev, d);
+                        d = 0;
+                    }
 
-            for (int i = 2; i < values.size(); i++) {
-                s = values.get(i).split(",");
-                date = LocalDate.parse(s[1]);
-                if (i + 1 == values.size()) {
-                    d += Double.parseDouble(s[2]);
-                    dailyAmounts.put(prev, d);
-                    return;
-                } else if (prev.isEqual(date)) {
-                    d += Double.parseDouble(s[2]);
-                } else if (date.isEqual(prev)) {
-                    dailyAmounts.put(prev, d);
-                    d = 0;
+                    prev = date;
+
                 }
-
-                prev = date;
-
             }
         }
     }
