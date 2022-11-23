@@ -1,6 +1,7 @@
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * A class to represent a chain of restaurants.
@@ -139,14 +140,37 @@ public class RestaurantChain implements ReadWrite{
      * @param name Name of the Customer
      * @return customer as Customer
      */
-    public Customer findCustomer(String name) {
+    public Customer findCustomer(String name, String phoneNumber) {
+        ArrayList<Customer> arr = new ArrayList<>();
         for (Customer cust : customers) {
             if (cust.getName().equalsIgnoreCase(name)) {
-                return cust;
+                arr.add(cust);
             }
         }
-        Customer c = new Customer(name);
-        customers.add(c);
-        return c;
+        if (arr.size() == 0) {
+            Customer c = new Customer(name, phoneNumber);
+            customers.add(c);
+            return c;
+        } else if (arr.size() == 1) {
+            return arr.get(0);
+        } else {
+            Scanner in = new Scanner(System.in);
+            System.out.println("Input the customer");
+            for (int i = 0; i < arr.size(); i++) {
+                System.out.println("[" + (i+1) + "] " + arr.get(i));
+            }
+            int selectedCustomer = in.nextInt();
+            return arr.get(selectedCustomer-1);
+        }
+    }
+
+    /**
+     * Overloaded findCustomer method that only takes name
+     * @param name name of the customer
+     * @return Selected Customer as Customer
+     * @author Bayan
+     */
+    public Customer findCustomer(String name) {
+        return findCustomer(name, "0");
     }
 }
