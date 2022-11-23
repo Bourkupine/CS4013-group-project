@@ -276,6 +276,7 @@ public class Restaurant implements ReadWrite{
     public ArrayList<Booking> getBookings() {
         return bookings;
     }
+    //TODO: ALL AVAILABLE BOOKINGS
     
     /**
     * returns the arraylist of bookings that are available

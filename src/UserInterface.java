@@ -407,15 +407,14 @@ public class UserInterface {
                 return true;
 
             case "m":
-
                 System.out.println("please give when you want the graph the start");
                 LocalDate start = valiDate();
-                System.out.println("please print when you want thee graph to end");
+                System.out.println("please print when you want the graph to end");
                 LocalDate end = valiDate();
 
                 m.generateGraph(start,end);
-                System.out.println("\n"+"This is the total earning for the restaurant since it was started = ");
-                r.getTotalEarnings();
+                System.out.println("\n"+"This is the total earnings for the restaurant since it was started: " + r.getTotalEarnings());
+                return true;
 
             case "u": //undo booking
                 undoBooking();
