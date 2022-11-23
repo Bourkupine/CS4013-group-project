@@ -200,7 +200,8 @@ public class Restaurant implements ReadWrite{
     public void fillHashMap() {
         
         ArrayList<String> values = readFile(money);
-        if(values.size()>1){
+
+        if (values.size() > 1) {
             String[] s = values.get(1).split(",");
 
             LocalDate prev = LocalDate.parse(s[1]);
