@@ -102,17 +102,8 @@ public class Restaurant implements ReadWrite{
             if(splitted[0].equals(String.valueOf(idNum))){
                 f.add(new FoodItem(splitted[1],Double.parseDouble(splitted[2]),splitted[3]));
             }
-            
+            menu = new Menu(f,this);
         }
-        if(f.size()==0){
-            for(String s: temp){
-                String[] splitted = s.split(",");
-                if(splitted[0].equals("0")){
-                    f.add(new FoodItem(splitted[1],Double.parseDouble(splitted[2]),splitted[3]));
-                }
-            }
-        }
-        menu = new Menu(f);
     }
     
     
@@ -391,6 +382,16 @@ public class Restaurant implements ReadWrite{
                 }
             }
         return availableTimes;
+    }
+
+    public Booking getBookingWithId(String idNum){
+        for(Booking b: bookings){
+            if(b.getId().equals(idNum)){
+                return b;
+            }
+        }
+        System.out.println("Id doesn't exist");
+        return null;
     }
     
     public File getStaffCsv() {

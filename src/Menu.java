@@ -5,6 +5,7 @@ import java.util.Formatter;
 
 public class Menu {
     private ArrayList<FoodItem> menu; //Bayan: An ArrayList of FoodItems to store the menu's data
+    private Restaurant r;
 
 
     /**
@@ -12,8 +13,9 @@ public class Menu {
      * @param menu ArrayList of FoodItems
      * @author Bayan
      */
-    public Menu(ArrayList<FoodItem> menu) {
+    public Menu(ArrayList<FoodItem> menu, Restaurant r) {
         this.menu = menu;// this is the menu
+        this.r=r;
         orderByType();//this will 
     }
 
@@ -118,5 +120,13 @@ public class Menu {
         }
 
         return menuString.toString();
+    }
+
+    public ArrayList<String> toCsv(){
+        ArrayList<String> arr = new ArrayList<>();
+        for(FoodItem f: menu){
+            arr.add(r.getIdNum()+","+f.toCsv());
+        }
+        return arr;
     }
 }

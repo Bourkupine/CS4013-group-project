@@ -1,3 +1,4 @@
+import java.awt.print.Book;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -166,7 +167,7 @@ public class UserInterface {
         String s = str.toLowerCase();
         switch (s) {
             case "a"://Add order
-                addOrder();
+                addOrder(w);
                 return true;
 
             case "r"://Remove order
@@ -238,7 +239,7 @@ public class UserInterface {
         String name; //Bayan: defined some variables used across multiple cases here to keep naming convention consistent
         switch (s) {
             case "a": //Add order
-                addOrder();
+                addOrder(m);
                 return true;
 
             case "r": //Remove order
@@ -444,12 +445,26 @@ public class UserInterface {
      * A method to add an order for an existing or new customer
      * @author Bayan
      */
-    private void addOrder() {
-        System.out.println("Enter customer name: ");
-        String name = in.next();
-        System.out.println("Enter phone number (type 0 for walk in): ");
-        String phone = in.next();
-        r.addOrder(new Order(r.getRestaurantChain().findCustomer(name, phone), r));
+    private void addOrder(Staff s) {
+        if(r.getMenu().getSize()==0){
+            System.out.println("No menu currently exists for this restaurant");
+            System.out.println("Please create one using manage menu");
+        }
+        else{
+            s.printBookings(today);
+            while(true){
+                System.out.println("Enter booking id");
+                String bookingId = in.next();
+                Booking b = r.getBookingWithId(bookingId);
+                if(b!=null){
+                    r.addOrder(new Order(b));
+                    break;
+                }
+            }
+
+
+        }
+
     }
 
     /**

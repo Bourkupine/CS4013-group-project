@@ -74,4 +74,8 @@ public class FoodItem {
         FoodItem foodItem = (FoodItem) o;
         return Objects.equals(name, foodItem.name);
     }
+
+    public String toCsv(){
+        return name+","+price+","+type;
+    }
 }
