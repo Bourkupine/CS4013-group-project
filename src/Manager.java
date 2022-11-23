@@ -140,18 +140,24 @@ public class Manager extends Staff implements ReadWrite{
 
         StringBuilder sb = new StringBuilder();
         Formatter fm = new Formatter(sb);
+        double total = 0;
+        LocalDate temp = start;
 
         String bars = "";
 
-        assert start.isBefore(end) : "Start date is after end date"; //not sure if this is required, but it should make sure end is not before start
-        while (start.isBefore(end.plusDays(1))) {
+        if (start.isBefore(end)) {
+            while (temp.isBefore(end.plusDays(1))) {
 
-            bars = "=".repeat((int) (getRest().getDailyAmounts().get(start) - (getRest().getDailyAmounts().get(start)%100)) / 100);
+                bars = "=".repeat((int) (getRest().getDailyAmounts().get(temp) - (getRest().getDailyAmounts().get(temp) % 100)) / 100);
+                total += getRest().getDailyAmounts().get(temp);
+                fm.format("[%s]: €%,-8.2f |%s\n", temp, getRest().getDailyAmounts().get(temp), bars);
+                start = start.plusDays(1);
+            }
 
-            fm.format("[%s]: €%,-8.2f |%s\n",start, getRest().getDailyAmounts().get(start), bars);
-            start = start.plusDays(1);
+            fm.format("\nTotal earnings %s - %s: %f", start.toString(), end.toString(), total);
+            System.out.println(sb.toString());
+        } else {
+            System.out.println("Start date is after end date");
         }
-
-        System.out.println(sb.toString());
     }
 }
