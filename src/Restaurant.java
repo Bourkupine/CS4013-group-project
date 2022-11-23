@@ -104,7 +104,14 @@ public class Restaurant implements ReadWrite{
             }
             
         }
-        
+        if(f.size()==0){
+            for(String s: temp){
+                String[] splitted = s.split(",");
+                if(splitted[0].equals("0")){
+                    f.add(new FoodItem(splitted[1],Double.parseDouble(splitted[2]),splitted[3]));
+                }
+            }
+        }
         menu = new Menu(f);
     }
     
