@@ -91,6 +91,7 @@ public class Order{
             } else if (item == 0){ // this is exiting the system and commiting their order, finalising their order
                 status = orderStatus.ORDERED; // lets the chef know the order is ready to be cooked
                 r.getChef().cooking(this);
+                System.out.println("Order confirmed");
             }
             else if (item == m.getSize()+1){ //remove order function
                 System.out.println(ordered.toString());
