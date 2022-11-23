@@ -49,9 +49,6 @@ public class RestaurantChain implements ReadWrite{
         for(Restaurant r:restaurants){
             updateFile(rest,r.toCsv());
         }
-
-
-
     }
 
     /**
@@ -136,22 +133,20 @@ public class RestaurantChain implements ReadWrite{
         return restaurants;
     }
 
-    public Customer findCustomer(Customer c) {
-        return findCustomer(c.getName());
-    }
-
     /**
-     * Returns first customer in the Customer ArrayList with the same name
+     * Returns first customer in the Customer ArrayList with the same name. If no customer is found it creates one with the specified name.
      * @author Bayan
      * @param name Name of the Customer
      * @return customer as Customer
      */
     public Customer findCustomer(String name) {
         for (Customer cust : customers) {
-            if (cust.getName().equals(name)) {
+            if (cust.getName().equalsIgnoreCase(name)) {
                 return cust;
             }
         }
-        return new Customer(name);
+        Customer c = new Customer(name);
+        customers.add(c);
+        return c;
     }
 }

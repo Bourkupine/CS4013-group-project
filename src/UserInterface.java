@@ -198,24 +198,11 @@ public class UserInterface {
         String s = str.toLowerCase();
         switch (s) {
             case "a"://Add order
-                //Ronan: this could(probably should) be done in waiter and then just call waiter.addOrder() here
-                System.out.println("Enter customer name: ");
-                String name = in.next();
-                System.out.println("Enter phone number(type 0 for walk in): ");
-                String phone = in.next();
-                boolean inList = false;
-                for (Customer c : r.getRestaurantChain().getCustomers()) {
-                    if (c.getName().equals(name)) {
-                        r.addOrder(new Order(c, r));//need to check how we are doing this in waiter
-                        inList = true;//If the customer is in the list of customers, the booking is assigned to them
-                    }
+                addOrder();
+                return true;
 
-                }
-                if (!inList) {
-                    Customer cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
-                    r.getRestaurantChain().addCustomer(cust);
-                    r.addOrder(new Order(cust, r));//This is for new customers
-                }
+            case "r"://Remove order
+                removeOrder();
                 return true;
 
             case "v"://View current orders
@@ -230,9 +217,9 @@ public class UserInterface {
                 while(running) {
                     //here I used ronans stuff and added to them
                     System.out.println("Enter customer name: ");
-                    name = in.next();
+                    String name = in.next();
                     System.out.println("Enter phone number(type 0 for walk in): ");
-                    phone = in.next();
+                    String phone = in.next();
                     int numberOfPeople = 0;
                     boolean lessthen8 = false;
                     while(!lessthen8) {
@@ -275,10 +262,10 @@ public class UserInterface {
                 return true;
 
             case "l"://Log out
-
                 return false;
+
         }
-        return true;//Ronan:this is never used, perhaps change above return trues to break?
+        return true;
     }
 
     /**
@@ -294,14 +281,14 @@ public class UserInterface {
             case "v"://View orders
                 c.printOrders();
                 return true;
+
             case "a"://Acknowledge order (ie: cook order)
                 c.cooking(r.getOrders().get(0));
                 r.getWaiter().getReadyOrders();
                 return true;
+
             case "l"://log out
-
                 return false;
-
         }
         return true;
     }
@@ -321,33 +308,11 @@ public class UserInterface {
         boolean inList;
         switch (s) {
             case "a": //Add order
-                //Ronan: this could(probably should) be done in waiter and then just call waiter.addOrder() here
-                System.out.println("Enter customer name: ");
-                name = in.next();
-                System.out.println("Enter phone number(type 0 for walk in): ");
-                phone = in.next();
-                inList = false;
-                for (Customer c : r.getRestaurantChain().getCustomers()) {
-                    if (c.getName().equals(name)) {
-                        r.addOrder(new Order(c, r));//need to check how we are doing this in waiter
-                        inList = true;//If the customer is in the list of customers, the booking is assigned to them
-                    }
-
-                }
-                if (!inList) {
-                    Customer cust = new Customer(name, phone);//Constructor for customer checks if phone is 0
-                    r.getRestaurantChain().addCustomer(cust);
-                    r.addOrder(new Order(cust, r));//This is for new customers
-                }
+                addOrder();
                 return true;
 
             case "r": //Remove order
-                System.out.println(r.getOrders().toString());//TODO: Better implementation here
-                System.out.println("Enter the order you would like to remove");
-                int remove =in.nextInt();
-                r.removeOrder(r.getOrders().get(remove-1));
-                System.out.println("Order" + r.getOrders().get(remove-1) + "has been removed");
-
+                removeOrder();
                 return true;
 
             case "v": //View orders
@@ -475,14 +440,11 @@ public class UserInterface {
                 return true;
 
             case "l"://logout
-
                 return false;
 
         }
         return true;
     }
-
-
 
     /**
      * Checks if a given date is within 6 days of today
@@ -578,5 +540,37 @@ public class UserInterface {
             System.out.println("No booking found with those details");
             return false;
         }
+    }
+
+    /**
+     * A method to add an order for an existing or new customer
+     * @author Bayan
+     */
+    private void addOrder() {
+        System.out.println("Enter customer name: ");
+        String name = in.next();
+        System.out.println("Enter phone number (type 0 for walk in): ");
+        String phone = in.next();
+        r.addOrder(new Order(r.getRestaurantChain().findCustomer(name), r));
+    }
+
+    /**
+     * A method to remove an existing order from the restaurant
+     * @author Bayan
+     */
+    private void removeOrder() {
+        System.out.println(r.getOrders().toString());
+        System.out.println("Enter the number of the order you would like to remove");
+        int remove;
+        while(true) {
+            remove = in.nextInt();
+            if (remove > 0 || remove < r.getOrders().size()) {
+                break;
+            } else {
+                System.out.println("Please input a valid order number");
+            }
+        }
+        System.out.println("Order" + r.getOrders().get(remove-1) + "has been removed");
+        r.removeOrder(r.getOrders().get(remove-1));
     }
 }
