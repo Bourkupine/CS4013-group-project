@@ -30,10 +30,7 @@ public class Customer implements ReadWrite{
      */
     public Customer(String name, String phoneNumber){
         this(name);
-        if(!phoneNumber.equals("0")){//this is for testing purposes
-            this.phoneNumber=phoneNumber;
-        }
-
+        this.phoneNumber=phoneNumber;
     }
 
     /**
