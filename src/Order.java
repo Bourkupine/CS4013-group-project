@@ -76,11 +76,12 @@ public class Order{
         System.out.println(m.toString()); //t:this is printing the menu so the customer can choose their items
         while(status == orderStatus.ORDERING ){ // when the constructor of order is invoked takeOrder is invoked. take order runs when foodstatus is ordering
             System.out.printf("""
-                Your current total is €%.2f
-                   To order an item or another item enter the number of the item on the menu
-                   To confirm your order enter the number 0
-                   To cancel an item enter the number\s"""+(m.getSize() + 1)+
-                            "\nTo cancel your order enter the number " + (m.getSize() + 2)+"\n", total); //Euan: cleaned up this chunk of print statements. Havent tested this with printf but i assume it works
+                    Your current total is €%.2f
+                        To order an item, enter its number
+                        [0] to confirm order
+                        [%d] to remove an item
+                        [%d] to cancel the order
+                    """, total, m.getSize()+1, m.getSize()+2);
             System.out.printf("This is your current order\n %s\n", ordered.toString()); //printing what the customer has currently ordered so the can see what their order is currently
             int item = order.nextInt();//taking the no. of the item they want
 
