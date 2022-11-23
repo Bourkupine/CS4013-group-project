@@ -62,6 +62,7 @@ public class Booking implements ReadWrite{
     /**
      * gets the restaurant the booking is in
      * @return the restaurant as a Restaurant object
+     * @author Euan
      */
     public Restaurant getRest() {
         return rest;
