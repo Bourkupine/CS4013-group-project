@@ -7,10 +7,10 @@ public class Menu {
     private ArrayList<FoodItem> menu; //Bayan: An ArrayList of FoodItems to store the menu's data
     private Restaurant r;
 
-
     /**
      * Full-arg constructor
      * @param menu ArrayList of FoodItems
+     * @param r Restaurant the menu is for
      * @author Bayan
      */
     public Menu(ArrayList<FoodItem> menu, Restaurant r) {
@@ -32,6 +32,7 @@ public class Menu {
     /**
      * Adds a specified FoodItem to the menu
      * @param f FoodItem to be added
+     * @return if the food was added successfully as boolean
      * @author Bayan
      */
     public boolean addFood(FoodItem f) {
@@ -48,6 +49,7 @@ public class Menu {
     /**
      * Removes a FoodItem with a specific name from the menu
      * @param name name of the FoodItem
+     * @return if the food was removed successfully as boolean
      * @author Bayan
      */
     public boolean removeFood(String name) { 
@@ -61,6 +63,7 @@ public class Menu {
 
     /**
      * Removes all FoodItems from the menu
+     * @author Bayan
      */
     public void clearMenu() {
         menu.clear();//clears the menu to remake it
@@ -122,6 +125,11 @@ public class Menu {
         return menuString.toString();
     }
 
+    /**
+     * Returns a String ArrayList of menu items in csv format
+     * @return String ArrayList of menu items in csv format
+     * @author Ronan
+     */
     public ArrayList<String> toCsv(){
         ArrayList<String> arr = new ArrayList<>();
         for(FoodItem f: menu){

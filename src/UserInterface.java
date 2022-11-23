@@ -19,6 +19,9 @@ public class UserInterface {
     /**
      * creates a user interface for restaurant
      * @param r restaurant the interface belongs to
+     * @param date today's date
+     * @param bookings a file containing all booking info
+     * @param money a file containing all money info
      * @author Ronan
      */
     public UserInterface(Restaurant r,LocalDate date, File bookings, File money) {
@@ -160,7 +163,7 @@ public class UserInterface {
      * This method runs if a waiter is logged in
      * @param str option passed from runStaff()
      * @param w waiter who is logged in
-     * @author Thomas, Ronan
+     * @author Thomas, Ronan, Bayan
      * @return false to log out, true otherwise
      */
     private boolean waiter(String str, Waiter w) {
@@ -229,7 +232,7 @@ public class UserInterface {
     /**
      * This runs if a manager is logged in
      * @param str option passed from runStaff()
-     * @author Thomas, Ronan
+     * @author Bayan, Thomas, Ronan
      * @param m manager who is currently logged in
      * @return false to log out, true otherwise
      */
@@ -336,6 +339,7 @@ public class UserInterface {
      * Checks if a given date is within 6 days of today
      * @param date date to be checked
      * @return true if within 6 days, false otherwise
+     * @author Ronan
      */
     private boolean validDate(LocalDate date){
 
@@ -417,6 +421,10 @@ public class UserInterface {
         return date;
     }
 
+    /**
+     * Selects an order to be paid for
+     * @author Bayan
+     */
     private void pay() {
         if(r.getOrders().isEmpty()){
             System.out.println("No orders currently");
@@ -429,6 +437,11 @@ public class UserInterface {
             t.processPayment(r.getOrders().get(o));
         }
     }
+
+    /**
+     * Selects a booking to be cancelled
+     * @author Bayan
+     */
     private void undoBooking() {
         System.out.println("Input customer name");
         String name = in.next();
@@ -443,6 +456,7 @@ public class UserInterface {
 
     /**
      * A method to add an order for an existing or new customer
+     * @param s a Staff object for accessing printBookings method in Staff
      * @author Bayan
      */
     private void addOrder(Staff s) {
@@ -457,12 +471,11 @@ public class UserInterface {
                 String bookingId = in.next();
                 Booking b = r.getBookingWithId(bookingId);
                 if(b!=null){
+                    b.setCompleted(true);
                     r.addOrder(new Order(b));
                     break;
                 }
             }
-
-
         }
 
     }

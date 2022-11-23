@@ -15,14 +15,13 @@ public class RestaurantChain implements ReadWrite{
     private ArrayList<Restaurant> restaurants = new ArrayList<>();// ArrayList containing all restaurants in chain
     private File rest; //Contains details of all restaurants
     private File customer;
-    
-
-
 
     /**
      * Full-arg constructor.
      * @param name name of chain
      * @param amountOfRestaurants amount of restaurants in the chain
+     * @param f files that data is read from
+     * @param d the current date
      * @author Bayan, Ronan
      */
     public RestaurantChain(String name, int amountOfRestaurants, File[] f, LocalDate d){
@@ -43,6 +42,7 @@ public class RestaurantChain implements ReadWrite{
 
     /**
      * Writes details of all restaurants in chain to their csv file
+     * @author Ronan
      */
     public void writeDetails(){
 
@@ -56,6 +56,7 @@ public class RestaurantChain implements ReadWrite{
     /**
      * Adds a customer to the arrayList of customers
      * @param c Customer to be added
+     * @author Ronan
      */
     public void addCustomer(Customer c){
         customers.add(c);
@@ -64,6 +65,7 @@ public class RestaurantChain implements ReadWrite{
 
     /**
      * Populates customer arraylist using customer csv
+     * @author Ronan
      */
 
     public void updateCustomers(){
@@ -76,11 +78,10 @@ public class RestaurantChain implements ReadWrite{
         }
     }
 
-
-
     /**
      * Writes customer csv using arraylist
      * Used whenever a customer pays, thus incrementing their loyalty
+     * @author Ronan
      */
     public void updateCustomerCsv(){
         ArrayList<String> s = new ArrayList<>();
@@ -93,6 +94,7 @@ public class RestaurantChain implements ReadWrite{
 
     /**
      * Populates each restaurant with staff from csv
+     * @param r the restaurant being populated
      * @author Ronan
      */
     public void staff (Restaurant r){
@@ -134,14 +136,20 @@ public class RestaurantChain implements ReadWrite{
         return customers;
     }
 
+    /**
+     * Returns an ArrayList of restaurants for this chain
+     * @return restaurants as ArrayList
+     * @author Ronan
+     */
     public ArrayList<Restaurant> getRestaurants(){
         return restaurants;
     }
 
     /**
-     * Returns first customer in the Customer ArrayList with the same name. If no customer is found it creates one with the specified name.
+     * Returns all customers with the specified name to be chosen from. If no customer is found, one is created.
      * @author Bayan
      * @param name Name of the Customer
+     * @param phoneNumber Phone number of the Customer
      * @return customer as Customer
      */
     public Customer findCustomer(String name, String phoneNumber) {
@@ -167,15 +175,5 @@ public class RestaurantChain implements ReadWrite{
             int selectedCustomer = in.nextInt();
             return arr.get(selectedCustomer-1);
         }
-    }
-
-    /**
-     * Overloaded findCustomer method that only takes name
-     * @param name name of the customer
-     * @return Selected Customer as Customer
-     * @author Bayan
-     */
-    public Customer findCustomer(String name) {
-        return findCustomer(name, "0");
     }
 }

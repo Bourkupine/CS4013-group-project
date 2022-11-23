@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
-
 public class Manager extends Staff implements ReadWrite{
-
 
     /**
      * Full-arg constructor
@@ -45,6 +43,7 @@ public class Manager extends Staff implements ReadWrite{
     /**
      * Removes a Staff from the restaurant
      * @param name name of the staff to be fired
+     * @return boolean if staff was fired successfully as boolean
      * @author Ronan, Bayan
      */
     public boolean fireStaff(String name) {

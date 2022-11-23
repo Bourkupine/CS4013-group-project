@@ -11,15 +11,16 @@ public class Booking implements ReadWrite{
     private final Table table ;
     private final Restaurant rest; //booking is specific to a certain restaurant
     private final LocalDate date;
-
-
-
+    private boolean completed;
 
     /**
-     * Create Booking order
+     * Create a Booking
      * @param customer pass a customer
      * @param numberOfPeople number of people for the booking
      * @param time time in hours
+     * @param rest restaurant the booking is for
+     * @param date date of the booking
+     * @param table table the booking is for
      * @author Euan
      */
     public Booking(Customer customer, int numberOfPeople, int time, Restaurant rest, LocalDate date, Table table) {
@@ -30,6 +31,7 @@ public class Booking implements ReadWrite{
         this.date=date;
         this.time = time; //the time of the booking
         this.table = table;
+        completed = false;
     }
 
     /**
@@ -70,10 +72,29 @@ public class Booking implements ReadWrite{
 
     /**
      * Gets the date of the booking
+     * @return the date of the booking as LocalDate
      * @author Bayan
      */
     public LocalDate getDate() {
         return date;
+    }
+
+    /**
+     * Returns if a booking has been completed or not
+     * @return completed as boolean
+     * @author Bayan
+     */
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    /**
+     * Sets the value of completed
+     * @param completed the value to be set to completed
+     * @author Bayan
+     */
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     /**
@@ -83,9 +104,6 @@ public class Booking implements ReadWrite{
      */
     @Override
     public String toString() {
-
-
-
         return String.format("""
                 Booking ID: %s
                 Customer name: %s

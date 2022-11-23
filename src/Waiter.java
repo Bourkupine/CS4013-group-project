@@ -18,7 +18,6 @@ public class Waiter extends Staff {
     /**
      * when called, the order is ready so the waiter gets permission to bring the order to a table
      * @author Thomas
-     *
      */
     public void getReadyOrders(){
        for(Order r: getRest().getOrders()){
@@ -31,6 +30,7 @@ public class Waiter extends Staff {
 
     /**
      * drops food to table and tells the chef it's been delivered
+     * @param r the order being delivered
      * @author Thomas
      */
     public void dropFood(Order r){

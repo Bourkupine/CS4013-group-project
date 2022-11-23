@@ -1,6 +1,5 @@
 //Euan: this can act like the main (overview?) class
 
-import java.awt.print.Book;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -29,19 +28,19 @@ public class Restaurant implements ReadWrite{
     private File staffCsv;
     
     private HashMap<LocalDate, Double> dailyAmounts = new HashMap<>();
-    
-    
-    
+
     /**
-    *
-    * @param amountOfTables the amount of tables the restaurant has.
-    * @param rc the chain the restaurant is apart of
-    * @param idNum id number of the restaurant
-    * @param date today's date
-    * @param booking .csv file containing details of bookings
-    * @param money .csv file containing details of money obtained
-    * @author Ronan, Thomas, Euan
-    */
+     * Constructor for a restaurant
+     * @param amountOfTables the amount of tables the restaurant has.
+     * @param rc the chain the restaurant is apart of
+     * @param idNum id number of the restaurant
+     * @param date today's date
+     * @param booking .csv file containing details of bookings
+     * @param money .csv file containing details of money obtained
+     * @param menuCsv .csv file containing details of menu
+     * @param staffCsv .csv file containing details of staff
+     * @author Ronan, Thomas, Euan
+     */
     public Restaurant(int amountOfTables, RestaurantChain rc, int idNum,LocalDate date, File booking, File money,File menuCsv,File staffCsv){
         this.booking=booking;
         this.money=money;
@@ -74,13 +73,14 @@ public class Restaurant implements ReadWrite{
         generateMenu();
         fillBookings();
     }
-    
+
     /**
-    * Cancel a booking
-    * @param name the name of the customer removing the booking
-    * @param bookingId the unique id of the booking
-    * @author Bayan
-    */
+     * Cancel a booking
+     * @param name the name of the customer removing the booking
+     * @param bookingId the unique id of the booking
+     * @return if the booking was cancelled successfully as boolean
+     * @author Bayan
+     */
     public boolean cancelBooking(String name, String bookingId) {
         for (Booking b : bookings) {
             if (b.getId().equals(bookingId) && b.getCustomer().getName().equalsIgnoreCase(name)) {
@@ -92,7 +92,7 @@ public class Restaurant implements ReadWrite{
     
     /**
     * Generates menu from csv file
-    * @author ronan
+    * @author Ronan
     */
     public void generateMenu() { //todo: this was for testing, should be done in UI, need to store menu items in csv
         ArrayList<FoodItem> f = new ArrayList<>();
@@ -175,14 +175,15 @@ public class Restaurant implements ReadWrite{
         
         return tableSeats.ceiling(people);
     }
-    
+
     /**
-    * Assigns a table to a booking
-    * @param daysInAdvance the amount of days in advance the booking is for
-    * @param hour time of booking
-    * @param people amount of people booking has
-    * @author Bayan
-    */
+     * Assigns a table to a booking
+     * @param daysInAdvance the amount of days in advance the booking is for
+     * @param hour time of booking
+     * @param people amount of people booking has
+     * @return the table available for the booking as Table
+     * @author Bayan
+     */
     public Table assignTable(int daysInAdvance, int hour, int people) {
         for (Table t : tables) {
             if (!t.getReservedAtTime(hour, daysInAdvance) && t.getNumberOfSeats() >= people) {
@@ -200,19 +201,38 @@ public class Restaurant implements ReadWrite{
         
         ArrayList<String> values = readFile(money);
 
+        String[] s = values.get(1).split(",");
 
-        for(int i = 1; i < values.size(); i++) {
-            String[] s = values.get(i).split(",");
-            if (Integer.parseInt(s[0]) == idNum) {
-                dailyAmounts.put(LocalDate.parse(s[1]), Double.parseDouble(s[2]));
+        LocalDate prev = LocalDate.parse(s[1]);
+        LocalDate date;
+        double d = Double.parseDouble(s[2]);
+
+        if (values.size() > 2) {
+
+            for (int i = 2; i < values.size(); i++) {
+                s = values.get(i).split(",");
+                date = LocalDate.parse(s[1]);
+                if (i + 1 == values.size()) {
+                    d += Double.parseDouble(s[2]);
+                    dailyAmounts.put(prev, d);
+                    return;
+                } else if (prev.isEqual(date)) {
+                    d += Double.parseDouble(s[2]);
+                } else if (date.isEqual(prev)) {
+                    dailyAmounts.put(prev, d);
+                    d = 0;
+                }
+
+                prev = date;
+
             }
         }
     }
     
     /**
     * Returns first Chef in Staff ArrayList
-    * @author ronan
-    * @return a chef
+    * @author Ronan
+    * @return Staff as Chef
     */
     public Chef getChef(){
         for(Staff s:staff){
@@ -222,11 +242,12 @@ public class Restaurant implements ReadWrite{
         }
         return null;
     }
+
     /**
-    * Returns first waiter in Staff ArrayList
-    * @author ronan
-    * @return a waiter
-    */
+     * Returns first Waiter in the Staff ArrayList
+     * @return Staff as Waiter
+     * @author Ronan
+     */
     public Waiter getWaiter(){
         for(Staff s:staff){
             if(s instanceof Waiter){
@@ -271,14 +292,15 @@ public class Restaurant implements ReadWrite{
     public ArrayList<Order> getOrders() {
         return orders;
     }
+
     /**
-    * returns all the bookings that are currently made
-    * @return arraylist of all the bookings
-    */
+     * returns all the bookings that are currently made
+     * @return arraylist of all the bookings
+     * @author Euan
+     */
     public ArrayList<Booking> getBookings() {
         return bookings;
     }
-    //TODO: ALL AVAILABLE BOOKINGS
     
     /**
     * returns the arraylist of bookings that are available
@@ -349,28 +371,59 @@ public class Restaurant implements ReadWrite{
     public RestaurantChain getRestaurantChain() {
         return rc;
     }
-    
-    
+
+    /**
+     * Returns money
+     * @return money as File
+     * @author Ronan
+     */
     public File getMoney() {
         return money;
     }
-    
+
+    /**
+     * Returns LocalDate of the restaurant
+     * @return date as LocalDate
+     * @author Ronan
+     */
     public LocalDate getDate() {
         return date;
     }
-    
+
+    /**
+     * Returns a HashMap of daily earnings of the restaurant
+     * @return dailyAmounts as HashMap
+     * @author Euan
+     */
     public HashMap<LocalDate, Double> getDailyAmounts() {
         return dailyAmounts;
     }
-    
+
+    /**
+     * Returns menu csv file
+     * @return menuCsv as File
+     * @author Ronan
+     */
     public File getMenuCsv() {
         return menuCsv;
     }
-    
+
+    /**
+     * Returns id number of the restaurant
+     * @return idNum as int
+     * @author Ronan
+     */
     public int getIdNum() {
         return idNum;
     }
 
+    /**
+     * Returns suitable times at a date where a booking can be made
+     * @param daysInAdvance the number of days in advance the booking is for
+     * @param numberOfPeople the number of people the booking is for
+     * @return ArrayList of available times as int ArrayList
+     * @author Bayan
+     */
     public ArrayList<Integer> getSuitableTimesAtDate(int daysInAdvance, int numberOfPeople) {
         ArrayList<Integer> availableTimes = new ArrayList<>();
         for (int i = 9; i < 22; i++) {
@@ -384,6 +437,12 @@ public class Restaurant implements ReadWrite{
         return availableTimes;
     }
 
+    /**
+     * Returns the booking with the specified id number
+     * @param idNum id number of the booking
+     * @return b as Booking
+     * @author Ronan
+     */
     public Booking getBookingWithId(String idNum){
         for(Booking b: bookings){
             if(b.getId().equals(idNum)){
@@ -393,20 +452,31 @@ public class Restaurant implements ReadWrite{
         System.out.println("Id doesn't exist");
         return null;
     }
-    
+
+    /**
+     * Returns the staff csv file
+     * @return staffCsv as File
+     * @author Ronan
+     */
     public File getStaffCsv() {
         return staffCsv;
     }
-    
+
+    /**
+     * Returns deletable csv files
+     * @return deletable csvs as File array
+     * @author Ronan
+     */
     public File[] getDeletableCsv(){
         File[] f = {booking,money,staffCsv};
         return f;
     }
-    
+
     /**
-    *
-    * @return ArrayList of Strings ideal for use in .csv file
-    */
+     * Returns the restaurant's data in csv format
+     * @return ArrayList of Strings ideal for use in .csv file
+     * @author Ronan
+     */
     public ArrayList<String> toCsv(){
         ArrayList<String> arr = new ArrayList<>();
         //arr.add("RestId,TableId,NumSeats");

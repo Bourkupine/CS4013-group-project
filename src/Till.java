@@ -12,16 +12,21 @@ public class Till implements ReadWrite {
     private Restaurant rest;
     private double change;
     private double amountGiven;
-    
+
+    /**
+     * Constructor for a Till object
+     * @param rest the restaurant the till is for
+     * @author Thomas
+     */
     public Till(Restaurant rest) {
         this.rest = rest;
     }
+
     /**
-    * processes a payment from the customer for the order.
-    * @author Thomas
-    */
-    
-   
+     * processes a payment from the customer for the order.
+     * @param order the order that is being processed
+     * @author Thomas
+     */
     public void processPayment(Order order){
         Scanner in = new Scanner(System.in);
         change = 0;
@@ -74,8 +79,10 @@ public class Till implements ReadWrite {
         rest.removeOrder(order);
         
     }
+
     /**
      * Prints the receipt to standard output
+     * @param order the order that the receipt is for
      * @author Bayan
      */
     private void printReceipt(Order order) {
@@ -86,7 +93,13 @@ public class Till implements ReadWrite {
                 Thank you for visiting Yum
                 """, amountGiven, change);
     }
-    
+
+    /**
+     * Returns an order's data in csv format
+     * @param order Order being processed
+     * @return order as csv formatted String
+     * @author Ronan, Thomas
+     */
     private String toCsv(Order order){
         return rest.getIdNum()+","+order.getDate().toString()+","+order.getTotal();
     }

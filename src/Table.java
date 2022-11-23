@@ -11,7 +11,7 @@ public class Table {
      * Full-arg constructor.
      * @param tableNumber id number for the table
      * @param numberOfSeats number of seats at this table
-     * @author Bayan + Euan
+     * @author Bayan, Euan
      */
     public Table(int tableNumber, int numberOfSeats) {
         this.tableNumber = tableNumber;
@@ -67,6 +67,11 @@ public class Table {
         return numberOfSeats;
     }
 
+    /**
+     * Returns a string representation of a Table
+     * @return Table as String
+     * @author Bayan, Ronan
+     */
     public String toString(){
         return "Table "+ tableNumber +" has "+ numberOfSeats +" seats";
     }

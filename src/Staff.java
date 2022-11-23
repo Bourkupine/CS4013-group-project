@@ -83,14 +83,17 @@ public abstract class Staff{
     public void printBookings(LocalDate date) {
         for (Booking b : rest.getBookings()) {
             if (date.equals(b.getDate()) || date.isAfter(b.getDate())) {
-                System.out.println(b);
+                if (!b.isCompleted()) {
+                    System.out.println(b);
+                }
             }
         }
     }
 
     /**
-     *
+     * Returns a Staff object's data in csv format
      * @return a comma seperated string representation of object
+     * @author Ronan
      */
     public String toCsv(){
         String type = getClass().getCanonicalName();
