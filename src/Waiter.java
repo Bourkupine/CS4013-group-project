@@ -3,8 +3,6 @@
  */
 public class Waiter extends Staff {
 
-    //Ronan: does this cause an error? chef never gets initialized
-
     /**
      * waiter constructor (creates a waiter)
      * @param name name of waiter

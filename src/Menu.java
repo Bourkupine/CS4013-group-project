@@ -17,9 +17,9 @@ public class Menu {
      * @author Bayan
      */
     public Menu(ArrayList<FoodItem> menu, Restaurant r) {
-        this.menu = menu;// this is the menu
+        this.menu = menu;
         this.r=r;
-        orderByType();//this will 
+        orderByType();
     }
 
     /**
@@ -79,7 +79,7 @@ public class Menu {
     private void orderByType() {
         ArrayList<FoodItem> tempMenu = new ArrayList<>();
         for (FoodItem f : menu) {
-            if(f.getType().equalsIgnoreCase("starter")) { //if the type is starter add it, starter is first
+            if(f.getType().equalsIgnoreCase("starter")) {
                 tempMenu.add(f);
             }
         }
