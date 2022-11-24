@@ -103,7 +103,6 @@ public class Manager extends Staff implements ReadWrite{
                 if (r.getMenu().removeFood(item)) {
                     System.out.println("Item removed from the menu");
                     ArrayList<String> temp =readFile(getRest().getMenuCsv());
-                    int index=0;
                     for(String s:temp){
                         String[] split = s.split(",");
                         if(split[0].equals(String.valueOf(getRest().getIdNum())) && split[1].equalsIgnoreCase(item)){
