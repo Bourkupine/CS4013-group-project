@@ -397,7 +397,7 @@ public class UserInterface {
         Table t = r.assignTable(daysInAdvance, selectedTime, numberOfPeople);
         t.setReservedAtTime(selectedTime, daysInAdvance, true);
         Customer c = r.getRestaurantChain().findCustomer(name, phone);
-        Booking booking = new Booking(c, numberOfPeople, selectedTime, r, today, t);
+        Booking booking = new Booking(c, numberOfPeople, selectedTime, r, d, t);
         r.addBooking(booking);
         booking.updateFile(bookings,booking.toCsv());
         System.out.println("Booking successful, your table number is " + t.getTableNumber());
