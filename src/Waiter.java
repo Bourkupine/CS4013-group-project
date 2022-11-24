@@ -1,5 +1,6 @@
-
-
+/**
+ * A class to represent a waiter staff member in a restaurant
+ */
 public class Waiter extends Staff {
 
     //Ronan: does this cause an error? chef never gets initialized

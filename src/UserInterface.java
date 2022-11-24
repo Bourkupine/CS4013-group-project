@@ -6,6 +6,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class to allow users to interact with the restaurant system
+ */
 public class UserInterface {
 
     private Restaurant r;

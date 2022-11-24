@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * A class to represent a staff member of a restaurant
+ */
 public abstract class Staff{
     private String name;
     private String password;

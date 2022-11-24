@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
+/**
+ * A class to represent a manager staff member at a restaurant
+ */
 public class Manager extends Staff implements ReadWrite{
 
     /**

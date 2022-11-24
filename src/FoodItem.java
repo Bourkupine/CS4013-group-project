@@ -1,7 +1,9 @@
-//Bayan: A class to represent a food item at a restaurant
 
 import java.util.Objects;
 
+/**
+ * A class to represent a food item on a menu at a restaurant
+ */
 public class FoodItem {
     private String name;
     private double price;

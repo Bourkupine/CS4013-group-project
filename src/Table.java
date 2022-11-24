@@ -2,6 +2,9 @@
 
 import java.util.ArrayList;
 
+/**
+ * A class to represent a dining table in a restaurant
+ */
 public class Table {
     private final int tableNumber; //Bayan: Unique ID number for the table
     private final int numberOfSeats; //Bayan: Number of seats at the table

@@ -1,3 +1,6 @@
+/**
+ * Class to represent a chef staff member in a restaurant
+ */
 public class Chef extends Staff {
 
     /**

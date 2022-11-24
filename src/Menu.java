@@ -3,6 +3,9 @@
 import java.util.ArrayList;
 import java.util.Formatter;
 
+/**
+ * A class to represent a menu at a restaurant
+ */
 public class Menu {
     private ArrayList<FoodItem> menu; //Bayan: An ArrayList of FoodItems to store the menu's data
     private Restaurant r;

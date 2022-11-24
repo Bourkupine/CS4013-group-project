@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
-
+/**
+ * A class to represent a restaurant in a restaurant chain
+ */
 public class Restaurant implements ReadWrite{
     
     private ArrayList<Booking> bookings = new ArrayList<>();

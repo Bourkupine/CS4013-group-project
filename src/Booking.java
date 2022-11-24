@@ -2,6 +2,9 @@
 
 import java.time.LocalDate;
 
+/**
+ * Class to represent a booking in a restaurant
+ */
 public class Booking implements ReadWrite{
 
     private final String id;

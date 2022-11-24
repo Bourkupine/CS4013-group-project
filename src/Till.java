@@ -4,8 +4,7 @@ import java.util.Scanner;
 //builds bill and a receipt 
 //
 /**
-* this is the till class
-* @author Thomas
+* A class to represent a till at a restaurant
 */
 public class Till implements ReadWrite {
     
