@@ -464,6 +464,10 @@ public class UserInterface {
             System.out.println("No menu currently exists for this restaurant");
             System.out.println("Please create one using manage menu");
         }
+        else if(!r.checkChef()){
+            System.out.println("No chef currently employed at this restaurant");
+            System.out.println("Please hire one using hire staff");
+        }
         else{
             s.printBookings(today);
             while(true){
