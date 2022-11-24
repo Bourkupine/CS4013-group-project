@@ -226,6 +226,15 @@ public class Restaurant implements ReadWrite{
     public boolean checkChef(){
         return getChef()!=null;
     }
+
+    /**
+     * Checks if a waiter is employed
+     * @author Ronan
+     * @return true if a waiter is employed, false otherwise
+     */
+    public boolean checkWaiter(){
+        return getWaiter()!=null;
+    }
     
     /**
     * Returns first Chef in Staff ArrayList

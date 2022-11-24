@@ -471,6 +471,10 @@ public class UserInterface {
             System.out.println("No chef currently employed at this restaurant");
             System.out.println("Please hire one using hire staff");
         }
+        else if(!r.checkWaiter()){
+            System.out.println("No waiter currently employed at this restaurant");
+            System.out.println("Please hire one using hire staff");
+        }
         else{
             s.printBookings(today);
             while(true){
