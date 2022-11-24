@@ -17,8 +17,6 @@ public class Restaurant implements ReadWrite{
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
     private ArrayList<Staff> staff = new ArrayList<>();
-    private double totalEarnings = 0;
-    private double dailyEarnings = 0;
     private int idNum ; //look back at this
     private int bookingId = 0;
     private RestaurantChain rc;
@@ -96,7 +94,7 @@ public class Restaurant implements ReadWrite{
     * Generates menu from csv file
     * @author Ronan
     */
-    public void generateMenu() { //todo: this was for testing, should be done in UI, need to store menu items in csv
+    public void generateMenu() {
         ArrayList<FoodItem> f = new ArrayList<>();
         ArrayList<String> temp = readFile(menuCsv);
         for(String s: temp){
@@ -266,14 +264,6 @@ public class Restaurant implements ReadWrite{
         orders.add(o);
     }
 
-    /**
-    * To see the total earnings of the restaurant. 
-    * @return total earnings for the restaurant
-    * @author Thomas
-    */
-    public double getTotalEarnings() {
-        return totalEarnings;
-    }
     
     /**
     * remove an order from the order array list
@@ -334,24 +324,7 @@ public class Restaurant implements ReadWrite{
     public ArrayList<Staff> getStaff() {
         return staff;
     }
-    
-    /**
-    * add onto the daily earnings
-    * @param amount amount to be added
-    * @author Euan
-    */
-    public void addToDailyEarnings(double amount) {
-        dailyEarnings += amount;
-    }
-    
-    /**
-    * updates the total earnings and resets daily amount
-    * @author Euan
-    */
-    public void updateDailyAmount() {
-        totalEarnings += dailyEarnings;
-        dailyEarnings = 0;
-    }//TODO: WHY NO USEY EUAN SEEMS TO KNOW THIS IS FOR EUAN
+
     
     /**
     * Increments and get the next booking ID number

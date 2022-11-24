@@ -10,7 +10,7 @@ public class Order{
     private ArrayList<FoodItem> ordered = new ArrayList<>();
     private Customer c; // bayan:
     private double total = 0; //Euan: changed from int to double to resemble currency better
-    private Menu m; // todo: needs to get menu method in restaurant chain.//Ronan: fixed?
+    private Menu m;
     private orderStatus status;
     private Restaurant r;
     private LocalDate date;//Today's date
@@ -52,14 +52,6 @@ public class Order{
         DELIVERED// the waiter lets the chef know it is delivered with no problems
     }
 
-    /**
-     * adds the order total to Daily Restaurant Earnings
-     * @param total order total as a double
-     * @author Euan
-     */
-    public void updateRestaurantTotal(double total) {
-        r.addToDailyEarnings(total);
-    }
     
     /**
     * Manages the ordering process
