@@ -51,27 +51,17 @@ public class RestaurantChain implements ReadWrite{
         }
     }
 
-    /**
-     * Adds a customer to the arrayList of customers
-     * @param c Customer to be added
-     * @author Ronan
-     */
-    public void addCustomer(Customer c){
-        customers.add(c);
-        updateFile(customer,c.toCsv());
-    }
 
     /**
      * Populates customer arraylist using customer csv
      * @author Ronan
      */
-
-    public void updateCustomers(){//TODO some customers not entering array
+    public void updateCustomers(){
         ArrayList<String> temp = readFile(customer);
         if(temp.size()>1){
             for(int i=1;i<temp.size();i++){
                 String[] split = temp.get(i).split(",");
-                addCustomer(new Customer(split[0],split[1],Integer.parseInt(split[2])));
+                customers.add(new Customer(split[0],split[1],Integer.parseInt(split[2])));
             }
         }
     }
