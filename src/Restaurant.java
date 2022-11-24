@@ -226,7 +226,7 @@ public class Restaurant implements ReadWrite{
      * @return true if a chef is employed, false otherwise
      */
     public boolean checkChef(){
-        return getChef()==null;
+        return getChef()!=null;
     }
     
     /**
