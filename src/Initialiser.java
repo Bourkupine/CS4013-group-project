@@ -32,7 +32,7 @@ public class Initialiser implements ReadWrite{
         System.out.println("Enter date");
         LocalDate date = LocalDate.parse(in.next());
         File[] f = files();
-        RestaurantChain rc = new RestaurantChain("Yum's",num,f,date);//TODO: employ staff
+        RestaurantChain rc = new RestaurantChain("Yum's",num,f,date);
 
         boolean validId=false;
         while(!validId){

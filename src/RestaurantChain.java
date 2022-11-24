@@ -10,8 +10,6 @@ import java.util.Scanner;
 public class RestaurantChain implements ReadWrite{
     private ArrayList<Customer> customers = new ArrayList<>(); //An arraylist of all customers across every restaurant.
     private final String name; //The name of the restaurant chain.
-    private int amountOfRestaurants; //The amount of restaurants.
-     //todo: this needs to be moved to restaurant since each restaurant has its own menu
     private ArrayList<Restaurant> restaurants = new ArrayList<>();// ArrayList containing all restaurants in chain
     private File rest; //Contains details of all restaurants
     private File customer;
