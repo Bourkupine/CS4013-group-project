@@ -78,7 +78,6 @@ public class Order{
                 total += m.getFoodItemAtIndex(item-1).getPrice(); // adding up the total for the customer to see what their total is at
             } else if (item == 0){ // this is exiting the system and commiting their order, finalising their order
                 status = orderStatus.ORDERED; // lets the chef know the order is ready to be cooked
-                r.getChef().cooking(this);
                 System.out.println("Order confirmed");
             }
             else if (item == m.getSize()+1){ //remove order function
