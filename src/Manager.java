@@ -106,11 +106,13 @@ public class Manager extends Staff implements ReadWrite{
                     int index=0;
                     for(String s:temp){
                         String[] split = s.split(",");
-                        if(split[0].equals(String.valueOf(getRest().getIdNum())) && split[1].equals(item)){
-                            index=temp.indexOf(s);
+                        if(split[0].equals(String.valueOf(getRest().getIdNum())) && split[1].equalsIgnoreCase(item)){
+                            temp.remove(s);
+                            System.out.println("hello");
+                            break;
                         }
                     }
-                    temp.remove(index);
+
                     writeFile(getRest().getMenuCsv(),temp);
                 } else {
                     System.out.println("Item not found");

@@ -44,18 +44,20 @@ public interface ReadWrite {
      * @author Ronan
      */
     default void writeFile(File f,ArrayList<String> s){
-        PrintWriter out = null;
+
         try {
-            out = new PrintWriter(f);
+            PrintWriter out= new PrintWriter(f);;
+
+            for(String test: s){
+                out.print(test);
+                out.print("\n");
+            }
+            out.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error writing to file");
         }
 
-        for(String test: s){
-            out.print(test);
-            out.print("\n");
-        }
-        out.close();
+
     }
 
     /**
