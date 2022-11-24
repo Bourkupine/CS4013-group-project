@@ -321,7 +321,7 @@ public class UserInterface {
                 System.out.println("Enter staff name:");
                 name = in.next();
                 if (m.fireStaff(name)) {
-                    System.out.println(name + "has been fired");
+                    System.out.println(name + " has been fired");
                 } else {
                     System.out.println("No staff found by that name");
                 }
