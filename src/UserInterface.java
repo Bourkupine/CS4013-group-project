@@ -155,7 +155,7 @@ public class UserInterface {
      */
     private boolean valid(String name, String pass, ArrayList<Staff> arr) {
         for (Staff s : arr) {
-            if (s.getName().equals(name) && s.getPassword().equals(pass)) {
+            if (s.getName().equalsIgnoreCase(name) && s.getPassword().equals(pass)) {
                 return true;
             }
         }
