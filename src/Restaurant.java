@@ -293,23 +293,6 @@ public class Restaurant implements ReadWrite{
     }
     
     /**
-    * returns the arraylist of bookings that are available
-    * @return bookings available as an arraylist
-    * @author Thomas
-    */
-    public ArrayList<Booking> getAvailableBookings() {
-        ArrayList<Booking> availableBookings = new ArrayList<>();
-        for (Booking r : this.getBookings()){
-            for( int i = 0; i < this.getBookings().size(); i++){
-                if(r != this.getBookings().get(i)){
-                    availableBookings.add(r);
-                }
-            }
-        }
-        return availableBookings ;
-    } 
-    
-    /**
     * gets current menu
     * @return menu as a menu object
     * @author Ronan
@@ -452,7 +435,6 @@ public class Restaurant implements ReadWrite{
      */
     public ArrayList<String> toCsv(){
         ArrayList<String> arr = new ArrayList<>();
-        //arr.add("RestId,TableId,NumSeats");
         for(Table t:tables){
             arr.add(idNum+","+t.getTableNumber()+","+t.getNumberOfSeats());
         }
