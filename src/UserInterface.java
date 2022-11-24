@@ -67,7 +67,7 @@ public class UserInterface {
             System.out.println("C)reate booking, U)ndo booking, Q)uit");
             String selection = in.next();
             if (selection.equalsIgnoreCase("c")) {
-                booking();
+                booking();//todo print bookings
             } else if (selection.equalsIgnoreCase("u")) {
                 undoBooking();
             } else if (selection.equalsIgnoreCase("q")) {
@@ -400,7 +400,7 @@ public class UserInterface {
         Booking booking = new Booking(c, numberOfPeople, selectedTime, r, d, t);
         r.addBooking(booking);
         booking.updateFile(bookings,booking.toCsv());
-        System.out.println("Booking successful, your table number is " + t.getTableNumber());
+        System.out.println("Booking successful, your booking id is " + booking.getId());
     }
 
     /**
