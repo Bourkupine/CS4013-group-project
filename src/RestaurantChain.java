@@ -56,8 +56,7 @@ public class RestaurantChain implements ReadWrite{
      * Populates customer arraylist using customer csv
      * @author Ronan
      */
-
-    public void updateCustomers(){//TODO some customers not entering array
+    public void updateCustomers(){
         ArrayList<String> temp = readFile(customer);
         if(temp.size()>1){
             for(int i=1;i<temp.size();i++){
