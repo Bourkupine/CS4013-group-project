@@ -11,6 +11,9 @@ public class Initialiser implements ReadWrite{
         run();
     }
 
+    /**
+     * Sets up the restaurant chain
+     */
     private void run(){
         Scanner in = new Scanner(System.in);
         boolean validNum=false;
@@ -49,6 +52,11 @@ public class Initialiser implements ReadWrite{
 
 
     }
+
+    /**
+     * Creates all csvs for storage
+     * @return array of csv files
+     */
     private File[] files(){
         File restaurants = new File("restaurants.csv");
         File bookings = new File("bookings.csv");
